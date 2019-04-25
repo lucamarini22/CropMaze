@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * @author Manuel
  *  Class used to load images from path.
  */
 
