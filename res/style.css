@@ -1,0 +1,4 @@
+#mainMenu{
+    -fx-background-image:url("/res/MainMenu/background.jpg");
+    -fx-background-size: cover;
+}
