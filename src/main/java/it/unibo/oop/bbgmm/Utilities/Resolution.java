@@ -5,8 +5,8 @@ import java.awt.*;
 public class Resolution {
     private static final Toolkit tk = Toolkit.getDefaultToolkit();
     private static final Dimension d = tk.getScreenSize();
-    private static int width = d.width/2;
-    private static int height = (2*d.height)/3;
+    private static int width = 1024;
+    private static int height = 768;
 
     public Resolution() {
     }
@@ -20,8 +20,8 @@ public class Resolution {
     }
 
     public static void setSmallResolution(){
-        width = d.width/2;
-        height = (2*d.height)/3;
+        width = 1024;
+        height = 768;
     }
 
     public static void setFullResolution(){
