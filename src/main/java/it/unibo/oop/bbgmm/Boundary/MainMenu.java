@@ -1,80 +1,112 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Utilities.Resolution;
-import javafx.scene.Parent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.geometry.Pos;
-
 
 public class MainMenu extends Scene {
-    private static double width;
-    private static double height;
-    private static Stage primaryStage;
 
-    Button exitButton = new Button("EXIT");
-    Button newGameButton = new Button("NEW GAME");
-    Button scoreButton = new Button("SCORE");
-    Button resolutionButton = new Button("RESOLUTION");
+    private static final Font FONT = Font.font("", FontWeight.BOLD, 50);
+
+    private static Stage primaryStage;
+    private final AnchorPane pane;
 
     private VBox menuBox;
     private int currentItem = 0;
 
+
     public MainMenu() {
-        super(new AnchorPane());
-        setResolution();
-        this.setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.UP) {
+        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
+
+        this.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.UP) {
                 if (currentItem > 0) {
-                    getButton(currentItem).setDisable(false);
-                    getButton(--currentItem).setDisable(true);
+                    getMenuItem(currentItem).setActive(false);
+                    getMenuItem(--currentItem).setActive(true);
                 }
             }
-            if (e.getCode() == KeyCode.DOWN) {
+
+            if (event.getCode() == KeyCode.DOWN) {
                 if (currentItem < menuBox.getChildren().size() - 1) {
-                    getButton(currentItem).setDisable(false);
-                    getButton(++currentItem).setDisable(true);
+                    getMenuItem(currentItem).setActive(false);
+                    getMenuItem(++currentItem).setActive(true);
                 }
             }
-            if (e.getCode() == KeyCode.ENTER) {
-                System.out.println("Fare cose");
-                //fa qualcosa in base al bottone quando premo enter
+
+            if (event.getCode() == KeyCode.ENTER) {
+                getMenuItem(currentItem).activate();
             }
         });
-    }
 
-    private void createBox(){
+        pane = new AnchorPane();
+
+        MenuItem itemExit = new MenuItem("EXIT");
+        itemExit.setOnActivate(() -> System.exit(0));
+
         menuBox = new VBox(10,
-                newGameButton,
-                scoreButton,
-                resolutionButton,
-                exitButton);
+                new MenuItem("NEW GAME"),
+                new MenuItem("SCORE"),
+                new MenuItem("OPTIONS"),
+                itemExit);
 
         menuBox.setAlignment(Pos.TOP_CENTER);
-        menuBox.setTranslateX(360);
-        menuBox.setTranslateY(300);
+
+        menuBox.setTranslateX(300); //segna la posizione
+        menuBox.setTranslateY(400);
+
+        getMenuItem(0).setActive(true);
+
+        pane.getChildren().add(menuBox);
+
+        this.setRoot(pane);
     }
 
-    private Button getButton(int index) {
+    private static class MenuItem extends HBox {
+        private Text text;
+        private Runnable script;
 
-        return (Button) menuBox.getChildren().get(index);
+        public MenuItem(String name) {
+            super(15);
+            setAlignment(Pos.CENTER);
+            text = new Text(name);
+            text.setFont(FONT);
+            text.setEffect(new GaussianBlur(2));
+            getChildren().add(text);
+            setActive(false);
+            setOnActivate(() -> System.out.println(name + " activated"));
+        }
 
+        public void setActive(boolean b) {
+            text.setFill(b ? Color.WHITE : Color.GREY);
+        }
+
+        public void setOnActivate(Runnable r) {
+            script = r;
+        }
+
+        public void activate() {
+            if (script != null)
+                script.run();
+        }
     }
 
-    public static MainMenu getMainMenu(Stage stage){
+
+    public static MainMenu getMainMenu(Stage stage) {
         primaryStage = stage;
-        setResolution();
         return new MainMenu();
     }
 
-    private static void setResolution(){
-        height= Resolution.getHeight();
-        width=Resolution.getWidth();
+    private MenuItem getMenuItem(int index) {
+        return (MenuItem)menuBox.getChildren().get(index);
     }
-
 }
