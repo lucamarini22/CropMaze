@@ -4,29 +4,21 @@ import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.*;
-
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javafx.scene.media.Media;
-import java.io.File;
-
-
-public class MainMenu extends Scene {
+public class SettingsMenu extends Scene {
 
     private static Stage primaryStage;
     private final AnchorPane pane;
 
     private VBox menuBox;
     private int currentItem = 0;
+    private boolean isFullscreen = false;
 
-    //private MediaPlayer buttonClicked;
-
-    public MainMenu() {
+    public SettingsMenu() {
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
-
-        //createMusicPlayer();
 
         this.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
@@ -50,13 +42,12 @@ public class MainMenu extends Scene {
 
         pane = new AnchorPane();
 
-        MenuItem itemExit = new MenuItem("EXIT");
+        MenuItem itemExit = new MenuItem("BACK");
         itemExit.setOnActivate(() -> System.exit(0));
 
         menuBox = new VBox(25,
-                new MenuItem("NEW GAME"),
-                new MenuItem("SCORE"),
-                new MenuItem("OPTIONS"),
+                new MenuItem("SMALL RESOLUTION"),
+                new MenuItem("FULLSCREEN"),
                 itemExit);
 
         menuBox.setAlignment(Pos.TOP_CENTER);
@@ -72,21 +63,15 @@ public class MainMenu extends Scene {
 
         this.setRoot(pane);
 
-
         this.getStylesheets().add("Style.css");
-        }
-
-    public static MainMenu getMainMenu(Stage stage) {
-        primaryStage = stage;
-        return new MainMenu();
     }
 
     private MenuItem getMenuItem(int index) {
         return (MenuItem)menuBox.getChildren().get(index);
     }
 
-    //private void createMusicPlayer(){
-    //    this.buttonClicked = new MediaPlayer(new Media("/res/sounds/button_clicked.mp3"));
-    //    buttonClicked.play();
-    //}
+    public static SettingsMenu getSettingsMenu(Stage stage) {
+        primaryStage = stage;
+        return new SettingsMenu();
+    }
 }
