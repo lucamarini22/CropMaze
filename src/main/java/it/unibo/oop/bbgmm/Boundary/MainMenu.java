@@ -20,11 +20,15 @@ public class MainMenu extends Scene {
 
     private VBox menuBox;
     private int currentItem = 0;
+    private final MenuItem itemNewGame = new MenuItem("NEW GAME");
+    private final MenuItem itemScore = new MenuItem("SCORE");
+    private final MenuItem itemSettings = new MenuItem("SETTINGS");
+    private final MenuItem itemExit = new MenuItem("EXIT");
 
     //private MediaPlayer buttonClicked;
 
     public MainMenu() {
-        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
+        super(new AnchorPane(), Resolution.getSmallWidth(), Resolution.getSmallHeight());
 
         //createMusicPlayer();
 
@@ -50,14 +54,13 @@ public class MainMenu extends Scene {
 
         pane = new AnchorPane();
 
-        MenuItem itemExit = new MenuItem("EXIT");
-        itemExit.setOnActivate(() -> System.exit(0));
-
         menuBox = new VBox(25,
-                new MenuItem("NEW GAME"),
-                new MenuItem("SCORE"),
-                new MenuItem("OPTIONS"),
+                itemNewGame,
+                itemScore,
+                itemSettings,
                 itemExit);
+
+        buttonActions();
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
@@ -78,6 +81,8 @@ public class MainMenu extends Scene {
 
     public static MainMenu getMainMenu(Stage stage) {
         primaryStage = stage;
+        primaryStage.setHeight(Resolution.getSmallHeight());
+        primaryStage.setWidth(Resolution.getSmallWidth());
         return new MainMenu();
     }
 
@@ -89,4 +94,18 @@ public class MainMenu extends Scene {
     //    this.buttonClicked = new MediaPlayer(new Media("/res/sounds/button_clicked.mp3"));
     //    buttonClicked.play();
     //}
+
+    private void buttonActions(){
+        //Da togliere i commenti per usare gli altri pulsanti
+        //itemNewGame.setOnActivate(() -> {
+        //    this.primaryStage.setScene(GameFieldView.getGameFieldView(this.primaryStage));
+        //});
+        //itemScore.setOnActivate(() -> {
+        //    this.primaryStage.setScene(Ranking.getRanking(this.primaryStage));
+        //});
+        itemSettings.setOnActivate(() -> {
+            this.primaryStage.setScene(SettingsMenu.getSettingsMenu(this.primaryStage));
+        });
+        itemExit.setOnActivate(() -> System.exit(0));
+    }
 }

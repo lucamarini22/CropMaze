@@ -16,9 +16,12 @@ public class SettingsMenu extends Scene {
     private VBox menuBox;
     private int currentItem = 0;
     private boolean isFullscreen = false;
+    private final MenuItem itemSmallScreen = new MenuItem("Small Screen");
+    private final MenuItem itemFullScreen = new MenuItem("Full Screen");
+    private final MenuItem itemBack = new MenuItem("BACK");
 
     public SettingsMenu() {
-        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
+        super(new AnchorPane(), Resolution.getSmallWidth(), Resolution.getSmallHeight());
 
         this.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
@@ -42,18 +45,26 @@ public class SettingsMenu extends Scene {
 
         pane = new AnchorPane();
 
-        MenuItem itemExit = new MenuItem("BACK");
-        itemExit.setOnActivate(() -> System.exit(0));
+        menuBox = new VBox(40,
+                itemSmallScreen,
+                itemFullScreen,
+                itemBack);
 
-        menuBox = new VBox(25,
-                new MenuItem("SMALL RESOLUTION"),
-                new MenuItem("FULLSCREEN"),
-                itemExit);
+        buttonActions();
+
+        if(Resolution.isFullScreen()){
+            itemSmallScreen.setUnderline(false);
+            itemFullScreen.setUnderline(true);
+        }
+        else{
+            itemSmallScreen.setUnderline(true);
+            itemFullScreen.setUnderline(false);
+        }
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
-        menuBox.setTranslateX(365);
-        menuBox.setTranslateY(350);
+        menuBox.setTranslateX(315);
+        menuBox.setTranslateY(300);
 
         getMenuItem(0).setActive(true);
 
@@ -72,6 +83,24 @@ public class SettingsMenu extends Scene {
 
     public static SettingsMenu getSettingsMenu(Stage stage) {
         primaryStage = stage;
+        primaryStage.setHeight(Resolution.getSmallHeight());
+        primaryStage.setWidth(Resolution.getSmallWidth());
         return new SettingsMenu();
+    }
+
+    private void buttonActions(){
+        itemBack.setOnActivate(() -> this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage)));
+        itemSmallScreen.setOnActivate(() -> {
+            this.isFullscreen = false;
+            Resolution.setSmallResolution();
+            itemSmallScreen.setUnderline(true);
+            itemFullScreen.setUnderline(false);
+        });
+        itemFullScreen.setOnActivate(() -> {
+            this.isFullscreen = true;
+            Resolution.setFullResolution();
+            itemSmallScreen.setUnderline(false);
+            itemFullScreen.setUnderline(true);
+        });
     }
 }

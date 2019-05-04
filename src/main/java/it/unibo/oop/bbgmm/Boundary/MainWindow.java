@@ -15,8 +15,8 @@ public class MainWindow extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage.setTitle("CROP MAZE");
         this.primaryStage.setFullScreen(false);
-        this.primaryStage.setWidth(Resolution.getWidth());
-        this.primaryStage.setHeight(Resolution.getHeight());
+        this.primaryStage.setWidth(Resolution.getSmallWidth());
+        this.primaryStage.setHeight(Resolution.getSmallHeight());
         this.primaryStage.centerOnScreen();
         this.primaryStage.setResizable(false);
 
