@@ -22,7 +22,6 @@ public class MenuItem extends HBox {
         text.setEffect(new GaussianBlur(2));
         getChildren().add(text);
         setActive(false);
-        setOnActivate(() -> System.out.println(name + " activated"));
     }
 
     public void setActive(boolean b) {
@@ -37,4 +36,6 @@ public class MenuItem extends HBox {
         if (script != null)
             script.run();
     }
+
+    public void setUnderline(boolean b){text.setUnderline(b);}
 }
