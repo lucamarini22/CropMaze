@@ -2,6 +2,10 @@ package it.unibo.oop.bbgmm.Utilities;
 
 import java.awt.*;
 
+/**
+ * @author Manuel
+ */
+
 public class Resolution {
     private static final int SMALL_HEIGHT = 768;
     private static final int SMALL_WIDTH = 1024;

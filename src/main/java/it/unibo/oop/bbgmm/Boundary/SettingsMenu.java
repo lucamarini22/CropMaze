@@ -8,6 +8,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * @author Manuel
+ */
+
 public class SettingsMenu extends Scene {
 
     private static Stage primaryStage;
@@ -70,7 +74,7 @@ public class SettingsMenu extends Scene {
 
         pane.getChildren().add(menuBox);
 
-        pane.setId("mainMenu");
+        pane.setId("settingsMenu");
 
         this.setRoot(pane);
 

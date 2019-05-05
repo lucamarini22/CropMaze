@@ -11,7 +11,14 @@ import javafx.stage.Stage;
 
 import javafx.scene.media.Media;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
+/**
+ * @author Manuel
+ */
 
 public class MainMenu extends Scene {
 
@@ -74,7 +81,6 @@ public class MainMenu extends Scene {
         pane.setId("mainMenu");
 
         this.setRoot(pane);
-
 
         this.getStylesheets().add("Style.css");
         }

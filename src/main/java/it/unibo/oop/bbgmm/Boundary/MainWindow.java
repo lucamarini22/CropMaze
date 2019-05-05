@@ -2,8 +2,12 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * @author Manuel
+ */
 
 public class MainWindow extends Application {
     private final Stage primaryStage = new Stage();
@@ -23,6 +27,9 @@ public class MainWindow extends Application {
         this.primaryStage.setOnCloseRequest(e -> {
             this.primaryStage.close();
         });
+
+        //metodo per l'icona
+        //this.primaryStage.getIcons().add(new Image(MainWindow.class.getResourceAsStream("icon.png")));
         //set as the scene the main menu
         this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage));
         this.primaryStage.show();
