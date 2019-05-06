@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Manuel
+ * Class that creates the stage of the application
  */
 
 public class MainWindow extends Application {
@@ -28,13 +29,10 @@ public class MainWindow extends Application {
             this.primaryStage.close();
         });
 
-        //metodo per l'icona
-        //this.primaryStage.getIcons().add(new Image(MainWindow.class.getResourceAsStream("icon.png")));
-        //set as the scene the main menu
+        this.primaryStage.getIcons().add(new Image("images/mainMenu/icon.png"));
+        //set the main menu as the scene
         this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage));
         this.primaryStage.show();
-
-        //manca metodo per mettere suono
     }
 
     public static void main(String[] args) {

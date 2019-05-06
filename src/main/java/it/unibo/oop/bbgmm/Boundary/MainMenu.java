@@ -5,19 +5,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
-
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-
-import javafx.scene.media.Media;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * @author Manuel
+ * Scene for the MainMenu
  */
 
 public class MainMenu extends Scene {
@@ -32,13 +24,10 @@ public class MainMenu extends Scene {
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    //private MediaPlayer buttonClicked;
-
     public MainMenu() {
         super(new AnchorPane(), Resolution.getSmallWidth(), Resolution.getSmallHeight());
 
-        //createMusicPlayer();
-
+        //it intercepts the button presses
         this.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
                 if (currentItem > 0) {
@@ -79,28 +68,21 @@ public class MainMenu extends Scene {
         pane.getChildren().add(menuBox);
 
         pane.setId("mainMenu");
+        this.getStylesheets().add("Style.css");
 
         this.setRoot(pane);
-
-        this.getStylesheets().add("Style.css");
         }
 
-    public static MainMenu getMainMenu(Stage stage) {
-        primaryStage = stage;
-        primaryStage.setHeight(Resolution.getSmallHeight());
-        primaryStage.setWidth(Resolution.getSmallWidth());
-        return new MainMenu();
-    }
-
+    /**
+     * Method used to get the requested element of the buttons' box
+     */
     private MenuItem getMenuItem(int index) {
         return (MenuItem)menuBox.getChildren().get(index);
     }
 
-    //private void createMusicPlayer(){
-    //    this.buttonClicked = new MediaPlayer(new Media("/res/sounds/button_clicked.mp3"));
-    //    buttonClicked.play();
-    //}
-
+    /**
+     * Method used to set the action for each button
+     */
     private void buttonActions(){
         //Da togliere i commenti per usare gli altri pulsanti
         //itemNewGame.setOnActivate(() -> {
@@ -113,5 +95,17 @@ public class MainMenu extends Scene {
             this.primaryStage.setScene(SettingsMenu.getSettingsMenu(this.primaryStage));
         });
         itemExit.setOnActivate(() -> System.exit(0));
+    }
+
+    /**
+     * Getter for the Scene
+     * @param stage
+     * @return MainMenu
+     */
+    public static MainMenu getMainMenu(Stage stage) {
+        primaryStage = stage;
+        primaryStage.setHeight(Resolution.getSmallHeight());
+        primaryStage.setWidth(Resolution.getSmallWidth());
+        return new MainMenu();
     }
 }

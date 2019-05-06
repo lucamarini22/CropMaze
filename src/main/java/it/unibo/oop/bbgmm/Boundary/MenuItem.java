@@ -15,9 +15,11 @@ import javafx.scene.text.Text;
 
 public class MenuItem extends HBox {
     private static final Font FONT = Font.font("MS Gothic", FontWeight.BOLD, 70);
+    //private static final String BUTTON_CLICKED_PATH = "src/main/resources/sounds/button_clicked.mp3";
 
-    private Text text;
+    private final Text text;
     private Runnable script;
+    //private final MediaPlayer button_clicked;
 
     public MenuItem(String name) {
         super(15);
@@ -27,14 +29,17 @@ public class MenuItem extends HBox {
         text.setEffect(new GaussianBlur(2));
         getChildren().add(text);
         setActive(false);
+
+        //button_clicked = new MediaPlayer(new Media(new File(BUTTON_CLICKED_PATH).toURI().toString()));
     }
 
     /**
-     *  Setter of the color of the text
+     *  Setter of the color of the
+     *  It changes when the item is selected
      * @param b
      */
     public void setActive(boolean b) {
-        text.setFill(b ? Color.YELLOW : Color.YELLOWGREEN);
+        text.setFill(b ? Color.YELLOW : Color.FORESTGREEN);
     }
 
     /**
@@ -49,8 +54,10 @@ public class MenuItem extends HBox {
      * Method that activates the action of the item
      */
     public void activate() {
-        if (script != null)
+        if (script != null){
+            //this.button_clicked.play(); //reproduces the buttonCklicked sound
             script.run();
+        }
     }
 
     /**
