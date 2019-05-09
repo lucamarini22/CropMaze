@@ -29,7 +29,7 @@ public interface Entity {
      * add a new component at the entity
      * @param component that will be added
      */
-    void add(EntytyComponet component);
+    void add(EntityComponent component);
 
     /**
      * used to synchronize the entities
@@ -37,4 +37,6 @@ public interface Entity {
      * @param up time since last call
      */
     void update(double up);
+
+    void destroy();
 }

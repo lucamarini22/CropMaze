@@ -4,7 +4,7 @@ package it.unibo.oop.bbgmm.Entity;
  * base class for entity type
  */
 
-public abstract class AbstractEntity {
+public abstract class AbstractEntity extends Entity {
     private final EntityBody body;
 
     /**
@@ -23,18 +23,30 @@ public abstract class AbstractEntity {
 
     @Override
     public void update(final double up){
-        update(up);
+        updateComponents(up);
     }
 
-    /**
-     * generate a @DestructionEvent and detaches all components
-     */
     @Override
     public void destroy(){
-        post(new DestructionEvent(this));
         components.forEach(this::remove);
         remove(body);
     }
 
 
+    @Override
+    public <C extends EntityComponent> Optional<C> get(Class<C> component) {
+        return component.attach(this);
+    }
+
+    @Override
+    public void remove(EntityComponent component) {
+        components.remove(component);
+        component.detach();
+    }
+
+    @Override
+    public void add(EntityComponent component) {
+        components.put(component);
+        component.attach(this);
+    }
 }

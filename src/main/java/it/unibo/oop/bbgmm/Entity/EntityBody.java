@@ -1,9 +1,11 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Utilities.Pair;
+import java.util.stream.Stream;
+
 public interface EntityBody extends EntityComponent{
 
     /**
-     *
      * @return the position
      */
     Pair<Integer, Integer> getPosition();
