@@ -5,6 +5,7 @@ import it.unibo.oop.bbgmm.Entity.Component.AbstractEntityComponent;
 public abstract class AbstractMovement extends AbstractEntityComponent implements Movement {
     private State currentState = State.STABLE;
     private Direction directionMovement = Direction.NOTHING;
+    private double speedMovement;
 
 
     /**
@@ -23,10 +24,13 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
 
     protected final void setDesiredDirection(final Direction changeDirection){
         directionMovement = changeDirection;
+
     }
 
     @Override
-    public void move(Direction direction) {
+    public void move(Direction direction,  double speed) {
+            this.directionMovement = direction;
+            this.speedMovement = speed;
 
     }
 
