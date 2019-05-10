@@ -1,4 +1,4 @@
-package it.unibo.oop.bbgmm.Entity;
+package it.unibo.oop.bbgmm.Entity.Component;
 
 import it.unibo.oop.bbgmm.Utilities.Pair;
 import java.util.stream.Stream;
