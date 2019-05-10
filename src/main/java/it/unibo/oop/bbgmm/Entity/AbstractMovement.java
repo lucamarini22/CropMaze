@@ -1,6 +1,8 @@
 package it.unibo.oop.bbgmm.Entity;
 
-public abstract class AbstractMovement extends AbstractComponent implements Movement {
+import it.unibo.oop.bbgmm.Entity.Component.AbstractEntityComponent;
+
+public abstract class AbstractMovement extends AbstractEntityComponent implements Movement {
     private State currentState = State.STABLE;
     private Direction directionMovement = Direction.NOTHING;
 

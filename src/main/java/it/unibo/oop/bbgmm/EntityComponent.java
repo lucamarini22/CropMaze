@@ -1,4 +1,9 @@
 package it.unibo.oop.bbgmm;
+
+import it.unibo.oop.bbgmm.Entity.Entity;
+
+import java.util.Optional;
+
 /**
  * Models a generic entity component.
  */
