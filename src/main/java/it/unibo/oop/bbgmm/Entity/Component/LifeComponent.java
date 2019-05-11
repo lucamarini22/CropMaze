@@ -36,6 +36,11 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
     }
 
     @Override
+    public void update(double delta) {
+
+    }
+
+    @Override
     public boolean isAlive() {
         return this.currentLifePoints > 0;
     }
