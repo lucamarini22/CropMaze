@@ -19,6 +19,13 @@ public interface EntityComponent {
     void detach();
 
     /**
+     * Sychronizes the component
+     * @param delta
+     *              The time passed since the last call in seconds
+     */
+    void update(double delta);
+
+    /**
      * @return The entity owner of the component
      */
     Optional<? extends Entity> getOwner();
