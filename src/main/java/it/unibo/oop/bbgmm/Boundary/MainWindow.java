@@ -17,7 +17,7 @@ public class MainWindow extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(final Stage primaryStage) throws Exception {
         this.primaryStage.setTitle("CROP MAZE");
         this.primaryStage.setFullScreen(false);
         this.primaryStage.setWidth(Resolution.getSmallWidth());

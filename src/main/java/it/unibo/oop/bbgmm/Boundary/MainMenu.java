@@ -4,16 +4,21 @@ import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.*;
+
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
  * @author Manuel
- * Scene for the MainMenu
+ * Scene for the MainMenu.
  */
 
 public class MainMenu extends Scene {
 
+    private static final int SPACE_BETWEEN_ITEM = 25;
+    private static final int BOX_X_COORDINATE = 365;
+    private static final int BOX_Y_COORDINATE = 350;
     private static Stage primaryStage;
     private final AnchorPane pane;
 
@@ -50,7 +55,7 @@ public class MainMenu extends Scene {
 
         pane = new AnchorPane();
 
-        menuBox = new VBox(25,
+        menuBox = new VBox(SPACE_BETWEEN_ITEM,
                 itemNewGame,
                 itemScore,
                 itemSettings,
@@ -60,8 +65,8 @@ public class MainMenu extends Scene {
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
-        menuBox.setTranslateX(365);
-        menuBox.setTranslateY(350);
+        menuBox.setTranslateX(BOX_X_COORDINATE);
+        menuBox.setTranslateY(BOX_Y_COORDINATE);
 
         getMenuItem(0).setActive(true);
 
@@ -74,16 +79,16 @@ public class MainMenu extends Scene {
         }
 
     /**
-     * Method used to get the requested element of the buttons' box
+     * Method used to get the requested element of the buttons' box.
      */
-    private MenuItem getMenuItem(int index) {
-        return (MenuItem)menuBox.getChildren().get(index);
+    private MenuItem getMenuItem(final int index) {
+        return (MenuItem) menuBox.getChildren().get(index);
     }
 
     /**
-     * Method used to set the action for each button
+     * Method used to set the action for each button.
      */
-    private void buttonActions(){
+    private void buttonActions() {
         //Da togliere i commenti per usare gli altri pulsanti
         //itemNewGame.setOnActivate(() -> {
         //    this.primaryStage.setScene(GameFieldView.getGameFieldView(this.primaryStage));
@@ -98,11 +103,11 @@ public class MainMenu extends Scene {
     }
 
     /**
-     * Getter for the Scene
+     * Getter for the Scene.
      * @param stage
      * @return MainMenu
      */
-    public static MainMenu getMainMenu(Stage stage) {
+    public static MainMenu getMainMenu(final Stage stage) {
         primaryStage = stage;
         primaryStage.setHeight(Resolution.getSmallHeight());
         primaryStage.setWidth(Resolution.getSmallWidth());

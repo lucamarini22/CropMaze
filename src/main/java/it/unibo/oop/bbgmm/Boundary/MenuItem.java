@@ -8,6 +8,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+
 /**
  * @author Manuel
  * Utility class with methods used to get and set the Resolution of the screen
@@ -21,8 +22,8 @@ public class MenuItem extends HBox {
     private Runnable script;
     //private final MediaPlayer button_clicked;
 
-    public MenuItem(String name) {
-        super(15);
+    public MenuItem(final String name) {
+        super();
         setAlignment(Pos.CENTER);
         text = new Text(name);
         text.setFont(FONT);
@@ -34,35 +35,37 @@ public class MenuItem extends HBox {
     }
 
     /**
-     *  Setter of the color of the
+     *  Setter of the color of the.
      *  It changes when the item is selected
      * @param b
      */
-    public void setActive(boolean b) {
+    public void setActive(final boolean b) {
         text.setFill(b ? Color.YELLOW : Color.FORESTGREEN);
     }
 
     /**
-     * Setter for the code to execute when the item is activated
+     * Setter for the code to execute when the item is activated.
      * @param r
      */
-    public void setOnActivate(Runnable r) {
+    public void setOnActivate(final Runnable r) {
         script = r;
     }
 
     /**
-     * Method that activates the action of the item
+     * Method that activates the action of the item.
      */
     public void activate() {
-        if (script != null){
+        if (script != null) {
             //this.button_clicked.play(); //reproduces the buttonCklicked sound
             script.run();
         }
     }
 
     /**
-     * Setter used to underline the text
+     * Setter used to underline the text.
      * @param b
      */
-    public void setUnderline(boolean b){text.setUnderline(b);}
+    public void setUnderline(final boolean b) {
+        text.setUnderline(b);
+    }
 }
