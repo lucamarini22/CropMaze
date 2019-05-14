@@ -43,13 +43,11 @@ public abstract class AbstractEntity implements Entity {
     /*
     ora restituisce il componente se è presente nella lista, bisogna cambiarlo
     se non è presente nella lista
+    --------- DA SISTEMARE ---------------
      */
     @Override
-    public <C extends EntityComponent> EntityComponent get(EntityComponent component) {
-        if(components.contains(component)){
-            return components.get(components.indexOf(component));
-        }
-        else return null;
+    public final EntityComponent get(EntityComponent component) {
+        return components.get(components.indexOf(component));
     }
 
     @Override
