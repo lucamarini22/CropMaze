@@ -26,9 +26,5 @@ public interface Movement extends EntityComponent {
         STABLE, WALKING, SHOOTING, DYING;
     }
 
-    enum Direction{
-        NORTH, SOUTH, EAST, WEST, NOTHING;
-    }
-
 
 }

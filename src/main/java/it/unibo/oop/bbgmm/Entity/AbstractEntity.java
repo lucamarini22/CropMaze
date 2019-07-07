@@ -1,12 +1,19 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Entity.Component.EntityBody;
+import it.unibo.oop.bbgmm.Entity.Component.EntityComponent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 /**
  * base class for entity type
  */
 
-public abstract class AbstractEntity extends Entity {
+public abstract class AbstractEntity implements Entity {
     private final EntityBody body;
-
+    private final List<EntityComponent> components = new ArrayList<>();
     /**
      * constructor for Abstract Entity
      * @param body
@@ -33,9 +40,14 @@ public abstract class AbstractEntity extends Entity {
     }
 
 
+    /*
+    ora restituisce il componente se è presente nella lista, bisogna cambiarlo
+    se non è presente nella lista
+    --------- DA SISTEMARE ---------------
+     */
     @Override
-    public <C extends EntityComponent> Optional<C> get(Class<C> component) {
-        return component.attach(this);
+    public final EntityComponent get(EntityComponent component) {
+        return components.get(components.indexOf(component));
     }
 
     @Override
@@ -46,7 +58,16 @@ public abstract class AbstractEntity extends Entity {
 
     @Override
     public void add(EntityComponent component) {
-        components.put(component);
+        components.add(component);
         component.attach(this);
+    }
+
+    /**
+     * Calls {@link EntityComponent#update} on the component
+     * @param up
+     *          Time for the update since last call
+     */
+    protected void updateComponents(final double up){
+        components.forEach(c -> c.update(up));
     }
 }
