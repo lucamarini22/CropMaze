@@ -24,5 +24,5 @@ public class EventSource<T> implements Event<T> {
     public void trigger(final T argument) {
         this.registeredHandlers.forEach(x -> x.handle(argument));
     }
-    
+
 }
