@@ -1,6 +1,10 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
+import it.unibo.oop.bbgmm.Entity.Bullet;
+import it.unibo.oop.bbgmm.Entity.Direction;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
@@ -42,7 +46,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
     @Override
     public void shoot(final Direction ownerDirection) {
-        this.bulletShoted(new Bullet(ownerDirection, this.weaponRange, this.weaponDamage));
+        this.bulletShoted.add(new Bullet(ownerDirection, this.weaponRange, this.weaponDamage));
     }
 
     @Override
@@ -50,4 +54,13 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
         return this.bulletShoted;
     }
 
+    /**
+     * Sychronizes the component
+     *
+     * @param delta The time passed since the last call in seconds
+     */
+    @Override
+    public void update(double delta) {
+
+    }
 }

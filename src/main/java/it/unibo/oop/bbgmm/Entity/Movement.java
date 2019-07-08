@@ -25,10 +25,4 @@ public interface Movement extends EntityComponent {
     enum State implements EntityState{
         STABLE, WALKING, SHOOTING, DYING;
     }
-
-    enum Direction{
-        NORTH, SOUTH, EAST, WEST, NOTHING;
-    }
-
-
 }

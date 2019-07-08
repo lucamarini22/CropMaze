@@ -1,5 +1,10 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
+import it.unibo.oop.bbgmm.Entity.Bullet;
+import it.unibo.oop.bbgmm.Entity.Direction;
+
+import java.util.List;
+
 public interface Weapon extends EntityComponent {
     /**
      * Shoots a projectile.
