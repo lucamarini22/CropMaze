@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Utilities.Pair;
+
 import java.awt.*;
 
 public class CollisionComponent extends AbstractEntityComponent implements Collidable {
