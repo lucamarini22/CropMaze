@@ -4,11 +4,11 @@ import it.unibo.oop.bbgmm.Utilities.Pair;
 
 public class Body extends AbstractEntityComponent implements EntityBody{
 
-    private Pair<Integer, Integer> position;
+    private Pair<Double, Double> position;
     private Pair<Double, Double> dimension;
     private double velocity;
 
-    Body(Pair<Integer, Integer> position, Pair<Double, Double> dimension, double velocity) {
+    Body(Pair<Double, Double> position, Pair<Double, Double> dimension, double velocity) {
         super();
         this.position = position;
         this.dimension = dimension;
@@ -21,7 +21,7 @@ public class Body extends AbstractEntityComponent implements EntityBody{
     }
 
     @Override
-    public Pair<Integer, Integer> getPosition() {
+    public Pair<Double, Double> getPosition() {
         return this.position;
     }
 

@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
+import it.unibo.oop.bbgmm.Entity.Direction;
+
 public interface Weapon extends EntityComponent {
     /**
      * Shoots a projectile.

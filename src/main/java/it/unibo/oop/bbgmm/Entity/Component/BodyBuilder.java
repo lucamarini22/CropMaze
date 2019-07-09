@@ -5,7 +5,7 @@ import it.unibo.oop.bbgmm.Utilities.Pair;
 public class BodyBuilder {
     private double velocity;
     private Pair<Double, Double> dimension;
-    private Pair<Integer, Integer> position;
+    private Pair<Double, Double> position;
 
     public BodyBuilder setVelocity(final double velocity) {
         this.velocity = velocity;
@@ -17,7 +17,7 @@ public class BodyBuilder {
         return this;
     }
 
-    public BodyBuilder setPosition(final Pair<Integer, Integer> position) {
+    public BodyBuilder setPosition(final Pair<Double, Double> position) {
         this.position = position;
         return this;
     }

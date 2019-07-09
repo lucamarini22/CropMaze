@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
+import it.unibo.oop.bbgmm.Entity.Direction;
+
 import java.util.ArrayList;
 
 public class WeaponImpl extends AbstractEntityComponent implements Weapon {
@@ -33,6 +35,11 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     @Override
     public int getWeaponRange() {
         return this.weaponRange;
+    }
+
+    @Override
+    public void update(double delta) {
+
     }
 
     @Override

@@ -8,7 +8,7 @@ public interface EntityBody extends EntityComponent{
     /**
      * @return The position
      */
-    Pair<Integer, Integer> getPosition();
+    Pair<Double, Double> getPosition();
 
     /**
      *
