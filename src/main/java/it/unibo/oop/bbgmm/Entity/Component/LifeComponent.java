@@ -5,7 +5,7 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
     private int maxLifePoints;
     private int currentLifePoints;
 
-    LifeComponent (final int max) {
+    public LifeComponent (final int max) {
         this.maxLifePoints = max;
         this.currentLifePoints = this.maxLifePoints;
     }
