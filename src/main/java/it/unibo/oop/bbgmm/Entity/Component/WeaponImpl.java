@@ -7,8 +7,10 @@ import java.util.ArrayList;
 public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
     private int weaponDamage;
+    private static final double COOLDOWN_TIME = 0.5;
     private int weaponRange;
     private List<Bullet> bulletShoted;
+    private final Timer cooldown = Timer.seconds(COOLDOWN_TIME);
 
 
     /**
@@ -20,6 +22,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
         this.weaponDamage = basicWeapon.damage;
         this.weaponRange = basicWeapon.range;
         this.bulletShoted = new ArrayList<Bullet>();
+        cooldown.update(COOLDOWN_TIME);
     }
 
     @Override
@@ -39,7 +42,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
     @Override
     public void update(double delta) {
-
+        cooldown.update(delta);
     }
 
     @Override
@@ -49,7 +52,9 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
     @Override
     public void shoot(final Direction ownerDirection) {
-        this.bulletShoted(new Bullet(ownerDirection, this.weaponRange, this.weaponDamage));
+        if(this.cooldown.isElapsed()) {
+            this.bulletShoted(new Bullet(ownerDirection, this.weaponRange, this.weaponDamage));
+        }
     }
 
     @Override
