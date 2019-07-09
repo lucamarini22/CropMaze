@@ -1,5 +1,10 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Entity.Component.EntityBody;
+import it.unibo.oop.bbgmm.Entity.Component.EntityComponent;
+
+import java.util.Optional;
+
 public interface Entity {
 
     /**
@@ -12,12 +17,10 @@ public interface Entity {
      * Get a component by its type
      *
      * @param component
-     *      Interface of the desider component that we want get
-     * @param <C>
-     *     Type of the components
+     *      Component that we want get
      * @return the component
      */
-    <C extends EntityComponent> Optional<C> get(Class<C> component);
+    <C extends EntityComponent> EntityComponent get(EntityComponent component);
 
     /**
      * remove a component from the body of the entity
@@ -29,7 +32,7 @@ public interface Entity {
      * add a new component at the entity
      * @param component that will be added
      */
-    void add(EntytyComponet component);
+    void add(EntityComponent component);
 
     /**
      * used to synchronize the entities
@@ -37,4 +40,6 @@ public interface Entity {
      * @param up time since last call
      */
     void update(double up);
+
+    void destroy();
 }
