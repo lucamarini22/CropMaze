@@ -1,6 +1,8 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
 import it.unibo.oop.bbgmm.Utilities.Pair;
+import javafx.geometry.Dimension2D;
+import javafx.geometry.Point2D;
 
 
 public interface EntityBody extends EntityComponent{
@@ -8,25 +10,12 @@ public interface EntityBody extends EntityComponent{
     /**
      * @return The position
      */
-    Pair<Double, Double> getPosition();
-
-    /**
-     *
-     * @param velocity
-     *          The speed of the entity
-     */
-    void setVelocity(double velocity);
-
-    /**
-     *
-     * @return Current speed
-     */
-    double getVelocity();
+    Point2D getPosition();
 
     /**
      *
      * @return Body dimension
      */
-    Pair<Double, Double> getDimension();
+    Dimension2D getDimension();
 
 }

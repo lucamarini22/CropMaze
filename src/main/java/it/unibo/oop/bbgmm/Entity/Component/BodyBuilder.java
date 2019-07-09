@@ -1,23 +1,21 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
-import it.unibo.oop.bbgmm.Utilities.Pair;
+
+import javafx.geometry.Dimension2D;
+import javafx.geometry.Point2D;
+
 
 public class BodyBuilder {
-    private double velocity;
-    private Pair<Double, Double> dimension;
-    private Pair<Double, Double> position;
+    private Dimension2D dimension;
+    private Point2D position;
 
-    public BodyBuilder setVelocity(final double velocity) {
-        this.velocity = velocity;
-        return this;
-    }
 
-    public BodyBuilder setDimension(final Pair<Double, Double> dimension) {
+    public BodyBuilder setDimension(final Dimension2D dimension) {
         this.dimension = dimension;
         return this;
     }
 
-    public BodyBuilder setPosition(final Pair<Double, Double> position) {
+    public BodyBuilder setPosition(final Point2D position) {
         this.position = position;
         return this;
     }
