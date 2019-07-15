@@ -1,26 +1,31 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Utilities.Pair;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
-//E' un'entità
 public class Bullet extends AbstractMovement {
+// it is considered as an entity, but it doesn't implement interface "Entity" because it has not to
+// implement its methods
 
-    private final int range;
+    private final int range; //necessary to deal with collisions
     private final int damage;
     private final Direction direction;
     private Image bulletImage;
     private final Rectangle shape;
+    private final Point2D position;
 
-    public Bullet(Direction ownerDirection, int weaponRange, int weaponDamage/*,Position pos*/) {
+    public Bullet(Direction ownerDirection, int weaponRange, int weaponDamage, Point2D position) {
         this.range = weaponRange;
         this.damage = weaponDamage;
         this.direction = ownerDirection;
+        this.position = position;
 
         updateState();
         chooseImage();
 
-        this.shape = new Rectangle(/*pos.X,pos.Y,*/bulletImage.getWidth(),bulletImage.getHeight());
+        this.shape = new Rectangle(position.getX(),position.getY(),bulletImage.getWidth(),bulletImage.getHeight());
     }
 
     /**
@@ -72,6 +77,16 @@ public class Bullet extends AbstractMovement {
      * Method called to update the position
      */
     private void move(){
-
+        //it will update the position of the shape
+        switch (direction){
+            case NORTH: this.shape.setY(this.shape.getY()/*+1*/);
+                break;
+            case SOUTH: this.shape.setY(this.shape.getY()/*-1*/);
+                break;
+            case EAST: this.shape.setX(this.shape.getX()/*+1*/);
+                break;
+            case WEST: this.shape.setX(this.shape.getX()/*-1*/);
+                break;
+        }
     }
 }

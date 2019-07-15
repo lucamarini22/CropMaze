@@ -46,7 +46,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
     @Override
     public void shoot(final Direction ownerDirection) {
-        this.bulletShoted.add(new Bullet(ownerDirection, this.weaponRange, this.weaponDamage));
+        this.bulletShoted.add(new Bullet(ownerDirection, this.weaponRange, this.weaponDamage, getOwner().get().getBody().getPosition()));
     }
 
     @Override
