@@ -2,10 +2,8 @@ package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Entity.Component.EntityBody;
 import it.unibo.oop.bbgmm.Entity.Component.EntityComponent;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * base class for entity type
