@@ -8,6 +8,8 @@ public abstract class AbstractEntityComponent implements EntityComponent {
 
     private Optional<Entity> owner = Optional.empty();
 
+
+
     @Override
     public void attach(Entity owner) {
         if(this.owner.isPresent()){
