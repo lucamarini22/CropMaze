@@ -1,4 +1,4 @@
-package it.unibo.oop.bbgmm.Entity;
+package it.unibo.oop.bbgmm.Entity.Collision;
 
 public enum CollisionLabel {
 

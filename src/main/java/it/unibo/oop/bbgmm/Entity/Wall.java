@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Entity.Component.EntityBody;
+
 public class Wall extends AbstractEntity {
 
     /**

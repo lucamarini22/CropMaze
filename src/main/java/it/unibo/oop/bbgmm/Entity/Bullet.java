@@ -26,6 +26,7 @@ public class Bullet extends AbstractMovement {
         chooseImage();
 
         this.shape = new Rectangle(position.getX(),position.getY(),bulletImage.getWidth(),bulletImage.getHeight());
+        move(); //called to avoid the overlap of the player and the bullet
     }
 
     /**
@@ -34,7 +35,7 @@ public class Bullet extends AbstractMovement {
     private void chooseImage() {
         double width = 1.5; //andrà sostituito con i valori giusti
         double height = 1.5;
-        switch (direction){
+        switch (this.direction){
             case NORTH: bulletImage = new Image("images/bullets/BulletUp.png",width,height,true,true);
                 break;
             case SOUTH: bulletImage = new Image("images/bullets/BulletDown.png",width,height,true,true);
@@ -78,7 +79,7 @@ public class Bullet extends AbstractMovement {
      */
     private void move(){
         //it will update the position of the shape
-        switch (direction){
+        switch (this.direction){
             case NORTH: this.shape.setY(this.shape.getY()/*+1*/);
                 break;
             case SOUTH: this.shape.setY(this.shape.getY()/*-1*/);
