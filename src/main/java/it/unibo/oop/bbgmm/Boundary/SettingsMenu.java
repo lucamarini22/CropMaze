@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 
 public class SettingsMenu extends Scene {
 
+    private static final int SPACE_BETWEEN_ITEM = 40;
+    private static final int BOX_X_COORDINATE = 315;
+    private static final int BOX_Y_COORDINATE = 300;
     private static Stage primaryStage;
     private final AnchorPane pane;
 
@@ -50,26 +53,25 @@ public class SettingsMenu extends Scene {
 
         pane = new AnchorPane();
 
-        menuBox = new VBox(40,
+        menuBox = new VBox(SPACE_BETWEEN_ITEM,
                 itemSmallScreen,
                 itemFullScreen,
                 itemBack);
 
         buttonActions();
 
-        if(Resolution.isFullScreen()){
+        if (Resolution.isFullScreen()) {
             itemSmallScreen.setUnderline(false);
             itemFullScreen.setUnderline(true);
-        }
-        else{
+        } else {
             itemSmallScreen.setUnderline(true);
             itemFullScreen.setUnderline(false);
         }
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
-        menuBox.setTranslateX(315);
-        menuBox.setTranslateY(300);
+        menuBox.setTranslateX(BOX_X_COORDINATE);
+        menuBox.setTranslateY(BOX_Y_COORDINATE);
 
         getMenuItem(0).setActive(true);
 
@@ -82,16 +84,16 @@ public class SettingsMenu extends Scene {
     }
 
     /**
-     * Method used to get the requested element of the buttons' box
+     * Method used to get the requested element of the buttons' box.
      */
-    private MenuItem getMenuItem(int index) {
-        return (MenuItem)menuBox.getChildren().get(index);
+    private MenuItem getMenuItem(final int index) {
+        return (MenuItem) menuBox.getChildren().get(index);
     }
 
     /**
-     * Method used to set the action for each button
+     * Method used to set the action for each button.
      */
-    private void buttonActions(){
+    private void buttonActions() {
         itemBack.setOnActivate(() -> this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage)));
         itemSmallScreen.setOnActivate(() -> {
             Resolution.setSmallResolution();
@@ -106,11 +108,11 @@ public class SettingsMenu extends Scene {
     }
 
     /**
-     * Getter for the Scene
+     * Getter for the Scene.
      * @param stage
      * @return SettingsMenu
      */
-    public static SettingsMenu getSettingsMenu(Stage stage) {
+    public static SettingsMenu getSettingsMenu(final Stage stage) {
         primaryStage = stage;
         primaryStage.setHeight(Resolution.getSmallHeight());
         primaryStage.setWidth(Resolution.getSmallWidth());

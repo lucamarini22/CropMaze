@@ -1,5 +1,6 @@
-package it.unibo.oop.bbgmm.Entity;
+package it.unibo.oop.bbgmm.Entity.Collision;
 
+import it.unibo.oop.bbgmm.Entity.Event;
 import it.unibo.oop.bbgmm.Utilities.Pair;
 
 import java.awt.*;

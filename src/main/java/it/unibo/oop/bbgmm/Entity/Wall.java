@@ -1,12 +1,14 @@
 package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
+import it.unibo.oop.bbgmm.Entity.Component.EntityBody;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
 /**
  * Represent a wall.
  */
+
 public class Wall extends AbstractEntity {
 
     private static final double WIDTH = 1.1;

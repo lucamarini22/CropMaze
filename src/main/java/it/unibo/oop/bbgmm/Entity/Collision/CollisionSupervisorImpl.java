@@ -1,4 +1,4 @@
-package it.unibo.oop.bbgmm.Entity;
+package it.unibo.oop.bbgmm.Entity.Collision;
 
 import java.util.ArrayList;
 import java.util.List;
