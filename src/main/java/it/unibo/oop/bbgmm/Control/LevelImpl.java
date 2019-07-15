@@ -1,7 +1,8 @@
 package it.unibo.oop.bbgmm.Control;
 
-import com.badlogic.gdx.maps.tiled.TiledMap;
+import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.GameField;
+import it.unibo.oop.bbgmm.Entity.Wall;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
@@ -10,12 +11,18 @@ import org.mapeditor.core.ObjectGroup;
 import org.mapeditor.core.TileLayer;
 
 import java.util.Locale;
+import java.util.Set;
 
+/**
+ * Controls a level.
+ */
 public class LevelImpl implements Level {
 
     private Entity player;
     private final Map map;
     private final GameField gameField;
+    private final Set<Entity> entities;
+
 
     /**
      * Constructor for LevelImpl
@@ -23,17 +30,20 @@ public class LevelImpl implements Level {
      *          Map to load.
      * @param gameField
      *          GameField gameField
+     * @param entities
+     *          Entities in the level
      */
-    public LevelImpl(final Map map, final GameField gameField) {
+    public LevelImpl(final Map map, final GameField gameField, final Set<Entity> entities) {
         this.map = map;
         this.gameField = gameField;
+        this.entities = entities;
 
 
         this.map.forEach(layer -> {
             if (layer instanceof TileLayer) {
-
+                loadTiles((TileLayer) layer);
             } else if (layer instanceof ObjectGroup) {
-
+                loadObjects((ObjectGroup) layer);
             }
         });
     }
@@ -47,6 +57,7 @@ public class LevelImpl implements Level {
                 final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
                         obj.getWidth(), obj.getHeight());
 
+
             });
         }
         if (layer.getName().trim().toLowerCase(Locale.UK).equals("objects")) {
@@ -54,6 +65,11 @@ public class LevelImpl implements Level {
                 final String type = mapObj.getType();
                 Entity entity;
                 switch (type) {
+                    case "player":
+
+                        break;
+
+                    //cases of all power ups and enemies
 
                     default:
                         break;
@@ -80,11 +96,11 @@ public class LevelImpl implements Level {
 
     @Override
     public Entity getPlayer() {
-        return null;
+        return this.player;
     }
 
     @Override
     public GameField getGameField() {
-        return null;
+        return this.gameField;
     }
 }
