@@ -24,6 +24,11 @@ dependencies {
     // SpotBugs
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
     compile 'com.github.spotbugs:spotbugs:3.1.6'
+
+    implementation 'org.mapeditor:libtiled:1.0.2'
+
+    implementation 'com.badlogicgames.gdx:gdx:1.9.9'
+
 }
 
 //PMD rules (More rigid rules)

@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Entity.Component.AbstractEntityComponent;
 import it.unibo.oop.bbgmm.Utilities.Pair;
 
 import java.awt.*;
@@ -39,5 +40,10 @@ public class CollisionComponent extends AbstractEntityComponent implements Colli
     @Override
     public Event<Collision> getEvent() {
         return this.collisionEvent;
+    }
+
+    @Override
+    public void update(double delta) {
+
     }
 }
