@@ -30,10 +30,5 @@ public interface EntityComponent {
      */
     Optional<? extends Entity> getOwner();
 
-    /**
-     * Sychronizes the component
-     * @param delta
-     *              The time passed since the last call in seconds
-     */
-    void update(double delta);
+
 }
