@@ -1,6 +1,6 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
-public class TimerImpl {
+public final class TimerImpl implements Timer {
     private final double end;
     private double timeElapsed;
 

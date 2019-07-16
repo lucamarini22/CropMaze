@@ -28,8 +28,6 @@ public interface Timer {
      *            in seconds
      * @return A {@link Timer} object.
      */
-    static Timer seconds(final double time) {
-        return new TimerImpl(time);
-    }
+    static Timer seconds(final double time) {return new TimerImpl(time);}
 
 }
