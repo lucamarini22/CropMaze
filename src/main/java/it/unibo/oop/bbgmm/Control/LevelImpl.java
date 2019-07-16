@@ -1,10 +1,7 @@
 package it.unibo.oop.bbgmm.Control;
 
+import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
-import it.unibo.oop.bbgmm.Entity.Entity;
-import it.unibo.oop.bbgmm.Entity.GameField;
-import it.unibo.oop.bbgmm.Entity.Player;
-import it.unibo.oop.bbgmm.Entity.Wall;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
@@ -20,10 +17,12 @@ import java.util.Set;
  */
 public class LevelImpl implements Level {
 
+    private static final int COIN_VALUE = 10;
     private Entity player;
     private final Map map;
     private final GameField gameField;
     private final Set<Entity> entities;
+
 
 
     // da mettere in una class difficoltà
@@ -84,12 +83,15 @@ public class LevelImpl implements Level {
                 final String type = mapObj.getType();
                 Entity entity;
                 switch (type) {
+                    //creation of the player
                     case "player":
                         player = gameField.addEntity(new Player(new BodyBuilder(), position, playerHealth));
                         break;
 
-                    //cases of all power ups and enemies
-
+                    //creation of all power ups, coins and enemies
+                    case "coin":
+                        entity = new Coin(new BodyBuilder(), position, COIN_VALUE);
+                        break;
                     default:
                         break;
                 }
