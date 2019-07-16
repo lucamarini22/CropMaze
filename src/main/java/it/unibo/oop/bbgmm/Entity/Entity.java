@@ -20,7 +20,7 @@ public interface Entity {
      *      Component that we want get
      * @return the component
      */
-    <C extends EntityComponent> EntityComponent get(EntityComponent component);
+    <C extends EntityComponent> Optional<C> get(Class<C> component);
 
     /**
      * remove a component from the body of the entity
