@@ -44,4 +44,5 @@ public class BodyBuilder {
         return dimension == null || this.position == null || this.direction == null;
     }
 
+
 }
