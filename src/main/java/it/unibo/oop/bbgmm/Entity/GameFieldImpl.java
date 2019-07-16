@@ -19,8 +19,9 @@ public class GameFieldImpl implements GameField {
     }
 
     @Override
-    public void addEntity(final Entity entity) {
+    public Entity addEntity(final Entity entity) {
         entities.add(entity);
+        return entity;
     }
 
     private void removeEntity(final Entity entity) {

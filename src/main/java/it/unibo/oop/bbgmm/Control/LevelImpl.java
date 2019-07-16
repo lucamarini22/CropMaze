@@ -1,7 +1,9 @@
 package it.unibo.oop.bbgmm.Control;
 
+import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
 import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.GameField;
+import it.unibo.oop.bbgmm.Entity.Player;
 import it.unibo.oop.bbgmm.Entity.Wall;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
@@ -24,6 +26,10 @@ public class LevelImpl implements Level {
     private final Set<Entity> entities;
 
 
+    // da mettere in una class difficoltà
+    private final int playerHealth = 100;
+
+
     /**
      * Constructor for LevelImpl
      * @param map
@@ -38,7 +44,6 @@ public class LevelImpl implements Level {
         this.gameField = gameField;
         this.entities = entities;
 
-
         this.map.forEach(layer -> {
             if (layer instanceof TileLayer) {
                 loadTiles((TileLayer) layer);
@@ -48,6 +53,19 @@ public class LevelImpl implements Level {
         });
     }
 
+    @Override
+    public Entity getPlayer() {
+        return this.player;
+    }
+
+    @Override
+    public GameField getGameField() {
+        return this.gameField;
+    }
+
+    private static Point2D invertY(final Point2D pt) {
+        return new Point2D(pt.getX(), -pt.getY());
+    }
 
 
     private void loadObjects(final ObjectGroup layer) {
@@ -56,17 +74,18 @@ public class LevelImpl implements Level {
             objLayer.forEach(obj -> {
                 final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
                         obj.getWidth(), obj.getHeight());
-
+                gameField.addEntity(new Wall(new BodyBuilder(), pos.getKey(), pos.getValue()));
 
             });
         }
         if (layer.getName().trim().toLowerCase(Locale.UK).equals("objects")) {
             layer.forEach(mapObj -> {
+                final Point2D position = invertY(new Point2D(mapObj.getX() / 70, mapObj.getY() / 70));
                 final String type = mapObj.getType();
                 Entity entity;
                 switch (type) {
                     case "player":
-
+                        player = gameField.addEntity(new Player(new BodyBuilder(), position, playerHealth));
                         break;
 
                     //cases of all power ups and enemies
@@ -94,13 +113,5 @@ public class LevelImpl implements Level {
     }
 
 
-    @Override
-    public Entity getPlayer() {
-        return this.player;
-    }
 
-    @Override
-    public GameField getGameField() {
-        return this.gameField;
-    }
 }
