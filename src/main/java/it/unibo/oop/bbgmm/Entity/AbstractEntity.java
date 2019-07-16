@@ -2,8 +2,11 @@ package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Entity.Component.EntityBody;
 import it.unibo.oop.bbgmm.Entity.Component.EntityComponent;
+import it.unibo.oop.bbgmm.Utilities.ComponentsContainerImpl;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * base class for entity type
@@ -11,12 +14,12 @@ import java.util.List;
 
 public abstract class AbstractEntity implements Entity {
     private final EntityBody body;
-    private final List<EntityComponent> components = new ArrayList<>();
+    private final ComponentsContainerImpl<EntityComponent> components = new ComponentsContainerImpl<>(EntityComponent.class);
     /**
      * constructor for Abstract Entity
      * @param body
      */
-    public AbstractEntity(EntityBody body) {
+    public AbstractEntity(final EntityBody body) {
         this.body = body;
         body.attach(this);
     }
@@ -38,25 +41,20 @@ public abstract class AbstractEntity implements Entity {
     }
 
 
-    /*
-    ora restituisce il componente se è presente nella lista, bisogna cambiarlo
-    se non è presente nella lista
-    --------- DA SISTEMARE ---------------
-     */
     @Override
-    public final EntityComponent get(EntityComponent component) {
-        return components.get(components.indexOf(component));
+    public final <C extends EntityComponent> Optional<C> get(final Class<C> component) {
+        return components.get(component);
     }
 
     @Override
-    public void remove(EntityComponent component) {
+    public void remove(final EntityComponent component) {
         components.remove(component);
         component.detach();
     }
 
     @Override
-    public void add(EntityComponent component) {
-        components.add(component);
+    public void add(final EntityComponent component) {
+        components.put(component);
         component.attach(this);
     }
 
@@ -66,6 +64,6 @@ public abstract class AbstractEntity implements Entity {
      *          Time for the update since last call
      */
     protected void updateComponents(final double up){
-        components.forEach(c -> c.update(up));
+
     }
 }
