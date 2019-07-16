@@ -4,32 +4,40 @@ public enum CollisionLabel {
 
     PLAYER {
         public boolean canCollideWith(final CollisionLabel other) {
-            return other == ALIEN || other == COIN || other == POWER;
+            return other == PUNCH || other == COIN || other == POWER || other == WALL;
         }
     },
 
     ALIEN {
         public boolean canCollideWith(final CollisionLabel other){
-            return other == PLAYER || other == COIN || other == POWER || other == SHOT;
+            return other == WALL || other == SHOT;
         }
     },
 
     SHOT {
         public boolean canCollideWith(final CollisionLabel other){
-            return other == ALIEN || other == COIN;
+            return other == ALIEN || other == WALL;
         }
     },
 
     POWER {
         public boolean canCollideWith(final CollisionLabel other){
-            return other == PLAYER || other == ALIEN;
-        }
+            return other == PLAYER;}
     },
 
     COIN{
         public boolean canCollideWith(final CollisionLabel other){
-            return other == PLAYER || other == ALIEN;
+            return other == PLAYER;
         }
+    },
+
+    PUNCH{
+        public boolean canCollideWith(final CollisionLabel other) { return other == PLAYER;}
+    },
+
+    WALL{
+        public boolean canCollideWith(final CollisionLabel other) {
+            return other == PLAYER || other == ALIEN || other == SHOT;}
     };
 
     public boolean canCollideWith(final CollisionLabel other){
