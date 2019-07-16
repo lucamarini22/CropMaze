@@ -4,23 +4,28 @@ import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
-public class EntityFactoryImpl implements EntityFactory {
+/**
+ * Factory implementation of the AbstractFactory EntityFactory.
+ */
+public final class EntityFactoryImpl implements EntityFactory {
+
+    private static final int COIN_VALUE = 10;
+
 
     // da mettere e gettare in una class difficoltà
-    private final int playerHealth = 100;
-    private final int enemyHealth = 20;
+    private static final int PLAYER_HEALTH = 100;
+    private static final int ENEMY_HEALTH = 20;
     //
-    private static final int COIN_VALUE = 10;
 
 
     @Override
     public Player createPlayer(final Point2D position) {
-        return new Player(new BodyBuilder(), position, playerHealth);
+        return new Player(new BodyBuilder(), position, PLAYER_HEALTH);
     }
 
     @Override
     public Alien createEnemy(final Point2D position) {
-        return new Alien(new BodyBuilder(), position, enemyHealth);
+        return new Alien(new BodyBuilder(), position, ENEMY_HEALTH);
     }
 
     @Override

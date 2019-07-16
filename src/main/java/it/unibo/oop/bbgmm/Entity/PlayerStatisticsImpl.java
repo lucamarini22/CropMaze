@@ -1,13 +1,11 @@
 package it.unibo.oop.bbgmm.Entity;
 
-import it.unibo.oop.bbgmm.Entity.Component.Inventory;
-
 import java.util.Objects;
 
 /**
  * Stores and sets statistics of an {@link Player} object.
  */
-public class PlayerStatisticsImpl implements PlayerStatistics {
+public final class PlayerStatisticsImpl implements PlayerStatistics {
 
     private int collectedMoney;
     private int killedEnemies;

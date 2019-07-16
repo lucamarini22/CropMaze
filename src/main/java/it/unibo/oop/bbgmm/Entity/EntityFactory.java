@@ -1,6 +1,5 @@
 package it.unibo.oop.bbgmm.Entity;
 
-import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
@@ -16,7 +15,9 @@ public interface EntityFactory {
     Player createPlayer(Point2D position);
 
     /**
-     * @return an enemy
+     * @param position
+     *      Position where the enemy spawn
+     * @return an enemy (alien)
      */
     Alien createEnemy(Point2D position);
 
@@ -28,6 +29,10 @@ public interface EntityFactory {
     Coin createCoin(Point2D position);
 
     /**
+     * @param position
+     *      Position where the wall spawns
+     * @param dimension
+     *      Dimension of the wall
      * @return a wall
      */
     Wall  createWall(Point2D position, Dimension2D dimension);

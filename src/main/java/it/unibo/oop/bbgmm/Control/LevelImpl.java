@@ -1,47 +1,41 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Entity.*;
-import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
+import it.unibo.oop.bbgmm.Entity.Entity;
+import it.unibo.oop.bbgmm.Entity.EntityFactory;
+import it.unibo.oop.bbgmm.Entity.GameField;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
 import org.mapeditor.core.Map;
 import org.mapeditor.core.ObjectGroup;
 import org.mapeditor.core.TileLayer;
-
 import java.util.Locale;
-import java.util.Set;
 
 /**
  * Controls a level.
  */
-public class LevelImpl implements Level {
+public final class LevelImpl implements Level {
 
     private Entity player;
     private final Map map;
     private final GameField gameField;
-    private final Set<Entity> entities;
     private final EntityFactory entityFactory;
     //private final EntitySpawner spawner;
 
 
-
-
-
-
     /**
-     * Constructor for LevelImpl
+     * Constructor for LevelImpl.
+     *
      * @param map
-     *          Map to load.
+     *          Map to load
      * @param gameField
      *          GameField gameField
-     * @param entities
-     *          Entities in the level
+     * @param entityFactory
+     *          Factory for the entities
      */
-    public LevelImpl(final Map map, final GameField gameField, final Set<Entity> entities, final EntityFactory entityFactory) {
+    public LevelImpl(final Map map, final GameField gameField, final EntityFactory entityFactory) {
         this.map = map;
         this.gameField = gameField;
-        this.entities = entities;
         this.entityFactory = entityFactory;
 
         this.map.forEach(layer -> {
@@ -69,9 +63,9 @@ public class LevelImpl implements Level {
 
 
     private void loadObjects(final ObjectGroup layer) {
-        final ObjectGroup objLayer = layer;
-        if (objLayer.getName().trim().toLowerCase(Locale.UK).equals("solid")) {
-            objLayer.forEach(obj -> {
+        //final ObjectGroup objLayer = layer;
+        if (layer.getName().trim().toLowerCase(Locale.UK).equals("solid")) {
+            layer.forEach(obj -> {
                 final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
                         obj.getWidth(), obj.getHeight());
                 gameField.addEntity(entityFactory.createWall(pos.getKey(), pos.getValue()));

@@ -1,8 +1,5 @@
 package it.unibo.oop.bbgmm.Entity;
 
-import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
-
-import java.util.function.Function;
 
 /**
  * Runs the game field.
@@ -22,6 +19,7 @@ public interface GameField {
      *
      * @param entity
      *      The entity that is going to be added in the game field
+     * @return the entity
      */
     Entity addEntity(Entity entity);
 }
