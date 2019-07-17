@@ -3,76 +3,74 @@ package it.unibo.oop.bbgmm.Entity;
 import it.unibo.oop.bbgmm.Utilities.Pair;
 
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ScoreListImpl implements ScoreList{
 
-	File fileName = new File("ScoreList.txt");
-	private List<Score> scoreList = new ArrayList<>();
-	
-	public ScoreListImpl() throws IOException {
-		final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
-		int size = ostream.readInt();
-		for(int i = 0; i<size; i++) {
-			try {
-				scoreList.add((Score) ostream.readObject());
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-		}
-		ostream.close();
-	}
-	
-	@Override
-	public void addScore(Pair<String, Integer> score) {
-		//maximux size of the scoreList is 5
-		Score newScore = new Score(score.getFst(),score.getSnd());
-		if(!scoreList.contains(newScore)){
-			scoreList.add(newScore);
-			scoreList.sort((s1,s2) -> s2.getLevel()-s1.getLevel());
-			if(scoreList.size() > 5){
-				scoreList = scoreList.subList(0, 4);
-			}
-			try {
-				writeOnFile();
-			} catch (IOException e) {
-				System.out.println("Error on writing on file\n");
-				e.printStackTrace();
-			}
-		}//if it contains the exact score it does nothing
-	}
+    File fileName = new File("ScoreList.txt");
+    private List<Score> scoreList = new ArrayList<>();
 
-	private void writeOnFile() throws IOException {
-		final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName, false)));
-		ostream.writeInt(scoreList.size());
-		scoreList.forEach(s -> {
-			try {
-				ostream.writeObject(s);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
-		ostream.flush();
-		ostream.close();
-	}
+    public ScoreListImpl() throws IOException {
+        final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
+        int size = ostream.readInt();
+        for(int i = 0; i<size; i++) {
+            try {
+                scoreList.add((Score) ostream.readObject());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        ostream.close();
+    }
 
-	@Override
-	public List<Pair<String, Integer>> getRanking() {
-		return scoreList.stream()
-						.map((s) -> new Pair<String, Integer>(s.getPlayerName(), s.getLevel()))
-						.collect(Collectors.toList());
-	}
+    @Override
+    public void addScore(Pair<String, Integer> score){
+        //maximux size of the scoreList is 5
+        Score newScore = new Score(score.getFst(),score.getSnd());
+        if(!scoreList.contains(newScore)){
+            scoreList.add(newScore);
+            scoreList.sort((s1,s2) -> s2.getLevel()-s1.getLevel());
+            if(scoreList.size() > 5){
+                scoreList = scoreList.subList(0, 4);
+            }
+            try {
+                writeOnFile();
+            } catch (IOException e) {
+                System.out.println("Error on writing on file\n");
+                e.printStackTrace();
+            }
+        }//if it contains the exact score it does nothing
+    }
 
-	@Override
-	public void deleteAll() throws IOException {
-		final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName, false)));
-		scoreList.clear();
-		ostream.writeInt(0);
-		ostream.flush();
-		ostream.close();
-	}
+    private void writeOnFile() throws IOException {
+        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName, false)));
+        ostream.writeInt(scoreList.size());
+        scoreList.forEach(s -> {
+            try {
+                ostream.writeObject(s);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        ostream.flush();
+        ostream.close();
+    }
 
+    @Override
+    public List<Pair<String, Integer>> getRanking() {
+        return scoreList.stream()
+                .map((s) -> new Pair<String, Integer>(s.getPlayerName(), s.getLevel()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteAll() throws IOException {
+        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName, false)));
+        scoreList.clear();
+        ostream.writeInt(0);
+        ostream.flush();
+        ostream.close();
+    }
 }
