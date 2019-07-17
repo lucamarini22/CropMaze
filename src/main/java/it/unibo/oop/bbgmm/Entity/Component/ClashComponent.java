@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
 import it.unibo.oop.bbgmm.Entity.Collision.Collision;
+import it.unibo.oop.bbgmm.Entity.Collision.CollisionLabel;
 
 public class ClashComponent extends AbstractEntityComponent {
 
@@ -15,7 +16,8 @@ public class ClashComponent extends AbstractEntityComponent {
                     life -> {
                         life.damaged(10);
                     }));
-        this.getOwner().ifPresent(owner ->(owner).destroy());
+        if(collision.getCollisionComponent().getCollisionLabel().equals(CollisionLabel.SHOT))
+            this.getOwner().ifPresent(owner ->(owner).destroy());
     }
 
     @Override

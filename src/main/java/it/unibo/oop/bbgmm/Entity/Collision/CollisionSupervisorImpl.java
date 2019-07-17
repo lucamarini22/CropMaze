@@ -39,11 +39,10 @@ public class CollisionSupervisorImpl implements CollisionSupervisor {
     private void verifyCollision(final CollisionComponent coll1, final CollisionComponent coll2){
         if(coll1.getCollisionLabel().canCollideWith(coll2.getCollisionLabel())){
             if(coll1.getShape().intersects(coll2.getShape())) {
-                Rectangle r = new Rectangle(coll1.getShape().intersection(coll2.getShape()));
                 notifyCollision(coll1, coll2, CollisionLabel.COIN);
                 notifyCollision(coll1, coll2, CollisionLabel.SHOT);
-                notifyCollision(coll1, coll2, CollisionLabel.PUNCH);
                 notifyCollision(coll1, coll2, CollisionLabel.POWER);
+                notifyCollision(coll1, coll2, CollisionLabel.ALIEN);
             }
         }
     }

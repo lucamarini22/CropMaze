@@ -3,11 +3,11 @@ package it.unibo.oop.bbgmm.Entity.Component;
 import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.Collision;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionLabel;
-import it.unibo.oop.bbgmm.Entity.Component.AbstractEntityComponent;
 import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.Event;
 import it.unibo.oop.bbgmm.Entity.EventSource;
 import it.unibo.oop.bbgmm.Utilities.Pair;
+import javafx.geometry.Rectangle2D;
 
 import java.awt.*;
 
@@ -15,16 +15,16 @@ public class CollisionComponent extends AbstractEntityComponent implements Colli
 
     private final CollisionLabel label;
     private final EventSource<Collision> collisionEvent;
-    private final Rectangle shape;
+    private final Rectangle2D shape;
 
-    public CollisionComponent(Entity owner, final Rectangle shape, final CollisionLabel label){
+    public CollisionComponent(Entity owner, final Rectangle2D shape, final CollisionLabel label){
 
         this.shape = shape;
         this.label = label;
         this.collisionEvent = new EventSource<Collision>();
     }
     @Override
-    public Rectangle getShape() {
+    public Rectangle2D getShape() {
         return this.shape;
     }
 
