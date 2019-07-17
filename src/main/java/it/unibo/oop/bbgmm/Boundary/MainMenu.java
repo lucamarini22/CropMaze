@@ -93,9 +93,9 @@ public class MainMenu extends Scene {
         //itemNewGame.setOnActivate(() -> {
         //    this.primaryStage.setScene(GameFieldView.getGameFieldView(this.primaryStage));
         //});
-        //itemScore.setOnActivate(() -> {
-        //    this.primaryStage.setScene(Ranking.getRanking(this.primaryStage));
-        //});
+        itemScore.setOnActivate(() -> {
+            this.primaryStage.setScene(RankingView.getRankingView(this.primaryStage));
+        });
         itemSettings.setOnActivate(() -> {
             this.primaryStage.setScene(SettingsMenu.getSettingsMenu(this.primaryStage));
         });

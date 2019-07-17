@@ -25,5 +25,7 @@ public class Player extends AbstractEntity {
         add(new CollisionComponent(this,new Rectangle(), CollisionLabel.PLAYER));
     }
 
+
+
 }
 
