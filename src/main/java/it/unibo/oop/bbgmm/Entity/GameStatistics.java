@@ -1,7 +1,7 @@
 package it.unibo.oop.bbgmm.Entity;
 
 /**
- * It stores the data to calculate the final score.
+ * It stores the data of the game.
  */
 public interface GameStatistics {
     /**
@@ -10,7 +10,7 @@ public interface GameStatistics {
     int getCurrentLevel();
 
     /**
-     * @return the final score
+     * @return the score
      */
     int getScore();
 

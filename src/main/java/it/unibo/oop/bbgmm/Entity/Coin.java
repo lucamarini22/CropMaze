@@ -12,7 +12,6 @@ public class Coin extends AbstractEntity {
     private static final int WIDTH = 1;
     private static final int HEIGHT = 1;
     private static final Dimension2D SIZE = new Dimension2D(WIDTH, HEIGHT);
-
     /**
      *
      * @param bodyBuilder

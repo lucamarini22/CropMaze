@@ -1,47 +1,42 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Entity.*;
-import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
+import it.unibo.oop.bbgmm.Entity.Entity;
+import it.unibo.oop.bbgmm.Entity.EntityFactory;
+import it.unibo.oop.bbgmm.Entity.GameField;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
 import org.mapeditor.core.Map;
 import org.mapeditor.core.ObjectGroup;
 import org.mapeditor.core.TileLayer;
-
 import java.util.Locale;
-import java.util.Set;
 
 /**
  * Controls a level.
  */
-public class LevelImpl implements Level {
+public final class LevelImpl implements Level {
 
-    private static final int COIN_VALUE = 10;
     private Entity player;
     private final Map map;
     private final GameField gameField;
-    private final Set<Entity> entities;
-
-
-
-    // da mettere in una class difficoltà
-    private final int playerHealth = 100;
+    private final EntityFactory entityFactory;
+    //private final EntitySpawner spawner;
 
 
     /**
-     * Constructor for LevelImpl
+     * Constructor for LevelImpl.
+     *
      * @param map
-     *          Map to load.
+     *          Map to load
      * @param gameField
      *          GameField gameField
-     * @param entities
-     *          Entities in the level
+     * @param entityFactory
+     *          Factory for the entities
      */
-    public LevelImpl(final Map map, final GameField gameField, final Set<Entity> entities) {
+    public LevelImpl(final Map map, final GameField gameField, final EntityFactory entityFactory) {
         this.map = map;
         this.gameField = gameField;
-        this.entities = entities;
+        this.entityFactory = entityFactory;
 
         this.map.forEach(layer -> {
             if (layer instanceof TileLayer) {
@@ -68,12 +63,12 @@ public class LevelImpl implements Level {
 
 
     private void loadObjects(final ObjectGroup layer) {
-        final ObjectGroup objLayer = layer;
-        if (objLayer.getName().trim().toLowerCase(Locale.UK).equals("solid")) {
-            objLayer.forEach(obj -> {
+        //final ObjectGroup objLayer = layer;
+        if (layer.getName().trim().toLowerCase(Locale.UK).equals("solid")) {
+            layer.forEach(obj -> {
                 final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
                         obj.getWidth(), obj.getHeight());
-                gameField.addEntity(new Wall(new BodyBuilder(), pos.getKey(), pos.getValue()));
+                gameField.addEntity(entityFactory.createWall(pos.getKey(), pos.getValue()));
 
             });
         }
@@ -85,12 +80,16 @@ public class LevelImpl implements Level {
                 switch (type) {
                     //creation of the player
                     case "player":
-                        player = gameField.addEntity(new Player(new BodyBuilder(), position, playerHealth));
+                        player = gameField.addEntity(entityFactory.createPlayer(position));
                         break;
 
                     //creation of all power ups, coins and enemies
                     case "coin":
-                        entity = new Coin(new BodyBuilder(), position, COIN_VALUE);
+                        entity = gameField.addEntity(entityFactory.createCoin(position));
+                        break;
+
+                    case "alien":
+                        entity = gameField.addEntity(entityFactory.createEnemy(position));
                         break;
                     default:
                         break;
