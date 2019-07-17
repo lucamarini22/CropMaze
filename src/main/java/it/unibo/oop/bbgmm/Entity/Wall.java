@@ -9,9 +9,6 @@ import javafx.geometry.Point2D;
  */
 public class Wall extends AbstractEntity {
 
-    private static final double WIDTH = 1.1;
-    private static final double HEIGHT = 1.2;
-
     /**
      *
      * @param bodyBuilder
