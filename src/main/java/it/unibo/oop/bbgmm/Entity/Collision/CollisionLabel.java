@@ -4,13 +4,13 @@ public enum CollisionLabel {
 
     PLAYER {
         public boolean canCollideWith(final CollisionLabel other) {
-            return other == PUNCH || other == COIN || other == POWER || other == WALL;
+            return other == PUNCH || other == COIN || other == POWER;
         }
     },
 
     ALIEN {
         public boolean canCollideWith(final CollisionLabel other){
-            return other == WALL || other == SHOT;
+            return other == SHOT;
         }
     },
 
@@ -37,7 +37,7 @@ public enum CollisionLabel {
 
     WALL{
         public boolean canCollideWith(final CollisionLabel other) {
-            return other == PLAYER || other == ALIEN || other == SHOT;}
+            return other == SHOT;}
     };
 
     public boolean canCollideWith(final CollisionLabel other){

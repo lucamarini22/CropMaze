@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollisionSupervisorImpl implements CollisonSupervisor {
+public class CollisionSupervisorImpl implements CollisionSupervisor {
 
     private final List<CollisionComponent> collidableComponents;
 
@@ -40,9 +40,6 @@ public class CollisionSupervisorImpl implements CollisonSupervisor {
         if(coll1.getCollisionLabel().canCollideWith(coll2.getCollisionLabel())){
             if(coll1.getShape().intersects(coll2.getShape())) {
                 Rectangle r = new Rectangle(coll1.getShape().intersection(coll2.getShape()));
-                CollisionLabel L1 = coll1.getCollisionLabel();
-                CollisionLabel L2 = coll2.getCollisionLabel();
-                notifyCollision(coll1, coll2, CollisionLabel.WALL);
                 notifyCollision(coll1, coll2, CollisionLabel.COIN);
                 notifyCollision(coll1, coll2, CollisionLabel.SHOT);
                 notifyCollision(coll1, coll2, CollisionLabel.PUNCH);
