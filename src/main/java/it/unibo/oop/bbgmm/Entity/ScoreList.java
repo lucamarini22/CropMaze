@@ -9,8 +9,6 @@ public interface ScoreList {
 	
 	void addScore(Pair<String, Integer> score);
 	
-	void writeOnFile() throws IOException;
-	
 	List<Pair<String, Integer>> getRanking();
 	
 	void deleteAll() throws IOException;

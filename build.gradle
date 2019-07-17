@@ -31,7 +31,6 @@ dependencies {
 
     implementation 'com.google.guava:guava-gwt:28.0-jre'
     
-    
 }
 
 //PMD rules (More rigid rules)

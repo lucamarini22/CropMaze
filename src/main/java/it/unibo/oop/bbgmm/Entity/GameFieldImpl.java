@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Runs the game field.
  */
-public class GameFieldImpl implements GameField {
+public final class GameFieldImpl implements GameField {
 
 
     private final Set<Entity> entities = new LinkedHashSet<>();

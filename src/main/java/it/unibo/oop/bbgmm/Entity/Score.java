@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Score implements Serializable{
 
@@ -22,5 +23,19 @@ public class Score implements Serializable{
 
 	public int getLevel() {
 		return level;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Score score = (Score) o;
+		return level == score.level &&
+				playerName.equals(score.playerName);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(playerName, level);
 	}
 }

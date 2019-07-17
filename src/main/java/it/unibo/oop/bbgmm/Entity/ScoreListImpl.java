@@ -2,27 +2,21 @@ package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Utilities.Pair;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ScoreListImpl implements ScoreList{
 
-	private final String fileName = System.getProperty("file.separator")+"ScoreList.txt";
+	File fileName = new File("ScoreList.txt");
 	private List<Score> scoreList = new ArrayList<>();
 	
-	public ScoreListImpl() throws FileNotFoundException, IOException {
+	public ScoreListImpl() throws IOException {
 		final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
 		int size = ostream.readInt();
-		for(int i = 0; i<=size; i++) {
+		for(int i = 0; i<size; i++) {
 			try {
 				scoreList.add((Score) ostream.readObject());
 			} catch (ClassNotFoundException e) {
@@ -34,17 +28,25 @@ public class ScoreListImpl implements ScoreList{
 	
 	@Override
 	public void addScore(Pair<String, Integer> score) {
-		//maximux size of the score is 10
-		scoreList.add(new Score(score.getFst(),score.getSnd()));
-		scoreList.sort((s1,s2) -> s1.getLevel()-s2.getLevel());
-		if(scoreList.size() > 10){
-			scoreList = scoreList.subList(0, 9);
-		}
+		//maximux size of the scoreList is 5
+		Score newScore = new Score(score.getFst(),score.getSnd());
+		if(!scoreList.contains(newScore)){
+			scoreList.add(newScore);
+			scoreList.sort((s1,s2) -> s2.getLevel()-s1.getLevel());
+			if(scoreList.size() > 5){
+				scoreList = scoreList.subList(0, 4);
+			}
+			try {
+				writeOnFile();
+			} catch (IOException e) {
+				System.out.println("Error on writing on file\n");
+				e.printStackTrace();
+			}
+		}//if it contains the exact score it does nothing
 	}
 
-	@Override
-	public void writeOnFile() throws IOException {
-		final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName)));
+	private void writeOnFile() throws IOException {
+		final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName, false)));
 		ostream.writeInt(scoreList.size());
 		scoreList.forEach(s -> {
 			try {
@@ -66,8 +68,10 @@ public class ScoreListImpl implements ScoreList{
 
 	@Override
 	public void deleteAll() throws IOException {
-		final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName)));
-		ostream.writeChar(' ');
+		final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName, false)));
+		scoreList.clear();
+		ostream.writeInt(0);
+		ostream.flush();
 		ostream.close();
 	}
 
