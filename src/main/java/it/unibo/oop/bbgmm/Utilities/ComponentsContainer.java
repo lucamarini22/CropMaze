@@ -17,7 +17,7 @@ public interface ComponentsContainer<T> {
      *             if interf is not an interface
      * @return the element found
      */
-    <C extends T> Optional<C> get(Class<C> interf) throws IllegalArgumentException;
+    <C extends T> Optional<C> get(final Class<C> interf) throws IllegalArgumentException;
 
     /**
      * Puts an element in the bag.
