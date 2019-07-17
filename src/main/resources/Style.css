@@ -7,3 +7,8 @@
     -fx-background-image:url("images/mainMenu/settings_back.png");
     -fx-background-size: cover, auto;
 }
+
+#rankingView{
+    -fx-background-image:url("images/mainMenu/settings_back.png");
+    -fx-background-size: cover, auto;
+}

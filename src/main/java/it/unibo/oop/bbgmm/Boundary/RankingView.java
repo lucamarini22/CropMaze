@@ -23,12 +23,16 @@ import java.util.List;
 public class RankingView extends Scene {
     private static final int SPACE_BETWEEN_ITEM = 40;
     private static final int BOX_X_COORDINATE = 315;
-    private static final int BOX_Y_COORDINATE = 50;
+    private static final int BOX_Y_COORDINATE = 70;
+    private static final int CROWN_Y_COORDINATE = -190;
     private static Stage primaryStage;
     private final AnchorPane pane;
+    private static final ImageView crown = new ImageView(new Image("images/crown.png"));
     private static final Font FONT = Font.font("MS Gothic", FontWeight.BOLD, 70);
+    private static final Font FONT_WINNER = Font.font("MS Gothic", FontWeight.BOLD, 100);
     private static final List<Text> rankList=new LinkedList<>();
     private VBox menuBox;
+    private VBox boximage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public RankingView(){
@@ -40,16 +44,21 @@ public class RankingView extends Scene {
         });
         pane = new AnchorPane();
         this.fillList();
+
         rankList.forEach(l -> l.setFont(FONT));
         rankList.forEach(l -> l.setEffect(new GaussianBlur(2)));
         rankList.forEach(l->l.setFill(Color.BLUE));
+        rankList.get(0).setFont(FONT_WINNER);
 
 
 
-
+        boximage = new VBox(crown);
+        boximage.setAlignment(Pos.TOP_CENTER);
+        boximage.setTranslateX(BOX_X_COORDINATE);
+        boximage.setTranslateY(CROWN_Y_COORDINATE);
         menuBox = new VBox(SPACE_BETWEEN_ITEM);
 
-        rankList.stream().forEach(t -> menuBox.getChildren().add(t));
+        rankList.forEach(t -> menuBox.getChildren().add(t));
         menuBox.getChildren().addAll(itemBack);
         buttonActions();
 
@@ -62,6 +71,7 @@ public class RankingView extends Scene {
         menuBox.setTranslateY(BOX_Y_COORDINATE);
 
         itemBack.setActive(true);
+        pane.getChildren().add(boximage);
         pane.getChildren().add(menuBox);
 
         pane.setId("rankingView");

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class ComponentsContainerImpl<T> implements ComponentsContainer<T> {
+public final class ComponentsContainerImpl<T> implements ComponentsContainer<T> {
     private final Map<Class<?>, T> elements = new LinkedHashMap<>();
     private final Class<T> interfaceParent;
 
@@ -20,9 +20,9 @@ public class ComponentsContainerImpl<T> implements ComponentsContainer<T> {
         this.interfaceParent = interfaceParent;
     }
     @Override
-    public <C extends T> Optional<C> get(Class<C> interf) throws IllegalArgumentException {
-        this.isInterface(interf);
-        return Optional.ofNullable(interf.cast(this.elements.get(interf)));
+    public <C extends T> Optional<C> get(Class<C> interfaceClass) throws IllegalArgumentException {
+        this.isInterface(interfaceClass);
+        return Optional.ofNullable(interfaceClass.cast(this.elements.get(interfaceClass)));
     }
 
     @Override
