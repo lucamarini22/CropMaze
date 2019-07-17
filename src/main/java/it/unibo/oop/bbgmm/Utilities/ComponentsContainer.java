@@ -11,13 +11,13 @@ public interface ComponentsContainer<T> {
      *
      * @param <C>
      *            the Interface type.
-     * @param interf
+     * @param interfaceClass
      *            the interface class
      * @throws IllegalArgumentException
      *             if interf is not an interface
      * @return the element found
      */
-    <C extends T> Optional<C> get(final Class<C> interf) throws IllegalArgumentException;
+    <C extends T> Optional<C> get(final Class<C> interfaceClass) throws IllegalArgumentException;
 
     /**
      * Puts an element in the bag.
