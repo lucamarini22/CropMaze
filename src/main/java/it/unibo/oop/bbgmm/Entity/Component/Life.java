@@ -1,6 +1,6 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
-public interface Life {
+public interface Life extends EntityComponent{
     /**
      *
      * @return Maximum amount of life points for the entity.
