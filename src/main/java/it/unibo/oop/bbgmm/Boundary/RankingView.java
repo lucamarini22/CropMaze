@@ -32,7 +32,7 @@ public class RankingView extends Scene {
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public RankingView(){
-        super(new AnchorPane(),Resolution.getSmallWidth(),Resolution.getSmallHeight());
+        super(new AnchorPane(),Resolution.getWidth(),Resolution.getHeight());
         this.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER ){
                 itemBack.activate();
@@ -92,8 +92,8 @@ public class RankingView extends Scene {
      */
     public static RankingView getRankingView(final Stage stage) {
         primaryStage = stage;
-        primaryStage.setHeight(Resolution.getSmallHeight());
-        primaryStage.setWidth(Resolution.getSmallWidth());
+        primaryStage.setHeight(Resolution.getHeight());
+        primaryStage.setWidth(Resolution.getWidth());
         return new RankingView();
     }
 

@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 public class SettingsMenu extends Scene {
 
     private static final int SPACE_BETWEEN_ITEM = 40;
+    private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 300;
     private static Stage primaryStage;
@@ -28,7 +29,7 @@ public class SettingsMenu extends Scene {
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public SettingsMenu() {
-        super(new AnchorPane(), Resolution.getSmallWidth(), Resolution.getSmallHeight());
+        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
 
         //it intercepts the button presses
         this.setOnKeyPressed(event -> {
@@ -70,8 +71,15 @@ public class SettingsMenu extends Scene {
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
-        menuBox.setTranslateX(BOX_X_COORDINATE);
-        menuBox.setTranslateY(BOX_Y_COORDINATE);
+        //calculates the position of the box
+        if(Resolution.isFullScreen()){
+            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
+        }
+        else{
+            menuBox.setLayoutX(BOX_X_COORDINATE);
+            menuBox.setLayoutY(BOX_Y_COORDINATE);
+        }
 
         getMenuItem(0).setActive(true);
 
@@ -94,7 +102,10 @@ public class SettingsMenu extends Scene {
      * Method used to set the action for each button.
      */
     private void buttonActions() {
-        itemBack.setOnActivate(() -> this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage)));
+        itemBack.setOnActivate(() -> {
+            this.primaryStage.setScene(MainMenu.getMainMenu(primaryStage));
+            checkResolution();
+    });
         itemSmallScreen.setOnActivate(() -> {
             Resolution.setSmallResolution();
             itemSmallScreen.setUnderline(true);
@@ -108,14 +119,25 @@ public class SettingsMenu extends Scene {
     }
 
     /**
+     * Method used to set or not the stage to FuLLScreen
+     */
+    private void checkResolution(){
+        if(Resolution.isFullScreen()){
+            this.primaryStage.setFullScreen(true);
+        }
+        else{
+            this.primaryStage.setFullScreen(false);
+        }
+    }
+
+    /**
      * Getter for the Scene.
      * @param stage
      * @return SettingsMenu
      */
     public static SettingsMenu getSettingsMenu(final Stage stage) {
         primaryStage = stage;
-        primaryStage.setHeight(Resolution.getSmallHeight());
-        primaryStage.setWidth(Resolution.getSmallWidth());
+        primaryStage.centerOnScreen();
         return new SettingsMenu();
     }
 }

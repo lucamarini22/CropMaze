@@ -3,6 +3,7 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.application.Application;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 
 /**
@@ -20,10 +21,11 @@ public class MainWindow extends Application {
     public void start(final Stage primaryStage) throws Exception {
         this.primaryStage.setTitle("CROP MAZE");
         this.primaryStage.setFullScreen(false);
-        this.primaryStage.setWidth(Resolution.getSmallWidth());
-        this.primaryStage.setHeight(Resolution.getSmallHeight());
+        this.primaryStage.setWidth(Resolution.getWidth());
+        this.primaryStage.setHeight(Resolution.getHeight());
         this.primaryStage.centerOnScreen();
         this.primaryStage.setResizable(false);
+        this.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 
         this.primaryStage.setOnCloseRequest(e -> {
             this.primaryStage.close();

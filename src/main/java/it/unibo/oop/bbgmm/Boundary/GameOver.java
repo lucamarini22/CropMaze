@@ -19,7 +19,7 @@ public class GameOver extends Scene {
     private final MenuItem itemExit = new MenuItem("EXIT");
 
     public GameOver(){
-        super(new AnchorPane(), Resolution.getSmallWidth(), Resolution.getSmallHeight());
+        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
 
         //button pressed, click with mouse or both of them?
         this.setOnKeyPressed(event -> {
@@ -82,8 +82,8 @@ public class GameOver extends Scene {
 
     public static GameOver getGameOver(Stage stage){
         gameOverStage = stage;
-        gameOverStage.setHeight(Resolution.getSmallHeight());
-        gameOverStage.setWidth(Resolution.getSmallWidth());
+        gameOverStage.setHeight(Resolution.getHeight());
+        gameOverStage.setWidth(Resolution.getWidth());
         return new GameOver();
     }
 }
