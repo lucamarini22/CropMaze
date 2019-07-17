@@ -1,8 +1,6 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Entity.Entity;
-import it.unibo.oop.bbgmm.Entity.EntityFactory;
-import it.unibo.oop.bbgmm.Entity.GameField;
+import it.unibo.oop.bbgmm.Entity.*;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
@@ -21,7 +19,10 @@ public final class LevelImpl implements Level {
     private final GameField gameField;
     private final EntityFactory entityFactory;
     //private final EntitySpawner spawner;
+    private PlayerStatistics playerStatistics;
 
+
+    private final GameStatistics gameStatistics;
 
     /**
      * Constructor for LevelImpl.
@@ -33,10 +34,11 @@ public final class LevelImpl implements Level {
      * @param entityFactory
      *          Factory for the entities
      */
-    public LevelImpl(final Map map, final GameField gameField, final EntityFactory entityFactory) {
+    public LevelImpl(final Map map, final GameField gameField, final EntityFactory entityFactory, GameStatistics gameStatistics) {
         this.map = map;
         this.gameField = gameField;
         this.entityFactory = entityFactory;
+        this.gameStatistics = gameStatistics;
 
         this.map.forEach(layer -> {
             if (layer instanceof TileLayer) {
@@ -81,6 +83,7 @@ public final class LevelImpl implements Level {
                     //creation of the player
                     case "player":
                         player = gameField.addEntity(entityFactory.createPlayer(position));
+                        playerStatistics = new PlayerStatisticsImpl(player);
                         break;
 
                     //creation of all power ups, coins and enemies
