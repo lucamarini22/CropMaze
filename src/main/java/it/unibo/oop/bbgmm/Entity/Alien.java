@@ -12,7 +12,7 @@ public class Alien extends AbstractEntity {
     private static final Dimension2D SIZE = new Dimension2D(1.1,1.2);
 
     private static final double WALK_SPEED=1;
-    private static final Inventory weapon = Inventory.GUN;
+    private static final int DAMAGE = 5;
 
     /**
      *
@@ -32,9 +32,9 @@ public class Alien extends AbstractEntity {
                 .build());
 
         add(new LifeComponent(health));
-        add(new WeaponImpl(weapon));
         add(new Feet(WALK_SPEED));
         add(new CollisionComponent(this,new Rectangle(), CollisionLabel.ALIEN));
+        add(new DamageComponent(DAMAGE));
 
     }
 
