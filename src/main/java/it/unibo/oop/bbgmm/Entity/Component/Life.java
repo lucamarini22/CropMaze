@@ -22,13 +22,6 @@ public interface Life extends EntityComponent{
 
     /**
      *
-     * @param healAmount
-     *                      Amount of heath points to heal
-     */
-    void healed(int healAmount);
-
-    /**
-     *
      * @return True if the entity is still alive
      */
     boolean isAlive();

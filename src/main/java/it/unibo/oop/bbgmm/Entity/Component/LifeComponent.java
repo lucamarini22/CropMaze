@@ -28,14 +28,6 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
     }
 
     @Override
-    public void healed(int healAmount) {
-        this.currentLifePoints+=healAmount;
-        if(this.currentLifePoints > this.maxLifePoints){
-            this.currentLifePoints = this.maxLifePoints;
-        }
-    }
-
-    @Override
     public void update(double delta) {
 
     }
