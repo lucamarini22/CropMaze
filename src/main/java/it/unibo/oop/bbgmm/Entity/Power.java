@@ -4,12 +4,31 @@ package it.unibo.oop.bbgmm.Entity;
  * This interface represents the specific power associated to PowerUp
  */
 public interface Power {
-
-    void activate();
-
-    void update();
-
+    /**
+     * Activate the power.
+     */
+    void activate(Entity player);
+    /**
+     * Notify the time passed.
+     * @param dt
+     *      The time passed.
+     */
+    void update(double dt);
+    /**
+     * Deactivate the power.
+     */
     void deactivate();
-
+    /**
+     * Return the PowerTag.
+     * @return
+     *      The PowerTag.
+     */
     PowerTag getPowerTag();
+
+    /**
+     * Return the power's state
+     * @return
+     *      the powers's state
+     */
+    boolean isActive();
 }

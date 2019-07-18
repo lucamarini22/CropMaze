@@ -5,7 +5,7 @@ import it.unibo.oop.bbgmm.Utilities.Temporary;
 /**
  * This class represents a power that have a limited life time
  */
-public class TemporaryPower extends AbstractPower implements Temporary {
+public abstract class TemporaryPower extends AbstractPower implements Temporary {
 
     private double time;
     private double timeout;

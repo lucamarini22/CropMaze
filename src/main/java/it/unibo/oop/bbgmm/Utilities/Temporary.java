@@ -20,9 +20,9 @@ public interface Temporary {
      */
     double getRemainingTime();
     /**
-     * Returns a void event that triggers when time is finished.
-     * @return
-     *      the timeout event
+     * Give more time to the power.
+     * @param time
+     *      the time to be added to the power.
      */
-    Event<Void> getTimeOutEvent();
+    void addTime(double time);
 }
