@@ -23,6 +23,6 @@ public interface Movement extends EntityComponent {
 
 
     enum State implements EntityState{
-        STABLE, WALKING, SHOOTING, DYING;
+        STABLE, WALKING, DYING;
     }
 }

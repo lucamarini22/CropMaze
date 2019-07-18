@@ -4,24 +4,21 @@ import java.awt.*;
 
 /**
  * @author Manuel
+ * Class used to set and get the resolution of the GameWindow
  */
 
 public class Resolution {
-    private static final int SMALL_HEIGHT = 768;
-    private static final int SMALL_WIDTH = 1024;
-    private static final Toolkit tk = Toolkit.getDefaultToolkit();
-    private static final Dimension d = tk.getScreenSize();
-    private static int width = 1024;
-    private static int height = 768;
+    public static final int SMALL_HEIGHT = 768;
+    public static final int SMALL_WIDTH = 1024;
+    private static final Toolkit TK = Toolkit.getDefaultToolkit();
+    private static final Dimension D = TK.getScreenSize();
+    private static int width = SMALL_WIDTH;
+    private static int height = SMALL_HEIGHT;
     private static boolean fullScreen;
 
     public Resolution() {
         fullScreen=false;
     }
-
-    public static int getSmallHeight(){return SMALL_HEIGHT;}
-
-    public static int getSmallWidth(){return SMALL_WIDTH;}
 
     public static int getHeight() {
         return height;
@@ -32,14 +29,14 @@ public class Resolution {
     }
 
     public static void setSmallResolution(){
-        width = 1024;
-        height = 768;
+        width = SMALL_WIDTH;
+        height = SMALL_HEIGHT;
         fullScreen = false;
     }
 
     public static void setFullResolution(){
-        width = d.width;
-        height = d.height;
+        width = D.width;
+        height = D.height;
         fullScreen = true;
     }
 

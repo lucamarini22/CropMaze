@@ -9,10 +9,16 @@ public final class PlayerStatisticsImpl implements PlayerStatistics {
 
     private int collectedMoney;
     private int killedEnemies;
-    private final Player player;
+    private final Entity player;
 
-    PlayerStatisticsImpl(final Player player) {
-        this.player = Objects.requireNonNull(player);
+    /**
+     * Constructor for the player's statistics.
+     *
+     * @param player
+     *      The {@link Player} tracked
+     */
+    public PlayerStatisticsImpl(final Entity player) {
+        this.player = player;
     }
 
     @Override

@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ScoreList {
-	
-	void addScore(Pair<String, Integer> score);
-	
-	List<Pair<String, Integer>> getRanking();
-	
-	void deleteAll() throws IOException;
+
+    void addScore(Pair<String, Integer> score);
+
+    List<Pair<String, Integer>> getRanking();
+
+    void deleteAll() throws IOException;
 }

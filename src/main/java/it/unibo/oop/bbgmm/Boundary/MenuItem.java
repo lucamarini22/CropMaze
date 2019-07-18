@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Utilities.FontMaker;
+import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.HBox;
@@ -15,7 +17,7 @@ import javafx.scene.text.Text;
  */
 
 public class MenuItem extends HBox {
-    private static final Font FONT = Font.font("MS Gothic", FontWeight.BOLD, 70);
+    private Font usedFont;
     //private static final String BUTTON_CLICKED_PATH = "src/main/resources/sounds/button_clicked.mp3";
 
     private final Text text;
@@ -26,7 +28,9 @@ public class MenuItem extends HBox {
         super();
         setAlignment(Pos.CENTER);
         text = new Text(name);
-        text.setFont(FONT);
+        FontMaker.modifyFont(Resolution.isFullScreen());
+        usedFont = FontMaker.getFont();
+        text.setFont(usedFont);
         text.setEffect(new GaussianBlur(2));
         getChildren().add(text);
         setActive(false);
