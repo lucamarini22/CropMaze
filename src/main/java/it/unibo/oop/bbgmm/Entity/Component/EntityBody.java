@@ -6,6 +6,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
 import java.awt.*;
+import java.util.Optional;
 
 
 public interface EntityBody extends EntityComponent{

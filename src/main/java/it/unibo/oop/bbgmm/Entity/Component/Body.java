@@ -6,6 +6,8 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
+import java.util.Optional;
+
 
 public class Body extends AbstractEntityComponent implements EntityBody{
 
@@ -31,6 +33,7 @@ public class Body extends AbstractEntityComponent implements EntityBody{
 
     @Override
     public boolean canMove() {return this.movable;}
+
 
     @Override
     public Direction getDirection() {return this.direction;}
