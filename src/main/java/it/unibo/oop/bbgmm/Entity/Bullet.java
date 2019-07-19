@@ -18,6 +18,6 @@ public class Bullet extends AbstractEntity {
         add(new LimitedFeet(speed, weaponRange));
         add(new DamageComponent(weaponDamage));
         add(new ClashComponent());
-        add(new CollisionComponent(this,getBody().getShape(), CollisionLabel.SHOT));
+        add(new CollisionComponent(this.getBody().getShape(), CollisionLabel.SHOT));
     }
 }
