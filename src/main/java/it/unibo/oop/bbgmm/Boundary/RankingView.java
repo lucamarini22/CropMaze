@@ -51,7 +51,6 @@ public class RankingView extends Scene {
         rankList.get(0).setFont(FONT_WINNER);
 
 
-
         boximage = new VBox(crown);
         boximage.setAlignment(Pos.TOP_CENTER);
         boximage.setTranslateX(BOX_X_COORDINATE);
@@ -91,6 +90,7 @@ public class RankingView extends Scene {
 
     //Metodo fittizio per riepire la lista
     private void fillList(){
+        rankList.clear();
         rankList.add(new Text("Simo 10"));
         rankList.add(new Text("Pier 9"));
         rankList.add(new Text("Lory 8"));
@@ -105,8 +105,7 @@ public class RankingView extends Scene {
      */
     public static RankingView getRankingView(final Stage stage, final PrincipalController controller) {
         primaryStage = stage;
-        primaryStage.setHeight(Resolution.getHeight());
-        primaryStage.setWidth(Resolution.getWidth());
+        primaryStage.centerOnScreen();
         return new RankingView(controller);
     }
 
