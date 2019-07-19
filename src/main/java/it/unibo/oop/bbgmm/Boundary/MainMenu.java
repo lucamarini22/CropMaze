@@ -109,7 +109,7 @@ public class MainMenu extends Scene {
         //    this.primaryStage.setScene(GameFieldView.getGameFieldView(this.primaryStage));
         //});
         itemScore.setOnActivate(() -> {
-            this.primaryStage.setScene(RankingView.getRankingView(this.primaryStage));
+            this.primaryStage.setScene(RankingView.getRankingView(this.primaryStage, this.controller));
             checkResolution();
         });
         itemSettings.setOnActivate(() -> {
