@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Entity.Component.Life;
+
 /**
  * Create a shield around the player and makes it invulnerable
  */
@@ -14,12 +16,13 @@ public class TemporaryShield extends TemporaryPower {
     @Override
     public void activate(final Entity player) {
         super.activate(player);
-        //attivare invulnerabilità sul player
+        player.get(Life.class).ifPresent(life ->
+            life.setVulnerability(false));
     }
 
     @Override
     public void deactivate() {
         super.deactivate();
-        //disattivare invulnerabilità sul player
+        getPlayer().get(Life.class).ifPresent(life -> life.setVulnerability(true));
     }
 }

@@ -8,5 +8,5 @@ public interface Damage extends EntityComponent{
      *
      * @return  The current amount of damage
      */
-    double getDamage();
+    int getDamage();
 }

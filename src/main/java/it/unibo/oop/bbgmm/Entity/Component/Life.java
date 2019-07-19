@@ -33,6 +33,13 @@ public interface Life extends EntityComponent{
     void damaged(int damageAmount);
 
     /**
+     * Add life
+     * @param moreLife
+     *                      Amount of life to add
+     */
+    void incrementLife(int moreLife);
+
+    /**
      *
      * @return True if the entity is still alive
      */
