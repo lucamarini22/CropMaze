@@ -34,7 +34,6 @@ public class Alien extends AbstractEntity {
         add(new LifeComponent(health));
         add(new Feet(WALK_SPEED));
         add(new CollisionComponent(this.getBody().getShape(), CollisionLabel.ALIEN));
-
         add(new DamageComponent(DAMAGE));
         add(new BrainComponent(WALK_SPEED));
 
