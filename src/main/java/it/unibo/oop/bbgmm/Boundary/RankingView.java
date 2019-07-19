@@ -1,4 +1,5 @@
 package it.unibo.oop.bbgmm.Boundary;
+import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.FontMaker;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
@@ -22,6 +23,7 @@ public class RankingView extends Scene {
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 70;
     private static final int CROWN_Y_COORDINATE = -190;
+    private final PrincipalController controller;
     private static Stage primaryStage;
     private final AnchorPane pane;
     private static final ImageView crown = new ImageView(new Image("images/crown.png"));
@@ -31,8 +33,9 @@ public class RankingView extends Scene {
     private VBox boximage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
-    public RankingView(){
+    public RankingView(final PrincipalController controller){
         super(new AnchorPane(),Resolution.getWidth(),Resolution.getHeight());
+        this.controller = controller;
         this.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER ){
                 itemBack.activate();
@@ -80,8 +83,10 @@ public class RankingView extends Scene {
 
 
     private void buttonActions() {
-        itemBack.setOnActivate(() -> this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage)));
-        checkResolution();
+        itemBack.setOnActivate(() -> {
+            this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage, controller));
+            checkResolution();
+        });
     }
 
     //Metodo fittizio per riepire la lista
@@ -98,11 +103,11 @@ public class RankingView extends Scene {
      * @param stage
      * @return SettingsMenu
      */
-    public static RankingView getRankingView(final Stage stage) {
+    public static RankingView getRankingView(final Stage stage, final PrincipalController controller) {
         primaryStage = stage;
         primaryStage.setHeight(Resolution.getHeight());
         primaryStage.setWidth(Resolution.getWidth());
-        return new RankingView();
+        return new RankingView(controller);
     }
 
 
