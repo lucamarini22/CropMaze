@@ -44,6 +44,11 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
         return this.weaponRange;
     }
 
+    /**
+     * Sychronizes the component
+     *
+     * @param delta The time passed since the last call in seconds
+     */
     @Override
     public void update(double delta) {
         cooldown.update(delta);
@@ -71,9 +76,5 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
         return this.bulletShoted;
     }
 
-    /**
-     * Sychronizes the component
-     *
-     * @param delta The time passed since the last call in seconds
-     */
+
 }
