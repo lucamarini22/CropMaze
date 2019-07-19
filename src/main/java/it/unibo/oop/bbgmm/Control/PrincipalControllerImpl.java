@@ -8,11 +8,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class PrincipalControllerImpl implements PrincipalController {
 
     private final PrincipalView view;
     private ScoreList score;
+    private Optional<GameController> gameControl = Optional.empty();
 
     public PrincipalControllerImpl(final Stage principalStage) {
         this.view = new PrincipalView(principalStage, this);
@@ -25,5 +27,11 @@ public class PrincipalControllerImpl implements PrincipalController {
 
     public List<Pair<String, Integer>> getRankingList(){
         return score.getRanking();
+    }
+
+    @Override
+    public GameController createGameController() {
+        Optional.of(new GameControllerImpl());
+        return gameControl.get();
     }
 }

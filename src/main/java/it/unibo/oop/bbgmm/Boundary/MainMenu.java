@@ -106,7 +106,8 @@ public class MainMenu extends Scene {
     private void buttonActions() {
         //Da togliere i commenti per usare gli altri pulsanti
         //itemNewGame.setOnActivate(() -> {
-        //    this.primaryStage.setScene(GameFieldView.getGameFieldView(this.primaryStage));
+        //    this.primaryStage.setScene(GameFieldView.getGameFieldView(this.primaryStage, this.controller));
+        //    checkResolution();
         //});
         itemScore.setOnActivate(() -> {
             this.primaryStage.setScene(RankingView.getRankingView(this.primaryStage, this.controller));

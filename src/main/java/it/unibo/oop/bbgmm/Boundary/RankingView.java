@@ -53,7 +53,6 @@ public class RankingView extends Scene {
         rankList.get(0).setFont(FONT_WINNER);
 
 
-
         boximage = new VBox(crown);
         boximage.setAlignment(Pos.TOP_CENTER);
         boximage.setTranslateX(BOX_X_COORDINATE);
@@ -90,7 +89,7 @@ public class RankingView extends Scene {
             checkResolution();
         });
     }
-
+    
     /**
      * Getter for the Scene.
      * @param stage
@@ -98,8 +97,7 @@ public class RankingView extends Scene {
      */
     public static RankingView getRankingView(final Stage stage, final PrincipalController controller) {
         primaryStage = stage;
-        primaryStage.setHeight(Resolution.getHeight());
-        primaryStage.setWidth(Resolution.getWidth());
+        primaryStage.centerOnScreen();
         return new RankingView(controller);
     }
 
