@@ -17,7 +17,7 @@ public class CollisionComponent extends AbstractEntityComponent implements Colli
     private final EventSource<Collision> collisionEvent;
     private final Rectangle2D shape;
 
-    public CollisionComponent(Entity owner, final Rectangle2D shape, final CollisionLabel label){
+    public CollisionComponent(final Rectangle2D shape, final CollisionLabel label){
 
         this.shape = shape;
         this.label = label;

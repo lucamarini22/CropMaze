@@ -7,7 +7,7 @@ public class DamageComponent extends AbstractEntityComponent implements Damage {
         this.damage = damage;
     }
     @Override
-    public double getDamage() {
+    public int getDamage() {
         return this.damage;
     }
 

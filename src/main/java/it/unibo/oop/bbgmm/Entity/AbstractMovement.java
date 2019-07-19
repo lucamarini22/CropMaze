@@ -35,6 +35,16 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
     }
 
     @Override
+    public double getSpeed() {
+        return this.speedMovement;
+    }
+
+    @Override
+    public void setSpeed(double speed) {
+        this.speedMovement = speed;
+    }
+
+    @Override
     public State getState() {
         return currentState;
     }
