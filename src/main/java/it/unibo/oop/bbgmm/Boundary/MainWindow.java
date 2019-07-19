@@ -1,7 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
-import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
@@ -11,14 +11,11 @@ import javafx.stage.Stage;
  * Class that creates the stage of the application
  */
 
-public class MainWindow extends Application {
-    private final Stage primaryStage = new Stage();
+public class MainWindow {
+    private final Stage primaryStage;
 
-    public MainWindow() {
-    }
-
-    @Override
-    public void start(final Stage primaryStage) throws Exception {
+    public MainWindow(final Stage primaryStage, final PrincipalController controller) {
+        this.primaryStage = primaryStage;
         this.primaryStage.setTitle("CROP MAZE");
         this.primaryStage.setFullScreen(false);
         this.primaryStage.setWidth(Resolution.getWidth());
@@ -33,11 +30,7 @@ public class MainWindow extends Application {
 
         this.primaryStage.getIcons().add(new Image("images/mainMenu/icon.png"));
         //set the main menu as the scene
-        this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage));
+        this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage,controller));
         this.primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

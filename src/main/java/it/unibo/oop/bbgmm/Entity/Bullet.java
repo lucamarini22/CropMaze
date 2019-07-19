@@ -5,8 +5,6 @@ import it.unibo.oop.bbgmm.Entity.Component.*;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
-import javafx.geometry.Rectangle2D;
-
 
 public class Bullet extends AbstractEntity {
     private static final Dimension2D SIZE = new Dimension2D(1.1,1.2);
@@ -19,6 +17,7 @@ public class Bullet extends AbstractEntity {
                          .build());
         add(new LimitedFeet(speed, weaponRange));
         add(new DamageComponent(weaponDamage));
+        add(new ClashComponent());
         add(new CollisionComponent(this,getBody().getShape(), CollisionLabel.SHOT));
     }
 }
