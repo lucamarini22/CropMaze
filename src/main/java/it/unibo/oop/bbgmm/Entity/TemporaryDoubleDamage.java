@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Entity.Component.Weapon;
+
 /**
  * This power gives double damage to the weapon's player
  */
@@ -14,12 +16,18 @@ public class TemporaryDoubleDamage extends TemporaryPower {
     @Override
     public void activate(Entity player) {
         super.activate(player);
-        //attivare
+        player.get(Weapon.class).ifPresent(w -> {
+            int damage = w.getWeaponDamage();
+            w.setWeaponDamage(damage * 2);
+        });
     }
 
     @Override
     public void deactivate() {
         super.deactivate();
-        //disattivare
+        getPlayer().get(Weapon.class).ifPresent(w -> {
+            int damage = w.getWeaponDamage();
+            w.setWeaponDamage(damage/2);
+        });
     }
 }
