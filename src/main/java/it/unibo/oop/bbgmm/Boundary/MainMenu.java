@@ -29,7 +29,6 @@ public class MainMenu extends Scene {
     private final PrincipalController controller;
     private static Stage primaryStage;
     private final AnchorPane pane;
-
     private VBox menuBox;
     private int currentItem = 0;
     private final MenuItem itemNewGame = new MenuItem("NEW GAME");

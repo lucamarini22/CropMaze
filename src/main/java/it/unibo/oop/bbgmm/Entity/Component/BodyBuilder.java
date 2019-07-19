@@ -5,7 +5,6 @@ import it.unibo.oop.bbgmm.Entity.Direction;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
-import java.util.Optional;
 
 
 public class BodyBuilder {

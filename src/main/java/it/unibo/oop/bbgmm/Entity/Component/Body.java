@@ -6,8 +6,6 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 
-import java.util.Optional;
-
 
 public class Body extends AbstractEntityComponent implements EntityBody{
 
