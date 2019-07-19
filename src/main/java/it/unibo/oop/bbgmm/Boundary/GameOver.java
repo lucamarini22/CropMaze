@@ -4,6 +4,8 @@ import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -14,17 +16,20 @@ public class GameOver extends Scene {
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 365;
     private static final int BOX_Y_COORDINATE = 350;
+    private static final int GAMEOVER_Y_COORDINATE=200;
     private final PrincipalController controller;
     private static Stage gameOverStage;
     private final AnchorPane pane;
-
+    private static final ImageView gameOVer = new ImageView(new Image("images/gameOver.png"));
     private int currentItem = 0;
     private VBox menuBox;
+    private VBox boxImage;
     private final MenuItem itemMainMenu = new MenuItem("MAIN MENU");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
     public GameOver(final PrincipalController controller){
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
+
         this.controller = controller;
 
         this.setOnKeyPressed(event -> {
@@ -46,6 +51,11 @@ public class GameOver extends Scene {
                 getMenuItem(currentItem).activate();
             }
         });
+
+        boxImage = new VBox(gameOVer);
+        boxImage.setAlignment(Pos.TOP_CENTER);
+        boxImage.setTranslateX(BOX_X_COORDINATE);
+        boxImage.setTranslateY(GAMEOVER_Y_COORDINATE);
 
         pane = new AnchorPane();
         menuBox = new VBox(SPACE_BETWEEN_ITEM, itemMainMenu, itemExit);
