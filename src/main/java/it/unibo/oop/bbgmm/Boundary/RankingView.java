@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RankingView extends Scene {
     private static final int SPACE_BETWEEN_ITEM = 40;
@@ -28,7 +29,7 @@ public class RankingView extends Scene {
     private final AnchorPane pane;
     private static final ImageView crown = new ImageView(new Image("images/crown.png"));
     private static final Font FONT_WINNER = Font.font("MS Gothic", FontWeight.BOLD, 100);
-    private static final List<Text> rankList=new LinkedList<>();
+    private static List<Text> rankList=new LinkedList<>();
     private VBox menuBox;
     private VBox boximage;
     private final MenuItem itemBack = new MenuItem("BACK");
@@ -42,8 +43,9 @@ public class RankingView extends Scene {
             }
         });
         pane = new AnchorPane();
-
-        this.fillList();
+        rankList = controller.getRankingList().stream()
+                .map(l -> new Text(l.getFst()+" "+l.getSnd()))
+                .collect(Collectors.toList());
 
         rankList.forEach(l -> l.setFont(FontMaker.getFont()));
         rankList.forEach(l -> l.setEffect(new GaussianBlur(2)));
@@ -87,17 +89,7 @@ public class RankingView extends Scene {
             checkResolution();
         });
     }
-
-    //Metodo fittizio per riepire la lista
-    private void fillList(){
-        rankList.clear();
-        rankList.add(new Text("Simo 10"));
-        rankList.add(new Text("Pier 9"));
-        rankList.add(new Text("Lory 8"));
-        rankList.add(new Text("Giannolo 6"));
-        rankList.add(new Text("Maren 1"));
-    }
-
+    
     /**
      * Getter for the Scene.
      * @param stage
