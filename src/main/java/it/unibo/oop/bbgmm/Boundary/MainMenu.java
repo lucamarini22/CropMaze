@@ -26,7 +26,6 @@ public class MainMenu extends Scene {
     private static final int BOX_Y_COORDINATE = 350;
     private static Stage primaryStage;
     private final AnchorPane pane;
-
     private VBox menuBox;
     private int currentItem = 0;
     private final MenuItem itemNewGame = new MenuItem("NEW GAME");
