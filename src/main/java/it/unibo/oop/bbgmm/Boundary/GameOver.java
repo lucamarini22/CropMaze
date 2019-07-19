@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,19 +10,23 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class GameOver extends Scene {
-
+    private static final int SPACE_BETWEEN_ITEM = 25;
+    private static final int DELTA = 80;
+    private static final int BOX_X_COORDINATE = 365;
+    private static final int BOX_Y_COORDINATE = 350;
+    private final PrincipalController controller;
     private static Stage gameOverStage;
     private final AnchorPane pane;
 
     private int currentItem = 0;
     private VBox menuBox;
-    private final MenuItem itemRestart = new MenuItem("RESTART");
+    private final MenuItem itemMainMenu = new MenuItem("MAIN MENU");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    public GameOver(){
+    public GameOver(final PrincipalController controller){
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
+        this.controller = controller;
 
-        //button pressed, click with mouse or both of them?
         this.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.UP) {
                 if(currentItem > 0) {
@@ -43,20 +48,27 @@ public class GameOver extends Scene {
         });
 
         pane = new AnchorPane();
-        menuBox = new VBox(25, itemRestart, itemExit);
+        menuBox = new VBox(SPACE_BETWEEN_ITEM, itemMainMenu, itemExit);
 
         buttonActions();
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
-        menuBox.setTranslateX(365);
-        menuBox.setTranslateY(350);
+        //calculates the position of the box
+        if(Resolution.isFullScreen()){
+            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
+        }
+        else{
+            menuBox.setLayoutX(BOX_X_COORDINATE);
+            menuBox.setLayoutY(BOX_Y_COORDINATE);
+        }
 
         getMenuItem(0).setActive(true);
 
         pane.getChildren().add(menuBox);
 
-        pane.setId("-- Game Over --");
+        pane.setId("gameOverView");
         this.getStylesheets().add("Style.css");
 
         this.setRoot(pane);
@@ -67,11 +79,24 @@ public class GameOver extends Scene {
     }
 
     private void buttonActions(){
-        /*itemRestart.setOnActivate(() -> {
-            this.gameOverStage.setScene(GameFieldView.getGameFiledView(this.gameOverStage));
-        });*/
+        itemMainMenu.setOnActivate(() -> {
+            this.gameOverStage.setScene(MainMenu.getMainMenu(this.gameOverStage, controller));
+            checkResolution();
+        });
 
         itemExit.setOnActivate(() -> System.exit(0));
+    }
+
+    /**
+     * Method used to set or not the stage to FuLLScreen
+     */
+    private void checkResolution(){
+        if(Resolution.isFullScreen()){
+            this.gameOverStage.setFullScreen(true);
+        }
+        else{
+            this.gameOverStage.setFullScreen(false);
+        }
     }
 
     /**
@@ -79,11 +104,9 @@ public class GameOver extends Scene {
      * @param stage
      * @return GameOver
      */
-
-    public static GameOver getGameOver(Stage stage){
+    public static GameOver getGameOver(Stage stage, final PrincipalController controller){
         gameOverStage = stage;
-        gameOverStage.setHeight(Resolution.getHeight());
-        gameOverStage.setWidth(Resolution.getWidth());
-        return new GameOver();
+        gameOverStage.centerOnScreen();
+        return new GameOver(controller);
     }
 }
