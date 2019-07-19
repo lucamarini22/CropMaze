@@ -20,6 +20,15 @@ public interface Movement extends EntityComponent {
      */
     State getState();
 
+    /**
+     *
+     * @return
+     */
+    double getSpeed();
+
+
+    void setSpeed(double speed);
+
 
 
     enum State implements EntityState{

@@ -4,6 +4,12 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
 
     private int maxLifePoints;
     private int currentLifePoints;
+    private boolean vulnerable= true;
+
+    @Override
+    public void setVulnerability(final boolean vulnerability) {
+        this.vulnerable = vulnerability;
+    }
 
     public LifeComponent (final int max) {
         this.maxLifePoints = max;
@@ -20,11 +26,23 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
     }
 
     @Override
+    public boolean isVulnerable() {
+        return vulnerable;
+    }
+
+    @Override
     public void damaged(int damageAmount) {
-        this.currentLifePoints-=damageAmount;
-        if(this.currentLifePoints < 0){
-            this.currentLifePoints = 0;
+        if(vulnerable) {
+            this.currentLifePoints -= damageAmount;
+            if (this.currentLifePoints < 0) {
+                this.currentLifePoints = 0;
+            }
         }
+    }
+
+    @Override
+    public void incrementLife(int moreLife) {
+        this.maxLifePoints = this.maxLifePoints + moreLife;
     }
 
     @Override

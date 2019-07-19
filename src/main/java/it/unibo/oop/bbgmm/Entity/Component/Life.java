@@ -15,10 +15,29 @@ public interface Life extends EntityComponent{
 
     /**
      *
+     * @return  If entity is vulnerable or not
+     */
+    boolean isVulnerable();
+    /**
+     * Set entity vulnerabilty
+     * @param vulnerability
+     *      True -> the entity can take damage
+     *      False -> the enity is invulnerable
+     */
+    void setVulnerability(boolean vulnerability);
+    /**
+     *
      * @param damageAmount
      *                      Amount of damage inflicted to the entity
      */
     void damaged(int damageAmount);
+
+    /**
+     * Add life
+     * @param moreLife
+     *                      Amount of life to add
+     */
+    void incrementLife(int moreLife);
 
     /**
      *

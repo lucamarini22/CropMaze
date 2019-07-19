@@ -2,12 +2,13 @@ package it.unibo.oop.bbgmm.Entity.Collision;
 
 import it.unibo.oop.bbgmm.Entity.Event;
 import it.unibo.oop.bbgmm.Utilities.Pair;
+import javafx.geometry.Rectangle2D;
 
 import java.awt.*;
 
 public interface Collidable {
 
-    Rectangle getShape();
+    Rectangle2D getShape();
 
     Pair<Double, Double> getPosition();
 

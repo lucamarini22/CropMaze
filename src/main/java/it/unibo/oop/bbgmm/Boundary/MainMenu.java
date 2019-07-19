@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Control.PrincipalController;
+import it.unibo.oop.bbgmm.Control.PrincipalControllerImpl;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -24,9 +26,9 @@ public class MainMenu extends Scene {
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 365;
     private static final int BOX_Y_COORDINATE = 350;
+    private final PrincipalController controller;
     private static Stage primaryStage;
     private final AnchorPane pane;
-
     private VBox menuBox;
     private int currentItem = 0;
     private final MenuItem itemNewGame = new MenuItem("NEW GAME");
@@ -34,8 +36,9 @@ public class MainMenu extends Scene {
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    public MainMenu() {
+    public MainMenu(final PrincipalController controller) {
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
+        this.controller = controller;
 
         //it intercepts the button presses
         this.setOnKeyPressed(event -> {
@@ -106,11 +109,11 @@ public class MainMenu extends Scene {
         //    this.primaryStage.setScene(GameFieldView.getGameFieldView(this.primaryStage));
         //});
         itemScore.setOnActivate(() -> {
-            this.primaryStage.setScene(RankingView.getRankingView(this.primaryStage));
+            this.primaryStage.setScene(RankingView.getRankingView(this.primaryStage, this.controller));
             checkResolution();
         });
         itemSettings.setOnActivate(() -> {
-            this.primaryStage.setScene(SettingsMenu.getSettingsMenu(this.primaryStage));
+            this.primaryStage.setScene(SettingsMenu.getSettingsMenu(this.primaryStage, this.controller));
             checkResolution();
         });
         itemExit.setOnActivate(() -> System.exit(0));
@@ -133,9 +136,9 @@ public class MainMenu extends Scene {
      * @param stage
      * @return MainMenu
      */
-    public static MainMenu getMainMenu(final Stage stage) {
+    public static MainMenu getMainMenu(final Stage stage, final PrincipalController controller) {
         primaryStage = stage;
         primaryStage.centerOnScreen();
-        return new MainMenu();
+        return new MainMenu(controller);
     }
 }

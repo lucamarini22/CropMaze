@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,6 +20,7 @@ public class SettingsMenu extends Scene {
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 300;
+    private final PrincipalController controller;
     private static Stage primaryStage;
     private final AnchorPane pane;
 
@@ -28,8 +30,9 @@ public class SettingsMenu extends Scene {
     private final MenuItem itemFullScreen = new MenuItem("Full Screen");
     private final MenuItem itemBack = new MenuItem("BACK");
 
-    public SettingsMenu() {
+    public SettingsMenu(final PrincipalController controller) {
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
+        this.controller = controller;
 
         //it intercepts the button presses
         this.setOnKeyPressed(event -> {
@@ -103,7 +106,7 @@ public class SettingsMenu extends Scene {
      */
     private void buttonActions() {
         itemBack.setOnActivate(() -> {
-            this.primaryStage.setScene(MainMenu.getMainMenu(primaryStage));
+            this.primaryStage.setScene(MainMenu.getMainMenu(primaryStage, controller));
             checkResolution();
     });
         itemSmallScreen.setOnActivate(() -> {
@@ -135,9 +138,9 @@ public class SettingsMenu extends Scene {
      * @param stage
      * @return SettingsMenu
      */
-    public static SettingsMenu getSettingsMenu(final Stage stage) {
+    public static SettingsMenu getSettingsMenu(final Stage stage, final PrincipalController controller) {
         primaryStage = stage;
         primaryStage.centerOnScreen();
-        return new SettingsMenu();
+        return new SettingsMenu(controller);
     }
 }

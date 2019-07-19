@@ -7,7 +7,7 @@ import it.unibo.oop.bbgmm.Entity.Entity;
 /**
  * Permit at the entity to walk
  */
-public final class Feet extends AbstractMovement {
+public class Feet extends AbstractMovement {
 
     private final double walkingSpeed;
 

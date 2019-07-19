@@ -10,26 +10,30 @@ public enum CollisionLabel {
 
     ALIEN {
         public boolean canCollideWith(final CollisionLabel other){
-            return other == PLAYER || other == COIN || other == POWER || other == SHOT;
+            return other == SHOT;
         }
     },
 
     SHOT {
         public boolean canCollideWith(final CollisionLabel other){
-            return other == ALIEN || other == COIN;
+            return other == ALIEN || other == WALL;
         }
     },
 
     POWER {
         public boolean canCollideWith(final CollisionLabel other){
-            return other == PLAYER || other == ALIEN;
-        }
+            return other == PLAYER;}
     },
 
     COIN{
         public boolean canCollideWith(final CollisionLabel other){
-            return other == PLAYER || other == ALIEN;
+            return other == PLAYER;
         }
+    },
+
+    WALL{
+        public boolean canCollideWith(final CollisionLabel other) {
+            return other == SHOT;}
     };
 
     public boolean canCollideWith(final CollisionLabel other){

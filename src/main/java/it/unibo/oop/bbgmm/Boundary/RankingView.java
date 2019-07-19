@@ -1,6 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
-
-import it.unibo.oop.bbgmm.Utilities.Pair;
+import it.unibo.oop.bbgmm.Control.PrincipalController;
+import it.unibo.oop.bbgmm.Utilities.FontMaker;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,8 +15,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,27 +23,29 @@ public class RankingView extends Scene {
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 70;
     private static final int CROWN_Y_COORDINATE = -190;
+    private final PrincipalController controller;
     private static Stage primaryStage;
     private final AnchorPane pane;
     private static final ImageView crown = new ImageView(new Image("images/crown.png"));
-    private static final Font FONT = Font.font("MS Gothic", FontWeight.BOLD, 70);
     private static final Font FONT_WINNER = Font.font("MS Gothic", FontWeight.BOLD, 100);
     private static final List<Text> rankList=new LinkedList<>();
     private VBox menuBox;
     private VBox boximage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
-    public RankingView(){
+    public RankingView(final PrincipalController controller){
         super(new AnchorPane(),Resolution.getWidth(),Resolution.getHeight());
+        this.controller = controller;
         this.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER ){
                 itemBack.activate();
             }
         });
         pane = new AnchorPane();
+
         this.fillList();
 
-        rankList.forEach(l -> l.setFont(FONT));
+        rankList.forEach(l -> l.setFont(FontMaker.getFont()));
         rankList.forEach(l -> l.setEffect(new GaussianBlur(2)));
         rankList.forEach(l->l.setFill(Color.BLUE));
         rankList.get(0).setFont(FONT_WINNER);
@@ -83,7 +83,10 @@ public class RankingView extends Scene {
 
 
     private void buttonActions() {
-        itemBack.setOnActivate(() -> this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage)));
+        itemBack.setOnActivate(() -> {
+            this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage, controller));
+            checkResolution();
+        });
     }
 
     //Metodo fittizio per riepire la lista
@@ -100,14 +103,25 @@ public class RankingView extends Scene {
      * @param stage
      * @return SettingsMenu
      */
-    public static RankingView getRankingView(final Stage stage) {
+    public static RankingView getRankingView(final Stage stage, final PrincipalController controller) {
         primaryStage = stage;
         primaryStage.setHeight(Resolution.getHeight());
         primaryStage.setWidth(Resolution.getWidth());
-        return new RankingView();
+        return new RankingView(controller);
     }
 
 
+    /**
+     * Method used to set or not the stage to FuLLScreen
+     */
+    private void checkResolution(){
+        if(Resolution.isFullScreen()){
+            this.primaryStage.setFullScreen(true);
+        }
+        else{
+            this.primaryStage.setFullScreen(false);
+        }
+    }
 
 
 
