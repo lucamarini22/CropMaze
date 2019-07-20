@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Entity.EntityState;
 import javafx.animation.Animation;
+import javafx.animation.Transition;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
@@ -11,13 +12,23 @@ import javafx.util.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EntityChangeStateView extends EntityViewImpl implements EntityChangeState {
-    private final Map<EntityState, Runnable> animations = new HashMap<>();
+/**
+ * Class to manage entity state chang
+ * @param <S>
+ *      Entity state type
+ */
+public class EntityChangeStateView<S extends EntityState> extends EntityViewImpl implements EntityChangeState<S> {
+    private final Map<S, Runnable> animations = new HashMap<>();
     private Animation currentAnimation;
 
-    public EntityChangeStateView(final Group group, final Dimension2D dimension, final Animation initialAnimation){
+    public EntityChangeStateView(final Group group, final Dimension2D dimension){
         super(group,dimension);
-        this.currentAnimation = initialAnimation;
+        this.currentAnimation = new Transition() {
+            @Override
+            protected void interpolate(double frac) {
+                //it's an empty animation
+            }
+        };
     }
 
     /**
@@ -27,11 +38,11 @@ public class EntityChangeStateView extends EntityViewImpl implements EntityChang
      * @param animation
      *      The state animation
      */
-    public void putAnimation(final EntityState state, final Runnable animation){
+    public void putAnimation(final S state, final Runnable animation){
         this.animations.put(state,animation);
     }
 
-    public Runnable dinamicAnimation(final Image image, final Duration duration, final int frames){
+    public Runnable dynamicAnimation(final Image image, final Duration duration, final int frames){
         return () -> {
             setImage(image);
             final Animation animation = new SpriteAnimation(getView(),duration,frames
@@ -72,7 +83,7 @@ public class EntityChangeStateView extends EntityViewImpl implements EntityChang
     }
 
     @Override
-    public void changeState(EntityState state) {
+    public void changeState(S state) {
         if(this.animations.containsKey(state)){
             this.animations.get(state).run();
         }

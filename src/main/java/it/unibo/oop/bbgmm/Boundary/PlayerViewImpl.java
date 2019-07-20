@@ -17,7 +17,7 @@ public class PlayerViewImpl extends EntityChangeStateView<PossibleEntityState> i
         putAnimation(PossibleEntityState.STABLE,
                 staticAnimation(new Image("")));
         putAnimation(PossibleEntityState.WALKING,
-                dinamicAnimation(new Image(""), Duration.millis(ANIMATION_DURATION),ANIMATION_FRAMES));
+                dynamicAnimation(new Image(""), Duration.millis(ANIMATION_DURATION),ANIMATION_FRAMES));
     }
 
     @Override
