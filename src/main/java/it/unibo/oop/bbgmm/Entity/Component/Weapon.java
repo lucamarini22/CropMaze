@@ -41,6 +41,19 @@ public interface Weapon extends EntityComponent {
 
     /**
      *
+     * @return Current weapon speed.
+     */
+    int getWeaponSpeed();
+
+    /**
+     *
+     * @param range
+     *              New speed value.
+     */
+    void setWeaponSpeed(int range);
+
+    /**
+     *
      * @return List of bullets shooted.
      */
     List<Bullet> getBulletList();
