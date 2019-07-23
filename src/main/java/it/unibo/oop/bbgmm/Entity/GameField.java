@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import java.util.Set;
 
 /**
  * Runs the game field.

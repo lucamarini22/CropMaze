@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Entity;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
