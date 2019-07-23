@@ -34,14 +34,17 @@ public class RankingView extends Scene {
     private VBox boximage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
-    public RankingView(final PrincipalController controller){
+    public RankingView(final Stage primaryStage, final PrincipalController controller){
         super(new AnchorPane(),Resolution.getWidth(),Resolution.getHeight());
+        this.primaryStage = primaryStage;
         this.controller = controller;
+
         this.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER ){
                 itemBack.activate();
             }
         });
+
         pane = new AnchorPane();
         rankList = controller.getRankingList().stream()
                 .map(l -> new Text(l.getFst()+" "+l.getSnd()))
@@ -64,8 +67,6 @@ public class RankingView extends Scene {
         buttonActions();
 
 
-
-
         menuBox.setAlignment(Pos.TOP_CENTER);
 
         menuBox.setTranslateX(BOX_X_COORDINATE);
@@ -81,40 +82,9 @@ public class RankingView extends Scene {
         this.setRoot(pane);
     }
 
-
-
     private void buttonActions() {
         itemBack.setOnActivate(() -> {
-            /*this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage, controller));
-            checkResolution();*/
+            ViewSwitcher.showMainMenu(this.primaryStage, this.controller);
         });
     }
-    
-    /**
-     * Getter for the Scene.
-     * @param stage
-     * @return SettingsMenu
-     */
-    public static RankingView getRankingView(final Stage stage, final PrincipalController controller) {
-        primaryStage = stage;
-        primaryStage.centerOnScreen();
-        return new RankingView(controller);
-    }
-
-
-    /**
-     * Method used to set or not the stage to FuLLScreen
-     */
-    private void checkResolution(){
-        if(Resolution.isFullScreen()){
-            this.primaryStage.setFullScreen(true);
-        }
-        else{
-            this.primaryStage.setFullScreen(false);
-        }
-    }
-
-
-
-
 }

@@ -20,7 +20,7 @@ public class ViewSwitcher {
     }
 
     public static void showRankingView(Stage primaryStage, PrincipalController controller){
-        primaryStage.setScene(new RankingView(controller));
+        primaryStage.setScene(new RankingView(primaryStage, controller));
         checkResolution(primaryStage);
     }
 
@@ -38,6 +38,7 @@ public class ViewSwitcher {
         }
         else{
             primaryStage.setFullScreen(false);
+            primaryStage.centerOnScreen();
         }
     }
 }

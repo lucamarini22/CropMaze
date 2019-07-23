@@ -69,7 +69,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
                                              this.weaponRange,
                                              this.weaponDamage,
                                              getOwner().get().getBody().getPosition(),
-                                             weaponSpeed));
+                                             this.weaponSpeed));
         }
     }
 
