@@ -44,4 +44,10 @@ public interface Weapon extends EntityComponent {
      * @return List of bullets shooted.
      */
     List<Bullet> getBulletList();
+
+    /**
+     * Remove the bullet in input from the list of bullets
+     * @param bullet
+     */
+    void removeBullet(final Bullet bullet);
 }

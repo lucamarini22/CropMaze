@@ -63,6 +63,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     public void shoot(final Direction ownerDirection) {
         if(this.cooldown.isElapsed()) {
             this.bulletShoted.add(new Bullet(new BodyBuilder(),
+                                             this,
                                              ownerDirection,
                                              this.weaponRange,
                                              this.weaponDamage,
@@ -76,5 +77,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
         return this.bulletShoted;
     }
 
-
+    public void removeBullet(final Bullet bullet){
+        this.bulletShoted.remove(bullet);
+    }
 }

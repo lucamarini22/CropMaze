@@ -27,9 +27,9 @@ public class GameOver extends Scene {
     private final MenuItem itemMainMenu = new MenuItem("MAIN MENU");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    public GameOver(final PrincipalController controller){
+    public GameOver(final Stage primaryStage, final PrincipalController controller){
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
-
+        this.gameOverStage = primaryStage;
         this.controller = controller;
 
         this.setOnKeyPressed(event -> {
@@ -90,33 +90,9 @@ public class GameOver extends Scene {
 
     private void buttonActions(){
         itemMainMenu.setOnActivate(() -> {
-            this.gameOverStage.setScene(MainMenu.getMainMenu(this.gameOverStage, controller));
-            checkResolution();
+            ViewSwitcher.showMainMenu(this.gameOverStage,controller);
         });
 
         itemExit.setOnActivate(() -> System.exit(0));
-    }
-
-    /**
-     * Method used to set or not the stage to FuLLScreen
-     */
-    private void checkResolution(){
-        if(Resolution.isFullScreen()){
-            this.gameOverStage.setFullScreen(true);
-        }
-        else{
-            this.gameOverStage.setFullScreen(false);
-        }
-    }
-
-    /**
-     * Getter for the scene
-     * @param stage
-     * @return GameOver
-     */
-    public static GameOver getGameOver(Stage stage, final PrincipalController controller){
-        gameOverStage = stage;
-        gameOverStage.centerOnScreen();
-        return new GameOver(controller);
     }
 }

@@ -36,8 +36,9 @@ public class MainMenu extends Scene {
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    public MainMenu(final PrincipalController controller) {
+    public MainMenu(final Stage primaryStage, final PrincipalController controller) {
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
+        this.primaryStage = primaryStage;
         this.controller = controller;
 
         //it intercepts the button presses
@@ -110,36 +111,11 @@ public class MainMenu extends Scene {
         //    checkResolution();
         //});
         itemScore.setOnActivate(() -> {
-            this.primaryStage.setScene(RankingView.getRankingView(this.primaryStage, this.controller));
-            checkResolution();
+            ViewSwitcher.showRankingView(primaryStage,controller);
         });
         itemSettings.setOnActivate(() -> {
-            this.primaryStage.setScene(SettingsMenu.getSettingsMenu(this.primaryStage, this.controller));
-            checkResolution();
+            ViewSwitcher.showSettings(primaryStage,controller);
         });
         itemExit.setOnActivate(() -> System.exit(0));
-    }
-
-    /**
-     * Method used to set or not the stage to FuLLScreen
-     */
-    private void checkResolution(){
-        if(Resolution.isFullScreen()){
-            this.primaryStage.setFullScreen(true);
-        }
-        else{
-            this.primaryStage.setFullScreen(false);
-        }
-    }
-
-    /**
-     * Getter for the Scene.
-     * @param stage
-     * @return MainMenu
-     */
-    public static MainMenu getMainMenu(final Stage stage, final PrincipalController controller) {
-        primaryStage = stage;
-        primaryStage.centerOnScreen();
-        return new MainMenu(controller);
     }
 }

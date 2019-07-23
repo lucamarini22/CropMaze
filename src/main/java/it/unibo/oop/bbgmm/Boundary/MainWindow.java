@@ -30,7 +30,7 @@ public class MainWindow {
 
         this.primaryStage.getIcons().add(new Image("images/mainMenu/icon.png"));
         //set the main menu as the scene
-        this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage,controller));
+        ViewSwitcher.showMainMenu(this.primaryStage,controller);
         this.primaryStage.show();
     }
 }

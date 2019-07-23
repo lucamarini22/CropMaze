@@ -85,8 +85,8 @@ public class RankingView extends Scene {
 
     private void buttonActions() {
         itemBack.setOnActivate(() -> {
-            this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage, controller));
-            checkResolution();
+            /*this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage, controller));
+            checkResolution();*/
         });
     }
     

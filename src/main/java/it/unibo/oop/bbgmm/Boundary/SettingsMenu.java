@@ -30,8 +30,9 @@ public class SettingsMenu extends Scene {
     private final MenuItem itemFullScreen = new MenuItem("Full Screen");
     private final MenuItem itemBack = new MenuItem("BACK");
 
-    public SettingsMenu(final PrincipalController controller) {
+    public SettingsMenu(final Stage primaryStage, final PrincipalController controller) {
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
+        this.primaryStage = primaryStage;
         this.controller = controller;
 
         //it intercepts the button presses
@@ -106,8 +107,7 @@ public class SettingsMenu extends Scene {
      */
     private void buttonActions() {
         itemBack.setOnActivate(() -> {
-            this.primaryStage.setScene(MainMenu.getMainMenu(primaryStage, controller));
-            checkResolution();
+            ViewSwitcher.showMainMenu(primaryStage,controller);
     });
         itemSmallScreen.setOnActivate(() -> {
             Resolution.setSmallResolution();
@@ -119,28 +119,5 @@ public class SettingsMenu extends Scene {
             itemSmallScreen.setUnderline(false);
             itemFullScreen.setUnderline(true);
         });
-    }
-
-    /**
-     * Method used to set or not the stage to FuLLScreen
-     */
-    private void checkResolution(){
-        if(Resolution.isFullScreen()){
-            this.primaryStage.setFullScreen(true);
-        }
-        else{
-            this.primaryStage.setFullScreen(false);
-        }
-    }
-
-    /**
-     * Getter for the Scene.
-     * @param stage
-     * @return SettingsMenu
-     */
-    public static SettingsMenu getSettingsMenu(final Stage stage, final PrincipalController controller) {
-        primaryStage = stage;
-        primaryStage.centerOnScreen();
-        return new SettingsMenu(controller);
     }
 }

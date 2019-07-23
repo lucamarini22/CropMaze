@@ -12,9 +12,5 @@ public class GameControllerImpl implements GameController {
 
     }
 
-    @Override
-    public void startGameLoop() {
-        /*gameLoop = Optional.of(new GameLoopImpl());
-        this.gameLoop.get().start();*/
-    }
+
 }

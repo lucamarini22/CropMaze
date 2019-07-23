@@ -1,20 +1,23 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
+import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Direction;
 
 /**
- * Component used to destroy the entity after a number of steps
+ * Component used to destroy the Bullet after a number of steps
  */
-public class LimitedFeet extends Feet{
+public class LimitedBulletFeet extends Feet{
 
     private int steps;
+    private Weapon weapon;
 
     /**
      * @param walkingSpeed entity speed for the movement
      */
-    public LimitedFeet(double walkingSpeed, int steps) {
+    public LimitedBulletFeet(Weapon weapon, double walkingSpeed, int steps) {
         super(walkingSpeed);
         this.steps = steps;
+        this.weapon = weapon;
     }
 
     @Override
@@ -23,7 +26,8 @@ public class LimitedFeet extends Feet{
             super.move(direction, speed);
         }
         else{
-            //bullet has finished its range so it must be destroyed
+            weapon.removeBullet((Bullet)getOwner().get());
+            getOwner().get().destroy();
         }
         steps--;
     }
