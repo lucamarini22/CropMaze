@@ -107,7 +107,7 @@ public class SettingsMenu extends Scene {
      */
     private void buttonActions() {
         itemBack.setOnActivate(() -> {
-            ViewSwitcher.showMainMenu(primaryStage,controller);
+            ViewSwitchert.showMainMenu(primaryStage,controller);
     });
         itemSmallScreen.setOnActivate(() -> {
             Resolution.setSmallResolution();

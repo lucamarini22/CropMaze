@@ -90,7 +90,7 @@ public class GameOver extends Scene {
 
     private void buttonActions(){
         itemMainMenu.setOnActivate(() -> {
-            ViewSwitcher.showMainMenu(this.gameOverStage,controller);
+            ViewSwitchert.showMainMenu(this.gameOverStage,controller);
         });
 
         itemExit.setOnActivate(() -> System.exit(0));

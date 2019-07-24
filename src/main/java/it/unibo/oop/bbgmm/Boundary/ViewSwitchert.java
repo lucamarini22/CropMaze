@@ -4,9 +4,9 @@ import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.stage.Stage;
 
-public class ViewSwitcher {
+public class ViewSwitchert {
 
-    public ViewSwitcher() {
+    public ViewSwitchert() {
     }
 
     public static void showMainMenu(Stage primaryStage, PrincipalController controller){

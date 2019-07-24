@@ -1,10 +1,8 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PrincipalController;
-import it.unibo.oop.bbgmm.Control.PrincipalControllerImpl;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 
@@ -12,22 +10,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
-
 /**
  * @author Manuel
  * Scene for the MainMenu.
  */
 
-public class MainMenu extends Scene {
+public class MainMenu extends BasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 25;
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 365;
     private static final int BOX_Y_COORDINATE = 350;
-    private final PrincipalController controller;
-    private static Stage primaryStage;
     private final AnchorPane pane;
     private VBox menuBox;
     private int currentItem = 0;
@@ -37,9 +30,7 @@ public class MainMenu extends Scene {
     private final MenuItem itemExit = new MenuItem("EXIT");
 
     public MainMenu(final Stage primaryStage, final PrincipalController controller) {
-        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
-        this.primaryStage = primaryStage;
-        this.controller = controller;
+        super(primaryStage,controller);
 
         //it intercepts the button presses
         this.setOnKeyPressed(event -> {
@@ -104,15 +95,18 @@ public class MainMenu extends Scene {
     /**
      * Method used to set the action for each button.
      */
-    private void buttonActions() {
+    @Override
+     protected void buttonActions() {
         //Da togliere i commenti per usare gli altri pulsanti
         //itemNewGame.setOnActivate(() -> {
         //});
         itemScore.setOnActivate(() -> {
-            ViewSwitcher.showRankingView(primaryStage,controller);
+            this.primaryStage.setScene(this.viewFactory.createRankingView());
+            checkResolution();
         });
         itemSettings.setOnActivate(() -> {
-            ViewSwitcher.showSettings(primaryStage,controller);
+            this.primaryStage.setScene(this.viewFactory.createSettingsMenu());
+            checkResolution();
         });
         itemExit.setOnActivate(() -> System.exit(0));
     }

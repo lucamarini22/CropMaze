@@ -46,6 +46,8 @@ public class RankingView extends Scene {
         });
 
         pane = new AnchorPane();
+
+
         rankList = controller.getRankingList().stream()
                 .map(l -> new Text(l.getFst()+" "+l.getSnd()))
                 .collect(Collectors.toList());
@@ -54,6 +56,8 @@ public class RankingView extends Scene {
         rankList.forEach(l -> l.setEffect(new GaussianBlur(2)));
         rankList.forEach(l->l.setFill(Color.BLUE));
         rankList.get(0).setFont(FONT_WINNER);
+
+
 
 
         boximage = new VBox(crown);
@@ -84,7 +88,7 @@ public class RankingView extends Scene {
 
     private void buttonActions() {
         itemBack.setOnActivate(() -> {
-            ViewSwitcher.showMainMenu(this.primaryStage, this.controller);
+            ViewSwitchert.showMainMenu(this.primaryStage, this.controller);
         });
     }
 }
