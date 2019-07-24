@@ -19,25 +19,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RankingView extends Scene {
+public class RankingView extends BasicView {
     private static final int SPACE_BETWEEN_ITEM = 40;
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 70;
     private static final int CROWN_Y_COORDINATE = -190;
-    private final PrincipalController controller;
-    private static Stage primaryStage;
     private final AnchorPane pane;
     private static final ImageView crown = new ImageView(new Image("images/crown.png"));
-    private static final Font FONT_WINNER = Font.font("MS Gothic", FontWeight.BOLD, 100);
     private static List<Text> rankList=new LinkedList<>();
     private VBox menuBox;
     private VBox boximage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public RankingView(final Stage primaryStage, final PrincipalController controller){
-        super(new AnchorPane(),Resolution.getWidth(),Resolution.getHeight());
-        this.primaryStage = primaryStage;
-        this.controller = controller;
+        super(primaryStage, controller);
 
         this.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER ){
@@ -55,9 +50,7 @@ public class RankingView extends Scene {
         rankList.forEach(l -> l.setFont(FontMaker.getFont()));
         rankList.forEach(l -> l.setEffect(new GaussianBlur(2)));
         rankList.forEach(l->l.setFill(Color.BLUE));
-        rankList.get(0).setFont(FONT_WINNER);
-
-
+        rankList.get(0).setFont(FontMaker.getFontWinner());
 
 
         boximage = new VBox(crown);
@@ -86,9 +79,11 @@ public class RankingView extends Scene {
         this.setRoot(pane);
     }
 
-    private void buttonActions() {
+    @Override
+    protected void buttonActions() {
         itemBack.setOnActivate(() -> {
-            ViewSwitchert.showMainMenu(this.primaryStage, this.controller);
+            this.primaryStage.setScene(this.viewFactory.createMainMenu());
+            checkResolution();
         });
     }
 }

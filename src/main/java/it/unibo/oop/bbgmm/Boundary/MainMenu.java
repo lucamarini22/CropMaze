@@ -98,8 +98,9 @@ public class MainMenu extends BasicView {
     @Override
      protected void buttonActions() {
         //Da togliere i commenti per usare gli altri pulsanti
-        //itemNewGame.setOnActivate(() -> {
-        //});
+        itemNewGame.setOnActivate(() -> {
+            this.primaryStage.setScene(this.viewFactory.createGameOver());
+        });
         itemScore.setOnActivate(() -> {
             this.primaryStage.setScene(this.viewFactory.createRankingView());
             checkResolution();

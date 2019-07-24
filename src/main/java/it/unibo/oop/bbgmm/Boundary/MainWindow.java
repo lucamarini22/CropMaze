@@ -13,9 +13,11 @@ import javafx.stage.Stage;
 
 public class MainWindow {
     private final Stage primaryStage;
+    private final ViewFactory viewFactory;
 
     public MainWindow(final Stage primaryStage, final PrincipalController controller) {
         this.primaryStage = primaryStage;
+        this.viewFactory = new ViewFactory(primaryStage, controller);
         this.primaryStage.setTitle("CROP MAZE");
         this.primaryStage.setFullScreen(false);
         this.primaryStage.setWidth(Resolution.getWidth());
@@ -30,7 +32,7 @@ public class MainWindow {
 
         this.primaryStage.getIcons().add(new Image("images/mainMenu/icon.png"));
         //set the main menu as the scene
-        ViewSwitchert.showMainMenu(this.primaryStage,controller);
+        this.primaryStage.setScene(this.viewFactory.createMainMenu());
         this.primaryStage.show();
     }
 }

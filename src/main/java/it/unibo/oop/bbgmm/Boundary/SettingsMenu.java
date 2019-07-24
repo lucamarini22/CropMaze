@@ -14,14 +14,12 @@ import javafx.stage.Stage;
  * Scene for the settings Menu used to set the Resolution
  */
 
-public class SettingsMenu extends Scene {
+public class SettingsMenu extends BasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 40;
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 300;
-    private final PrincipalController controller;
-    private static Stage primaryStage;
     private final AnchorPane pane;
 
     private VBox menuBox;
@@ -31,9 +29,7 @@ public class SettingsMenu extends Scene {
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public SettingsMenu(final Stage primaryStage, final PrincipalController controller) {
-        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
-        this.primaryStage = primaryStage;
-        this.controller = controller;
+        super(primaryStage, controller);
 
         //it intercepts the button presses
         this.setOnKeyPressed(event -> {
@@ -65,24 +61,20 @@ public class SettingsMenu extends Scene {
 
         buttonActions();
 
-        if (Resolution.isFullScreen()) {
-            itemSmallScreen.setUnderline(false);
-            itemFullScreen.setUnderline(true);
-        } else {
-            itemSmallScreen.setUnderline(true);
-            itemFullScreen.setUnderline(false);
-        }
-
         menuBox.setAlignment(Pos.TOP_CENTER);
 
-        //calculates the position of the box
+        //calculates the position of the box and witch item is underlined
         if(Resolution.isFullScreen()){
             menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
             menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
+            itemSmallScreen.setUnderline(false);
+            itemFullScreen.setUnderline(true);
         }
         else{
             menuBox.setLayoutX(BOX_X_COORDINATE);
             menuBox.setLayoutY(BOX_Y_COORDINATE);
+            itemSmallScreen.setUnderline(true);
+            itemFullScreen.setUnderline(false);
         }
 
         getMenuItem(0).setActive(true);
@@ -102,13 +94,12 @@ public class SettingsMenu extends Scene {
         return (MenuItem) menuBox.getChildren().get(index);
     }
 
-    /**
-     * Method used to set the action for each button.
-     */
-    private void buttonActions() {
+    @Override
+    protected void buttonActions() {
         itemBack.setOnActivate(() -> {
-            ViewSwitchert.showMainMenu(primaryStage,controller);
-    });
+            this.primaryStage.setScene(this.viewFactory.createMainMenu());
+            checkResolution();
+        });
         itemSmallScreen.setOnActivate(() -> {
             Resolution.setSmallResolution();
             itemSmallScreen.setUnderline(true);

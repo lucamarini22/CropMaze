@@ -11,14 +11,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class GameOver extends Scene {
+public class GameOver extends BasicView {
     private static final int SPACE_BETWEEN_ITEM = 25;
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 365;
     private static final int BOX_Y_COORDINATE = 350;
     private static final int GAMEOVER_Y_COORDINATE=200;
-    private final PrincipalController controller;
-    private static Stage gameOverStage;
     private final AnchorPane pane;
     private static final ImageView gameOVer = new ImageView(new Image("images/gameOver.png"));
     private int currentItem = 0;
@@ -28,9 +26,7 @@ public class GameOver extends Scene {
     private final MenuItem itemExit = new MenuItem("EXIT");
 
     public GameOver(final Stage primaryStage, final PrincipalController controller){
-        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
-        this.gameOverStage = primaryStage;
-        this.controller = controller;
+        super(primaryStage, controller);
 
         this.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.UP) {
@@ -76,6 +72,7 @@ public class GameOver extends Scene {
 
         getMenuItem(0).setActive(true);
 
+        pane.getChildren().add(boxImage);
         pane.getChildren().add(menuBox);
 
         pane.setId("gameOverView");
@@ -88,9 +85,11 @@ public class GameOver extends Scene {
         return (MenuItem)menuBox.getChildren().get(index);
     }
 
-    private void buttonActions(){
+    @Override
+    protected void buttonActions(){
         itemMainMenu.setOnActivate(() -> {
-            ViewSwitchert.showMainMenu(this.gameOverStage,controller);
+            this.primaryStage.setScene(this.viewFactory.createMainMenu());
+            checkResolution();
         });
 
         itemExit.setOnActivate(() -> System.exit(0));
