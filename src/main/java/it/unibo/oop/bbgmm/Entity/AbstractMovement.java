@@ -31,7 +31,7 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
     public void move(Direction direction,  double speed) {
             this.directionMovement = direction;
             this.speedMovement = speed;
-
+            //deve cambiare la posizione del body
     }
 
     @Override

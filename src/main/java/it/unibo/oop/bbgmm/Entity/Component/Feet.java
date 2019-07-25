@@ -38,8 +38,8 @@ public class Feet extends AbstractMovement {
 
     @Override
     public void move(Direction direction, double speed) {
-        super.move(direction, speed);
         setDesiredDirection(direction);
+        super.move(direction, speed);
     }
 
     private void updateState(Direction direction){

@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
+import it.unibo.oop.bbgmm.Control.WallChecker;
+import it.unibo.oop.bbgmm.Control.WallCheckerImpl;
 import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Direction;
 
@@ -10,6 +12,7 @@ public class LimitedBulletFeet extends Feet{
 
     private int steps;
     private Weapon weapon;
+    //private final WallChecker wallChecker = new WallCheckerImpl();
 
     /**
      * @param walkingSpeed entity speed for the movement
@@ -30,5 +33,12 @@ public class LimitedBulletFeet extends Feet{
             getOwner().get().destroy();
         }
         steps--;
+    }
+
+    @Override
+    public void update(double delta) {
+        //if(!wallChecker.willCollide(getOwner().get().getBody().getPosition(),getOwner().get().getBody().getDimension())){
+        //    move(getOwner().get().getBody().getDirection(),getSpeed());
+        //}
     }
 }

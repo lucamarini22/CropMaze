@@ -48,7 +48,9 @@ public class GameControllerImpl implements GameController {
     public void stop() { timer.stop(); }
 
     private void update() {
+        //updates the view
         //entities.forEach(EntityController::update);
+        //updates the model
         model.update(FRAME);
     }
 }
