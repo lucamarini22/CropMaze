@@ -11,7 +11,7 @@ import java.util.List;
  * this component is responsible for collecting power
  */
 
-public class PickupableComponent extends AbstractEntityComponent {
+public class PickupableComponent extends AbstractEntityComponent implements Collector{
 
     private final Power power;
 
