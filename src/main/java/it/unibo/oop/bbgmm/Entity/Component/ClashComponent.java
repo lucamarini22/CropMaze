@@ -4,7 +4,7 @@ import it.unibo.oop.bbgmm.Entity.Collision.Collision;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionLabel;
 import it.unibo.oop.bbgmm.Entity.Entity;
 
-public class ClashComponent extends AbstractEntityComponent {
+public class ClashComponent extends AbstractEntityComponent implements Clash{
 
     public ClashComponent(){
         this.getOwner().ifPresent(owner -> owner.get(CollisionComponent.class).ifPresent(
