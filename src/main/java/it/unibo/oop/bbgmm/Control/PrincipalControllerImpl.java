@@ -34,4 +34,11 @@ public class PrincipalControllerImpl implements PrincipalController {
         Optional.of(new GameControllerImpl());
         return gameControl.get();
     }
+
+    @Override
+    public void stopGame() {
+        if(gameControl.isPresent()){
+            gameControl.get().stop();
+        }
+    }
 }

@@ -9,4 +9,6 @@ public interface PrincipalController {
     List<Pair<String, Integer>> getRankingList();
 
     GameController startGame();
+
+    void stopGame();
 }

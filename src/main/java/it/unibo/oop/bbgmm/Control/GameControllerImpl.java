@@ -8,6 +8,7 @@ import javafx.animation.AnimationTimer;
 import org.mapeditor.core.Map;
 import org.mapeditor.io.TMXMapReader;
 import java.io.File;
+import java.util.List;
 
 public class GameControllerImpl implements GameController {
 
@@ -16,7 +17,7 @@ public class GameControllerImpl implements GameController {
     private final GameField model;
     private final Level loadLevel;
     private Map map;
-    //private List<EntityController> entities;
+    private List<EntityController> entities;
    //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
     //loadLevel crea la mappa di gioco i personaggi e gli alieni
     private final AnimationTimer timer = new AnimationTimer() {
@@ -49,7 +50,7 @@ public class GameControllerImpl implements GameController {
 
     private void update() {
         //updates the view
-        //entities.forEach(EntityController::update);
+        entities.forEach(EntityController::update);
         //updates the model
         model.update(FRAME);
     }
