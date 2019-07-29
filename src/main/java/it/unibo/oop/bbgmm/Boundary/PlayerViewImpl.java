@@ -1,7 +1,5 @@
 package it.unibo.oop.bbgmm.Boundary;
 
-import it.unibo.oop.bbgmm.Entity.EntityState;
-import it.unibo.oop.bbgmm.Entity.Movement;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
