@@ -1,9 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.FontMaker;
-import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,15 +9,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RankingView extends BasicView {
+public class RankingView extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 40;
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 70;

@@ -6,13 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public abstract class BasicView extends Scene {
+public abstract class AbstractBasicView extends Scene {
 
     private final PrincipalController controller;
     private final Stage primaryStage;
     private final ViewFactory viewFactory;
 
-    public BasicView(final Stage primaryStage, final PrincipalController controller) {
+    public AbstractBasicView(final Stage primaryStage, final PrincipalController controller) {
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
         this.controller = controller;
         this.primaryStage = primaryStage;

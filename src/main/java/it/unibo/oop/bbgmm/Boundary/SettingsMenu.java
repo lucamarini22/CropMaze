@@ -3,7 +3,6 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -14,7 +13,7 @@ import javafx.stage.Stage;
  * Scene for the settings Menu used to set the Resolution
  */
 
-public class SettingsMenu extends BasicView {
+public class SettingsMenu extends AbstractBasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 40;
     private static final int DELTA = 80;

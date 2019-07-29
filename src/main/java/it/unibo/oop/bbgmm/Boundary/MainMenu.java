@@ -3,7 +3,6 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +14,7 @@ import javafx.stage.Stage;
  * Scene for the MainMenu.
  */
 
-public class MainMenu extends BasicView {
+public class MainMenu extends AbstractBasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 25;
     private static final int DELTA = 80;

@@ -3,7 +3,6 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -11,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class GameOver extends BasicView {
+public class GameOver extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 25;
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 365;
