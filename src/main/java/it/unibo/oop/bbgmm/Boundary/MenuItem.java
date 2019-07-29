@@ -7,10 +7,8 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
-import static it.unibo.oop.bbgmm.Boundary.Music.BUTTONPRESS;
+import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_PRESS;
 
 
 /**
@@ -60,7 +58,7 @@ public class MenuItem extends HBox {
      */
     public void activate() {
         if (script != null) {
-            this.audioPlayer.playSound(BUTTONPRESS.getPath());
+            this.audioPlayer.playSound(BUTTON_PRESS.getPath());
             script.run();
         }
     }

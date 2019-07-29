@@ -5,21 +5,21 @@ import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import static it.unibo.oop.bbgmm.Boundary.Music.BUTTONSWITCH;
+import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_SWITCH;
 
 public abstract class AbstractBasicView extends Scene {
 
     private final PrincipalController controller;
     private final Stage primaryStage;
     private final ViewFactory viewFactory;
-    private final AudioPlayer audioPlayer = new AudioPlayerImpl(10,10);
+    private final AudioPlayer audioPlayer;
 
     public AbstractBasicView(final Stage primaryStage, final PrincipalController controller) {
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
         this.controller = controller;
         this.primaryStage = primaryStage;
         this.viewFactory = new ViewFactory(primaryStage,controller);
+        this.audioPlayer = new AudioPlayerImpl(30,10);
     }
 
     /**
@@ -50,6 +50,14 @@ public abstract class AbstractBasicView extends Scene {
     }
 
     /**
+     * Getter for the AudioPlayer
+     * @return audioPlayer
+     */
+    protected AudioPlayer getAudioPlayer() {
+        return audioPlayer;
+    }
+
+    /**
      * Method used to set or not the stage to FullScreen
      */
     protected void checkResolution(){
@@ -62,7 +70,10 @@ public abstract class AbstractBasicView extends Scene {
         }
     }
 
+    /**
+     * Method called to play the buttonSwitch sound
+     */
     protected void playSound(){
-        this.audioPlayer.playSound(BUTTONSWITCH.getPath());
+        this.audioPlayer.playSound(BUTTON_SWITCH.getPath());
     }
 }

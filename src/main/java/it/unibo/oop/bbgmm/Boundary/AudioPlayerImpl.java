@@ -27,7 +27,6 @@ public class AudioPlayerImpl implements AudioPlayer{
 
     @Override
     public void playMusic(String path) {
-        stopMusic();
         loadMusic(path);
         mediaPlayer.setVolume(musicVolume);
         mediaPlayer.play();
@@ -36,11 +35,11 @@ public class AudioPlayerImpl implements AudioPlayer{
 
     @Override
     public void stopMusic() {
-
+        mediaPlayer.stop();
     }
 
     private void loadMusic(final String path){
-        mediaPlayer = new MediaPlayer(new Media(getClass().getResource(path).toExternalForm()));
+        mediaPlayer = new MediaPlayer(new Media(path));
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setVolume(musicVolume);
     }

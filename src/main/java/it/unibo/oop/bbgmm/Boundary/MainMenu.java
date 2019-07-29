@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
+
 /**
  * @author Manuel
  * Scene for the MainMenu.
@@ -84,6 +86,8 @@ public class MainMenu extends AbstractBasicView {
         this.getStylesheets().add("Style.css");
 
         this.setRoot(pane);
+
+        getAudioPlayer().playMusic(MENU_TRACK.getPath());
     }
 
     /**
@@ -101,6 +105,7 @@ public class MainMenu extends AbstractBasicView {
         //Da togliere i commenti per usare gli altri pulsanti
         itemNewGame.setOnActivate(() -> {
             getPrimaryStage().setScene(getViewFactory().createGameOver());
+            getAudioPlayer().stopMusic();
         });
         itemScore.setOnActivate(() -> {
             getPrimaryStage().setScene(getViewFactory().createRankingView());
