@@ -24,27 +24,28 @@ public class GameOver extends AbstractBasicView {
     private final MenuItem itemMainMenu = new MenuItem("MAIN MENU");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    public GameOver(final Stage primaryStage, final PrincipalController controller){
-        super(primaryStage, controller);
+    public GameOver(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer){
+        super(primaryStage, controller, audioPlayer);
 
         this.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.UP) {
                 if(currentItem > 0) {
+                    playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(--currentItem).setActive(true);
-                    playSound();
                 }
             }
 
             if(event.getCode() == KeyCode.DOWN) {
                 if(currentItem < menuBox.getChildren().size() - 1 ){
+                    playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(++currentItem).setActive(true);
-                    playSound();
                 }
             }
 
             if(event.getCode() == KeyCode.ENTER){
+                playPressSound();
                 getMenuItem(currentItem).activate();
             }
         });

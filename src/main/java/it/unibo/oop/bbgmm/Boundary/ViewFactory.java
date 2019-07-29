@@ -7,10 +7,12 @@ public class ViewFactory {
 
     private final Stage stage;
     private final PrincipalController controller;
+    private final AudioPlayer audioPlayer;
 
-    public ViewFactory(Stage stage, PrincipalController controller) {
+    public ViewFactory(Stage stage, PrincipalController controller, AudioPlayer audioPlayer) {
         this.stage = stage;
         this.controller = controller;
+        this.audioPlayer = audioPlayer;
     }
 
     /**
@@ -18,7 +20,7 @@ public class ViewFactory {
      * @return MainMenu
      */
     public MainMenu createMainMenu(){
-        return new MainMenu(stage,controller);
+        return new MainMenu(stage,controller,audioPlayer);
     }
 
     /**
@@ -26,7 +28,7 @@ public class ViewFactory {
      * @return RankingView
      */
     public RankingView createRankingView(){
-        return new RankingView(stage,controller);
+        return new RankingView(stage,controller,audioPlayer);
     }
 
     /**
@@ -34,7 +36,7 @@ public class ViewFactory {
      * @return SettingsMenu
      */
     public SettingsMenu createSettingsMenu(){
-        return new SettingsMenu(stage,controller);
+        return new SettingsMenu(stage,controller,audioPlayer);
     }
 
     /**
@@ -42,6 +44,6 @@ public class ViewFactory {
      * @return GameOver
      */
     public GameOver createGameOver(){
-        return new GameOver(stage,controller);
+        return new GameOver(stage,controller,audioPlayer);
     }
 }

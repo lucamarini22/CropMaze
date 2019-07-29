@@ -30,28 +30,29 @@ public class MainMenu extends AbstractBasicView {
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    public MainMenu(final Stage primaryStage, final PrincipalController controller) {
-        super(primaryStage,controller);
+    public MainMenu(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer) {
+        super(primaryStage,controller, audioPlayer);
 
         //it intercepts the button presses
         this.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
                 if (currentItem > 0) {
+                    playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(--currentItem).setActive(true);
-                    playSound();
                 }
             }
 
             if (event.getCode() == KeyCode.DOWN) {
                 if (currentItem < menuBox.getChildren().size() - 1) {
+                    playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(++currentItem).setActive(true);
-                    playSound();
                 }
             }
 
             if (event.getCode() == KeyCode.ENTER) {
+                playPressSound();
                 getMenuItem(currentItem).activate();
             }
         });
@@ -86,8 +87,6 @@ public class MainMenu extends AbstractBasicView {
         this.getStylesheets().add("Style.css");
 
         this.setRoot(pane);
-
-        getAudioPlayer().playMusic(MENU_TRACK.getPath());
     }
 
     /**

@@ -21,11 +21,9 @@ public class MenuItem extends HBox {
     private Font usedFont;
     private final Text text;
     private Runnable script;
-    private final AudioPlayer audioPlayer;
 
     public MenuItem(final String name) {
         super();
-        this.audioPlayer = new AudioPlayerImpl(10,10);
         setAlignment(Pos.CENTER);
         text = new Text(name);
         FontMaker.modifyFont(Resolution.isFullScreen());
@@ -58,7 +56,6 @@ public class MenuItem extends HBox {
      */
     public void activate() {
         if (script != null) {
-            this.audioPlayer.playSound(BUTTON_PRESS.getPath());
             script.run();
         }
     }

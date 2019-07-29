@@ -27,11 +27,12 @@ public class RankingView extends AbstractBasicView {
     private VBox boximage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
-    public RankingView(final Stage primaryStage, final PrincipalController controller){
-        super(primaryStage, controller);
+    public RankingView(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer){
+        super(primaryStage, controller, audioPlayer);
 
         this.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER ){
+                playPressSound();
                 itemBack.activate();
             }
         });

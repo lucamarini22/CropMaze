@@ -4,7 +4,7 @@ import java.net.URL;
 
 public enum Music {
 
-    MENU_TRACK("sounds/alienblues.wav"),
+    MENU_TRACK("sounds/menuSong.mp3"),
 
     GAME_TRACK(""),
 
