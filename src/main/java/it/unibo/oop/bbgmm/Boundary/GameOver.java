@@ -88,10 +88,13 @@ public class GameOver extends BasicView {
     @Override
     protected void buttonActions(){
         itemMainMenu.setOnActivate(() -> {
-            this.primaryStage.setScene(this.viewFactory.createMainMenu());
+            getPrimaryStage().setScene(getViewFactory().createMainMenu());
             checkResolution();
         });
 
-        itemExit.setOnActivate(() -> System.exit(0));
+        itemExit.setOnActivate(() -> {
+            getController().stopGame();
+            System.exit(0);
+        });
     }
 }

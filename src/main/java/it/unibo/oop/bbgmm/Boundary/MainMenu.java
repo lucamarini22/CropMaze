@@ -99,16 +99,19 @@ public class MainMenu extends BasicView {
      protected void buttonActions() {
         //Da togliere i commenti per usare gli altri pulsanti
         itemNewGame.setOnActivate(() -> {
-            this.primaryStage.setScene(this.viewFactory.createGameOver());
+            getPrimaryStage().setScene(getViewFactory().createGameOver());
         });
         itemScore.setOnActivate(() -> {
-            this.primaryStage.setScene(this.viewFactory.createRankingView());
+            getPrimaryStage().setScene(getViewFactory().createRankingView());
             checkResolution();
         });
         itemSettings.setOnActivate(() -> {
-            this.primaryStage.setScene(this.viewFactory.createSettingsMenu());
+            getPrimaryStage().setScene(getViewFactory().createSettingsMenu());
             checkResolution();
         });
-        itemExit.setOnActivate(() -> System.exit(0));
+        itemExit.setOnActivate(() -> {
+            getController().stopGame();
+            System.exit(0);
+        });
     }
 }

@@ -9,8 +9,8 @@ import javafx.stage.Stage;
 public abstract class BasicView extends Scene {
 
     private final PrincipalController controller;
-    protected final Stage primaryStage;
-    protected final ViewFactory viewFactory;
+    private final Stage primaryStage;
+    private final ViewFactory viewFactory;
 
     public BasicView(final Stage primaryStage, final PrincipalController controller) {
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
@@ -29,6 +29,22 @@ public abstract class BasicView extends Scene {
      * @return controller
      */
     protected PrincipalController getController() { return this.controller; }
+
+    /**
+     * Getter for the Stage
+     * @return primaryStage
+     */
+    protected Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    /**
+     * Getter for the viewFactory
+     * @return viewFactory
+     */
+    protected ViewFactory getViewFactory() {
+        return viewFactory;
+    }
 
     /**
      * Method used to set or not the stage to FullScreen

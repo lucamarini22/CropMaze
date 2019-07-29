@@ -82,7 +82,7 @@ public class RankingView extends BasicView {
     @Override
     protected void buttonActions() {
         itemBack.setOnActivate(() -> {
-            this.primaryStage.setScene(this.viewFactory.createMainMenu());
+            getPrimaryStage().setScene(getViewFactory().createMainMenu());
             checkResolution();
         });
     }
