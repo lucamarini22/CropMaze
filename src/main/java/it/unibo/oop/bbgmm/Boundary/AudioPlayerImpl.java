@@ -4,6 +4,9 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import java.applet.Applet;
+import java.net.URL;
+
 public class AudioPlayerImpl implements AudioPlayer{
 
     private final double soundVolume;
@@ -20,7 +23,6 @@ public class AudioPlayerImpl implements AudioPlayer{
     @Override
     public void playSound(String path) {
         new AudioClip(path).play(soundVolume);
-
     }
 
     @Override

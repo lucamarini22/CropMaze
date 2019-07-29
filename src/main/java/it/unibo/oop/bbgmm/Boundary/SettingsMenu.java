@@ -36,6 +36,7 @@ public class SettingsMenu extends AbstractBasicView {
                 if (currentItem > 0) {
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(--currentItem).setActive(true);
+                    playSound();
                 }
             }
 
@@ -43,6 +44,7 @@ public class SettingsMenu extends AbstractBasicView {
                 if (currentItem < menuBox.getChildren().size() - 1) {
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(++currentItem).setActive(true);
+                    playSound();
                 }
             }
 

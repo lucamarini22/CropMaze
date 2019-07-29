@@ -10,6 +10,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import static it.unibo.oop.bbgmm.Boundary.Music.BUTTONPRESS;
+
 
 /**
  * @author Manuel
@@ -17,15 +19,15 @@ import javafx.scene.text.Text;
  */
 
 public class MenuItem extends HBox {
-    private Font usedFont;
-    //private static final String BUTTON_CLICKED_PATH = "src/main/resources/sounds/button_clicked.mp3";
 
+    private Font usedFont;
     private final Text text;
     private Runnable script;
-    //private final MediaPlayer button_clicked;
+    private final AudioPlayer audioPlayer;
 
     public MenuItem(final String name) {
         super();
+        this.audioPlayer = new AudioPlayerImpl(10,10);
         setAlignment(Pos.CENTER);
         text = new Text(name);
         FontMaker.modifyFont(Resolution.isFullScreen());
@@ -34,8 +36,6 @@ public class MenuItem extends HBox {
         text.setEffect(new GaussianBlur(2));
         getChildren().add(text);
         setActive(false);
-
-        //button_clicked = new MediaPlayer(new Media(new File(BUTTON_CLICKED_PATH).toURI().toString()));
     }
 
     /**
@@ -60,7 +60,7 @@ public class MenuItem extends HBox {
      */
     public void activate() {
         if (script != null) {
-            //this.button_clicked.play(); //reproduces the buttonCklicked sound
+            this.audioPlayer.playSound(BUTTONPRESS.getPath());
             script.run();
         }
     }

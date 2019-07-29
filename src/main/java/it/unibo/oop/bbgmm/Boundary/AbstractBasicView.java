@@ -6,11 +6,14 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import static it.unibo.oop.bbgmm.Boundary.Music.BUTTONSWITCH;
+
 public abstract class AbstractBasicView extends Scene {
 
     private final PrincipalController controller;
     private final Stage primaryStage;
     private final ViewFactory viewFactory;
+    private final AudioPlayer audioPlayer = new AudioPlayerImpl(10,10);
 
     public AbstractBasicView(final Stage primaryStage, final PrincipalController controller) {
         super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
@@ -57,5 +60,9 @@ public abstract class AbstractBasicView extends Scene {
             primaryStage.setFullScreen(false);
             primaryStage.centerOnScreen();
         }
+    }
+
+    protected void playSound(){
+        this.audioPlayer.playSound(BUTTONSWITCH.getPath());
     }
 }
