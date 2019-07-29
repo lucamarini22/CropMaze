@@ -1,9 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.FontMaker;
-import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,38 +9,37 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RankingView extends Scene {
+public class RankingView extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 40;
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 70;
     private static final int CROWN_Y_COORDINATE = -190;
-    private final PrincipalController controller;
-    private static Stage primaryStage;
     private final AnchorPane pane;
     private static final ImageView crown = new ImageView(new Image("images/crown.png"));
-    private static final Font FONT_WINNER = Font.font("MS Gothic", FontWeight.BOLD, 100);
     private static List<Text> rankList=new LinkedList<>();
     private VBox menuBox;
     private VBox boximage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
-    public RankingView(final PrincipalController controller){
-        super(new AnchorPane(),Resolution.getWidth(),Resolution.getHeight());
-        this.controller = controller;
+    public RankingView(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer){
+        super(primaryStage, controller, audioPlayer);
+
         this.setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER ){
+                playPressSound();
                 itemBack.activate();
             }
         });
+
         pane = new AnchorPane();
+
+
         rankList = controller.getRankingList().stream()
                 .map(l -> new Text(l.getFst()+" "+l.getSnd()))
                 .collect(Collectors.toList());
@@ -50,7 +47,7 @@ public class RankingView extends Scene {
         rankList.forEach(l -> l.setFont(FontMaker.getFont()));
         rankList.forEach(l -> l.setEffect(new GaussianBlur(2)));
         rankList.forEach(l->l.setFill(Color.BLUE));
-        rankList.get(0).setFont(FONT_WINNER);
+        rankList.get(0).setFont(FontMaker.getFontWinner());
 
 
         boximage = new VBox(crown);
@@ -62,8 +59,6 @@ public class RankingView extends Scene {
         rankList.forEach(t -> menuBox.getChildren().add(t));
         menuBox.getChildren().addAll(itemBack);
         buttonActions();
-
-
 
 
         menuBox.setAlignment(Pos.TOP_CENTER);
@@ -81,40 +76,11 @@ public class RankingView extends Scene {
         this.setRoot(pane);
     }
 
-
-
-    private void buttonActions() {
+    @Override
+    protected void buttonActions() {
         itemBack.setOnActivate(() -> {
-            this.primaryStage.setScene(MainMenu.getMainMenu(this.primaryStage, controller));
+            getPrimaryStage().setScene(getViewFactory().createMainMenu());
             checkResolution();
         });
     }
-    
-    /**
-     * Getter for the Scene.
-     * @param stage
-     * @return SettingsMenu
-     */
-    public static RankingView getRankingView(final Stage stage, final PrincipalController controller) {
-        primaryStage = stage;
-        primaryStage.centerOnScreen();
-        return new RankingView(controller);
-    }
-
-
-    /**
-     * Method used to set or not the stage to FuLLScreen
-     */
-    private void checkResolution(){
-        if(Resolution.isFullScreen()){
-            this.primaryStage.setFullScreen(true);
-        }
-        else{
-            this.primaryStage.setFullScreen(false);
-        }
-    }
-
-
-
-
 }

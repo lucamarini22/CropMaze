@@ -80,7 +80,6 @@ public final class LevelImpl implements Level {
                 final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
                         obj.getWidth(), obj.getHeight());
                 gameField.addEntity(entityFactory.createWall(pos.getKey(), pos.getValue()));
-
             });
         }
         if (layer.getName().trim().toLowerCase(Locale.UK).equals("objects")) {

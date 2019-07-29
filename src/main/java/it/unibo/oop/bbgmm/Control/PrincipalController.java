@@ -8,5 +8,7 @@ public interface PrincipalController {
 
     List<Pair<String, Integer>> getRankingList();
 
-    GameController createGameController();
+    GameController startGame();
+
+    void stopGame();
 }
