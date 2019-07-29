@@ -1,6 +1,8 @@
 package it.unibo.oop.bbgmm.Entity;
 
 
+import java.util.Set;
+
 /**
  * Runs the game field.
  */
@@ -22,4 +24,19 @@ public interface GameField {
      * @return the entity
      */
     Entity addEntity(Entity entity);
+
+    /**
+     * Gets all the {@link Entity} in the game.
+     *
+     * @return all the entities
+     */
+    Set<Entity> getEntities();
+
+    /**
+     * Removes the {@link Entity} passed by argument.
+     *
+     * @param entity
+     *      The {@link Entity} to remove
+     */
+    void removeEntity(Entity entity);
 }
