@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -24,7 +25,15 @@ public final class GameFieldImpl implements GameField {
         return entity;
     }
 
-    private void removeEntity(final Entity entity) {
+    @Override
+    public Set<Entity> getEntities() {
+        return Collections.unmodifiableSet(this.entities);
+    }
+
+    @Override
+    public void removeEntity(final Entity entity) {
         this.entities.remove(entity);
     }
+
+
 }
