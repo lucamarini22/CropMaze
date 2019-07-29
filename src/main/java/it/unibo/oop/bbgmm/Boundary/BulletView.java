@@ -5,7 +5,7 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 
-public class BulletView extends EntityChangeStateView<PossibleEntityState>{
+public class BulletView extends AliveEntityViewImpl{
 
     private final Direction direction;
 

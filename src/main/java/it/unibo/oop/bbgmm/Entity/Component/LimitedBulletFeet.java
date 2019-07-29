@@ -9,7 +9,7 @@ import it.unibo.oop.bbgmm.Entity.Direction;
  * Component used to destroy the Bullet after a number of steps
  */
 public class LimitedBulletFeet extends Feet{
-    
+
     private static final int STEP = 1;
     private Life lifeComponent;
     private Weapon weapon;
