@@ -26,7 +26,11 @@ public class PlayerInputHandler {
         if(event.getCode().equals(KeyCode.D) ||
                 event.getCode().equals(KeyCode.S) ||
                 event.getCode().equals(KeyCode.W) ||
-                event.getCode().equals(KeyCode.A)) {
+                event.getCode().equals(KeyCode.A)||
+                event.getCode().equals(KeyCode.DOWN)||
+                event.getCode().equals(KeyCode.LEFT)||
+                event.getCode().equals(KeyCode.RIGHT)||
+                event.getCode().equals(KeyCode.UP)) {
 
             if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
                 this.input.add(event.getCode());
@@ -61,6 +65,18 @@ public class PlayerInputHandler {
         }
         if(this.input.contains(KeyCode.A)){
             shift = shift.add(PlayerMoves.LEFT.x,PlayerMoves.LEFT.y);
+        }
+        if(this.input.contains(KeyCode.UP)){
+
+        }
+        if(this.input.contains(KeyCode.DOWN)){
+
+        }
+        if(this.input.contains(KeyCode.LEFT)){
+
+        }
+        if(this.input.contains(KeyCode.RIGHT)){
+
         }
         return shift;
     }

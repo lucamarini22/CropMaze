@@ -1,6 +1,11 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Entity.*;
+import it.unibo.oop.bbgmm.Entity.GameField;
+import it.unibo.oop.bbgmm.Entity.GameStatistics;
+import it.unibo.oop.bbgmm.Entity.EntityFactory;
+import it.unibo.oop.bbgmm.Entity.PlayerStatistics;
+import it.unibo.oop.bbgmm.Entity.PlayerStatisticsImpl;
+import it.unibo.oop.bbgmm.Entity.Entity;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
@@ -14,11 +19,13 @@ import java.util.Locale;
  */
 public final class LevelImpl implements Level {
 
+    private static final int ENEMIES_INCREMENT_FACTOR = 4;
+
+
     private Entity player;
     private final Map map;
     private final GameField gameField;
     private final EntityFactory entityFactory;
-    //private final EntitySpawner spawner;
     private PlayerStatistics playerStatistics;
 
 
@@ -33,8 +40,10 @@ public final class LevelImpl implements Level {
      *          GameField gameField
      * @param entityFactory
      *          Factory for the entities
+     * @param gameStatistics
+     *          Statistics of the game
      */
-    public LevelImpl(final Map map, final GameField gameField, final EntityFactory entityFactory, GameStatistics gameStatistics) {
+    public LevelImpl(final Map map, final GameField gameField, final EntityFactory entityFactory, final GameStatistics gameStatistics) {
         this.map = map;
         this.gameField = gameField;
         this.entityFactory = entityFactory;
@@ -71,7 +80,6 @@ public final class LevelImpl implements Level {
                 final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
                         obj.getWidth(), obj.getHeight());
                 gameField.addEntity(entityFactory.createWall(pos.getKey(), pos.getValue()));
-
             });
         }
         if (layer.getName().trim().toLowerCase(Locale.UK).equals("objects")) {
@@ -92,12 +100,32 @@ public final class LevelImpl implements Level {
                         break;
 
                     case "alien":
-                        entity = gameField.addEntity(entityFactory.createEnemy(position));
+                        //for da tenere, quello dentro da sostituire con spawn(type) di EntitySpawnerImpl
+                        for (int i = 0; i < this.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
+                            entity = gameField.addEntity(entityFactory.createEnemy(position));
+                        }
                         break;
                     default:
                         break;
                 }
             });
+        }
+    }
+
+    // Levels starts from zero
+
+    /**
+     * @param currentLevel
+     *      The number of the current level
+     * @return the numbers of enemies to spawn
+     */
+    private int getEnemiesNumber(final int currentLevel) {
+        int multiplicator = currentLevel % ENEMIES_INCREMENT_FACTOR;
+
+        if (multiplicator == 0) {
+            return ENEMIES_INCREMENT_FACTOR * ENEMIES_INCREMENT_FACTOR;
+        } else {
+            return multiplicator * ENEMIES_INCREMENT_FACTOR;
         }
     }
 
@@ -115,7 +143,5 @@ public final class LevelImpl implements Level {
 
         return new Pair<>(pos, dim);
     }
-
-
 
 }

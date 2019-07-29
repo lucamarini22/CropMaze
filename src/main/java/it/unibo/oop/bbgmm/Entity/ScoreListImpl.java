@@ -3,17 +3,18 @@ package it.unibo.oop.bbgmm.Entity;
 import it.unibo.oop.bbgmm.Utilities.Pair;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ScoreListImpl implements ScoreList{
 
-    File fileName = new File("ScoreList.txt");
+    private final URL fileName = ClassLoader.getSystemResource("ScoreList.txt");
     private List<Score> scoreList = new ArrayList<>();
 
     public ScoreListImpl() throws IOException {
-        final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName)));
+        final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName.getPath())));
         int size = ostream.readInt();
         for(int i = 0; i<size; i++) {
             try {
@@ -33,7 +34,7 @@ public class ScoreListImpl implements ScoreList{
             scoreList.add(newScore);
             scoreList.sort((s1,s2) -> s2.getLevel()-s1.getLevel());
             if(scoreList.size() > 5){
-                scoreList = scoreList.subList(0, 4);
+                scoreList = scoreList.subList(0, 5);
             }
             try {
                 writeOnFile();
@@ -45,7 +46,7 @@ public class ScoreListImpl implements ScoreList{
     }
 
     private void writeOnFile() throws IOException {
-        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName, false)));
+        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName.getPath(), false)));
         ostream.writeInt(scoreList.size());
         scoreList.forEach(s -> {
             try {
@@ -67,7 +68,7 @@ public class ScoreListImpl implements ScoreList{
 
     @Override
     public void deleteAll() throws IOException {
-        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName, false)));
+        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName.getPath(), false)));
         scoreList.clear();
         ostream.writeInt(0);
         ostream.flush();
