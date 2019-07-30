@@ -21,9 +21,11 @@ import java.util.stream.Collectors;
 
 public class RankingView extends Scene {
     private static final int SPACE_BETWEEN_ITEM = 40;
-    private static final int BOX_X_COORDINATE = 315;
+    private static final int DELTA = 80;
+    private static final int BOX_X_COORDINATE = 280;
     private static final int BOX_Y_COORDINATE = 70;
-    private static final int CROWN_Y_COORDINATE = -190;
+    private static final int CROWN_Y_COORDINATE = -180;
+    private static final int CROWN_WIDTH = 500;
     private final PrincipalController controller;
     private static Stage primaryStage;
     private final AnchorPane pane;
@@ -43,36 +45,50 @@ public class RankingView extends Scene {
             }
         });
         pane = new AnchorPane();
-        rankList = controller.getRankingList().stream()
-                .map(l -> new Text(l.getFst()+" "+l.getSnd()))
-                .collect(Collectors.toList());
-
-        rankList.forEach(l -> l.setFont(FontMaker.getFont()));
-        rankList.forEach(l -> l.setEffect(new GaussianBlur(2)));
-        rankList.forEach(l->l.setFill(Color.BLUE));
-        rankList.get(0).setFont(FONT_WINNER);
 
 
-        boximage = new VBox(crown);
-        boximage.setAlignment(Pos.TOP_CENTER);
-        boximage.setTranslateX(BOX_X_COORDINATE);
-        boximage.setTranslateY(CROWN_Y_COORDINATE);
         menuBox = new VBox(SPACE_BETWEEN_ITEM);
+        boximage = new VBox(crown);
+        if(!controller.getRankingList().isEmpty()) {
+            rankList = controller.getRankingList().stream()
+                    .map(l -> new Text(l.getFst() + " " + l.getSnd()))
+                    .collect(Collectors.toList());
 
-        rankList.forEach(t -> menuBox.getChildren().add(t));
-        menuBox.getChildren().addAll(itemBack);
+            rankList.forEach(l -> l.setFont(FontMaker.getFont()));
+            rankList.forEach(l -> l.setEffect(new GaussianBlur(2)));
+            rankList.forEach(l -> l.setFill(Color.BLUE));
+            rankList.get(0).setFont(FontMaker.getFontWinner());
+            rankList.forEach(t -> menuBox.getChildren().add(t));
+
+            pane.getChildren().add(boximage);
+        }
+
         buttonActions();
 
-
-
-
+        boximage.setAlignment(Pos.TOP_CENTER);
         menuBox.setAlignment(Pos.TOP_CENTER);
 
-        menuBox.setTranslateX(BOX_X_COORDINATE);
-        menuBox.setTranslateY(BOX_Y_COORDINATE);
+        menuBox.getChildren().addAll(itemBack);
+
+        //calculates the position of the box
+        if(Resolution.isFullScreen()){
+            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGzHT);
+            boximage.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH);
+            boximage.setLayoutY(CROWN_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
+        }
+        else{
+            menuBox.setLayoutX(BOX_X_COORDINATE);
+            menuBox.setLayoutY(BOX_Y_COORDINATE);
+            crown.setFitWidth(CROWN_WIDTH);
+            boximage.setTranslateX(BOX_X_COORDINATE);
+            boximage.setTranslateY(CROWN_Y_COORDINATE);
+        }
+
+
+
 
         itemBack.setActive(true);
-        pane.getChildren().add(boximage);
         pane.getChildren().add(menuBox);
 
         pane.setId("rankingView");
@@ -89,7 +105,7 @@ public class RankingView extends Scene {
             checkResolution();
         });
     }
-    
+
     /**
      * Getter for the Scene.
      * @param stage
