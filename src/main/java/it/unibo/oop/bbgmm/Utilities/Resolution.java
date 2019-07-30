@@ -16,6 +16,7 @@ public final class Resolution {
     private static int height = SMALL_HEIGHT;
     private static boolean fullScreen;
 
+
     public Resolution() {
         fullScreen=false;
     }

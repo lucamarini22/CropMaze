@@ -5,11 +5,9 @@ import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.input.KeyCode;
 
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 
 /**
  * @author Manuel
@@ -20,7 +18,7 @@ public class MainMenu extends AbstractBasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 25;
     private static final int DELTA = 80;
-    private static final int BOX_X_COORDINATE = 365;
+    private static final int BOX_X_COORDINATE = 370;
     private static final int BOX_Y_COORDINATE = 350;
     private final AnchorPane pane;
     private VBox menuBox;

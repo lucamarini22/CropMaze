@@ -43,6 +43,7 @@ public class LimitedBulletFeet extends Feet{
         else{
             remove();
         }*/
+        move(getOwner().get().getBody().getDirection(),getSpeed());
     }
 
     private void remove(){

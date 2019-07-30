@@ -18,7 +18,7 @@ public class GameControllerImpl implements GameController {
     private final EntitySpawner entitySpawner;
     private final EntityFactory entityFactory;
     //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
-    //loadLevel crea la mappa di gioco i personaggi e gli alieni
+    //level crea la mappa di gioco i personaggi e gli alieni
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long now) {

@@ -17,7 +17,7 @@ public class Feet extends AbstractMovement {
      *            entity speed for the movement
      */
     public Feet(final double walkingSpeed){
-        super();
+        super(walkingSpeed);
         this.walkingSpeed = walkingSpeed;
     }
 

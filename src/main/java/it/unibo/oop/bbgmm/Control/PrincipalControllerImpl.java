@@ -31,7 +31,7 @@ public class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public GameController startGame() {
-        Optional.of(new GameControllerImpl());
+        gameControl = Optional.of(new GameControllerImpl());
         return gameControl.get();
     }
 
