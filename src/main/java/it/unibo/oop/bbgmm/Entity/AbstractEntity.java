@@ -64,6 +64,6 @@ public abstract class AbstractEntity implements Entity {
      *          Time for the update since last call
      */
     protected void updateComponents(final double up){
-
+        components.forEach(c -> c.update(up));
     }
 }

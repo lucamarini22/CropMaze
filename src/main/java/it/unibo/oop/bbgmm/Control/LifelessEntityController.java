@@ -8,16 +8,14 @@ import it.unibo.oop.bbgmm.Entity.Entity;
  * Base class for AbstractLifeEntityController
  */
 public class LifelessEntityController extends AbstractLifelessEntityController<LifelessEntityView> {
-    /**
-     *
-     * @param entity
-     *             the object to control
-     * @param entityView
-     *              the object to update
-     */
-    public LifelessEntityController(final Entity entity, final LifelessEntityView entityView) {
-        super(entity, entityView);
-    }
-
-
+    
+        /**
+         * @param entity
+         *            The {@link Entity} object to control.
+         * @param entityView
+         *            The {@link LifelessEntityView} object to update.
+         */
+        public LifelessEntityController(final Entity entity, final LifelessEntityView entityView) {
+            super(entity, entityView);
+        }
 }

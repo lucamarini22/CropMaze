@@ -14,13 +14,12 @@ public abstract class AbstractLifelessEntityController<L extends EntityView> ext
      * @param entity     object to control
      * @param entityView
      */
-    public AbstractLifelessEntityController(Entity entity, L entityView) {
+    public AbstractLifelessEntityController(final Entity entity, final L entityView) {
         super(entity, entityView);
     }
 
     @Override
-    public final void update(){
-        //creata classe ViewUtils, ma si potrebbe non usare più avanti
+    public void update() {
         getEntityView().setPosition(ViewUtils.worldPointToFX(getEntity().getBody().getPosition()));
     }
 }

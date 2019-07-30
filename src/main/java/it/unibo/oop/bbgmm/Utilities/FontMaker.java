@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * Class used to create the rigth font to use based on the dimension of the GameWindow
  */
-public class FontMaker {
+public final class FontMaker {
 
     private static final Toolkit TK = Toolkit.getDefaultToolkit();
     private static final Dimension D = TK.getScreenSize();

@@ -14,11 +14,14 @@ import java.util.Locale;
  */
 public final class LevelImpl implements Level {
 
+    private static final int ENEMIES_INCREMENT_FACTOR = 4;
+
+
     private Entity player;
     private final Map map;
     private final GameField gameField;
     private final EntityFactory entityFactory;
-    //private final EntitySpawner spawner;
+    private final EntitySpawner entitySpawner;
     private PlayerStatistics playerStatistics;
 
 
@@ -33,12 +36,17 @@ public final class LevelImpl implements Level {
      *          GameField gameField
      * @param entityFactory
      *          Factory for the entities
+     * @param gameStatistics
+     *          Statistics of the game
+     * @param entitySpawner
+     *          {@link EntitySpawner} that spawns entities
      */
-    public LevelImpl(final Map map, final GameField gameField, final EntityFactory entityFactory, GameStatistics gameStatistics) {
+    public LevelImpl(final Map map, final GameField gameField, final EntityFactory entityFactory, final GameStatistics gameStatistics, final EntitySpawner entitySpawner) {
         this.map = map;
         this.gameField = gameField;
         this.entityFactory = entityFactory;
         this.gameStatistics = gameStatistics;
+        this.entitySpawner = entitySpawner;
 
         this.map.forEach(layer -> {
             if (layer instanceof TileLayer) {
@@ -70,8 +78,7 @@ public final class LevelImpl implements Level {
             layer.forEach(obj -> {
                 final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
                         obj.getWidth(), obj.getHeight());
-                gameField.addEntity(entityFactory.createWall(pos.getKey(), pos.getValue()));
-
+                entitySpawner.spawn(pos.getKey(), pos.getValue());
             });
         }
         if (layer.getName().trim().toLowerCase(Locale.UK).equals("objects")) {
@@ -79,25 +86,42 @@ public final class LevelImpl implements Level {
                 final Point2D position = invertY(new Point2D(mapObj.getX() / 70, mapObj.getY() / 70));
                 final String type = mapObj.getType();
                 Entity entity;
-                switch (type) {
+                switch (EntityType.valueOf(type)) {
                     //creation of the player
-                    case "player":
-                        player = gameField.addEntity(entityFactory.createPlayer(position));
+                    case PLAYER:
+                        player = entitySpawner.spawn(EntityType.PLAYER.toString(), position);
                         playerStatistics = new PlayerStatisticsImpl(player);
                         break;
 
                     //creation of all power ups, coins and enemies
-                    case "coin":
-                        entity = gameField.addEntity(entityFactory.createCoin(position));
+                    case COIN:
+                        entity = entitySpawner.spawn(EntityType.COIN.toString(), position);
                         break;
 
-                    case "alien":
-                        entity = gameField.addEntity(entityFactory.createEnemy(position));
+                    case ALIEN:
+                        for (int i = 0; i < this.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
+                            entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
+                        }
                         break;
                     default:
                         break;
                 }
             });
+        }
+    }
+
+    // Levels starts from zero
+
+    /**
+     * @param currentLevel
+     *      The number of the current level
+     * @return the numbers of enemies to spawn
+     */
+    private int getEnemiesNumber(final int currentLevel) {
+        if (currentLevel % ENEMIES_INCREMENT_FACTOR == 0) {
+            return ENEMIES_INCREMENT_FACTOR;
+        } else {
+            return currentLevel % ENEMIES_INCREMENT_FACTOR;
         }
     }
 
@@ -115,7 +139,5 @@ public final class LevelImpl implements Level {
 
         return new Pair<>(pos, dim);
     }
-
-
 
 }

@@ -3,7 +3,6 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -14,14 +13,12 @@ import javafx.stage.Stage;
  * Scene for the settings Menu used to set the Resolution
  */
 
-public class SettingsMenu extends Scene {
+public class SettingsMenu extends AbstractBasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 40;
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 300;
-    private final PrincipalController controller;
-    private static Stage primaryStage;
     private final AnchorPane pane;
 
     private VBox menuBox;
@@ -30,14 +27,14 @@ public class SettingsMenu extends Scene {
     private final MenuItem itemFullScreen = new MenuItem("Full Screen");
     private final MenuItem itemBack = new MenuItem("BACK");
 
-    public SettingsMenu(final PrincipalController controller) {
-        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
-        this.controller = controller;
+    public SettingsMenu(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer) {
+        super(primaryStage, controller, audioPlayer);
 
         //it intercepts the button presses
         this.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
                 if (currentItem > 0) {
+                    playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(--currentItem).setActive(true);
                 }
@@ -45,12 +42,14 @@ public class SettingsMenu extends Scene {
 
             if (event.getCode() == KeyCode.DOWN) {
                 if (currentItem < menuBox.getChildren().size() - 1) {
+                    playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(++currentItem).setActive(true);
                 }
             }
 
             if (event.getCode() == KeyCode.ENTER) {
+                playPressSound();
                 getMenuItem(currentItem).activate();
             }
         });
@@ -64,24 +63,20 @@ public class SettingsMenu extends Scene {
 
         buttonActions();
 
-        if (Resolution.isFullScreen()) {
-            itemSmallScreen.setUnderline(false);
-            itemFullScreen.setUnderline(true);
-        } else {
-            itemSmallScreen.setUnderline(true);
-            itemFullScreen.setUnderline(false);
-        }
-
         menuBox.setAlignment(Pos.TOP_CENTER);
 
-        //calculates the position of the box
+        //calculates the position of the box and witch item is underlined
         if(Resolution.isFullScreen()){
             menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
             menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
+            itemSmallScreen.setUnderline(false);
+            itemFullScreen.setUnderline(true);
         }
         else{
             menuBox.setLayoutX(BOX_X_COORDINATE);
             menuBox.setLayoutY(BOX_Y_COORDINATE);
+            itemSmallScreen.setUnderline(true);
+            itemFullScreen.setUnderline(false);
         }
 
         getMenuItem(0).setActive(true);
@@ -101,14 +96,12 @@ public class SettingsMenu extends Scene {
         return (MenuItem) menuBox.getChildren().get(index);
     }
 
-    /**
-     * Method used to set the action for each button.
-     */
-    private void buttonActions() {
+    @Override
+    protected void buttonActions() {
         itemBack.setOnActivate(() -> {
-            this.primaryStage.setScene(MainMenu.getMainMenu(primaryStage, controller));
+            getPrimaryStage().setScene(getViewFactory().createMainMenu());
             checkResolution();
-    });
+        });
         itemSmallScreen.setOnActivate(() -> {
             Resolution.setSmallResolution();
             itemSmallScreen.setUnderline(true);
@@ -119,28 +112,5 @@ public class SettingsMenu extends Scene {
             itemSmallScreen.setUnderline(false);
             itemFullScreen.setUnderline(true);
         });
-    }
-
-    /**
-     * Method used to set or not the stage to FuLLScreen
-     */
-    private void checkResolution(){
-        if(Resolution.isFullScreen()){
-            this.primaryStage.setFullScreen(true);
-        }
-        else{
-            this.primaryStage.setFullScreen(false);
-        }
-    }
-
-    /**
-     * Getter for the Scene.
-     * @param stage
-     * @return SettingsMenu
-     */
-    public static SettingsMenu getSettingsMenu(final Stage stage, final PrincipalController controller) {
-        primaryStage = stage;
-        primaryStage.centerOnScreen();
-        return new SettingsMenu(controller);
     }
 }
