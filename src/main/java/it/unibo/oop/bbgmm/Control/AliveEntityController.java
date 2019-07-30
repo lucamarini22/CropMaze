@@ -34,7 +34,7 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
         if(getEntity().get(Life.class).isPresent()){
             getEntityView().setPosition(ViewUtils.worldPointToFX(getEntity().getBody().getPosition()));
         } else {
-            getEntityView().deathUpdate();
+            getEntityView().deathView();
         }
     }
 
@@ -52,9 +52,9 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
      * @param direction
      *          where the entity is going
      */
-    public void faceDirectionChanged(final Direction direction){
+    /*public void faceDirectionChanged(final Direction direction){
         getEntityView().changeFaceDirection(direction);
-    }
+    }*/
 
     /**
      * it updates the entity state
@@ -67,7 +67,7 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
         }
         else if (life.getCurrentLifePoints() > 0){
             //the entity is damaged but still alive
-            getEntityView().changeState(PossibleEntityState.SUFFERING);
+            //getEntityView().changeState(PossibleEntityState.SUFFERING);
         }
     }
 
