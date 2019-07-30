@@ -10,6 +10,7 @@ import javafx.geometry.Point2D;
 public final class EntityFactoryImpl implements EntityFactory {
 
     private static final int COIN_VALUE = 10;
+    private static final double TIMEOUT = 0.1;
 
 
     // da mettere e gettare in una class difficoltà
@@ -36,5 +37,19 @@ public final class EntityFactoryImpl implements EntityFactory {
     @Override
     public Wall createWall(final Point2D position, final Dimension2D dimension) {
         return new Wall(new BodyBuilder(), position, dimension);
+    }
+    @Override
+    public PowerUp createDoubleSpeed(final Point2D position) {
+        return new PowerUp(new BodyBuilder(), position, new TemporaryDoubleSpeed(TIMEOUT));
+    }
+
+    @Override
+    public PowerUp createDoubleDamage(final Point2D position) {
+        return new PowerUp(new BodyBuilder(), position, new TemporaryDoubleDamage(TIMEOUT));
+    }
+
+    @Override
+    public PowerUp createShield(final Point2D position) {
+        return new PowerUp(new BodyBuilder(), position, new TemporaryShield(TIMEOUT));
     }
 }
