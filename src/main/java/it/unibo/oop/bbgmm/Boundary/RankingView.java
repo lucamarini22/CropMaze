@@ -11,18 +11,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class RankingView extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 40;
-    private static final int DELTA = 80;
-    private static final int BOX_X_COORDINATE = 280;
-    private static final int BOX_Y_COORDINATE = 70;
-    private final AnchorPane pane;
     private static final ImageView crown = new ImageView(new Image("images/crown.png"));
-    private static List<Text> rankList=new LinkedList<>();
     private VBox menuBox;
     private VBox boximage;
     private final MenuItem itemBack = new MenuItem("BACK");
@@ -37,23 +31,25 @@ public class RankingView extends AbstractBasicView {
             }
         });
 
-        pane = new AnchorPane();
+        AnchorPane pane = new AnchorPane();
 
 
         menuBox = new VBox(SPACE_BETWEEN_ITEM);
-        boximage = new VBox(crown);
         if(!controller.getRankingList().isEmpty()) {
-            rankList = controller.getRankingList().stream()
+
+            boximage = new VBox(crown);
+            List<Text> rankList = controller.getRankingList().stream()
                     .map(l -> new Text(l.getFst() + " " + l.getSnd()))
                     .collect(Collectors.toList());
 
-            rankList.forEach(l -> l.setFont(FontMaker.getFont()));
-            rankList.forEach(l -> l.setEffect(new GaussianBlur(2)));
-            rankList.forEach(l -> l.setFill(Color.BLUE));
+            rankList.forEach(this::fontUtil);
             rankList.get(0).setFont(FontMaker.getFontWinner());
             rankList.forEach(t -> menuBox.getChildren().add(t));
 
             pane.getChildren().add(boximage);
+        }else
+        {
+            menuBox.getChildren().add(fontUtil(new Text("NO RANKING")));
         }
 
         buttonActions();
@@ -84,4 +80,17 @@ public class RankingView extends AbstractBasicView {
         });
     }
 
+    /**
+     * Util to set the font for the ranking list
+     * @param text
+     *      The text that has to be modified
+     * @return
+     *      The text modified
+     */
+    private Text fontUtil(final Text text){
+        text.setFont(FontMaker.getFont());
+        text.setEffect(new GaussianBlur(2));
+        text.setFill(Color.BLUE);
+        return text;
+    }
 }
