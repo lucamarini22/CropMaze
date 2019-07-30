@@ -96,6 +96,19 @@ public final class LevelImpl implements Level {
                             entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
                         }
                         break;
+
+                    case DOUBLESPEED:
+                        entity = entitySpawner.spawn(EntityType.DOUBLESPEED.toString(), position);
+                        break;
+
+                    case DOUBLEDAMAGE:
+                        entity = entitySpawner.spawn(EntityType.DOUBLEDAMAGE.toString(), position);
+                        break;
+
+                    case SHIELD:
+                        entity = entitySpawner.spawn(EntityType.SHIELD.toString(), position);
+                        break;
+
                     default:
                         break;
                 }
