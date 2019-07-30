@@ -8,7 +8,7 @@ import it.unibo.oop.bbgmm.Entity.EntityState;
  * @param <S>
  *      The EntityState type
  */
-public interface EntityChangeState<S extends EntityState> {
+public interface EntityChangeState<S extends EntityState> extends EntityView{
     /**
      * Runs the state animation
      * @param state

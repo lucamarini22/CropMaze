@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Control;
 
 import it.unibo.oop.bbgmm.Boundary.AliveEntityView;
+import it.unibo.oop.bbgmm.Boundary.AliveEntityViewImpl;
 import it.unibo.oop.bbgmm.Boundary.PossibleEntityState;
 import it.unibo.oop.bbgmm.Boundary.ViewUtils;
 import it.unibo.oop.bbgmm.Entity.Component.Life;
