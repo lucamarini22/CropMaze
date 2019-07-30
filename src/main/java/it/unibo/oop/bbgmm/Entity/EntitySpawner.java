@@ -5,6 +5,7 @@ import javafx.geometry.Point2D;
 
 /**
  * {@link Entity} spawner.
+ * It spawns entities and calculates the number of enemies to spawn.
  */
 public interface EntitySpawner {
 
@@ -30,4 +31,13 @@ public interface EntitySpawner {
      */
     Entity spawn(Point2D position, Dimension2D dimension);
 
+
+    // Levels start from one
+
+    /**
+     * @param currentLevel
+     *      The number of the current level
+     * @return the numbers of enemies to spawn
+     */
+    int getEnemiesNumber(int currentLevel);
 }

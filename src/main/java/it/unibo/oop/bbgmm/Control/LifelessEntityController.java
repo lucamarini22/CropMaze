@@ -8,7 +8,7 @@ import it.unibo.oop.bbgmm.Entity.Entity;
  * Base class for AbstractLifeEntityController
  */
 public class LifelessEntityController extends AbstractLifelessEntityController<LifelessEntityView> {
-    
+
         /**
          * @param entity
          *            The {@link Entity} object to control.

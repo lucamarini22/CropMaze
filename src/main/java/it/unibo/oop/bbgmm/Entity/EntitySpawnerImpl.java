@@ -9,6 +9,8 @@ import org.apache.commons.lang.NullArgumentException;
  */
 public final class EntitySpawnerImpl implements EntitySpawner {
 
+    private static final int ENEMIES_INCREMENT_FACTOR = 4;
+
     private final EntityFactory entityFactory;
     private final GameField gameField;
 
@@ -43,5 +45,14 @@ public final class EntitySpawnerImpl implements EntitySpawner {
     @Override
     public Entity spawn(final Point2D position, final Dimension2D dimension) {
         return gameField.addEntity(entityFactory.createWall(position, dimension));
+    }
+
+    @Override
+    public int getEnemiesNumber(final int currentLevel) {
+        if (currentLevel % ENEMIES_INCREMENT_FACTOR == 0) {
+            return ENEMIES_INCREMENT_FACTOR;
+        } else {
+            return currentLevel % ENEMIES_INCREMENT_FACTOR;
+        }
     }
 }

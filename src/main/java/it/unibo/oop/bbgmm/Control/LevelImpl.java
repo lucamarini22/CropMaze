@@ -14,13 +14,9 @@ import java.util.Locale;
  */
 public final class LevelImpl implements Level {
 
-    private static final int ENEMIES_INCREMENT_FACTOR = 4;
-
-
     private Entity player;
     private final Map map;
     private final GameField gameField;
-    private final EntityFactory entityFactory;
     private final EntitySpawner entitySpawner;
     private PlayerStatistics playerStatistics;
 
@@ -34,17 +30,14 @@ public final class LevelImpl implements Level {
      *          Map to load
      * @param gameField
      *          GameField gameField
-     * @param entityFactory
-     *          Factory for the entities
      * @param gameStatistics
      *          Statistics of the game
      * @param entitySpawner
      *          {@link EntitySpawner} that spawns entities
      */
-    public LevelImpl(final Map map, final GameField gameField, final EntityFactory entityFactory, final GameStatistics gameStatistics, final EntitySpawner entitySpawner) {
+    public LevelImpl(final Map map, final GameField gameField, final GameStatistics gameStatistics, final EntitySpawner entitySpawner) {
         this.map = map;
         this.gameField = gameField;
-        this.entityFactory = entityFactory;
         this.gameStatistics = gameStatistics;
         this.entitySpawner = entitySpawner;
 
@@ -99,7 +92,7 @@ public final class LevelImpl implements Level {
                         break;
 
                     case ALIEN:
-                        for (int i = 0; i < this.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
+                        for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
                             entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
                         }
                         break;
@@ -107,21 +100,6 @@ public final class LevelImpl implements Level {
                         break;
                 }
             });
-        }
-    }
-
-    // Levels starts from zero
-
-    /**
-     * @param currentLevel
-     *      The number of the current level
-     * @return the numbers of enemies to spawn
-     */
-    private int getEnemiesNumber(final int currentLevel) {
-        if (currentLevel % ENEMIES_INCREMENT_FACTOR == 0) {
-            return ENEMIES_INCREMENT_FACTOR;
-        } else {
-            return currentLevel % ENEMIES_INCREMENT_FACTOR;
         }
     }
 
