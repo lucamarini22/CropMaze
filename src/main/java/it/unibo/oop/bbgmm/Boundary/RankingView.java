@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.FontMaker;
+import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
@@ -11,14 +12,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class RankingView extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 40;
-    private static final ImageView crown = new ImageView(new Image("images/crown.png"));
+    private static final int DELTA = 140;
+    private static final int BOX_X_COORDINATE = 280;
+    private static final int BOX_Y_COORDINATE = 70;
+    //private static final ImageView crown = new ImageView(new Image("images/crown.png"));
     private VBox menuBox;
-    private VBox boximage;
+    //private VBox boxImage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public RankingView(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer){
@@ -36,35 +41,33 @@ public class RankingView extends AbstractBasicView {
 
         menuBox = new VBox(SPACE_BETWEEN_ITEM);
         if(!controller.getRankingList().isEmpty()) {
-
-            boximage = new VBox(crown);
+            //boxImage = new VBox(crown);
             List<Text> rankList = controller.getRankingList().stream()
                     .map(l -> new Text(l.getFst() + " " + l.getSnd()))
                     .collect(Collectors.toList());
-
             rankList.forEach(this::fontUtil);
             rankList.get(0).setFont(FontMaker.getFontWinner());
             rankList.forEach(t -> menuBox.getChildren().add(t));
-
-            pane.getChildren().add(boximage);
+            //boxImage.setAlignment(Pos.TOP_CENTER);
+            //pane.getChildren().add(boxImage);
+            if(Resolution.isFullScreen()){
+                menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+                menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
+            }
+            else{
+                menuBox.setLayoutX(BOX_X_COORDINATE);
+                menuBox.setLayoutY(BOX_Y_COORDINATE);
+            }
         }else
         {
             menuBox.getChildren().add(fontUtil(new Text("NO RANKING")));
         }
-
         buttonActions();
-
-        boximage.setAlignment(Pos.TOP_CENTER);
-        menuBox.setAlignment(Pos.TOP_CENTER);
-
         menuBox.getChildren().addAll(itemBack);
-
         menuBox.setAlignment(Pos.TOP_CENTER);
-
-
-
         itemBack.setActive(true);
         pane.getChildren().add(menuBox);
+
 
         pane.setId("rankingView");
         this.getStylesheets().add("Style.css");
