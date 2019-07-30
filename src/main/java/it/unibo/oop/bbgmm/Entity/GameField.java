@@ -2,8 +2,6 @@ package it.unibo.oop.bbgmm.Entity;
 
 import java.util.Set;
 
-import java.util.Set;
-
 /**
  * Runs the game field.
  */
@@ -40,4 +38,9 @@ public interface GameField {
      *      The {@link Entity} to remove
      */
     void removeEntity(Entity entity);
+
+    /**
+     * @return all the {@link Wall} present in the game field
+     */
+    Set<Entity> getWalls();
 }
