@@ -29,7 +29,7 @@ public class GameControllerImpl implements GameController {
     public GameControllerImpl() {
         gameField = new GameFieldImpl();
         loadMap();
-        this.entityFactory = new EntityFactoryImpl();
+        this.entityFactory = new EntityFactoryImpl(this.gameField.getWalls());
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
         level = new LevelImpl(this.map, this.gameField, new GameStatisticsImpl(), this.entitySpawner);
         run();
