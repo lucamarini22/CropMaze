@@ -4,13 +4,13 @@ import java.net.URL;
 
 public enum Music {
 
-    MENU_TRACK("sounds/menuSong.mp3"),
+    MENU_TRACK("sounds/menuSong.wav"),
 
     GAME_TRACK(""),
 
-    BUTTON_SWITCH("sounds/button_switched.mp3"),
+    BUTTON_SWITCH("sounds/button_switched.wav"),
 
-    BUTTON_PRESS("sounds/button_clicked.mp3");
+    BUTTON_PRESS("sounds/button_clicked.wav");
 
     private final URL path;
 

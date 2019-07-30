@@ -10,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
+
 public class GameOver extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 25;
     private static final int DELTA = 80;
@@ -92,6 +94,7 @@ public class GameOver extends AbstractBasicView {
         itemMainMenu.setOnActivate(() -> {
             getPrimaryStage().setScene(getViewFactory().createMainMenu());
             checkResolution();
+            getAudioPlayer().playMusic(MENU_TRACK.getPath());
         });
 
         itemExit.setOnActivate(() -> {
