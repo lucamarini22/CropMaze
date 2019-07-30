@@ -1,9 +1,6 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Entity.EntityFactoryImpl;
-import it.unibo.oop.bbgmm.Entity.GameField;
-import it.unibo.oop.bbgmm.Entity.GameFieldImpl;
-import it.unibo.oop.bbgmm.Entity.GameStatisticsImpl;
+import it.unibo.oop.bbgmm.Entity.*;
 import javafx.animation.AnimationTimer;
 import org.mapeditor.core.Map;
 import org.mapeditor.io.TMXMapReader;
@@ -14,10 +11,12 @@ public class GameControllerImpl implements GameController {
 
     private static final double FRAME = 1.0 / 60;
 
-    private final GameField model;
-    private final Level loadLevel;
+    private final GameField gameField;
+    private final Level level;
     private Map map;
     private List<EntityController> entities;
+    private final EntitySpawner entitySpawner;
+    private final EntityFactory entityFactory;
     //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
     //loadLevel crea la mappa di gioco i personaggi e gli alieni
     private final AnimationTimer timer = new AnimationTimer() {
@@ -28,9 +27,11 @@ public class GameControllerImpl implements GameController {
     };
 
     public GameControllerImpl() {
-        model = new GameFieldImpl();
+        gameField = new GameFieldImpl();
         loadMap();
-        loadLevel = new LevelImpl(this.map, this.model, new EntityFactoryImpl(), new GameStatisticsImpl());
+        this.entityFactory = new EntityFactoryImpl();
+        this.entitySpawner = new EntitySpawnerImpl(this.entityFactory,gameField);
+        level = new LevelImpl(this.map, this.gameField, this.entityFactory, new GameStatisticsImpl(), this.entitySpawner);
         run();
     }
 
@@ -62,6 +63,6 @@ public class GameControllerImpl implements GameController {
         //updates the view
         entities.forEach(EntityController::update);
         //updates the model
-        model.update(FRAME);
+        gameField.update(FRAME);
     }
 }
