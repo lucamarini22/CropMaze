@@ -18,7 +18,7 @@ public class GameControllerImpl implements GameController {
     private final Level loadLevel;
     private Map map;
     private List<EntityController> entities;
-   //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
+    //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
     //loadLevel crea la mappa di gioco i personaggi e gli alieni
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -34,6 +34,9 @@ public class GameControllerImpl implements GameController {
         run();
     }
 
+    /**
+     * Method called to load the Map
+     */
     private void loadMap() {
         File path = new File("");
         try {
@@ -44,10 +47,17 @@ public class GameControllerImpl implements GameController {
         }
     }
 
+    /**
+     * Method called to start the Timer
+     */
     private void run(){ timer.start(); }
 
+    @Override
     public void stop() { timer.stop(); }
 
+    /**
+     * Method called every loop to aupdate the entities in the model and in the view
+     */
     private void update() {
         //updates the view
         entities.forEach(EntityController::update);
