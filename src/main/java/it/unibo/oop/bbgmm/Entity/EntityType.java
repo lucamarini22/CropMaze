@@ -7,5 +7,5 @@ public enum EntityType {
     /**
      * Types of entities.
      */
-    PLAYER, ALIEN, COIN
+    PLAYER, ALIEN, COIN, DOUBLESPEED, DOUBLEDAMAGE, SHIELD
 }
