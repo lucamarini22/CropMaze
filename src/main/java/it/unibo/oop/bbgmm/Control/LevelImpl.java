@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Control;
 
+import it.unibo.oop.bbgmm.Boundary.GameFieldView;
 import it.unibo.oop.bbgmm.Entity.*;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
@@ -7,18 +8,27 @@ import javafx.util.Pair;
 import org.mapeditor.core.Map;
 import org.mapeditor.core.ObjectGroup;
 import org.mapeditor.core.TileLayer;
+
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * Controls a level.
  */
 public final class LevelImpl implements Level {
+    private static final float TILE_SIZE = 1f;
+
 
     private Entity player;
     private final Map map;
     private final GameField gameField;
     private final EntitySpawner entitySpawner;
     private PlayerStatistics playerStatistics;
+    private final GameFieldView gameFieldView;
+    private final Set<EntityController> entitiesControllers;
+    private final PrincipalController principalController;
 
 
     private final GameStatistics gameStatistics;
@@ -34,12 +44,20 @@ public final class LevelImpl implements Level {
      *          Statistics of the game
      * @param entitySpawner
      *          {@link EntitySpawner} that spawns entities
+     * @param gameFieldView
+     *          View of the {@link GameField}
+     * @param principalController
+     *          Principal Controller
      */
-    public LevelImpl(final Map map, final GameField gameField, final GameStatistics gameStatistics, final EntitySpawner entitySpawner) {
+    public LevelImpl(final Map map, final GameField gameField, final GameStatistics gameStatistics, final EntitySpawner entitySpawner,
+                     final GameFieldView gameFieldView, final PrincipalController principalController) {
         this.map = map;
         this.gameField = gameField;
         this.gameStatistics = gameStatistics;
         this.entitySpawner = entitySpawner;
+        this.gameFieldView = gameFieldView;
+        this.principalController = principalController;
+        this.entitiesControllers = new LinkedHashSet<>();
 
         this.map.forEach(layer -> {
             if (layer instanceof TileLayer) {
@@ -58,6 +76,21 @@ public final class LevelImpl implements Level {
     @Override
     public GameField getGameField() {
         return this.gameField;
+    }
+
+    @Override
+    public GameFieldView getGameFieldView() {
+        return this.gameFieldView;
+    }
+
+    @Override
+    public Set<EntityController> getEntitiesControllers() {
+        return Collections.unmodifiableSet(this.entitiesControllers);
+    }
+
+    @Override
+    public PlayerStatistics getPlayerStatistic() {
+        return this.playerStatistics;
     }
 
     private static Point2D invertY(final Point2D pt) {
@@ -83,30 +116,39 @@ public final class LevelImpl implements Level {
                     //creation of the player
                     case PLAYER:
                         player = entitySpawner.spawn(EntityType.PLAYER.toString(), position);
+                        //final PlayerController controller = new PlayerController(player,
+                               // view.entityFactory().createPlayer());
+                        ///////view.setPlayerInputListener(controller);
+                        //entitiesControllers.add(controller);
                         playerStatistics = new PlayerStatisticsImpl(player);
                         break;
 
                     //creation of all power ups, coins and enemies
                     case COIN:
                         entity = entitySpawner.spawn(EntityType.COIN.toString(), position);
+                        //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
                         break;
 
                     case ALIEN:
                         for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
                             entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
+                            //entitiesControllers.add(new AliveEntityController()entity, gameFieldView.entityFactory().create...);
                         }
                         break;
 
                     case DOUBLESPEED:
                         entity = entitySpawner.spawn(EntityType.DOUBLESPEED.toString(), position);
+                        //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
                         break;
 
                     case DOUBLEDAMAGE:
                         entity = entitySpawner.spawn(EntityType.DOUBLEDAMAGE.toString(), position);
+                        //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
                         break;
 
                     case SHIELD:
                         entity = entitySpawner.spawn(EntityType.SHIELD.toString(), position);
+                        //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
                         break;
 
                     default:
@@ -117,6 +159,7 @@ public final class LevelImpl implements Level {
     }
 
     private void loadTiles(final TileLayer layer) {
+        gameFieldView.showField(layer, Point2D.ZERO, new Dimension2D(TILE_SIZE, TILE_SIZE));
 
     }
 

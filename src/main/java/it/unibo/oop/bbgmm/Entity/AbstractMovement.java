@@ -1,10 +1,11 @@
 package it.unibo.oop.bbgmm.Entity;
 import  it.unibo.oop.bbgmm.Entity.Component.AbstractEntityComponent;
+import javafx.geometry.Point2D;
 
 
 public abstract class AbstractMovement extends AbstractEntityComponent implements Movement {
     private State currentState = State.STABLE;
-    private Direction directionMovement = Direction.NOTHING;
+    private Point2D directionMovement = Point2D.ZERO;
     private double speedMovement;
 
     public AbstractMovement(final double speedMovement) {
@@ -21,19 +22,18 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
         }
     }
 
-    protected final Direction getDesiredDirection(){
+    protected final Point2D getDesiredDirection(){
         return directionMovement;
     }
 
-    protected final void setDesiredDirection(final Direction changeDirection){
+    protected final void setDesiredDirection(Point2D changeDirection){
         directionMovement = changeDirection;
 
     }
 
     @Override
-    public void move(Direction direction,  double speed) {
+    public void move(Point2D direction) {
             this.directionMovement = direction;
-            this.speedMovement = speed;
             //deve cambiare la posizione del body
     }
 

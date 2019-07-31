@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 import it.unibo.oop.bbgmm.Entity.Component.EntityComponent;
+import javafx.geometry.Point2D;
 
 
 /**
@@ -12,7 +13,7 @@ public interface Movement extends EntityComponent {
      * @param direction
      *          the direction where the entity will move
      */
-    void move(Direction direction, double speed);
+    void move(Point2D direction);
 
     /**
      *

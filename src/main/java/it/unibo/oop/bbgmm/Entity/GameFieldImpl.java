@@ -1,5 +1,8 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisor;
+import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
+
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,12 +15,14 @@ public final class GameFieldImpl implements GameField {
 
 
     private final Set<Entity> entities = new LinkedHashSet<>();
+    private final CollisionSupervisor collisionSupervisor = new CollisionSupervisorImpl();
 
     @Override
     public void update(final double up) {
         //incompleted
         this.entities.stream()
                      .forEach(e -> e.update(up));
+        this.collisionSupervisor.searchCollision();
     }
 
     @Override
