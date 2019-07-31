@@ -19,6 +19,10 @@ import java.util.Set;
  */
 public final class LevelImpl implements Level {
     private static final float TILE_SIZE = 1f;
+    private static final int FIRST_LEVEL = 1;
+
+    private static final String SOLID_OBJECTS = "SOLID";
+    private static final String ENTITY_OBJECTS = "OBJECTS";
 
 
     private Entity player;
@@ -49,8 +53,9 @@ public final class LevelImpl implements Level {
      * @param principalController
      *          Principal Controller
      */
-    public LevelImpl(final Map map, final GameField gameField, final GameStatistics gameStatistics, final EntitySpawner entitySpawner,
-                     final GameFieldView gameFieldView, final PrincipalController principalController) {
+    public LevelImpl(final Map map, final GameField gameField, final GameStatistics gameStatistics,
+                     final EntitySpawner entitySpawner, final GameFieldView gameFieldView,
+                     final PrincipalController principalController) {
         this.map = map;
         this.gameField = gameField;
         this.gameStatistics = gameStatistics;
@@ -97,80 +102,83 @@ public final class LevelImpl implements Level {
         return new Point2D(pt.getX(), -pt.getY());
     }
 
-
     private void loadObjects(final ObjectGroup layer) {
         //final ObjectGroup objLayer = layer;
-        if (layer.getName().trim().toLowerCase(Locale.UK).equals("solid")) {
-            layer.forEach(obj -> {
-                final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
-                        obj.getWidth(), obj.getHeight());
-                entitySpawner.spawn(pos.getKey(), pos.getValue());
-            });
+        if (layer.getName().trim().toLowerCase(Locale.UK).equals(SOLID_OBJECTS)) {
+            this.loadSolidObjects(layer);
         }
-        if (layer.getName().trim().toLowerCase(Locale.UK).equals("objects")) {
-            layer.forEach(mapObj -> {
-                final Point2D position = invertY(new Point2D(mapObj.getX() / 70, mapObj.getY() / 70));
-                final String type = mapObj.getType();
-                Entity entity;
-                switch (EntityType.valueOf(type)) {
-                    //creation of the player
-                    case PLAYER:
+        if (layer.getName().trim().toLowerCase(Locale.UK).equals(ENTITY_OBJECTS)) {
+          this.loadEntityObjects(layer);
+        }
+    }
+    private void loadSolidObjects(final ObjectGroup layer) {
+        layer.forEach(obj -> {
+            final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
+                    obj.getWidth(), obj.getHeight());
+            entitySpawner.spawn(pos.getKey(), pos.getValue());
+        });
+    }
+
+    private void loadEntityObjects(final ObjectGroup layer) {
+        layer.forEach(mapObj -> {
+            final Point2D position = invertY(new Point2D(mapObj.getX() / 70, mapObj.getY() / 70));
+            final String type = mapObj.getType();
+            Entity entity;
+            switch (EntityType.valueOf(type)) {
+                //creation of the player
+                case PLAYER:
+                    if (this.gameStatistics.getCurrentLevel() == FIRST_LEVEL) {
                         player = entitySpawner.spawn(EntityType.PLAYER.toString(), position);
                         //final PlayerController controller = new PlayerController(player,
-                               // view.entityFactory().createPlayer());
+                        // view.entityFactory().createPlayer());
                         ///////view.setPlayerInputListener(controller);
                         //entitiesControllers.add(controller);
                         playerStatistics = new PlayerStatisticsImpl(player);
-                        break;
+                    }
+                    //if it is not the first level it doesn't recreate the player
+                    break;
+                //creation of all power ups, coins and enemies
+                case COIN:
+                    entity = entitySpawner.spawn(EntityType.COIN.toString(), position);
+                    entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().createCoinView()));
+                    break;
 
-                    //creation of all power ups, coins and enemies
-                    case COIN:
-                        entity = entitySpawner.spawn(EntityType.COIN.toString(), position);
-                        //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
-                        break;
+                case ALIEN:
+                    for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
+                        entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
+                        //entitiesControllers.add(new AliveEntityController()entity, gameFieldView.entityFactory().create...);
+                    }
+                    break;
 
-                    case ALIEN:
-                        for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
-                            entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
-                            //entitiesControllers.add(new AliveEntityController()entity, gameFieldView.entityFactory().create...);
-                        }
-                        break;
+                case DOUBLESPEED:
+                    entity = entitySpawner.spawn(EntityType.DOUBLESPEED.toString(), position);
+                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
+                    break;
 
-                    case DOUBLESPEED:
-                        entity = entitySpawner.spawn(EntityType.DOUBLESPEED.toString(), position);
-                        //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
-                        break;
+                case DOUBLEDAMAGE:
+                    entity = entitySpawner.spawn(EntityType.DOUBLEDAMAGE.toString(), position);
+                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
+                    break;
 
-                    case DOUBLEDAMAGE:
-                        entity = entitySpawner.spawn(EntityType.DOUBLEDAMAGE.toString(), position);
-                        //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
-                        break;
+                case SHIELD:
+                    entity = entitySpawner.spawn(EntityType.SHIELD.toString(), position);
+                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
+                    break;
 
-                    case SHIELD:
-                        entity = entitySpawner.spawn(EntityType.SHIELD.toString(), position);
-                        //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
-                        break;
-
-                    default:
-                        break;
-                }
-            });
-        }
+                default:
+                    break;
+            }
+        });
     }
 
     private void loadTiles(final TileLayer layer) {
         gameFieldView.showField(layer, Point2D.ZERO, new Dimension2D(TILE_SIZE, TILE_SIZE));
-
     }
-
-    private Pair<Point2D, Dimension2D> mapPositionToWorld(final Map map,
-                                                          final double x, final double y,
+    private Pair<Point2D, Dimension2D> mapPositionToWorld(final Map map, final double x, final double y,
                                                           final double width, final double height) {
-        final Dimension2D dim = new Dimension2D(width / map.getTileWidth(),
-                height / map.getTileHeight());
+        final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
         final Point2D pos = new Point2D(x / map.getTileWidth() + dim.getWidth() / 2,
                 -(y / map.getTileHeight() + dim.getHeight() / 2));
-
         return new Pair<>(pos, dim);
     }
 
