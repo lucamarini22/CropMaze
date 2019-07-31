@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Control;
 
+import it.unibo.oop.bbgmm.Boundary.GameFieldView;
 import it.unibo.oop.bbgmm.Entity.*;
 import javafx.animation.AnimationTimer;
 import org.mapeditor.core.Map;
@@ -12,12 +13,15 @@ public class GameControllerImpl implements GameController {
     private static final double FRAME = 1.0 / 60;
     private static final String MAP_PATH = "images/map/CropMazeMap.tmx";
 
+    private final PrincipalController principalController;
     private final GameField gameField;
     private final Level level;
     private Map map;
     private List<EntityController> entities;
     private final EntitySpawner entitySpawner;
     private final EntityFactory entityFactory;
+    private final GameFieldView gameFieldView;
+    private final GameStatistics gameStatistics;
     //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
     //level crea la mappa di gioco i personaggi e gli alieni
     private final AnimationTimer timer = new AnimationTimer() {
@@ -27,17 +31,19 @@ public class GameControllerImpl implements GameController {
         }
     };
 
-    public GameControllerImpl() {
+    public GameControllerImpl(final GameStatistics gameStatistics, final GameFieldView gameFieldView, final PrincipalController principalController) {
         gameField = new GameFieldImpl();
+        this.principalController = principalController;
+        this.gameStatistics = gameStatistics;
+        this.gameFieldView = gameFieldView;
         try {
             loadMap();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        GameStatistics gameStatistics = new GameStatisticsImpl();
         this.entityFactory = new EntityFactoryImpl(this.gameField.getWalls(), new EntityStatisticsImpl(), gameStatistics);
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
-        level = new LevelImpl(this.map, this.gameField, gameStatistics, this.entitySpawner);
+        level = new LevelImpl(this.map, this.gameField, gameStatistics, this.entitySpawner, this.gameFieldView, this.principalController);
         run();
     }
     /**
