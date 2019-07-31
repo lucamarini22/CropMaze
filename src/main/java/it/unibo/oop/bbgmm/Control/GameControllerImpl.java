@@ -34,9 +34,10 @@ public class GameControllerImpl implements GameController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.entityFactory = new EntityFactoryImpl(this.gameField.getWalls());
+        GameStatistics gameStatistics = new GameStatisticsImpl();
+        this.entityFactory = new EntityFactoryImpl(this.gameField.getWalls(), new EntityStatisticsImpl(), gameStatistics);
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
-        level = new LevelImpl(this.map, this.gameField, new GameStatisticsImpl(), this.entitySpawner);
+        level = new LevelImpl(this.map, this.gameField, gameStatistics, this.entitySpawner);
         run();
     }
     /**
