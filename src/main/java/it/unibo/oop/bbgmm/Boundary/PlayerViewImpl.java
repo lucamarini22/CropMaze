@@ -27,4 +27,6 @@ public class PlayerViewImpl extends EntityChangeStateView<PossibleEntityState> i
     public void setPosition(final Point2D position){
         super.setPosition(position);
     }
+
+
 }
