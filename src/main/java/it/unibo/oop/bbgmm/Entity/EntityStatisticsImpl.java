@@ -1,6 +1,9 @@
 package it.unibo.oop.bbgmm.Entity;
 
-public class EntityStatisticsImpl implements EntityStatistics {
+/**
+ * Implementation of {@link EntityStatistics}.
+ */
+public final class EntityStatisticsImpl implements EntityStatistics {
 
     private static final int COIN_VALUE = 10;
     private static final int PLAYER_HEALTH = 100;
