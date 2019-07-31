@@ -6,6 +6,7 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
 import java.awt.*;
+import java.util.Set;
 
 public class Alien extends AbstractEntity {
 
@@ -23,7 +24,7 @@ public class Alien extends AbstractEntity {
      * @param health
      *              its initial life points
      */
-    public Alien(final BodyBuilder bodyBuilder, final Point2D position, final int health){
+    public Alien(final BodyBuilder bodyBuilder, final Point2D position, final int health, final Set<Entity> walls){
         super(bodyBuilder
                 .setPosition(position)
                 .setDimension(SIZE)
@@ -32,7 +33,7 @@ public class Alien extends AbstractEntity {
                 .build());
 
         add(new LifeComponent(health));
-        add(new Feet(WALK_SPEED));
+        add(new Feet(WALK_SPEED,walls));
         add(new CollisionComponent(this.getBody().getShape(), CollisionLabel.ALIEN));
         add(new DamageComponent(DAMAGE));
         add(new BrainComponent(WALK_SPEED));
