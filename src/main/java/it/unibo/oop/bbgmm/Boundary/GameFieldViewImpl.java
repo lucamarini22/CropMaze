@@ -3,6 +3,7 @@ package it.unibo.oop.bbgmm.Boundary;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.mapeditor.core.Tile;
@@ -12,6 +13,25 @@ import org.mapeditor.core.TileLayer;
  * Implementation of the view of {@link it.unibo.oop.bbgmm.Entity.GameField}.
  */
 public final class GameFieldViewImpl implements GameFieldView {
+    private final Group fieldView = new Group();
+    private final Group rootView = new Group(fieldView);
+    private final AudioPlayer audioplayer;
+
+    /**
+     * Constructor of {@link GameFieldViewImpl}.
+     * @param audioPlayer
+     *      {@link AudioPlayer}
+     */
+    public GameFieldViewImpl(final AudioPlayer audioPlayer) {
+        this.audioplayer = audioPlayer;
+    }
+
+    @Override
+    public EntityViewFactory getEntityViewFactory() {
+        //change
+        return null;
+    }
+
     @Override
     public void showField(final TileLayer layer, final Point2D topLeft, final Dimension2D tileSize) {
         for (int x = 0; x < layer.getMap().getWidth(); x++) {
@@ -26,7 +46,7 @@ public final class GameFieldViewImpl implements GameFieldView {
                     tileView.setTranslateX(x * ViewUtils.metersToPixels(tileSize.getWidth()) + topLeft.getX());
                     tileView.setTranslateY(y * ViewUtils.metersToPixels(tileSize.getHeight()) + topLeft.getY());
 
-                    //worldView.getChildren().add(tileView);
+                    fieldView.getChildren().add(tileView);
                 }
             }
         }

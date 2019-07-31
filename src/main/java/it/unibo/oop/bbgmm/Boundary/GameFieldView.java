@@ -10,6 +10,10 @@ import org.mapeditor.core.TileLayer;
 public interface GameFieldView {
 
     /**
+     * @return a factory for the views of entities
+     */
+    EntityViewFactory getEntityViewFactory();
+    /**
      * Shows the tiled map.
      * @param layer
      *      Layer to show
