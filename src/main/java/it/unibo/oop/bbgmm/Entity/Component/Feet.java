@@ -25,9 +25,10 @@ public class Feet extends AbstractMovement {
      *      walls for checking collisions
      */
     public Feet(final double walkingSpeed, final Set<Entity> walls){
-        super();
+        super(walkingSpeed);
         this.walls = walls;
         this.walkingSpeed = walkingSpeed;
+
     }
 
     /**

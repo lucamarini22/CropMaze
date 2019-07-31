@@ -18,9 +18,9 @@ public class LimitedBulletFeet extends Feet{
     /**
      * @param walkingSpeed entity speed for the movement
      */
-    public LimitedBulletFeet(Weapon weapon, double walkingSpeed) {
+    public LimitedBulletFeet(final Weapon weapon, final double walkingSpeed, final Life lifeComponent) {
         super(walkingSpeed);
-        this.lifeComponent = getOwner().get().get(Life.class).get();
+        this.lifeComponent = lifeComponent;
         this.weapon = weapon;
     }
 
@@ -43,6 +43,7 @@ public class LimitedBulletFeet extends Feet{
         else{
             remove();
         }*/
+        move(getOwner().get().getBody().getDirection(),getSpeed());
     }
 
     private void remove(){

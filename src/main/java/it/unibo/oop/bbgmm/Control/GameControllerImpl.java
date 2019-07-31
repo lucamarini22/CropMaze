@@ -10,6 +10,7 @@ import java.util.List;
 public class GameControllerImpl implements GameController {
 
     private static final double FRAME = 1.0 / 60;
+    private static final String MAP_PATH = "images/map/CropMazeMap.tmx";
 
     private final GameField gameField;
     private final Level level;
@@ -18,7 +19,7 @@ public class GameControllerImpl implements GameController {
     private final EntitySpawner entitySpawner;
     private final EntityFactory entityFactory;
     //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
-    //loadLevel crea la mappa di gioco i personaggi e gli alieni
+    //level crea la mappa di gioco i personaggi e gli alieni
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long now) {
@@ -28,23 +29,25 @@ public class GameControllerImpl implements GameController {
 
     public GameControllerImpl() {
         gameField = new GameFieldImpl();
-        loadMap();
-        this.entityFactory = new EntityFactoryImpl();
+        try {
+            loadMap();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.entityFactory = new EntityFactoryImpl(this.gameField.getWalls());
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
         level = new LevelImpl(this.map, this.gameField, new GameStatisticsImpl(), this.entitySpawner);
         run();
     }
-
     /**
-     * Method called to load the Map
+     * Method called to load the Map.
      */
-    private void loadMap() {
-        File path = new File("");
+    private void loadMap() throws Exception {
+        File path = new File(MAP_PATH);
         try {
-            map = new TMXMapReader().readMap(path.getAbsolutePath());
-        } catch (Exception e) {
-            System.out.println("ERROR: Can't load map\n");
-            e.printStackTrace();
+            this.map = new TMXMapReader().readMap(path.getAbsolutePath());
+        } catch (final Exception e) {
+            throw new Exception("ERROR: Can't load map\n");
         }
     }
 

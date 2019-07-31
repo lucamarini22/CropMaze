@@ -16,7 +16,7 @@ public class Bullet extends AbstractEntity {
                          .setMovable(true)
                          .build());
         add(new LifeComponent(weaponRange));
-        add(new LimitedBulletFeet(weapon, speed));
+        add(new LimitedBulletFeet(weapon, speed, get(Life.class).get()));
         add(new DamageComponent(weaponDamage));
         add(new ClashComponent());
         add(new CollisionComponent(this.getBody().getShape(), CollisionLabel.SHOT));
