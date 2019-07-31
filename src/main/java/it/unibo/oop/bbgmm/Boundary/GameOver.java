@@ -15,9 +15,13 @@ import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 public class GameOver extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 25;
     private static final int DELTA = 80;
-    private static final int BOX_X_COORDINATE = 365;
-    private static final int BOX_Y_COORDINATE = 350;
-    private static final int GAMEOVER_Y_COORDINATE=200;
+    private static final int BOX_X_COORDINATE = 300;
+    private static final int BOX_Y_COORDINATE = 500;
+    private static final int GAMEOVER_X_COORDINATE=200;
+    private static final int GAMEOVER_Y_COORDINATE=50;
+    private final static double SOUND_VOLUME = 1;
+    private final static double MUSIC_VOLUME = 0.4;
+    private final AudioPlayer audioPlayer;
     private final AnchorPane pane;
     private static final ImageView gameOVer = new ImageView(new Image("images/gameOver.png"));
     private int currentItem = 0;
@@ -52,9 +56,12 @@ public class GameOver extends AbstractBasicView {
             }
         });
 
+        this.audioPlayer = new AudioPlayerImpl(SOUND_VOLUME,MUSIC_VOLUME);
+        this.audioPlayer.playMusic(Music.GAMEOVER_TRACK.getPath());
+
         boxImage = new VBox(gameOVer);
         boxImage.setAlignment(Pos.TOP_CENTER);
-        boxImage.setTranslateX(BOX_X_COORDINATE);
+        boxImage.setTranslateX(GAMEOVER_X_COORDINATE);
         boxImage.setTranslateY(GAMEOVER_Y_COORDINATE);
 
         pane = new AnchorPane();
@@ -94,12 +101,18 @@ public class GameOver extends AbstractBasicView {
         itemMainMenu.setOnActivate(() -> {
             getPrimaryStage().setScene(getViewFactory().createMainMenu());
             checkResolution();
+<<<<<<< HEAD
+            this.audioPlayer.stopMusic();
+=======
             getAudioPlayer().playMusic(MENU_TRACK.getPath());
+>>>>>>> b45aaccc07f029177c838c1c2c575df0ebc615e7
         });
 
         itemExit.setOnActivate(() -> {
             getController().stopGame();
             System.exit(0);
+
         });
+
     }
 }
