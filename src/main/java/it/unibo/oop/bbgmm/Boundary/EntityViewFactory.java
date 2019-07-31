@@ -5,11 +5,20 @@ package it.unibo.oop.bbgmm.Boundary;
  */
 public interface EntityViewFactory {
 
+    /**
+     * @return a {@link it.unibo.oop.bbgmm.Entity.Player} view
+     */
     PlayerView createPlayerView();
 
-    //AlienView createAlienView();
+    /**
+     * @return a {@link it.unibo.oop.bbgmm.Entity.Alien} view
+     */
+    AliveEntityView createAlienView();
 
-    //CoinView createCoinView();
+    /**
+     * @return a {@link it.unibo.oop.bbgmm.Entity.Coin} view
+     */
+    LifelessEntityView createCoinView();
 
     //upgrades and power ups
 }
