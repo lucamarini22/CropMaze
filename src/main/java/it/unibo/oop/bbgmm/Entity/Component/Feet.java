@@ -79,14 +79,19 @@ public class Feet extends AbstractMovement {
     }
 
     @Override
-    public void move( Direction direction, double speed) {
+    public void move( Point2D distanceVector) {
         //utilizzando questo distancevector dovrai modificare la posizione dell'entità
         //ovviamente dovrai modificare il metodo e fare in modo che chieda in input un point2d
-        //if(wallChecker(distanceVector)){
-        //    Point2D newDistanceVector = this.calculatePosition(distanceVector);
-        //}
-        setDesiredDirection(direction);
-        super.move(direction, speed);
+        if(wallChecker(distanceVector)){
+            Point2D newDistanceVector = this.calculatePosition(distanceVector);
+            setDesiredDirection(newDistanceVector);
+            super.move(newDistanceVector);
+
+        }
+        else {
+            setDesiredDirection(distanceVector);
+            super.move(distanceVector);
+        }
     }
 
     private void updateState(Direction direction){
