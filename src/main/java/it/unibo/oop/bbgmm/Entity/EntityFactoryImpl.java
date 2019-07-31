@@ -17,6 +17,15 @@ public final class EntityFactoryImpl implements EntityFactory {
     private final EntityStatistics entityStatistics;
     private final GameStatistics gameStatistics;
 
+    /**
+     * Constructor of {@link EntityFactoryImpl}.
+     * @param walls
+     *      Set of all {@link Wall}s in the {@link GameField}
+     * @param entityStatistics
+     *      Statistics of the various entities
+     * @param gameStatistics
+     *      Statistics of the game
+     */
     public EntityFactoryImpl(final Set<Entity> walls, final EntityStatistics entityStatistics, final GameStatistics gameStatistics) {
         this.walls = walls;
         this.entityStatistics = entityStatistics;
