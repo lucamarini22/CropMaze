@@ -20,7 +20,6 @@ public class GameOver extends AbstractBasicView {
     private final static double SOUND_VOLUME = 1;
     private final static double MUSIC_VOLUME = 0.4;
     private final AudioPlayer audioPlayer;
-    private final ViewFactory viewFactory;
     private final AnchorPane pane;
     private static final ImageView gameOVer = new ImageView(new Image("images/gameOver.png"));
     private int currentItem = 0;
@@ -57,7 +56,6 @@ public class GameOver extends AbstractBasicView {
 
         this.audioPlayer = new AudioPlayerImpl(SOUND_VOLUME,MUSIC_VOLUME);
         this.audioPlayer.playMusic(Music.GAMEOVER_TRACK.getPath());
-        this.viewFactory = new ViewFactory(primaryStage, controller, audioPlayer);
 
         boxImage = new VBox(gameOVer);
         boxImage.setAlignment(Pos.TOP_CENTER);
