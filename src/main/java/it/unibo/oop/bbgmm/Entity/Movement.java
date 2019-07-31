@@ -22,17 +22,17 @@ public interface Movement extends EntityComponent {
     State getState();
 
     /**
+     * Update the component and applies the movement
+     * @param dt
+     *      time delta in seconds since the last update call
      *
-     * @return
      */
-    double getSpeed();
-
-
-    void setSpeed(double speed);
+    @Override
+    void update(double dt);
 
 
 
     enum State implements EntityState{
-        STABLE, WALKING, DYING;
+        STABLE, WALKING, DYING
     }
 }

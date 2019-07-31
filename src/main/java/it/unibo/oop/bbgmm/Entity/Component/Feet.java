@@ -25,7 +25,7 @@ public class Feet extends AbstractMovement {
      *      walls for checking collisions
      */
     public Feet(final double walkingSpeed, final Set<Entity> walls){
-        super(walkingSpeed);
+        super();
         this.walls = walls;
         this.walkingSpeed = walkingSpeed;
 
@@ -38,11 +38,6 @@ public class Feet extends AbstractMovement {
     @Override
     public void attach(Entity owner) {
         super.attach(owner);
-    }
-
-    @Override
-    public void update(double delta) {
-
     }
 
     /**
@@ -84,7 +79,7 @@ public class Feet extends AbstractMovement {
         //ovviamente dovrai modificare il metodo e fare in modo che chieda in input un point2d
         if(wallChecker(distanceVector)){
             Point2D newDistanceVector = this.calculatePosition(distanceVector);
-            setDesiredDirection(newDistanceVector);
+            setDirectionMovement(newDistanceVector);
             super.move(newDistanceVector);
 
         }
@@ -103,4 +98,9 @@ public class Feet extends AbstractMovement {
         }
     }
 
+    @Override
+    protected Point2D movementToCompute(double dt) {
+        Point2D movement = getDirectionMovement().subtract(getOwner().get().getBody().)
+        return null;
+    }
 }
