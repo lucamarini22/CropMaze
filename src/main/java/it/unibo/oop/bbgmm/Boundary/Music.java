@@ -8,6 +8,8 @@ public enum Music {
 
     GAME_TRACK(""),
 
+    GAMEOVER_TRACK("sounds/gameOver.wav"),
+
     BUTTON_SWITCH("sounds/button_switched.mp3"),
 
     BUTTON_PRESS("sounds/button_clicked.mp3");
