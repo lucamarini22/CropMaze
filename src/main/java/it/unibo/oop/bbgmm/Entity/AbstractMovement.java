@@ -7,6 +7,9 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
     private Direction directionMovement = Direction.NOTHING;
     private double speedMovement;
 
+    public AbstractMovement(final double speedMovement) {
+        this.speedMovement = speedMovement;
+    }
 
     /**
      * Set the new state of the entity
@@ -31,7 +34,7 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
     public void move(Direction direction,  double speed) {
             this.directionMovement = direction;
             this.speedMovement = speed;
-
+            //deve cambiare la posizione del body
     }
 
     @Override

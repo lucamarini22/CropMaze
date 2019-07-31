@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
@@ -37,5 +38,25 @@ public interface EntityFactory {
      */
     Wall  createWall(Point2D position, Dimension2D dimension);
 
-    //power ups
+    /**
+     * @param position
+     *      Position where the double speed power up spawn
+     * @return the {@link TemporaryDoubleSpeed} power up
+     */
+    PowerUp createDoubleSpeed(Point2D position);
+
+    /**
+     * @param position
+     *      Position where the double damage power up spawn
+     * @return the {@link TemporaryDoubleDamage} power up
+     */
+    PowerUp createDoubleDamage(Point2D position);
+
+    /**
+     * @param position
+     *      Position where the shield power up spawn
+     * @return the {@link TemporaryShield} power up
+     */
+    PowerUp createShield(Point2D position);
+
 }

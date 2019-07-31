@@ -7,7 +7,7 @@ import java.awt.*;
  * Class used to set and get the resolution of the GameWindow
  */
 
-public class Resolution {
+public final class Resolution {
     public static final int SMALL_HEIGHT = 768;
     public static final int SMALL_WIDTH = 1024;
     private static final Toolkit TK = Toolkit.getDefaultToolkit();
@@ -15,6 +15,7 @@ public class Resolution {
     private static int width = SMALL_WIDTH;
     private static int height = SMALL_HEIGHT;
     private static boolean fullScreen;
+
 
     public Resolution() {
         fullScreen=false;

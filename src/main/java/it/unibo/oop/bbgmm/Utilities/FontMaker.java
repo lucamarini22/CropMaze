@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * Class used to create the rigth font to use based on the dimension of the GameWindow
  */
-public class FontMaker {
+public final class FontMaker {
 
     private static final Toolkit TK = Toolkit.getDefaultToolkit();
     private static final Dimension D = TK.getScreenSize();
@@ -22,6 +22,8 @@ public class FontMaker {
     public static void modifyFont(boolean fullscreen){
         if(fullscreen){
             if(!fullFont.isPresent()){
+
+                int two = SMALL_FONT*D.width/1024;
                 fullFont = Optional.of((SMALL_FONT*FULL)/SMALL);
             }
             font = Font.font("MS Gothic", FontWeight.BOLD, fullFont.get());

@@ -7,7 +7,6 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 
@@ -17,12 +16,10 @@ import javafx.scene.text.Text;
  */
 
 public class MenuItem extends HBox {
-    private Font usedFont;
-    //private static final String BUTTON_CLICKED_PATH = "src/main/resources/sounds/button_clicked.mp3";
 
+    private Font usedFont;
     private final Text text;
     private Runnable script;
-    //private final MediaPlayer button_clicked;
 
     public MenuItem(final String name) {
         super();
@@ -34,8 +31,6 @@ public class MenuItem extends HBox {
         text.setEffect(new GaussianBlur(2));
         getChildren().add(text);
         setActive(false);
-
-        //button_clicked = new MediaPlayer(new Media(new File(BUTTON_CLICKED_PATH).toURI().toString()));
     }
 
     /**
@@ -60,7 +55,6 @@ public class MenuItem extends HBox {
      */
     public void activate() {
         if (script != null) {
-            //this.button_clicked.play(); //reproduces the buttonCklicked sound
             script.run();
         }
     }

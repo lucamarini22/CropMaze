@@ -14,7 +14,6 @@ public class EntityViewImpl implements EntityView {
     public EntityViewImpl(final Group group, final Dimension2D dimension){
         this.myGroup = group;
         this.dimension = dimension;
-
         this.myGroup.getChildren().add(image);
     }
 

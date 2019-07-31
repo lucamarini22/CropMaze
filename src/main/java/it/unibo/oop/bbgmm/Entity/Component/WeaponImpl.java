@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Entity.Component;
 
 import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Direction;
+import it.unibo.oop.bbgmm.Entity.Movement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,11 +45,6 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
         return this.weaponRange;
     }
 
-    /**
-     * Sychronizes the component
-     *
-     * @param delta The time passed since the last call in seconds
-     */
     @Override
     public void update(double delta) {
         cooldown.update(delta);
@@ -60,14 +56,23 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     }
 
     @Override
+    public int getWeaponSpeed() { return this.weaponSpeed; }
+
+    @Override
+    public void setWeaponSpeed(int speed) { this.weaponSpeed = speed; }
+
+    @Override
     public void shoot(final Direction ownerDirection) {
         if(this.cooldown.isElapsed()) {
-            this.bulletShoted.add(new Bullet(new BodyBuilder(),
-                                             ownerDirection,
-                                             this.weaponRange,
-                                             this.weaponDamage,
-                                             getOwner().get().getBody().getPosition(),
-                                             weaponSpeed));
+            Bullet bullet = new Bullet(new BodyBuilder(),
+                                        this,
+                                        ownerDirection,
+                                        this.weaponRange,
+                                        this.weaponDamage,
+                                        getOwner().get().getBody().getPosition(),
+                                        this.weaponSpeed);
+            this.bulletShoted.add(bullet);
+            bullet.get(Movement.class).get().update(0);
         }
     }
 
@@ -76,5 +81,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
         return this.bulletShoted;
     }
 
-
+    public void removeBullet(final Bullet bullet){
+        this.bulletShoted.remove(bullet);
+    }
 }

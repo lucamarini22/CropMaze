@@ -1,33 +1,25 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PrincipalController;
-import it.unibo.oop.bbgmm.Control.PrincipalControllerImpl;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
 
 /**
  * @author Manuel
  * Scene for the MainMenu.
  */
 
-public class MainMenu extends Scene {
+public class MainMenu extends AbstractBasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 25;
     private static final int DELTA = 80;
-    private static final int BOX_X_COORDINATE = 365;
+    private static final int BOX_X_COORDINATE = 370;
     private static final int BOX_Y_COORDINATE = 350;
-    private final PrincipalController controller;
-    private static Stage primaryStage;
     private final AnchorPane pane;
     private VBox menuBox;
     private int currentItem = 0;
@@ -36,14 +28,14 @@ public class MainMenu extends Scene {
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    public MainMenu(final PrincipalController controller) {
-        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
-        this.controller = controller;
+    public MainMenu(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer) {
+        super(primaryStage,controller, audioPlayer);
 
         //it intercepts the button presses
         this.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
                 if (currentItem > 0) {
+                    playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(--currentItem).setActive(true);
                 }
@@ -51,12 +43,14 @@ public class MainMenu extends Scene {
 
             if (event.getCode() == KeyCode.DOWN) {
                 if (currentItem < menuBox.getChildren().size() - 1) {
+                    playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(++currentItem).setActive(true);
                 }
             }
 
             if (event.getCode() == KeyCode.ENTER) {
+                playPressSound();
                 getMenuItem(currentItem).activate();
             }
         });
@@ -103,43 +97,25 @@ public class MainMenu extends Scene {
     /**
      * Method used to set the action for each button.
      */
-    private void buttonActions() {
+    @Override
+     protected void buttonActions() {
         //Da togliere i commenti per usare gli altri pulsanti
-        //itemNewGame.setOnActivate(() -> {
-        //    this.primaryStage.setScene(GameFieldView.getGameFieldView(this.primaryStage, this.controller));
-        //    checkResolution();
-        //});
+        itemNewGame.setOnActivate(() -> {
+            getPrimaryStage().setScene(getViewFactory().createGameOver());
+            checkResolution();
+            getAudioPlayer().stopMusic();
+        });
         itemScore.setOnActivate(() -> {
-            this.primaryStage.setScene(RankingView.getRankingView(this.primaryStage, this.controller));
+            getPrimaryStage().setScene(getViewFactory().createRankingView());
             checkResolution();
         });
         itemSettings.setOnActivate(() -> {
-            this.primaryStage.setScene(SettingsMenu.getSettingsMenu(this.primaryStage, this.controller));
+            getPrimaryStage().setScene(getViewFactory().createSettingsMenu());
             checkResolution();
         });
-        itemExit.setOnActivate(() -> System.exit(0));
-    }
-
-    /**
-     * Method used to set or not the stage to FuLLScreen
-     */
-    private void checkResolution(){
-        if(Resolution.isFullScreen()){
-            this.primaryStage.setFullScreen(true);
-        }
-        else{
-            this.primaryStage.setFullScreen(false);
-        }
-    }
-
-    /**
-     * Getter for the Scene.
-     * @param stage
-     * @return MainMenu
-     */
-    public static MainMenu getMainMenu(final Stage stage, final PrincipalController controller) {
-        primaryStage = stage;
-        primaryStage.centerOnScreen();
-        return new MainMenu(controller);
+        itemExit.setOnActivate(() -> {
+            getController().stopGame();
+            System.exit(0);
+        });
     }
 }
