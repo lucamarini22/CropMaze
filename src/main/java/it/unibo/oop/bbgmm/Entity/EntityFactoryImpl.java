@@ -10,35 +10,32 @@ import java.util.Set;
  * Factory implementation of the AbstractFactory EntityFactory.
  */
 public final class EntityFactoryImpl implements EntityFactory {
+    private static final double TIMEOUT = 0.1;
 
     private final Set<Entity> walls;
 
-    private static final int COIN_VALUE = 10;
-    private static final double TIMEOUT = 0.1;
+    private final EntityStatistics entityStatistics;
+    private final GameStatistics gameStatistics;
 
-
-    // da mettere e gettare in una class difficoltà
-    private static final int PLAYER_HEALTH = 100;
-    private static final int ENEMY_HEALTH = 20;
-    //
-
-    public EntityFactoryImpl(final Set<Entity> walls) {
+    public EntityFactoryImpl(final Set<Entity> walls, final EntityStatistics entityStatistics, final GameStatistics gameStatistics) {
         this.walls = walls;
+        this.entityStatistics = entityStatistics;
+        this.gameStatistics = gameStatistics;
     }
 
     @Override
     public Player createPlayer(final Point2D position) {
-        return new Player(new BodyBuilder(), position, PLAYER_HEALTH, this.walls);
+        return new Player(new BodyBuilder(), position, entityStatistics.getPlayerHealth(), this.walls);
     }
 
     @Override
     public Alien createEnemy(final Point2D position) {
-        return new Alien(new BodyBuilder(), position, ENEMY_HEALTH, this.walls);
+        return new Alien(new BodyBuilder(), position, entityStatistics.getEnemyHealth(this.gameStatistics.getCurrentLevel()), this.walls);
     }
 
     @Override
     public Coin createCoin(final Point2D position) {
-        return new Coin(new BodyBuilder(), position, COIN_VALUE);
+        return new Coin(new BodyBuilder(), position, entityStatistics.getCoinValue());
     }
 
     @Override
