@@ -8,6 +8,5 @@ public class BulletController extends AliveEntityController{
     public BulletController(final Entity bullet, final BulletView bulletView) {
         super(bullet,bulletView);
     }
-
 }
 

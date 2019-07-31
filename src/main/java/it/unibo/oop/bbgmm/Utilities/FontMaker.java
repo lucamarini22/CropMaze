@@ -22,6 +22,8 @@ public final class FontMaker {
     public static void modifyFont(boolean fullscreen){
         if(fullscreen){
             if(!fullFont.isPresent()){
+
+                int two = SMALL_FONT*D.width/1024;
                 fullFont = Optional.of((SMALL_FONT*FULL)/SMALL);
             }
             font = Font.font("MS Gothic", FontWeight.BOLD, fullFont.get());

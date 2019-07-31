@@ -7,12 +7,13 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
 import java.awt.*;
+import java.util.Set;
 
 public class Player extends AbstractEntity {
     private static final Dimension2D SIZE = new Dimension2D(1.1,1.2);
     private static final double WALKING_SPEED = 1;
     private static final Inventory weapon = Inventory.GUN;
-    public Player(final BodyBuilder bodyBuilder, final Point2D position, final int health){
+    public Player(final BodyBuilder bodyBuilder, final Point2D position, final int health, final Set<Entity> walls){
         super(bodyBuilder
                 .setPosition(position)
                 .setDimension(SIZE)
@@ -20,7 +21,7 @@ public class Player extends AbstractEntity {
                 .setMovable(true)
                 .build());
         add(new LifeComponent(health));
-        add(new Feet(WALKING_SPEED));
+        add(new Feet(WALKING_SPEED,walls));
         add(new WeaponImpl(weapon));
         add(new CollisionComponent(this.getBody().getShape(), CollisionLabel.PLAYER));
     }

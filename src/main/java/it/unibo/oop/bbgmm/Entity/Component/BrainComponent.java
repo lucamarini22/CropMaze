@@ -9,6 +9,7 @@ public class BrainComponent extends AbstractMovement implements Brain {
     private double movementSpeed;
 
     public BrainComponent(double speed){
+        super(speed);
         this.movementSpeed = speed;
     }
     @Override

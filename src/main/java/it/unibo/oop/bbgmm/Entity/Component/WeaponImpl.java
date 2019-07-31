@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Entity.Component;
 
 import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Direction;
+import it.unibo.oop.bbgmm.Entity.Movement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +72,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
                                         getOwner().get().getBody().getPosition(),
                                         this.weaponSpeed);
             this.bulletShoted.add(bullet);
-            bullet.get(LimitedBulletFeet.class).get().update(0);
+            bullet.get(Movement.class).get().update(0);
         }
     }
 
