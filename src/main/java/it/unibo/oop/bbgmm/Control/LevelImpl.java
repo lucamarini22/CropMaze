@@ -60,7 +60,7 @@ public final class LevelImpl implements Level {
         this.principalController = principalController;
         this.entitiesControllers = new LinkedHashSet<>();
 
-        this.map.forEach(layer -> {
+        this.map.getLayers().forEach(layer -> {
             if (layer instanceof TileLayer) {
                 loadTiles((TileLayer) layer);
             } else if (layer instanceof ObjectGroup) {

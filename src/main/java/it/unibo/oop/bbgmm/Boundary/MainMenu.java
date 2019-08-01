@@ -100,7 +100,7 @@ public class MainMenu extends AbstractBasicView {
      * Method used to set the action for each button.
      */
     @Override
-     protected void buttonActions() {
+    protected void buttonActions() {
         //Da togliere i commenti per usare gli altri pulsanti
         itemNewGame.setOnActivate(() -> {
             getController().startGame();
