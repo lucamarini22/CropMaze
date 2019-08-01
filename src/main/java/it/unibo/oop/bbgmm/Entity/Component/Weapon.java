@@ -33,12 +33,7 @@ public interface Weapon extends EntityComponent {
      * @return Current weapon range.
      */
     int getWeaponRange();
-
-    /**
-     *
-     * @return A set of the walls in the map
-     */
-    Set<Entity> getWalls();
+    
     /**
      *
      * @param range
