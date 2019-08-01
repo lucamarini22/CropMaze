@@ -54,18 +54,17 @@ public class LimitedBulletFeet extends Feet{
     }
 
     private Point2D calculateVector(){
-        double speed = getSpeed();
         Point2D vector = Point2D.ZERO;
 
         switch(getOwner().get().getBody().getDirection()){
 
-            case NORTH: vector = new Point2D(PlayerMoves.UP.x*speed, PlayerMoves.UP.y*speed);
-                break;
-            case SOUTH: vector = new Point2D(PlayerMoves.DOWN.x*speed, PlayerMoves.DOWN.y*speed);
+            case NORTH: vector = new Point2D(PlayerMoves.UP.x, PlayerMoves.UP.y);
             break;
-            case EAST: vector = new Point2D(PlayerMoves.RIGHT.x*speed, PlayerMoves.RIGHT.y*speed);
+            case SOUTH: vector = new Point2D(PlayerMoves.DOWN.x, PlayerMoves.DOWN.y);
             break;
-            case WEST: vector =  new Point2D(PlayerMoves.LEFT.x*speed, PlayerMoves.LEFT.y*speed);
+            case EAST: vector = new Point2D(PlayerMoves.RIGHT.x, PlayerMoves.RIGHT.y);
+            break;
+            case WEST: vector =  new Point2D(PlayerMoves.LEFT.x, PlayerMoves.LEFT.y);
             break;
         }
 
