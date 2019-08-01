@@ -2,10 +2,12 @@ package it.unibo.oop.bbgmm.Entity.Component;
 
 import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Direction;
+import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.Movement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
@@ -15,6 +17,8 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     private int weaponRange;
     private List<Bullet> bulletShoted;
     private final Timer cooldown = Timer.seconds(COOLDOWN_TIME);
+    private final Set<Entity> walls;
+
 
 
     /**
@@ -22,12 +26,13 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
      * @param basicWeapon
      *                  The entity weapon.
      */
-    public WeaponImpl (final Inventory basicWeapon) {
+    public WeaponImpl (final Inventory basicWeapon, final Set<Entity>walls) {
         this.weaponDamage = basicWeapon.damage;
         this.weaponRange = basicWeapon.range;
         this.weaponSpeed = basicWeapon.speed;
         this.bulletShoted = new ArrayList<Bullet>();
         cooldown.update(COOLDOWN_TIME);
+        this.walls = walls;
     }
 
     @Override
@@ -62,13 +67,13 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     public void setWeaponSpeed(int speed) { this.weaponSpeed = speed; }
 
     @Override
-    public void shoot(final Direction ownerDirection) {
-        if(this.cooldown.isElapsed()) {
+    public void shoot(final Direction shootingDirection) {
+        if(this.cooldown.isElapsed() && shootingDirection != Direction.NOTHING) {
             Bullet bullet = new Bullet(new BodyBuilder(),
                                         this,
-                                        ownerDirection,
+                                        shootingDirection,
                                         getOwner().get().getBody().getPosition(),
-            getOwner().get().getBody().);
+                                        walls);
             this.bulletShoted.add(bullet);
             bullet.get(Movement.class).get().update(0);
         }
