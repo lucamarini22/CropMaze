@@ -42,7 +42,7 @@ public abstract class AbstractMovement extends ClashComponent implements Movemen
      *
      * @return the desired movement vector
      */
-    protected final Point2D getDirectionMovement(){
+    protected final Point2D getPosition(){
         return desiredPosition;
     }
 
@@ -55,5 +55,20 @@ public abstract class AbstractMovement extends ClashComponent implements Movemen
     protected final void setPosition(final Point2D newMovement){
 
         this.desiredPosition = newMovement;
+    }
+
+    /**
+     * Get the actual direction
+     * @return the direction
+     */
+    protected final Direction getDirection(){ return direction; }
+
+    /**
+     * set the direction
+     * @param newDirection
+     * @return
+     */
+    protected final void setDirection(Direction newDirection) {
+        this.direction = newDirection;
     }
 }
