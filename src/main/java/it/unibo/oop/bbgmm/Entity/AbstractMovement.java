@@ -7,7 +7,8 @@ import javafx.geometry.Point2D;
 
 public abstract class AbstractMovement extends ClashComponent implements Movement {
     private State currentState = State.STABLE;
-    private Point2D directionMovement = Point2D.ZERO;
+    private Point2D desiredPosition = Point2D.ZERO;
+    private Direction direction = Direction.NOTHING;
 
     @Override
     public State getState() {
@@ -42,15 +43,17 @@ public abstract class AbstractMovement extends ClashComponent implements Movemen
      * @return the desired movement vector
      */
     protected final Point2D getDirectionMovement(){
-        return directionMovement;
+        return desiredPosition;
     }
 
     /**
-     * Set the desired movement vector
+     * Set the new movement vector
      * @param newMovement
-     *          the movement
+     *              new movement to do
+     *
      */
-    protected final void setDirectionMovement(final Point2D newMovement){
-        this.directionMovement = newMovement;
+    protected final void setPosition(final Point2D newMovement){
+
+        this.desiredPosition = newMovement;
     }
 }
