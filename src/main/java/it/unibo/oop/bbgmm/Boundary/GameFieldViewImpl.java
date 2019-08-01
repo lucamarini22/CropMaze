@@ -38,13 +38,11 @@ public final class GameFieldViewImpl implements GameFieldView {
                 final Tile tile = layer.getTileAt(x, y);
                 if (tile != null && tile.getImage() != null) {
                     final Image tileImage = SwingFXUtils.toFXImage(tile.getImage(), null);
-
                     final ImageView tileView = new ImageView(tileImage);
                     tileView.setFitWidth(ViewUtils.metersToPixels(tileSize.getWidth()));
                     tileView.setFitHeight(ViewUtils.metersToPixels(tileSize.getHeight()));
                     tileView.setTranslateX(x * ViewUtils.metersToPixels(tileSize.getWidth()) + topLeft.getX());
                     tileView.setTranslateY(y * ViewUtils.metersToPixels(tileSize.getHeight()) + topLeft.getY());
-
                     fieldView.getChildren().add(tileView);
                 }
             }

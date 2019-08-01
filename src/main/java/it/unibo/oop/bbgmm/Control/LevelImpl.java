@@ -20,10 +20,8 @@ import java.util.Set;
 public final class LevelImpl implements Level {
     private static final float TILE_SIZE = 1f;
     private static final int FIRST_LEVEL = 1;
-
     private static final String SOLID_OBJECTS = "SOLID";
     private static final String ENTITY_OBJECTS = "OBJECTS";
-
 
     private Entity player;
     private final Map map;
@@ -33,8 +31,6 @@ public final class LevelImpl implements Level {
     private final GameFieldView gameFieldView;
     private final Set<EntityController> entitiesControllers;
     private final PrincipalController principalController;
-
-
     private final GameStatistics gameStatistics;
 
     /**
