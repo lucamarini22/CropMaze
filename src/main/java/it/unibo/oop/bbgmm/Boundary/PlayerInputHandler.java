@@ -66,17 +66,23 @@ public class PlayerInputHandler {
         if(this.input.contains(KeyCode.A)){
             shift = shift.add(PlayerMoves.LEFT.x,PlayerMoves.LEFT.y);
         }
-        if(this.input.contains(KeyCode.UP)){
 
+        return shift;
+    }
+
+    public Point2D computeShooting(){
+        Point2D shift = Point2D.ZERO;
+        if(this.input.contains(KeyCode.UP)){
+            shift = shift.add(PlayerMoves.UP.x,PlayerMoves.UP.y);
         }
         if(this.input.contains(KeyCode.DOWN)){
-
+            shift = shift.add(PlayerMoves.DOWN.x,PlayerMoves.DOWN.y);
         }
         if(this.input.contains(KeyCode.LEFT)){
-
+            shift = shift.add(PlayerMoves.LEFT.x,PlayerMoves.LEFT.y);
         }
         if(this.input.contains(KeyCode.RIGHT)){
-
+            shift = shift.add(PlayerMoves.RIGHT.x,PlayerMoves.RIGHT.y);
         }
         return shift;
     }
