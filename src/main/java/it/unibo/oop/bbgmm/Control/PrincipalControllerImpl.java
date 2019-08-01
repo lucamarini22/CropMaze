@@ -44,6 +44,11 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
+    public void InsertNewScore(final String name, final Integer result) {
+        score.addScore(new Pair<>(name, result));
+    }
+
+    @Override
     public GameController startGame() {
         gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
                 new GameFieldViewImpl(new AudioPlayerImpl(SOUND_VOLUME, MUSIC_VOLUME)), this));

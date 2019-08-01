@@ -46,4 +46,11 @@ public class ViewFactory {
     public GameOver createGameOver(){
         return new GameOver(stage,controller,audioPlayer);
     }
+
+    /**
+     *  Creates a new scene showing the InsertScoreVIew
+     * @return InsertScoreView
+     */
+    public InsertScoreView createInsertScoreView(){ return new InsertScoreView(stage,controller,audioPlayer);
+    }
 }
