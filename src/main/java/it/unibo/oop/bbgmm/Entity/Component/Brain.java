@@ -6,7 +6,7 @@ import javafx.geometry.Point2D;
 public interface Brain extends EntityComponent {
 
     /**
-     * Method used by aliens to find the player 
+     * Method used by aliens to find the player
      * @param player
      * @param alien
      * @return true if the alien in near to the player
