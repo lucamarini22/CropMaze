@@ -6,14 +6,7 @@ import javafx.geometry.Point2D;
 public interface Brain extends EntityComponent {
 
     /**
-     * Move alien to player position
-      * @param player
-     * @param alien
-     */
-    public void moveToPlayer(Entity player, Entity alien);
-
-    /**
-     *
+     * Method used by aliens to find the player 
      * @param player
      * @param alien
      * @return true if the alien in near to the player

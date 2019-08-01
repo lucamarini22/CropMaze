@@ -31,4 +31,10 @@ public interface EntityBody extends EntityComponent{
      */
     Rectangle2D getShape();
 
+    /**
+     *
+     * @return if the entity can move
+     */
+    boolean canMove();
+
 }

@@ -6,40 +6,20 @@ import it.unibo.oop.bbgmm.Entity.Entity;
 import javafx.geometry.Point2D;
 
 import java.awt.*;
+import java.util.Set;
 
-public class BrainComponent extends AbstractMovement implements Brain {
+public class BrainComponent extends Feet implements Brain {
 
     private double movementSpeed;
 
-    public BrainComponent(double speed){
-        super(speed);
-        this.movementSpeed = speed;
+    /**
+     * @param walkingSpeed entity speed for the movement
+     * @param walls
+     */
+    public BrainComponent(double walkingSpeed, Set<Entity> walls) {
+        super(walkingSpeed, walls);
     }
-    @Override
-    public void moveToPlayer(Entity player, Entity alien) {
-        if(player.getBody().getPosition().getX() > alien.getBody().getPosition().getX()){
-            alien.getBody().getPosition().add(1,0);
-            setDesiredDirection(Direction.SOUTH);
-            move(Direction.SOUTH, movementSpeed);
-        }
-        else{
-            alien.getBody().getPosition().add(-1,0);
-            setDesiredDirection(Direction.NORTH);
-            move(Direction.NORTH, movementSpeed);
-        }
 
-        if(player.getBody().getPosition().getY() > alien.getBody().getPosition().getY()){
-            alien.getBody().getPosition().add(0, 1);
-            setDesiredDirection(Direction.EAST);
-            move(Direction.EAST, movementSpeed);
-        }
-        else{
-            alien.getBody().getPosition().add(0, -1);
-            setDesiredDirection(Direction.WEST);
-            move(Direction.WEST, movementSpeed);
-        }
-
-    }
 
     @Override
     public boolean findPlayer(Entity player, Entity alien) {
