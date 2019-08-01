@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Control;
 
+import it.unibo.oop.bbgmm.Boundary.AudioPlayerImpl;
 import it.unibo.oop.bbgmm.Boundary.GameFieldViewImpl;
 import it.unibo.oop.bbgmm.Boundary.PrincipalView;
 import it.unibo.oop.bbgmm.Entity.GameStatisticsImpl;
@@ -12,12 +13,23 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public class PrincipalControllerImpl implements PrincipalController {
+/**
+ * {@link PrincipalController} implementation.
+ */
+public final class PrincipalControllerImpl implements PrincipalController {
 
+    //class VOLUME to implement?
+    private static final double SOUND_VOLUME = 10;
+    private static final double MUSIC_VOLUME = 10;
     private final PrincipalView view;
     private ScoreList score;
     private Optional<GameController> gameControl = Optional.empty();
 
+    /**
+     * {@link PrincipalControllerImpl} constructor.
+     * @param principalStage
+     *      Principal {@link Stage}
+     */
     public PrincipalControllerImpl(final Stage principalStage) {
         this.view = new PrincipalView(principalStage, this);
         try {
@@ -26,20 +38,21 @@ public class PrincipalControllerImpl implements PrincipalController {
             e.printStackTrace();
         }
     }
-
-    public List<Pair<String, Integer>> getRankingList(){
+    @Override
+    public List<Pair<String, Integer>> getRankingList() {
         return score.getRanking();
     }
 
     @Override
     public GameController startGame() {
-        gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(), new GameFieldViewImpl(), this));
+        gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
+                new GameFieldViewImpl(new AudioPlayerImpl(SOUND_VOLUME, MUSIC_VOLUME)), this));
         return gameControl.get();
     }
 
     @Override
     public void stopGame() {
-        if(gameControl.isPresent()){
+        if (gameControl.isPresent()) {
             gameControl.get().stop();
         }
     }
