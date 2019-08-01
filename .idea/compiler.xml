@@ -11,10 +11,16 @@
       <entry name="!?*.kt" />
       <entry name="!?*.clj" />
       <entry name="!?*.aj" />
+      <entry name="?*.tmx" />
+      <entry name="?.tsx" />
+      <entry name="?*.png" />
+      <entry name="?*.zip" />
+      <entry name="?*.xml" />
+      <entry name=".tmx" />
       <entry name="!?*.tmx" />
-      <entry name="!?.tsx" />
-      <entry name="!?*.png" />
-      <entry name="!?*.zip" />
+      <entry name="*.tmx" />
+      <entry name="!?*.xml" />
+      <entry name="*.xml" />
     </wildcardResourcePatterns>
   </component>
 </project>
