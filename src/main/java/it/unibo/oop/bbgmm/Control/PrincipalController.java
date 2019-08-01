@@ -8,6 +8,8 @@ public interface PrincipalController {
 
     List<Pair<String, Integer>> getRankingList();
 
+    void InsertNewScore(final String name, final Integer result);
+
     GameController startGame();
 
     void stopGame();

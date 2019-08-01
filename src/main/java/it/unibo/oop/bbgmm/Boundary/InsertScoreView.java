@@ -15,10 +15,7 @@ public class InsertScoreView extends AbstractBasicView {
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 300;
     private static final int BOX_Y_COORDINATE = 500;
-    private final AudioPlayer audioPlayer;
     private final AnchorPane pane;
-    private final static double SOUND_VOLUME = 1;
-    private final static double MUSIC_VOLUME = 0.4;
     private int currentItem = 0;
     private VBox menuBox;
     private final TextArea insertID = new TextArea();
@@ -52,8 +49,6 @@ public class InsertScoreView extends AbstractBasicView {
                 getMenuItem(currentItem).activate();
             }
         });
-
-        this.audioPlayer = new AudioPlayerImpl(SOUND_VOLUME,MUSIC_VOLUME);
 
         pane = new AnchorPane();
         menuBox = new VBox(SPACE_BETWEEN_ITEM, insertID, itemScore, itemMainMenu, itemRanking);
@@ -100,7 +95,11 @@ public class InsertScoreView extends AbstractBasicView {
 
         itemScore.setOnActivate(() -> {
             String id = insertID.getText();
-            System.out.println(id);
+            if(!id.isEmpty()) {
+                String result;
+                result = id.replace(" ", "");
+                getController().InsertNewScore(result, 10);
+            }
         });
     }
 }

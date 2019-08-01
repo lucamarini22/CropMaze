@@ -30,6 +30,11 @@ public class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
+    public void InsertNewScore(final String name, final Integer result) {
+        score.addScore(new Pair<>(name, result));
+    }
+
+    @Override
     public GameController startGame() {
         gameControl = Optional.of(new GameControllerImpl());
         return gameControl.get();
