@@ -2,8 +2,10 @@ package it.unibo.oop.bbgmm.Entity.Component;
 
 import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Direction;
+import it.unibo.oop.bbgmm.Entity.Entity;
 
 import java.util.List;
+import java.util.Set;
 
 public interface Weapon extends EntityComponent {
     /**
@@ -32,6 +34,11 @@ public interface Weapon extends EntityComponent {
      */
     int getWeaponRange();
 
+    /**
+     *
+     * @return A set of the walls in the map
+     */
+    Set<Entity> getWalls();
     /**
      *
      * @param range
