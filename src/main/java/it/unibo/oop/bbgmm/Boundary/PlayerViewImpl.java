@@ -6,7 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
-public class PlayerViewImpl extends EntityChangeStateView<PossibleEntityState> implements PlayerView {
+public final class PlayerViewImpl extends AbstractAliveEntityView implements PlayerView {
     private static final int ANIMATION_DURATION = 0;
     private static final int ANIMATION_FRAMES = 0;
 
@@ -29,4 +29,18 @@ public class PlayerViewImpl extends EntityChangeStateView<PossibleEntityState> i
     }
 
 
+    @Override
+    public void setMaxLifePoints(int maxLifePoints) {
+
+    }
+
+    @Override
+    public void setCurrentLifePoints(int currentLifePoints) {
+
+    }
+
+    @Override
+    public void setCoins(int coins) {
+
+    }
 }

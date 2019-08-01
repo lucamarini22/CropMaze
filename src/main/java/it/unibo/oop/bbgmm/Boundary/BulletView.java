@@ -5,7 +5,7 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 
-public class BulletView extends AliveEntityViewImpl{
+public class BulletView extends AbstractAliveEntityView{
 
     private final Direction direction;
 

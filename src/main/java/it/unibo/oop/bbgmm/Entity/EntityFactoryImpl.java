@@ -12,8 +12,8 @@ import java.util.Set;
 public final class EntityFactoryImpl implements EntityFactory {
     private static final double TIMEOUT = 0.1;
 
+    private final GameField gameField;
     private final Set<Entity> walls;
-
     private final EntityStatistics entityStatistics;
     private final GameStatistics gameStatistics;
 
@@ -26,7 +26,8 @@ public final class EntityFactoryImpl implements EntityFactory {
      * @param gameStatistics
      *      Statistics of the game
      */
-    public EntityFactoryImpl(final Set<Entity> walls, final EntityStatistics entityStatistics, final GameStatistics gameStatistics) {
+    public EntityFactoryImpl(final GameField gameField, final Set<Entity> walls, final EntityStatistics entityStatistics, final GameStatistics gameStatistics) {
+        this.gameField = gameField;
         this.walls = walls;
         this.entityStatistics = entityStatistics;
         this.gameStatistics = gameStatistics;
@@ -34,7 +35,7 @@ public final class EntityFactoryImpl implements EntityFactory {
 
     @Override
     public Player createPlayer(final Point2D position) {
-        return new Player(new BodyBuilder(), position, entityStatistics.getPlayerHealth(), this.walls);
+        return new Player(new BodyBuilder(), position, entityStatistics.getPlayerHealth(), this.gameField);
     }
 
     @Override

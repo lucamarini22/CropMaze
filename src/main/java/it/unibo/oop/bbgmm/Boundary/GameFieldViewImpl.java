@@ -28,8 +28,7 @@ public final class GameFieldViewImpl implements GameFieldView {
 
     @Override
     public EntityViewFactory getEntityViewFactory() {
-        //change
-        return null;
+        return new EntityViewFactoryImpl(fieldView, audioplayer);
     }
 
     @Override

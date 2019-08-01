@@ -2,11 +2,12 @@ package it.unibo.oop.bbgmm.Control;
 
 import it.unibo.oop.bbgmm.Boundary.GameFieldView;
 import it.unibo.oop.bbgmm.Entity.*;
+import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
 import javafx.animation.AnimationTimer;
 import org.mapeditor.core.Map;
 import org.mapeditor.io.TMXMapReader;
 import java.io.File;
-import java.util.List;
+import java.util.Set;
 
 public class GameControllerImpl implements GameController {
 
@@ -14,13 +15,13 @@ public class GameControllerImpl implements GameController {
     private static final String MAP_PATH = "images/map/CropMazeMap.tmx";
 
     private final PrincipalController principalController;
-    private final GameField gameField;
-    private final Level level;
+    private GameField gameField;
+    private Level level;
     private Map map;
-    private List<EntityController> entities;
+    private Set<EntityController> entitiesControllers;
     private final EntitySpawner entitySpawner;
     private final EntityFactory entityFactory;
-    private final GameFieldView gameFieldView;
+    private GameFieldView gameFieldView;
     private final GameStatistics gameStatistics;
     //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
     //level crea la mappa di gioco i personaggi e gli alieni
@@ -32,7 +33,7 @@ public class GameControllerImpl implements GameController {
     };
 
     public GameControllerImpl(final GameStatistics gameStatistics, final GameFieldView gameFieldView, final PrincipalController principalController) {
-        gameField = new GameFieldImpl();
+        gameField = new GameFieldImpl(new CollisionSupervisorImpl());
         this.principalController = principalController;
         this.gameStatistics = gameStatistics;
         this.gameFieldView = gameFieldView;
@@ -41,7 +42,7 @@ public class GameControllerImpl implements GameController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.entityFactory = new EntityFactoryImpl(this.gameField.getWalls(), new EntityStatisticsImpl(), gameStatistics);
+        this.entityFactory = new EntityFactoryImpl(this.gameField, this.gameField.getWalls(), new EntityStatisticsImpl(), gameStatistics);
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
         level = new LevelImpl(this.map, this.gameField, gameStatistics, this.entitySpawner, this.gameFieldView, this.principalController);
         run();
@@ -61,7 +62,13 @@ public class GameControllerImpl implements GameController {
     /**
      * Method called to start the Timer
      */
-    private void run(){ timer.start(); }
+    private void run() {
+        level = new LevelImpl(this.map, this.gameField, this.gameStatistics, this.entitySpawner, this.gameFieldView, this.principalController);
+        this.gameField = level.getGameField();
+        this.gameFieldView = level.getGameFieldView();
+        this.entitiesControllers = level.getEntitiesControllers();
+        timer.start();
+    }
 
     @Override
     public void stop() { timer.stop(); }
@@ -71,7 +78,7 @@ public class GameControllerImpl implements GameController {
      */
     private void update() {
         //updates the view
-        entities.forEach(EntityController::update);
+        entitiesControllers.forEach(EntityController::update);
         //updates the model
         gameField.update(FRAME);
     }

@@ -6,12 +6,12 @@ import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 
 
-public class EntityViewImpl implements EntityView {
+public abstract class AbstractEntityView implements EntityView {
     private final ImageView image = new ImageView();
     private final Dimension2D dimension;
     private final Group myGroup;
 
-    public EntityViewImpl(final Group group, final Dimension2D dimension){
+    public AbstractEntityView(final Group group, final Dimension2D dimension){
         this.myGroup = group;
         this.dimension = dimension;
         this.myGroup.getChildren().add(image);
