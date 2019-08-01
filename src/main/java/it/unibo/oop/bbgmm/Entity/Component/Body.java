@@ -32,7 +32,6 @@ public class Body extends AbstractEntityComponent implements EntityBody{
     @Override
     public boolean canMove() {return this.movable;}
 
-
     @Override
     public Direction getDirection() {return this.direction;}
 

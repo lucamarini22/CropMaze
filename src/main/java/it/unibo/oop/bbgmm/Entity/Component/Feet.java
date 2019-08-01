@@ -50,7 +50,7 @@ public class Feet extends AbstractMovement {
      *
      */
     protected boolean wallChecker(final Point2D distanceVector){
-        Point2D newDistanceVector = this.calculatePosition(distanceVector);
+        Point2D newDistanceVector = this.calculateNewDistanceVector(distanceVector);
         if(getOwner().isPresent()){
             Dimension2D dimension  = getOwner().get().getBody().getDimension();
             Rectangle2D shape = new Rectangle2D(newDistanceVector.getX(),newDistanceVector.getY(),
@@ -67,7 +67,7 @@ public class Feet extends AbstractMovement {
      * @return
      *      The new distance vector
      */
-    private Point2D calculatePosition(final Point2D distanceVector){
+    private Point2D calculateNewDistanceVector(final Point2D distanceVector){
         final double hf = distanceVector.getX() > 0 ? 1 : distanceVector.getX() < 0 ? -1 : 0;
         final double vf = distanceVector.getY() > 0 ? 1 : distanceVector.getY() < 0 ? -1 : 0;
         return new Point2D(hf * walkingSpeed, vf * walkingSpeed);
@@ -77,30 +77,32 @@ public class Feet extends AbstractMovement {
     public void move( Point2D distanceVector) {
         //utilizzando questo distancevector dovrai modificare la posizione dell'entità
         //ovviamente dovrai modificare il metodo e fare in modo che chieda in input un point2d
-        if(wallChecker(distanceVector)){
-            Point2D newDistanceVector = this.calculatePosition(distanceVector);
-            setDirectionMovement(newDistanceVector);
-            super.move(newDistanceVector);
 
+        Point2D movement = calculateNewDistanceVector(distanceVector);
+
+        //verifico se c'è un muro, se è presente l'entità non può spostarsi e rimane ferma
+        if(wallChecker(distanceVector)){
+            setDirectionMovement(Point2D.ZERO);
+            updateState();
         }
-        else {
-            setDesiredDirection(distanceVector);
-            super.move(distanceVector);
+        else{
+            setDirectionMovement(movement);
+            updateState();
         }
+
+
     }
 
-    private void updateState(Direction direction){
-        if(direction.equals(direction.NOTHING)){
-            setState(State.STABLE);
-        }
-        else {
+    /**
+     * Set the state of the entity
+     */
+    private void updateState(){
+        if(getDirectionMovement().getX() != 0 || getDirectionMovement().getY() != 0){
             setState(State.WALKING);
         }
+        else{
+            setState(State.STABLE);
+        }
     }
 
-    @Override
-    protected Point2D movementToCompute(double dt) {
-        Point2D movement = getDirectionMovement().subtract(getOwner().get().getBody().)
-        return null;
-    }
 }

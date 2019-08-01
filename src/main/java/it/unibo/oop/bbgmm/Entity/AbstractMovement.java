@@ -18,33 +18,13 @@ public abstract class AbstractMovement extends ClashComponent implements Movemen
      * Applies movement
      * @param dt
      */
+
+    //non sono sicura su come debba essere utilizzata,
+    // il metodo update è riferito a ClashComponent
     @Override
     public void update(double dt) {
         super.update(dt);
-        final Point2D movVector = movementToCompute(dt);
-        if(!movVector.equals(Point2D.ZERO)){
-            applyMovement(getOwner().get().getBody(), movVector);
-        }
-    }
 
-    /**
-     * Return the movement vector to apply to the body
-     * @param dt
-     *          delta time seconds since last call
-     * @return
-     *         movement vector to be applied
-     */
-    protected abstract Point2D movementToCompute(double dt);
-
-    /**
-     * Apply force to the entity's body to move it
-     * @param body
-     *           The owner body
-     * @param movement
-     *           Movement vector
-     */
-    protected void applyMovement(final EntityBody body, final Point2D movement){
-        body.applyImpulse(movement);
     }
 
     /**

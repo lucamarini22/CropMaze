@@ -27,19 +27,6 @@ public interface EntityBody extends EntityComponent{
 
     /**
      *
-     * @return If the body can move
-     */
-    boolean canMove();
-
-    /**
-     *
-     * @param impulse
-     *          the impulse vector
-     */
-    void applyImpulse(Point2D impulse);
-
-    /**
-     *
      * @return Body shape
      */
     Rectangle2D getShape();
