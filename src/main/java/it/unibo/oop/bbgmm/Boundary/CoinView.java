@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 /**
  * Class that represent a {@link it.unibo.oop.bbgmm.Entity.Coin} view.
  */
-public class CoinView extends EntityViewImpl implements LifelessEntityView {
+public class CoinView extends AbstractEntityView implements LifelessEntityView {
 
     private static final String COIN_IMAGE = ""; //modify
     private static final int WIDTH = 70;
