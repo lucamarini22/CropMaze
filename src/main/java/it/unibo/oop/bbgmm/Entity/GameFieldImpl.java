@@ -2,7 +2,6 @@ package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisor;
 import it.unibo.oop.bbgmm.Entity.Component.CollisionComponent;
-
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -34,7 +33,7 @@ public final class GameFieldImpl implements GameField {
     @Override
     public Entity addEntity(final Entity entity) {
         entities.add(entity);
-        if(entity.get(CollisionComponent.class).isPresent()){
+        if (entity.get(CollisionComponent.class).isPresent()) {
             this.collisionSupervisor.addCollisionComponent(entity.get(CollisionComponent.class).get());
         }
         return entity;
@@ -48,7 +47,7 @@ public final class GameFieldImpl implements GameField {
     @Override
     public void removeEntity(final Entity entity) {
         this.entities.remove(entity);
-        if(entity.get(CollisionComponent.class).isPresent()){
+        if (entity.get(CollisionComponent.class).isPresent()) {
             this.collisionSupervisor.removeCollisionComponent(entity.get(CollisionComponent.class).get());
         }
     }
@@ -57,6 +56,4 @@ public final class GameFieldImpl implements GameField {
     public Set<Entity> getWalls() {
         return this.entities.stream().filter(e -> e.getClass().equals(Wall.class)).collect(Collectors.toSet());
     }
-
-
 }

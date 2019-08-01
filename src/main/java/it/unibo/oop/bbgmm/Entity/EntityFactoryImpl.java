@@ -3,7 +3,6 @@ package it.unibo.oop.bbgmm.Entity;
 import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
-
 import java.util.Set;
 
 /**
@@ -19,13 +18,15 @@ public final class EntityFactoryImpl implements EntityFactory {
 
     /**
      * Constructor of {@link EntityFactoryImpl}.
+     * @param gameField
+     *      {@link GameField} instance
      * @param walls
      *      Set of all {@link Wall}s in the {@link GameField}
      * @param entityStatistics
      *      Statistics of the various entities
      * @param gameStatistics
      *      Statistics of the game
-     */
+     */ht know about other Enemy instanc
     public EntityFactoryImpl(final GameField gameField, final Set<Entity> walls, final EntityStatistics entityStatistics, final GameStatistics gameStatistics) {
         this.gameField = gameField;
         this.walls = walls;
