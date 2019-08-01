@@ -33,8 +33,14 @@ public interface EntityBody extends EntityComponent{
 
     /**
      *
+<<<<<<< HEAD
      * @return if the entity can move
      */
     boolean canMove();
 
+=======
+     * @return Body shape
+     */
+    boolean canMove();
+>>>>>>> bd1f7c7f44f5bf726dc2b0da076eef275b024594
 }

@@ -47,7 +47,9 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
 
     @Override
     public void update(double delta) {
-
+        if(isDead()) {
+            this.getOwner().get().destroy();
+        }
     }
 
     @Override

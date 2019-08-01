@@ -44,7 +44,7 @@ public class GameControllerImpl implements GameController {
         }
         this.entityFactory = new EntityFactoryImpl(this.gameField, this.gameField.getWalls(), new EntityStatisticsImpl(), gameStatistics);
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
-        level = new LevelImpl(this.map, this.gameField, gameStatistics, this.entitySpawner, this.gameFieldView, this.principalController);
+        level = new LevelImpl(this.map, this.gameField, this.gameStatistics, this.entitySpawner, this.gameFieldView, this.principalController);
         run();
     }
     /**
@@ -63,7 +63,6 @@ public class GameControllerImpl implements GameController {
      * Method called to start the Timer
      */
     private void run() {
-        level = new LevelImpl(this.map, this.gameField, this.gameStatistics, this.entitySpawner, this.gameFieldView, this.principalController);
         this.gameField = level.getGameField();
         this.gameFieldView = level.getGameFieldView();
         this.entitiesControllers = level.getEntitiesControllers();
