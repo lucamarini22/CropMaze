@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Control;
 
+import com.google.common.io.Files;
 import it.unibo.oop.bbgmm.Boundary.GameFieldView;
 import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
@@ -7,6 +8,7 @@ import javafx.animation.AnimationTimer;
 import org.mapeditor.core.Map;
 import org.mapeditor.io.TMXMapReader;
 import java.io.File;
+import java.net.URL;
 import java.util.Set;
 
 public class GameControllerImpl implements GameController {
@@ -51,9 +53,9 @@ public class GameControllerImpl implements GameController {
      * Method called to load the Map.
      */
     private void loadMap() throws Exception {
-        File path = new File(MAP_PATH);
+        URL path = ClassLoader.getSystemResource(MAP_PATH);
         try {
-            this.map = new TMXMapReader().readMap(path.getAbsolutePath());
+            this.map = new TMXMapReader().readMap(path.toExternalForm());
         } catch (final Exception e) {
             throw new Exception("ERROR: Can't load map\n");
         }
