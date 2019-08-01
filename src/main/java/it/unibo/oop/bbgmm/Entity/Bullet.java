@@ -15,8 +15,7 @@ public class Bullet extends AbstractEntity {
                   final Weapon weapon,
                   final Direction ownerDirection,
                   final Point2D position,
-                  final Set<Entity> walls,
-                  final GameField gameField) {
+                  final Set<Entity> walls) {
         super(bodyBuilder.setPosition(position)
                          .setDimension(SIZE)
                          .setDirection(ownerDirection)

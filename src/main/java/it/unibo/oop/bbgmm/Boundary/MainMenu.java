@@ -103,9 +103,7 @@ public class MainMenu extends AbstractBasicView {
      protected void buttonActions() {
         //Da togliere i commenti per usare gli altri pulsanti
         itemNewGame.setOnActivate(() -> {
-            getPrimaryStage().setScene(getViewFactory().createGameOver());
-            checkResolution();
-            getAudioPlayer().stopMusic();
+            getController().startGame();
         });
         itemScore.setOnActivate(() -> {
             getPrimaryStage().setScene(getViewFactory().createRankingView());
