@@ -13,16 +13,19 @@ public final class GameFieldImpl implements GameField {
     private final Set<Entity> entities;
     private final CollisionSupervisor collisionSupervisor;
 
-    GameFieldImpl(final CollisionSupervisor collisionSupervisor) {
+    /**
+     * {@link GameFieldImpl} constructor.
+     * @param collisionSupervisor
+     *      {@link CollisionSupervisor} instance
+     */
+    public GameFieldImpl(final CollisionSupervisor collisionSupervisor) {
         this.entities =  new LinkedHashSet<>();
         this.collisionSupervisor = collisionSupervisor;
     }
 
     @Override
     public void update(final double up) {
-        //incompleted
-        this.entities.stream()
-                     .forEach(e -> e.update(up));
+        this.entities.forEach(e -> e.update(up));
         this.collisionSupervisor.searchCollision();
     }
 
