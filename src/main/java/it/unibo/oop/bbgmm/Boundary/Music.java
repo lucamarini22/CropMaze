@@ -10,9 +10,7 @@ public enum Music {
 
     GAMEOVER_TRACK("sounds/gameOver.wav"),
 
-    BUTTON_SWITCH("sounds/button_switched.mp3"),
-
-    BUTTON_SWITCH_WAV("sounds/button_switched.wav"),
+    BUTTON_SWITCH("sounds/button_switched.wav"),
 
     BUTTON_PRESS("sounds/button_clicked.wav");
 

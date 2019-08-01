@@ -5,19 +5,25 @@ import it.unibo.oop.bbgmm.Entity.Component.*;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
+import java.util.Set;
+
 
 public class Bullet extends AbstractEntity {
     private static final Dimension2D SIZE = new Dimension2D(1.1,1.2);
 
-    public Bullet(final BodyBuilder bodyBuilder, final Weapon weapon, final Direction ownerDirection, final int weaponRange, final int weaponDamage, final Point2D position, int speed) {
+    public Bullet(final BodyBuilder bodyBuilder,
+                  final Weapon weapon,
+                  final Direction ownerDirection,
+                  final Point2D position,
+                  final Set<Entity> walls) {
         super(bodyBuilder.setPosition(position)
                          .setDimension(SIZE)
                          .setDirection(ownerDirection)
                          .setMovable(true)
                          .build());
-        add(new LifeComponent(weaponRange));
-        add(new LimitedBulletFeet(weapon, speed, get(Life.class).get()));
-        add(new DamageComponent(weaponDamage));
+        add(new LifeComponent(weapon.getWeaponRange()));
+        add(new LimitedBulletFeet(weapon, weapon.getWeaponSpeed(), get(Life.class).get(), walls));
+        add(new DamageComponent(weapon.getWeaponDamage()));
         add(new ClashComponent());
         add(new CollisionComponent(this.getBody().getShape(), CollisionLabel.SHOT));
     }

@@ -67,10 +67,8 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
             Bullet bullet = new Bullet(new BodyBuilder(),
                                         this,
                                         ownerDirection,
-                                        this.weaponRange,
-                                        this.weaponDamage,
                                         getOwner().get().getBody().getPosition(),
-                                        this.weaponSpeed);
+            getOwner().get().getBody().);
             this.bulletShoted.add(bullet);
             bullet.get(Movement.class).get().update(0);
         }
