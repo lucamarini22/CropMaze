@@ -146,7 +146,7 @@ public final class LevelImpl implements Level {
                 case ALIEN:
                     for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
                         entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
-                        //entitiesControllers.add(new AliveEntityController()entity, gameFieldView.entityFactory().create...);
+                        entitiesControllers.add(new AliveEntityController(entity, gameFieldView.getEntityViewFactory().createAlienView()));
                     }
                     break;
 
