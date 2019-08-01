@@ -17,11 +17,11 @@ import java.util.Map;
  * @param <S>
  *      Entity state type
  */
-public class EntityChangeStateView<S extends EntityState> extends EntityViewImpl implements EntityChangeState<S> {
+public abstract class AbstractEntityChangeStateView<S extends EntityState> extends AbstractEntityView implements EntityChangeState<S> {
     private final Map<S, Runnable> animations = new HashMap<>();
     private Animation currentAnimation;
 
-    public EntityChangeStateView(final Group group, final Dimension2D dimension){
+    public AbstractEntityChangeStateView(final Group group, final Dimension2D dimension){
         super(group,dimension);
         this.currentAnimation = new Transition() {
             @Override

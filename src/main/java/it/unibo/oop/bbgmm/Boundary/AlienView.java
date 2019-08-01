@@ -5,7 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
-public class AlienView extends AliveEntityViewImpl {
+public class AlienView extends AbstractAliveEntityView{
 
 
     private static final int WIDTH = 50, HEIGHT = 50;
