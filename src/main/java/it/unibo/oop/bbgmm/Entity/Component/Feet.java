@@ -54,7 +54,7 @@ public class Feet extends AbstractMovement {
      *
      *
      */
-    private boolean wallChecker(final Point2D distanceVector){
+    protected boolean wallChecker(final Point2D distanceVector){
         Point2D newDistanceVector = this.calculatePosition(distanceVector);
         if(getOwner().isPresent()){
             Dimension2D dimension  = getOwner().get().getBody().getDimension();

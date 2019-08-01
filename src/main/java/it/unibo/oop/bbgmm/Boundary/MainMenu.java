@@ -69,6 +69,8 @@ public class MainMenu extends AbstractBasicView {
 
         //calculates the position of the box
         if(Resolution.isFullScreen()){
+            int one = BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA;
+            int two = BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT;
             menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
             menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
         }
