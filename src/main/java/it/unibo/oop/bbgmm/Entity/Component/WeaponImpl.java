@@ -75,6 +75,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
                                         gameField.getWalls());
             this.bulletShoted.add(bullet);
             bullet.get(Movement.class).get().update(0);
+            gameField.addEntity(bullet);
         }
     }
 

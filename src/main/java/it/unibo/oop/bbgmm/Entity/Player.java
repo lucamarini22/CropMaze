@@ -23,12 +23,7 @@ public class Player extends AbstractEntity {
         add(new LifeComponent(health));
         add(new Feet(WALKING_SPEED,gameField.getWalls()));
         add(new WeaponImpl(weapon,gameField));
-        add(new Feet(WALKING_SPEED,gameField.getWalls()));
-        add(new WeaponImpl(weapon, gameField));
         add(new CollisionComponent(this.getBody().getShape(), CollisionLabel.PLAYER));
     }
-
-
-
 }
 
