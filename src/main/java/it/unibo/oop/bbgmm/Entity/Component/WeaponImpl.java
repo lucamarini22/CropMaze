@@ -1,9 +1,6 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
-import it.unibo.oop.bbgmm.Entity.Bullet;
-import it.unibo.oop.bbgmm.Entity.Direction;
-import it.unibo.oop.bbgmm.Entity.Entity;
-import it.unibo.oop.bbgmm.Entity.Movement;
+import it.unibo.oop.bbgmm.Entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +14,8 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     private int weaponRange;
     private List<Bullet> bulletShoted;
     private final Timer cooldown = Timer.seconds(COOLDOWN_TIME);
-    private final Set<Entity> walls;
+    private final GameField gameField;
+
 
 
 
@@ -26,13 +24,13 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
      * @param basicWeapon
      *                  The entity weapon.
      */
-    public WeaponImpl (final Inventory basicWeapon, final Set<Entity>walls) {
+    public WeaponImpl (final Inventory basicWeapon, final GameField gameField) {
         this.weaponDamage = basicWeapon.damage;
         this.weaponRange = basicWeapon.range;
         this.weaponSpeed = basicWeapon.speed;
         this.bulletShoted = new ArrayList<Bullet>();
         cooldown.update(COOLDOWN_TIME);
-        this.walls = walls;
+        this.gameField = gameField;
     }
 
 
@@ -74,7 +72,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
                                         this,
                                         shootingDirection,
                                         getOwner().get().getBody().getPosition(),
-                                        walls);
+                                        gameField.getWalls());
             this.bulletShoted.add(bullet);
             bullet.get(Movement.class).get().update(0);
         }
