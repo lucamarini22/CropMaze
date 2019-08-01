@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class Feet extends AbstractMovement {
 
-    private final double walkingSpeed;
+    private double walkingSpeed;
     private final Set<Entity> walls;
 
     /**
@@ -82,15 +82,13 @@ public class Feet extends AbstractMovement {
 
         //verifico se c'è un muro, se è presente l'entità non può spostarsi e rimane ferma
         if(wallChecker(distanceVector)){
-            setDirectionMovement(Point2D.ZERO);
+            setPosition(Point2D.ZERO);
             updateState();
         }
         else{
-            setDirectionMovement(movement);
+            setPosition(movement);
             updateState();
         }
-
-
     }
 
     /**
@@ -103,6 +101,19 @@ public class Feet extends AbstractMovement {
         else{
             setState(State.STABLE);
         }
+    }
+
+    /**
+     * return the walking speed
+
+     * @return the speed
+     */
+    public double getSpeed(){
+        return this.walkingSpeed;
+    }
+
+    public void setSpeed(double newSpeed){
+        this.walkingSpeed = newSpeed;
     }
 
 }

@@ -13,5 +13,10 @@ public interface Brain extends EntityComponent {
      */
     public boolean findPlayer(Entity player, Entity alien);
 
+    /**
+     * select a new direction for find the player
+     */
+    public void checkDirection(Entity player, Entity alien);
+
 
 }
