@@ -23,5 +23,4 @@ public interface GameFieldView {
      *      Dimension of the tile
      */
     void showField(TileLayer layer, Point2D topLeft, Dimension2D tileSize);
-
 }
