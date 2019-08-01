@@ -26,7 +26,7 @@ public final class EntityFactoryImpl implements EntityFactory {
      *      Statistics of the various entities
      * @param gameStatistics
      *      Statistics of the game
-     */ht know about other Enemy instanc
+     */
     public EntityFactoryImpl(final GameField gameField, final Set<Entity> walls, final EntityStatistics entityStatistics, final GameStatistics gameStatistics) {
         this.gameField = gameField;
         this.walls = walls;
