@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Control.PlayerInputListener;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
@@ -16,20 +17,21 @@ public final class GameFieldViewImpl implements GameFieldView {
     private final Group fieldView = new Group();
     private final Group rootView = new Group(fieldView);
     private final AudioPlayer audioplayer;
+    private final PlayerInputHandler playerInputHandler;
 
     /**
      * Constructor of {@link GameFieldViewImpl}.
      * @param audioPlayer
      *      {@link AudioPlayer}
      */
-    public GameFieldViewImpl(final AudioPlayer audioPlayer) {
+    public GameFieldViewImpl(final AudioPlayer audioPlayer, final PlayerInputHandler playerInputHandler) {
         this.audioplayer = audioPlayer;
+        this.playerInputHandler = playerInputHandler;
     }
 
     @Override
     public EntityViewFactory getEntityViewFactory() {
-        //change
-        return null;
+        return new EntityViewFactoryImpl(fieldView, audioplayer);
     }
 
     @Override
