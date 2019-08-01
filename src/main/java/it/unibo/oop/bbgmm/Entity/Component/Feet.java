@@ -73,22 +73,46 @@ public class Feet extends AbstractMovement {
         return new Point2D(hf * walkingSpeed, vf * walkingSpeed);
     }
 
+    /**
+     * Modify the direction that the entity will follow
+     * @param vector
+     *
+     */
+    public Direction calculateNewDirection(final Point2D vector){
+        if(vector.getY() != vector.getX() ){
+            if(vector.getX() == 0 && vector.getY() > 0){
+                return Direction.NORTH;
+            }
+            if(vector.getX() == 0 && vector.getY() < 0){
+                return Direction.SOUTH;
+            }
+            if(vector.getX() < 0 && vector.getY() == 0){
+                return Direction.WEST;
+            }
+            if(vector.getX() > 0 && vector.getY() == 0){
+                return Direction.EAST;
+            }
+        }
+        return Direction.NOTHING;
+
+    }
+
     @Override
     public void move( Point2D distanceVector) {
         //utilizzando questo distancevector dovrai modificare la posizione dell'entità
         //ovviamente dovrai modificare il metodo e fare in modo che chieda in input un point2d
 
-        Point2D movement = calculateNewDistanceVector(distanceVector);
+        Point2D movementVector = calculateNewDistanceVector(distanceVector);
 
         //verifico se c'è un muro, se è presente l'entità non può spostarsi e rimane ferma
         if(wallChecker(distanceVector)){
             setPosition(Point2D.ZERO);
-            updateState();
         }
         else{
-            setPosition(movement);
-            updateState();
+            setPosition(movementVector);
+            calculateNewDirection(movementVector);
         }
+        updateState();
     }
 
     /**
