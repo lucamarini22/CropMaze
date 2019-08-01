@@ -33,7 +33,7 @@ public interface Weapon extends EntityComponent {
      * @return Current weapon range.
      */
     int getWeaponRange();
-    
+
     /**
      *
      * @param range

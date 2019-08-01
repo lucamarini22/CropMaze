@@ -35,6 +35,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
         this.walls = walls;
     }
 
+
     @Override
     public int getWeaponDamage() {
         return this.weaponDamage;
