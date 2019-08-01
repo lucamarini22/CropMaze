@@ -19,7 +19,7 @@ public abstract class AbstractEntity implements Entity {
      * constructor for Abstract Entity
      * @param body
      */
-    public AbstractEntity(final EntityBody body) {
+    public AbstractEntity(final EntityBody body /*final GameField gameField*/) {
         this.body = body;
         body.attach(this);
     }

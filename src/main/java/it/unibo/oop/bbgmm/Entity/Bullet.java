@@ -1,6 +1,5 @@
 package it.unibo.oop.bbgmm.Entity;
 
-import it.unibo.oop.bbgmm.Control.GameController;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionLabel;
 import it.unibo.oop.bbgmm.Entity.Component.*;
 import javafx.geometry.Dimension2D;
@@ -10,7 +9,7 @@ import java.util.Set;
 
 
 public class Bullet extends AbstractEntity {
-    private static final Dimension2D SIZE = new Dimension2D(1.1,1.2);
+    private static final Dimension2D SIZE = new Dimension2D(0.5,0.3);
 
     public Bullet(final BodyBuilder bodyBuilder,
                   final Weapon weapon,
@@ -24,7 +23,7 @@ public class Bullet extends AbstractEntity {
                          .setMovable(true)
                          .build());
         add(new LifeComponent(weapon.getWeaponRange()));
-        add(new LimitedBulletFeet(weapon, weapon.getWeaponSpeed(), get(Life.class).get(), walls, gameField));
+        add(new LimitedBulletFeet(weapon, weapon.getWeaponSpeed(), get(Life.class).get(), walls));
         add(new DamageComponent(weapon.getWeaponDamage()));
         add(new ClashComponent());
         add(new CollisionComponent(this.getBody().getShape(), CollisionLabel.SHOT));

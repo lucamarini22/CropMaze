@@ -33,7 +33,7 @@ public class BodyBuilder {
     }
 
     public Body build() {
-        if(this.checkBuid()){
+        if(this.checkBuild()){
             throw new IllegalStateException("The build is incomplete");
         }else {
             Body body = new Body(this.position, this.dimension, this.direction, this.movable);
@@ -41,7 +41,7 @@ public class BodyBuilder {
         }
     }
 
-    private boolean checkBuid(){
+    private boolean checkBuild(){
         return dimension == null || this.position == null || this.direction == null;
     }
 
