@@ -1,6 +1,8 @@
 package it.unibo.oop.bbgmm.Control;
 
+import it.unibo.oop.bbgmm.Boundary.GameFieldViewImpl;
 import it.unibo.oop.bbgmm.Boundary.PrincipalView;
+import it.unibo.oop.bbgmm.Entity.GameStatisticsImpl;
 import it.unibo.oop.bbgmm.Entity.ScoreList;
 import it.unibo.oop.bbgmm.Entity.ScoreListImpl;
 import it.unibo.oop.bbgmm.Utilities.Pair;
@@ -31,7 +33,7 @@ public class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public GameController startGame() {
-        gameControl = Optional.of(new GameControllerImpl());
+        gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(), new GameFieldViewImpl(), this));
         return gameControl.get();
     }
 

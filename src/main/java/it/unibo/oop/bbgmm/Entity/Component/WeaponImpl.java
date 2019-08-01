@@ -36,11 +36,6 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     }
 
     @Override
-    public Set<Entity> getWalls() {
-        return this.walls;
-    }
-
-    @Override
     public int getWeaponDamage() {
         return this.weaponDamage;
     }
@@ -77,10 +72,8 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
             Bullet bullet = new Bullet(new BodyBuilder(),
                                         this,
                                         shootingDirection,
-                                        this.weaponRange,
-                                        this.weaponDamage,
                                         getOwner().get().getBody().getPosition(),
-                                        this.weaponSpeed);
+                                        walls);
             this.bulletShoted.add(bullet);
             bullet.get(Movement.class).get().update(0);
         }
