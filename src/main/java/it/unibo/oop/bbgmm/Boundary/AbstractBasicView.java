@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
+import it.unibo.oop.bbgmm.Utilities.Volume;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -19,14 +20,16 @@ public abstract class AbstractBasicView {
     private final Group root;
     private Scene scene;
 
-    public AbstractBasicView(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer, final Group root, final Scene scene) {
+    public AbstractBasicView(final Stage primaryStage, final PrincipalController controller, final Group root, final Scene scene) {
         this.root = root;
         this.scene = scene;
         this.controller = controller;
         this.primaryStage = primaryStage;
-        this.audioPlayer = audioPlayer;
-        this.viewFactory = new ViewFactory(primaryStage, controller, audioPlayer, root, scene);
-        this.scene.getStylesheets().add("Style.css");
+        this.audioPlayer = controller.getAudioPlayer();
+        this.viewFactory = new ViewFactory(primaryStage, controller, root, scene);
+        //this.root.setId("gameOverView");
+        //this.scene.getStylesheets().add("Style.css");
+
     }
 
     /**
@@ -59,13 +62,6 @@ public abstract class AbstractBasicView {
     protected void setScene(Scene scene){
         this.scene = scene;
     }
-    /**
-     * Getter for the Stage
-     * @return primaryStage
-     */
-    protected Stage getPrimaryStage() {
-        return this.primaryStage;
-    }
 
     /**
      * Getter for the viewFactory
@@ -96,6 +92,14 @@ public abstract class AbstractBasicView {
             primaryStage.centerOnScreen();
             this.scene.getWidth();
         }
+        primaryStage.setWidth(Resolution.getWidth());
+        primaryStage.setHeight(Resolution.getHeight());
+    }
+
+    protected void updateVolume(Volume musicVolume, Volume effectsVolume){
+        this.audioPlayer.setMusicVolume(musicVolume.getValue());
+        this.audioPlayer.setSoundVolume(effectsVolume.getValue());
+        getController().updateVolume(musicVolume, effectsVolume);
     }
 
     /**

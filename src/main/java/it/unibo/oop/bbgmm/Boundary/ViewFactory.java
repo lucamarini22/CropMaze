@@ -12,14 +12,12 @@ public class ViewFactory {
     private final Group root;
     private final Scene scene;
     private final PrincipalController controller;
-    private AudioPlayer audioPlayer;
 
-    public ViewFactory(Stage stage, PrincipalController controller, AudioPlayer audioPlayer, final Group root, final Scene scene) {
+    public ViewFactory(Stage stage, PrincipalController controller, final Group root, final Scene scene) {
         this.stage = stage;
         this.root = root;
         this.scene = scene;
         this.controller = controller;
-        this.audioPlayer = audioPlayer;
     }
 
     /**
@@ -27,7 +25,7 @@ public class ViewFactory {
      * @return MainMenu
      */
     public MainMenu createMainMenu(){
-        return new MainMenu(stage,controller,audioPlayer, root, scene);
+        return new MainMenu(stage,controller, root, scene);
     }
 
     /**
@@ -35,7 +33,7 @@ public class ViewFactory {
      * @return RankingView
      */
     public RankingView createRankingView(){
-        return new RankingView(stage,controller,audioPlayer, root, scene);
+        return new RankingView(stage,controller, root, scene);
     }
 
     /**
@@ -43,7 +41,7 @@ public class ViewFactory {
      * @return SettingsMenu
      */
     public SettingsMenu createSettingsMenu(){
-        return new SettingsMenu(stage,controller,audioPlayer, root, scene);
+        return new SettingsMenu(stage,controller, root, scene);
     }
 
     /**
@@ -51,17 +49,13 @@ public class ViewFactory {
      * @return GameOver
      */
     public GameOver createGameOver(){
-        return new GameOver(stage,controller,audioPlayer, root, scene);
+        return new GameOver(stage,controller, root, scene);
     }
 
     /**
      *  Creates a new scene showing the InsertScoreVIew
      * @return InsertScoreView
      */
-    public InsertScoreView createInsertScoreView(){ return new InsertScoreView(stage,controller,audioPlayer, root, scene);
-    }
-
-    public void updateVolume(Volume musicVolume, Volume effectsVolume){
-        this.audioPlayer = new AudioPlayerImpl(musicVolume.getValue(), effectsVolume.getValue());
+    public InsertScoreView createInsertScoreView(){ return new InsertScoreView(stage,controller, root, scene);
     }
 }

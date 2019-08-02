@@ -30,8 +30,9 @@ public class GameOver extends AbstractBasicView {
     private final MenuItem itemMainMenu = new MenuItem("MAIN MENU");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    public GameOver(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer, final Group group, final Scene scene){
-        super(primaryStage, controller, audioPlayer, group, scene);
+    public GameOver(final Stage primaryStage, final PrincipalController controller,
+                    final Group group, final Scene scene){
+        super(primaryStage, controller, group, scene);
 
         getScene().setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.UP) {

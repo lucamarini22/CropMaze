@@ -36,7 +36,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
         this.volumeData = new VolumeDataImpl();
         this.audioPlayer = new AudioPlayerImpl(volumeData.getMusicVolume().getValue(),
                 volumeData.getEffectsVolume().getValue());
-        this.view = new PrincipalView(principalStage, this, audioPlayer);
+        this.view = new PrincipalView(principalStage, this);
         try {
             this.score = new ScoreListImpl();
         } catch (IOException e) {
@@ -65,6 +65,11 @@ public final class PrincipalControllerImpl implements PrincipalController {
     @Override
     public VolumeData getVolumeData() {
         return this.volumeData;
+    }
+
+    @Override
+    public AudioPlayer getAudioPlayer() {
+        return this.audioPlayer;
     }
 
     @Override
@@ -102,9 +107,11 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void showGameField(final Group group) {
-        gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
+        /*gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
                 new GameFieldViewImpl(new AudioPlayerImpl(volumeData.getMusicVolume().getValue(),
-                        volumeData.getEffectsVolume().getValue()), this.playerInputHandler.get()), this));
+                        volumeData.getEffectsVolume().getValue()), this.playerInputHandler.get()), this));*/
+        gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
+                new GameFieldViewImpl(this.audioPlayer, this.playerInputHandler.get()), this));
         group.getChildren().clear();
         group.getChildren().addAll(gameControl.get().getGameFieldView().getGroup().getChildren());
         startGame();

@@ -34,6 +34,9 @@ public class LimitedBulletFeet extends Feet{
     public void move(Point2D distanceVector) {
         if(lifeComponent.isAlive()){
             super.move(distanceVector);
+            if(getPosition().equals(Point2D.ZERO)){
+                remove();
+            }
         }
         else{
             remove();
@@ -43,12 +46,13 @@ public class LimitedBulletFeet extends Feet{
 
     @Override
     public void update(double delta) {
-        if(wallChecker(distanceVector)){
+        /*if(wallChecker(distanceVector)){
             move(distanceVector);
         }
         else{
             remove();
-        }
+        }*/
+        move(distanceVector);
     }
 
     private void remove(){

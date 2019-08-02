@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Control;
 
+import it.unibo.oop.bbgmm.Boundary.AudioPlayer;
 import it.unibo.oop.bbgmm.Boundary.PlayerInputHandler;
 import it.unibo.oop.bbgmm.Boundary.ViewFactory;
 import it.unibo.oop.bbgmm.Utilities.Pair;
@@ -36,10 +37,16 @@ public interface PrincipalController {
     void updateVolume(final Volume musicVolume, final Volume effectsVolume);
 
     /**
-     *
-     * @return
+     * Getter for the Volume
+     * @return VolumeData
      */
     VolumeData getVolumeData();
+
+    /**
+     *Getter for the AudioPlayer
+     * @return AudioPlayer
+     */
+    AudioPlayer getAudioPlayer();
 
     /**
      * Method that stops the game

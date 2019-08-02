@@ -36,8 +36,8 @@ public class SettingsMenu extends AbstractBasicView {
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public SettingsMenu(final Stage primaryStage, final PrincipalController controller,
-                        final AudioPlayer audioPlayer, final Group group, final Scene scene) {
-        super(primaryStage, controller, audioPlayer, group, scene);
+                        final Group group, final Scene scene) {
+        super(primaryStage, controller, group, scene);
 
 
         //it intercepts the button presses
@@ -127,7 +127,7 @@ public class SettingsMenu extends AbstractBasicView {
 
         itemMusicVolume.setOnActivate(() -> {
             nextMusicVolume();
-            getController().updateVolume(this.musicVolume, this.effectsVolume);
+            updateVolume(this.musicVolume,this.effectsVolume);
             getAudioPlayer().stopMusic();
             getAudioPlayer().playMusic(MENU_TRACK.getPath());
             getViewFactory().createSettingsMenu();
@@ -135,7 +135,7 @@ public class SettingsMenu extends AbstractBasicView {
 
         itemEffectsVolume.setOnActivate(() -> {
             nextEffectsVolume();
-            getController().updateVolume(this.musicVolume, this.effectsVolume);
+            updateVolume(this.musicVolume,this.effectsVolume);
             getViewFactory().createSettingsMenu();
         });
     }

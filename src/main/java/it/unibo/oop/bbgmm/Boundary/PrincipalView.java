@@ -8,8 +8,8 @@ public class PrincipalView {
 
     private final MainWindow window;
 
-    public PrincipalView(final Stage primaryStage, PrincipalController controller, AudioPlayer audioPlayer) {
-        this.window = new MainWindow(primaryStage, controller, audioPlayer);
+    public PrincipalView(final Stage primaryStage, PrincipalController controller) {
+        this.window = new MainWindow(primaryStage, controller);
     }
 
 }

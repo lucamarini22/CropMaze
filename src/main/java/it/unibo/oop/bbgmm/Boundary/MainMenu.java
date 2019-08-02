@@ -31,8 +31,8 @@ public class MainMenu extends AbstractBasicView {
 
 
     public MainMenu(final Stage primaryStage, final PrincipalController controller,
-                    final AudioPlayer audioPlayer, final Group group, final Scene scene) {
-        super(primaryStage,controller, audioPlayer, group, scene);
+                    final Group group, final Scene scene) {
+        super(primaryStage,controller, group, scene);
 
 
         //it intercepts the button presses
@@ -86,7 +86,7 @@ public class MainMenu extends AbstractBasicView {
         root.getChildren().clear();
         root.getChildren().add(menuBox);
 
-        root.setId("mainMenu");
+        //root.setId("mainMenu");
     }
 
     /**
