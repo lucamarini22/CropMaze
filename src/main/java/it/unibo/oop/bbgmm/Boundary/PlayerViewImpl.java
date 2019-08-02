@@ -4,6 +4,7 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
+import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 
 public final class PlayerViewImpl extends AbstractAliveEntityView implements PlayerView {
@@ -30,6 +31,15 @@ public final class PlayerViewImpl extends AbstractAliveEntityView implements Pla
     @Override
     public void setPosition(final Point2D position){
         super.setPosition(position);
+        getView().getParent()
+                .setTranslateX(-getView().getTranslateX() * scaling().getMxx() + getView().getScene().getWidth() / 2);
+        getView().getParent()
+                .setTranslateY(-getView().getTranslateY() * scaling().getMyy() + getView().getScene().getHeight() / 2);
+    }
+
+    private Scale scaling() {
+        return getGroup().getTransforms().stream().filter(t -> t instanceof Scale).map(t -> (Scale) t)
+                .findFirst().orElseGet(() -> new Scale(1, 1));
     }
 
 

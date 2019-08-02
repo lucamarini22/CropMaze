@@ -5,7 +5,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.mapeditor.core.Tile;
@@ -18,14 +17,16 @@ public final class GameFieldViewImpl implements GameFieldView {
     private final Group fieldView = new Group();
     private final Group rootView = new Group(fieldView);
     private final AudioPlayer audioplayer;
+    private final PlayerInputHandler playerInputHandler;
 
     /**
      * Constructor of {@link GameFieldViewImpl}.
      * @param audioPlayer
      *      {@link AudioPlayer}
      */
-    public GameFieldViewImpl(final AudioPlayer audioPlayer) {
+    public GameFieldViewImpl(final AudioPlayer audioPlayer, final PlayerInputHandler playerInputHandler) {
         this.audioplayer = audioPlayer;
+        this.playerInputHandler = playerInputHandler;
     }
 
     @Override

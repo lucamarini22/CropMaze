@@ -3,6 +3,7 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PlayerInputListener;
 import it.unibo.oop.bbgmm.Utilities.PlayerMoves;
 import javafx.geometry.Point2D;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -12,8 +13,10 @@ public class PlayerInputHandler {
     private final Set<KeyCode> input = new HashSet<>();
     private PlayerInputListener listener;
 
-    public PlayerInputHandler(final PlayerInputListener listener){
+    public PlayerInputHandler(final Scene scene , final PlayerInputListener listener){
         this.listener = listener;
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, this::onKeyPressed);
+        scene.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyPressed);
     }
 
     /**
