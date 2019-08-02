@@ -7,6 +7,7 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -38,6 +39,7 @@ public class Feet extends AbstractMovement {
     @Override
     public void attach(Entity owner) {
         super.attach(owner);
+        updateState();
     }
 
     /**

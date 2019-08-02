@@ -1,11 +1,10 @@
 package it.unibo.oop.bbgmm.Entity;
-import  it.unibo.oop.bbgmm.Entity.Component.AbstractEntityComponent;
+import it.unibo.oop.bbgmm.Entity.Component.AbstractEntityComponent;
 import it.unibo.oop.bbgmm.Entity.Component.ClashComponent;
-import it.unibo.oop.bbgmm.Entity.Component.EntityBody;
 import javafx.geometry.Point2D;
 
 
-public abstract class AbstractMovement extends ClashComponent implements Movement {
+public abstract class AbstractMovement extends AbstractEntityComponent implements Movement {
     private State currentState = State.STABLE;
     private Point2D desiredPosition = Point2D.ZERO;
     private Direction direction = Direction.NOTHING;
@@ -20,12 +19,10 @@ public abstract class AbstractMovement extends ClashComponent implements Movemen
      * @param dt
      */
 
-    //non sono sicura su come debba essere utilizzata,
-    // il metodo update è riferito a ClashComponent
+    //devo vedere ancora come usarlo
     @Override
     public void update(double dt) {
-        super.update(dt);
-
+    //super.update(dt);
     }
 
     /**
