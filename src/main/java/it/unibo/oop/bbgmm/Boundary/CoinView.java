@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
  */
 public class CoinView extends AbstractEntityView implements LifelessEntityView {
 
-    private static final String COIN_IMAGE = ""; //modify
+    private static final String COIN_IMAGE = "/images/Coin/coinSilver.png"; //modify
     private static final int WIDTH = 70;
     private static final int HEIGHT = 70;
     private final AudioPlayer audioplayer;
