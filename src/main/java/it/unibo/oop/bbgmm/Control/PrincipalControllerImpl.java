@@ -5,6 +5,9 @@ import it.unibo.oop.bbgmm.Entity.GameStatisticsImpl;
 import it.unibo.oop.bbgmm.Entity.ScoreList;
 import it.unibo.oop.bbgmm.Entity.ScoreListImpl;
 import it.unibo.oop.bbgmm.Utilities.Pair;
+import it.unibo.oop.bbgmm.Utilities.Volume;
+import it.unibo.oop.bbgmm.Utilities.VolumeData;
+import it.unibo.oop.bbgmm.Utilities.VolumeDataImpl;
 import javafx.scene.Group;
 import javafx.stage.Stage;
 
@@ -17,13 +20,12 @@ import java.util.Optional;
  */
 public final class PrincipalControllerImpl implements PrincipalController {
 
-    //class VOLUME to implement?
-    private static final double SOUND_VOLUME = 10;
-    private static final double MUSIC_VOLUME = 10;
+    private VolumeDataImpl volumeData;
     private final PrincipalView view;
     private ScoreList score;
     private Optional<PlayerInputHandler> playerInputHandler = Optional.empty();
     private Optional<GameController> gameControl = Optional.empty();
+    private AudioPlayer audioPlayer;
 
     /**
      * {@link PrincipalControllerImpl} constructor.
@@ -31,12 +33,16 @@ public final class PrincipalControllerImpl implements PrincipalController {
      *      Principal {@link Stage}
      */
     public PrincipalControllerImpl(final Stage principalStage) {
-        this.view = new PrincipalView(principalStage, this);
+        this.volumeData = new VolumeDataImpl();
+        this.audioPlayer = new AudioPlayerImpl(volumeData.getMusicVolume().getValue(),
+                volumeData.getEffectsVolume().getValue());
+        this.view = new PrincipalView(principalStage, this, audioPlayer);
         try {
             this.score = new ScoreListImpl();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
     @Override
     public List<Pair<String, Integer>> getRankingList() {
@@ -46,6 +52,19 @@ public final class PrincipalControllerImpl implements PrincipalController {
     @Override
     public void InsertNewScore(final String name, final Integer result) {
         this.score.addScore(new Pair<>(name, result));
+    }
+
+    @Override
+    public void updateVolume(Volume musicVolume, Volume effectsVolume) {
+        this.volumeData.setMusicVolume(musicVolume);
+        this.volumeData.setEffectsVolume(effectsVolume);
+        this.audioPlayer.setMusicVolume(this.volumeData.getMusicVolume().getValue());
+        this.audioPlayer.setSoundVolume(this.volumeData.getEffectsVolume().getValue());
+    }
+
+    @Override
+    public VolumeData getVolumeData() {
+        return this.volumeData;
     }
 
     @Override
@@ -83,8 +102,9 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void showGameField(final Group group) {
-        this.gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
-                new GameFieldViewImpl(new AudioPlayerImpl(SOUND_VOLUME, MUSIC_VOLUME), this.playerInputHandler.get()), this));
+        gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
+                new GameFieldViewImpl(new AudioPlayerImpl(volumeData.getMusicVolume().getValue(),
+                        volumeData.getEffectsVolume().getValue()), this.playerInputHandler.get()), this));
         group.getChildren().clear();
         group.getChildren().addAll(gameControl.get().getGameFieldView().getGroup().getChildren());
         startGame();

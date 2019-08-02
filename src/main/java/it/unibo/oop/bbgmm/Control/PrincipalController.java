@@ -3,6 +3,8 @@ package it.unibo.oop.bbgmm.Control;
 import it.unibo.oop.bbgmm.Boundary.PlayerInputHandler;
 import it.unibo.oop.bbgmm.Boundary.ViewFactory;
 import it.unibo.oop.bbgmm.Utilities.Pair;
+import it.unibo.oop.bbgmm.Utilities.Volume;
+import it.unibo.oop.bbgmm.Utilities.VolumeData;
 import javafx.scene.Group;
 import javafx.stage.Stage;
 
@@ -25,6 +27,19 @@ public interface PrincipalController {
      * @param result
      */
     void InsertNewScore(final String name, final Integer result);
+
+    /**
+     * Method used to update the audioPlayer
+     * @param musicVolume
+     * @param effectsVolume
+     */
+    void updateVolume(final Volume musicVolume, final Volume effectsVolume);
+
+    /**
+     *
+     * @return
+     */
+    VolumeData getVolumeData();
 
     /**
      * Method that stops the game

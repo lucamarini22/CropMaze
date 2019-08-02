@@ -5,7 +5,6 @@ public class VolumeDataImpl implements VolumeData {
     private  Volume musicVolume = Volume.LOW;
     private  Volume effectsVolume = Volume.LOW;
 
-
     @Override
     public Volume getMusicVolume() {
         return musicVolume;

@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PrincipalController;
+import it.unibo.oop.bbgmm.Utilities.Volume;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -11,7 +12,7 @@ public class ViewFactory {
     private final Group root;
     private final Scene scene;
     private final PrincipalController controller;
-    private final AudioPlayer audioPlayer;
+    private AudioPlayer audioPlayer;
 
     public ViewFactory(Stage stage, PrincipalController controller, AudioPlayer audioPlayer, final Group root, final Scene scene) {
         this.stage = stage;
@@ -58,5 +59,9 @@ public class ViewFactory {
      * @return InsertScoreView
      */
     public InsertScoreView createInsertScoreView(){ return new InsertScoreView(stage,controller,audioPlayer, root, scene);
+    }
+
+    public void updateVolume(Volume musicVolume, Volume effectsVolume){
+        this.audioPlayer = new AudioPlayerImpl(musicVolume.getValue(), effectsVolume.getValue());
     }
 }
