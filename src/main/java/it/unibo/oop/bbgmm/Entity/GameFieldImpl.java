@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisor;
 import it.unibo.oop.bbgmm.Entity.Component.CollisionComponent;
 import java.util.Collections;
@@ -33,7 +34,7 @@ public final class GameFieldImpl implements GameField {
     @Override
     public Entity addEntity(final Entity entity) {
         entities.add(entity);
-        if (entity.get(CollisionComponent.class).isPresent()) {
+        if (entity.get(Collidable.class).isPresent()) {
             this.collisionSupervisor.addCollisionComponent(entity.get(CollisionComponent.class).get());
         }
         return entity;
@@ -47,7 +48,7 @@ public final class GameFieldImpl implements GameField {
     @Override
     public void removeEntity(final Entity entity) {
         this.entities.remove(entity);
-        if (entity.get(CollisionComponent.class).isPresent()) {
+        if (entity.get(Collidable.class).isPresent()) {
             this.collisionSupervisor.removeCollisionComponent(entity.get(CollisionComponent.class).get());
         }
     }
