@@ -18,6 +18,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     private final Group rootView = new Group(fieldView);
     private final AudioPlayer audioplayer;
     private final PlayerInputHandler playerInputHandler;
+    private final StatusBar statusBar;
 
     /**
      * Constructor of {@link GameFieldViewImpl}.
@@ -29,11 +30,13 @@ public final class GameFieldViewImpl implements GameFieldView {
     public GameFieldViewImpl(final AudioPlayer audioPlayer, final PlayerInputHandler playerInputHandler) {
         this.audioplayer = audioPlayer;
         this.playerInputHandler = playerInputHandler;
+        statusBar = new StatusBarImpl();
+        //rootView.getChildren().add(statusBar.getStatusBox());
     }
 
     @Override
     public EntityViewFactory getEntityViewFactory() {
-        return new EntityViewFactoryImpl(fieldView, audioplayer);
+        return new EntityViewFactoryImpl(this.fieldView, this.audioplayer, this.statusBar);
     }
 
     @Override

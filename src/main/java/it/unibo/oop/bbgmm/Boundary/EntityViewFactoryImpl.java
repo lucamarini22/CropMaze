@@ -9,6 +9,7 @@ import javafx.scene.Group;
 public final class EntityViewFactoryImpl implements EntityViewFactory {
     private final Group parent;
     private final AudioPlayer audioPlayer;
+    private final StatusBar statusBar;
 
     /**
      * Constructor of {@link EntityViewFactoryImpl}.
@@ -16,14 +17,16 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
      *      {@link Group} instance parent
      * @param audioPlayer
      *      {@link AudioPlayer} instance
+     * @param statusBar
+     *      Bar that visualize the {@link it.unibo.oop.bbgmm.Entity.Player}'s status
      */
-    public EntityViewFactoryImpl(final Group parent, final AudioPlayer audioPlayer) {
+    public EntityViewFactoryImpl(final Group parent, final AudioPlayer audioPlayer, final StatusBar statusBar) {
+        this.statusBar = statusBar;
         this.parent = parent;
         this.audioPlayer = audioPlayer;
     }
     @Override
     public PlayerView createPlayerView() {
-        StatusBar statusBar = new StatusBarImpl();
         return new PlayerViewImpl(parent, statusBar);
     }
 
