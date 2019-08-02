@@ -1,7 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PlayerInputListener;
-import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
@@ -24,6 +23,8 @@ public final class GameFieldViewImpl implements GameFieldView {
      * Constructor of {@link GameFieldViewImpl}.
      * @param audioPlayer
      *      {@link AudioPlayer}
+     * @param playerInputHandler
+     *      {@link PlayerInputHandler} instance
      */
     public GameFieldViewImpl(final AudioPlayer audioPlayer, final PlayerInputHandler playerInputHandler) {
         this.audioplayer = audioPlayer;

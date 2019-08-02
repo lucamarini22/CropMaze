@@ -1,6 +1,5 @@
 package it.unibo.oop.bbgmm.Entity;
 
-import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 

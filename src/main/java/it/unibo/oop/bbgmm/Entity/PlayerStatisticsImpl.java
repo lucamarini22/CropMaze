@@ -1,7 +1,5 @@
 package it.unibo.oop.bbgmm.Entity;
 
-import java.util.Objects;
-
 /**
  * Stores and sets statistics of an {@link Player} object.
  */

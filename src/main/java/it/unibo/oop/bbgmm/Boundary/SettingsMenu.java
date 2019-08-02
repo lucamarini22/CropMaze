@@ -22,8 +22,8 @@ public class SettingsMenu extends AbstractBasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 10;
     private static final int DELTA = 80;
-    private static final int BOX_X_COORDINATE = 315;
-    private static final int BOX_Y_COORDINATE = 300;
+    private static final int BOX_X_COORDINATE = 200;
+    private static final int BOX_Y_COORDINATE = 185;
 
     private VBox menuBox;
     private int currentItem = 0;
@@ -31,13 +31,14 @@ public class SettingsMenu extends AbstractBasicView {
     private Volume effectsVolume = getController().getVolumeData().getEffectsVolume();
     private final MenuItem itemSmallScreen = new MenuItem("Small Screen");
     private final MenuItem itemFullScreen = new MenuItem("Full Screen");
-    private MenuItem itemMusicVolume = new MenuItem(musicVolume.getText());
-    private MenuItem itemEffectsVolume = new MenuItem(effectsVolume.getText());
+    private MenuItem itemMusicVolume = new MenuItem("Music: " + musicVolume.getText());
+    private MenuItem itemEffectsVolume = new MenuItem("Effects: " + effectsVolume.getText());
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public SettingsMenu(final Stage primaryStage, final PrincipalController controller,
                         final AudioPlayer audioPlayer, final Group group, final Scene scene) {
         super(primaryStage, controller, audioPlayer, group, scene);
+
 
         //it intercepts the button presses
         getScene().setOnKeyPressed(event -> {

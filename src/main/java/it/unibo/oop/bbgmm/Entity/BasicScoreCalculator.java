@@ -1,7 +1,7 @@
 package it.unibo.oop.bbgmm.Entity;
 
 /**
- * Calculates the score using the {@link Player} statistics.
+ * Calculates the score using the Player statistics.
  */
 public final class BasicScoreCalculator implements ScoreCalculator {
     private static final int KILL_MULTIPLIER = 50;

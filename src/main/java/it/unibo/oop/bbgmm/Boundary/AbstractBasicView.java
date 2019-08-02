@@ -17,7 +17,7 @@ public abstract class AbstractBasicView {
     private final ViewFactory viewFactory;
     private final AudioPlayer audioPlayer;
     private final Group root;
-    private final Scene scene;
+    private Scene scene;
 
     public AbstractBasicView(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer, final Group root, final Scene scene) {
         this.root = root;
@@ -26,6 +26,7 @@ public abstract class AbstractBasicView {
         this.primaryStage = primaryStage;
         this.audioPlayer = audioPlayer;
         this.viewFactory = new ViewFactory(primaryStage, controller, audioPlayer, root, scene);
+        this.scene.getStylesheets().add("Style.css");
     }
 
     /**
@@ -55,6 +56,9 @@ public abstract class AbstractBasicView {
         return this.scene;
     }
 
+    protected void setScene(Scene scene){
+        this.scene = scene;
+    }
     /**
      * Getter for the Stage
      * @return primaryStage
@@ -85,10 +89,12 @@ public abstract class AbstractBasicView {
     protected void checkResolution(){
         if(Resolution.isFullScreen()){
             primaryStage.setFullScreen(true);
+
         }
         else{
             primaryStage.setFullScreen(false);
             primaryStage.centerOnScreen();
+            this.scene.getWidth();
         }
     }
 

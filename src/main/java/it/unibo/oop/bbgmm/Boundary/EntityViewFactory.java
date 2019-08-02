@@ -20,11 +20,18 @@ public interface EntityViewFactory {
      */
     LifelessEntityView createCoinView();
 
+    /**
+     * @return a Double Speed {@link it.unibo.oop.bbgmm.Entity.PowerUp} view
+     */
     LifelessEntityView createDoubleSpeedView();
 
+    /**
+     * @return a Double Damage {@link it.unibo.oop.bbgmm.Entity.PowerUp} view
+     */
     LifelessEntityView createDoubleDamageView();
 
+    /**
+     * @return a Shield {@link it.unibo.oop.bbgmm.Entity.PowerUp} view
+     */
     LifelessEntityView createShieldView();
-
-    //upgrades and power ups
 }
