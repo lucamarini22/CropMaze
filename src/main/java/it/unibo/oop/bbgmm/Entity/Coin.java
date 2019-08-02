@@ -27,6 +27,7 @@ public class Coin extends AbstractEntity {
                 .setPosition(position)
                 .setDimension(SIZE)
                 .setMovable(false)
+                .setDirection(Direction.NOTHING)
                 .build());
     }
 }
