@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import javafx.scene.Node;
+
 public interface StatusBar {
     /**
      * Set the max health
@@ -19,4 +21,6 @@ public interface StatusBar {
      *      Number of coins collected
      */
     void setCoins(int coins);
+
+
 }
