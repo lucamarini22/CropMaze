@@ -18,13 +18,13 @@ public abstract class AbstractEntityView implements EntityView {
     }
 
     @Override
-    public void setPosition(Point2D newPosition) {
+    public void setPosition(final Point2D newPosition) {
         this.image.setTranslateX(newPosition.getX() - this.image.getBoundsInLocal().getWidth() / 2);
         this.image.setTranslateY(newPosition.getY() - this.image.getBoundsInLocal().getHeight() / 2);
     }
 
     @Override
-    public void setDimension(Dimension2D dimension) {
+    public void setDimension(final Dimension2D dimension) {
         this.image.setFitHeight(dimension.getHeight());
         this.image.setFitWidth(dimension.getHeight());
     }
