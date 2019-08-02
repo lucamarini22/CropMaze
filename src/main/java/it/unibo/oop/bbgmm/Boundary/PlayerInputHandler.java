@@ -40,6 +40,7 @@ public class PlayerInputHandler {
             if (event.getEventType().equals(KeyEvent.KEY_RELEASED)) {
                 this.input.remove(event.getCode());
             }
+            applyMovement();
         }
     }
 
@@ -50,7 +51,10 @@ public class PlayerInputHandler {
     /**
      * notify the controller that the player wants to move
      */
-    public void applyMovement(){listener.ifPresent(playerInputListener -> playerInputListener.move(computeMovement()));}
+    private void applyMovement(){listener.ifPresent(playerInputListener ->{
+        playerInputListener.move(computeMovement());
+        playerInputListener.shoot(computeShooting());
+    }); }
 
     public Point2D computeMovement(){
         Point2D shift = Point2D.ZERO;
