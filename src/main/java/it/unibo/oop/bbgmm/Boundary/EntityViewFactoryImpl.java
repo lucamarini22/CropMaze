@@ -29,9 +29,7 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
 
     @Override
     public AliveEntityView createAlienView() {
-        //
-        //return new AliveEntityViewImpl(parent, );
-        return null;
+        return new AlienView(parent);
     }
 
     @Override
