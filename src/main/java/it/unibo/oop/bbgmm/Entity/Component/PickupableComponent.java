@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
+import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.Collision;
 import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.Power;
@@ -16,7 +17,7 @@ public class PickupableComponent extends AbstractEntityComponent implements Coll
     private final Power power;
 
     public PickupableComponent(final Power power){
-        this.getOwner().ifPresent(owner -> owner.get(CollisionComponent.class).ifPresent(
+        this.getOwner().ifPresent(owner -> owner.get(Collidable.class).ifPresent(
                 c -> c.getEvent().register(this::pickUp)));
         this.power = power;
     }
