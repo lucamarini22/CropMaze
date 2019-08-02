@@ -41,6 +41,11 @@ public abstract class AbstractEntityController<V extends EntityView> implements 
      */
     protected final V getEntityView(){ return entityView; }
 
+    /**
+     * it manages the entity destruction
+     */
+    public abstract void entityDestruction();
+
 
 
 }
