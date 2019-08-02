@@ -6,13 +6,11 @@ import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.Utilities.ZipExtractor;
 import javafx.animation.AnimationTimer;
-import javafx.stage.Stage;
 import org.mapeditor.core.Map;
 import org.mapeditor.io.TMXMapReader;
 
 import java.io.File;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Set;
 
 /**
@@ -21,7 +19,7 @@ import java.util.Set;
 public final class GameControllerImpl implements GameController {
 
     private static final double FRAME = 1.0 / 60;
-    private static final String MAP_PATH = "/images/map/Map.zip";
+    private static final String MAP_PATH = "/images/Map/Map.zip";
     private static final String MAP_NAME = "CropMazeMap.tmx";
 
     private final PrincipalController principalController;
@@ -95,7 +93,7 @@ public final class GameControllerImpl implements GameController {
     }
 
     @Override
-    public GameFieldView getGameFieldView(){
+    public GameFieldView getGameFieldView() {
         return this.gameFieldView;
     }
 
