@@ -36,12 +36,13 @@ public class LimitedBulletFeet extends Feet{
             super.move(distanceVector);
             if(getPosition().equals(Point2D.ZERO)){
                 remove();
+            }else{
+                lifeComponent.damaged(STEP);
             }
         }
         else{
             remove();
         }
-        lifeComponent.damaged(STEP);
     }
 
     @Override
