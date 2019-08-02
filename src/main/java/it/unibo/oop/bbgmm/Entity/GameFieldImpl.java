@@ -35,7 +35,7 @@ public final class GameFieldImpl implements GameField {
     public Entity addEntity(final Entity entity) {
         entities.add(entity);
         if (entity.get(Collidable.class).isPresent()) {
-            this.collisionSupervisor.addCollisionComponent(entity.get(CollisionComponent.class).get());
+            this.collisionSupervisor.addCollisionComponent(entity.get(Collidable.class).get());
         }
         return entity;
     }
@@ -49,7 +49,7 @@ public final class GameFieldImpl implements GameField {
     public void removeEntity(final Entity entity) {
         this.entities.remove(entity);
         if (entity.get(Collidable.class).isPresent()) {
-            this.collisionSupervisor.removeCollisionComponent(entity.get(CollisionComponent.class).get());
+            this.collisionSupervisor.removeCollisionComponent(entity.get(Collidable.class).get());
         }
     }
 

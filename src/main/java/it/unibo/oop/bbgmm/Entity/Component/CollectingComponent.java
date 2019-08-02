@@ -1,11 +1,12 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
+import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.Collision;
 
 public class CollectingComponent extends AbstractEntityComponent implements Collector{
 
     public CollectingComponent(){
-        this.getOwner().ifPresent(owner -> owner.get(CollisionComponent.class).ifPresent(
+        this.getOwner().ifPresent(owner -> owner.get(Collidable.class).ifPresent(
                 c -> c.getEvent().register(this::collect)));
     }
 
