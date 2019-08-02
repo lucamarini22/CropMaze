@@ -1,6 +1,8 @@
 package it.unibo.oop.bbgmm.Tests;
 
 import it.unibo.oop.bbgmm.Entity.*;
+import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
+import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
 import it.unibo.oop.bbgmm.Entity.Component.Weapon;
 
 import javafx.geometry.Point2D;
@@ -10,14 +12,13 @@ import org.junit.Test;
 import java.util.List;
 
 public class BulletTest {
-    private final EntityFactory entityFactory;
     private final Player player;
     private Point2D playerPosition;
+    private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl());
 
     public BulletTest() {
-        entityFactory = new EntityFactoryImpl();
         playerPosition = new Point2D(20,40);
-        player = entityFactory.createPlayer(playerPosition);
+        player = new Player(new BodyBuilder(), playerPosition, 100, this.gameField);
     }
 
     @Test
@@ -29,10 +30,13 @@ public class BulletTest {
         //list size should be 1
         Assert.assertEquals(list.size(),1);
 
-        for(int i = 0; i < weapon.getWeaponRange(); i++){
+        Bullet bullet = list.get(0);
+        for(int i = 0; i < weapon.getWeaponRange()-1; i++){
             //make the bullet move
-            list.get(0).update(1);
+            bullet.update(1);
         }
+        player.destroy();
+        bullet.destroy();
 
         list = weapon.getBulletList();
 

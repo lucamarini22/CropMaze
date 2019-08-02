@@ -10,9 +10,10 @@ import java.util.Set;
 
 public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
+    private static final double COOLDOWN_TIME = 0.5;
+    private static final int INITIAL_STEP = 1;
     private int weaponDamage;
     private int weaponSpeed;
-    private static final double COOLDOWN_TIME = 0.5;
     private int weaponRange;
     private List<Bullet> bulletShoted;
     private final Timer cooldown = Timer.seconds(COOLDOWN_TIME);
@@ -28,7 +29,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
      */
     public WeaponImpl (final Inventory basicWeapon, final GameField gameField) {
         this.weaponDamage = basicWeapon.damage;
-        this.weaponRange = basicWeapon.range;
+        this.weaponRange = basicWeapon.range+INITIAL_STEP;
         this.weaponSpeed = basicWeapon.speed;
         this.bulletShoted = new ArrayList<Bullet>();
         cooldown.update(COOLDOWN_TIME);
@@ -58,7 +59,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
     @Override
     public void setWeaponRange(final int range) {
-        this.weaponRange = range;
+        this.weaponRange = range+INITIAL_STEP;
     }
 
     @Override
