@@ -102,14 +102,9 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void showGameField(final Group group) {
-<<<<<<< HEAD
         gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
                 new GameFieldViewImpl(new AudioPlayerImpl(volumeData.getMusicVolume().getValue(),
-                        volumeData.getEffectsVolume().getValue())), this));
-=======
-        this.gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
-                new GameFieldViewImpl(new AudioPlayerImpl(SOUND_VOLUME, MUSIC_VOLUME), this.playerInputHandler.get()), this));
->>>>>>> 728344ef6c352b8380b95d68aec4dc97731bba89
+                        volumeData.getEffectsVolume().getValue()), this.playerInputHandler.get()), this));
         group.getChildren().clear();
         group.getChildren().addAll(gameControl.get().getGameFieldView().getGroup().getChildren());
         startGame();
