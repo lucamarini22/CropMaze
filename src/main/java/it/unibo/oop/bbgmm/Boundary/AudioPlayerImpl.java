@@ -9,8 +9,8 @@ import java.net.URL;
 
 public class AudioPlayerImpl implements AudioPlayer{
 
-    private final double soundVolume;
-    private final double musicVolume;
+    private double soundVolume;
+    private double musicVolume;
     private MediaPlayer mediaPlayer;
 
     public AudioPlayerImpl(final double soundVolume, final double musicVolume){
@@ -42,5 +42,13 @@ public class AudioPlayerImpl implements AudioPlayer{
         mediaPlayer = new MediaPlayer(new Media(path));
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         mediaPlayer.setVolume(musicVolume);
+    }
+
+    public void setSoundVolume(final double volume){
+        this.soundVolume = volume;
+    }
+
+    public void setMusicVolume(final double volume){
+        this.musicVolume = volume;
     }
 }

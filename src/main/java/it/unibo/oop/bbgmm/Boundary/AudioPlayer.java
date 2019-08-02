@@ -13,4 +13,8 @@ public interface AudioPlayer {
     void playMusic(String path);
 
     void stopMusic();
+
+    void setSoundVolume(final double volume);
+
+    void setMusicVolume(final double volume);
 }

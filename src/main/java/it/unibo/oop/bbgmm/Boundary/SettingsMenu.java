@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
+import it.unibo.oop.bbgmm.Utilities.Volume;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -10,6 +11,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
+
 /**
  * @author Manuel
  * Scene for the settings Menu used to set the Resolution
@@ -17,15 +20,19 @@ import javafx.stage.Stage;
 
 public class SettingsMenu extends AbstractBasicView {
 
-    private static final int SPACE_BETWEEN_ITEM = 40;
+    private static final int SPACE_BETWEEN_ITEM = 10;
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 300;
 
     private VBox menuBox;
     private int currentItem = 0;
+    private Volume musicVolume = getController().getVolumeData().getMusicVolume();
+    private Volume effectsVolume = getController().getVolumeData().getEffectsVolume();
     private final MenuItem itemSmallScreen = new MenuItem("Small Screen");
     private final MenuItem itemFullScreen = new MenuItem("Full Screen");
+    private MenuItem itemMusicVolume = new MenuItem(musicVolume.getText());
+    private MenuItem itemEffectsVolume = new MenuItem(effectsVolume.getText());
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public SettingsMenu(final Stage primaryStage, final PrincipalController controller,
@@ -60,6 +67,8 @@ public class SettingsMenu extends AbstractBasicView {
         menuBox = new VBox(SPACE_BETWEEN_ITEM,
                 itemSmallScreen,
                 itemFullScreen,
+                itemMusicVolume,
+                itemEffectsVolume,
                 itemBack);
 
         buttonActions();
@@ -73,7 +82,7 @@ public class SettingsMenu extends AbstractBasicView {
             itemSmallScreen.setUnderline(false);
             itemFullScreen.setUnderline(true);
         }
-        else{
+        else {
             menuBox.setLayoutX(BOX_X_COORDINATE);
             menuBox.setLayoutY(BOX_Y_COORDINATE);
             itemSmallScreen.setUnderline(true);
@@ -113,7 +122,28 @@ public class SettingsMenu extends AbstractBasicView {
             Resolution.setFullResolution();
             itemSmallScreen.setUnderline(false);
             itemFullScreen.setUnderline(true);
-
         });
+
+        itemMusicVolume.setOnActivate(() -> {
+            nextMusicVolume();
+            getController().updateVolume(this.musicVolume, this.effectsVolume);
+            getAudioPlayer().stopMusic();
+            getAudioPlayer().playMusic(MENU_TRACK.getPath());
+            getViewFactory().createSettingsMenu();
+        });
+
+        itemEffectsVolume.setOnActivate(() -> {
+            nextEffectsVolume();
+            getController().updateVolume(this.musicVolume, this.effectsVolume);
+            getViewFactory().createSettingsMenu();
+        });
+    }
+
+    private void nextMusicVolume(){
+        this.musicVolume = Volume.values()[(this.musicVolume.ordinal() + 1)% Volume.values().length];
+    }
+
+    private void nextEffectsVolume(){
+        this.effectsVolume = Volume.values()[(this.effectsVolume.ordinal() + 1)% Volume.values().length];
     }
 }

@@ -2,6 +2,8 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
+import it.unibo.oop.bbgmm.Utilities.Volume;
+import it.unibo.oop.bbgmm.Utilities.VolumeData;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -16,17 +18,15 @@ import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
  */
 
 public class MainWindow {
-    private final static double SOUND_VOLUME = 1;
-    private final static double MUSIC_VOLUME = 0.4;
     private final Stage primaryStage;
     private final Group root;
     private final Scene scene;
     private final ViewFactory viewFactory;
     private final AudioPlayer audioPlayer;
 
-    public MainWindow(final Stage primaryStage, final PrincipalController controller) {
+    public MainWindow(final Stage primaryStage, final PrincipalController controller, AudioPlayer audioPlayer) {
         this.primaryStage = primaryStage;
-        this.audioPlayer = new AudioPlayerImpl(SOUND_VOLUME,MUSIC_VOLUME);
+        this.audioPlayer = audioPlayer;
         this.primaryStage.setTitle("CROP MAZE");
         this.primaryStage.setFullScreen(false);
         this.primaryStage.setWidth(Resolution.getWidth());
@@ -43,7 +43,7 @@ public class MainWindow {
         //set the main menu as the scene
         this.root = new Group();
         this.scene = new Scene(root, Resolution.getWidth(), Resolution.getHeight());
-        this.viewFactory = new ViewFactory(primaryStage, controller, audioPlayer, root, scene);
+        this.viewFactory = new ViewFactory(primaryStage, controller,  audioPlayer, root, scene);
         this.primaryStage.setScene(scene);
         this.viewFactory.createMainMenu();
 
