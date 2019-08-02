@@ -20,11 +20,11 @@ public class PowerUpView extends AbstractEntityView implements LifelessEntityVie
         switch (tag){
 
             case DOUBLEDAMAGE:
-                getView().setImage(new Image(""));
+                getView().setImage(new Image("images/shield.png"));
             case SHIELD:
-                getView().setImage(new Image(""));
+                getView().setImage(new Image("images/shield.png"));
             case DOUBLESPEED:
-                getView().setImage(new Image(""));
+                getView().setImage(new Image("images/shield.png"));
         }
     }
 }
