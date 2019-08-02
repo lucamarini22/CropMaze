@@ -29,9 +29,11 @@ public class MainMenu extends AbstractBasicView {
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
+
     public MainMenu(final Stage primaryStage, final PrincipalController controller,
                     final AudioPlayer audioPlayer, final Group group, final Scene scene) {
         super(primaryStage,controller, audioPlayer, group, scene);
+
 
         //it intercepts the button presses
         getScene().setOnKeyPressed(event -> {
@@ -85,8 +87,6 @@ public class MainMenu extends AbstractBasicView {
         root.getChildren().add(menuBox);
 
         root.setId("mainMenu");
-
-        getScene().getStylesheets().add("Style.css");
     }
 
     /**
@@ -105,6 +105,7 @@ public class MainMenu extends AbstractBasicView {
             getController().showGameField(getRoot());
             getAudioPlayer().stopMusic();
             checkResolution();
+            clearEnter();
         });
         itemScore.setOnActivate(() -> {
             getController().showRankingView(getViewFactory());
@@ -115,6 +116,16 @@ public class MainMenu extends AbstractBasicView {
         itemExit.setOnActivate(() -> {
             getController().stopGame();
             System.exit(0);
+        });
+    }
+
+    /**
+     * it clears the actions of the button enter
+     */
+    private void clearEnter() {
+        getScene().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+            }
         });
     }
 }
