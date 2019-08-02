@@ -1,6 +1,5 @@
 package it.unibo.oop.bbgmm.Entity;
 import it.unibo.oop.bbgmm.Entity.Component.AbstractEntityComponent;
-import it.unibo.oop.bbgmm.Entity.Component.ClashComponent;
 import javafx.geometry.Point2D;
 
 
