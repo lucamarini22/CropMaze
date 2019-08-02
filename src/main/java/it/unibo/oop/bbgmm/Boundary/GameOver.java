@@ -3,6 +3,8 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -21,7 +23,6 @@ public class GameOver extends AbstractBasicView {
     private static final int GAMEOVER_Y_COORDINATE=50;
     private final static double SOUND_VOLUME = 1;
     private final static double MUSIC_VOLUME = 0.4;
-    private final AnchorPane pane;
     private static final ImageView gameOVer = new ImageView(new Image("images/gameOver.png"));
     private int currentItem = 0;
     private VBox menuBox;
@@ -29,10 +30,10 @@ public class GameOver extends AbstractBasicView {
     private final MenuItem itemMainMenu = new MenuItem("MAIN MENU");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    public GameOver(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer){
-        super(primaryStage, controller, audioPlayer);
+    public GameOver(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer, final Group group, final Scene scene){
+        super(primaryStage, controller, audioPlayer, group, scene);
 
-        this.setOnKeyPressed(event -> {
+        getScene().setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.UP) {
                 if(currentItem > 0) {
                     playSwitchSound();
@@ -62,7 +63,6 @@ public class GameOver extends AbstractBasicView {
         boxImage.setTranslateX(GAMEOVER_X_COORDINATE);
         boxImage.setTranslateY(GAMEOVER_Y_COORDINATE);
 
-        pane = new AnchorPane();
         menuBox = new VBox(SPACE_BETWEEN_ITEM, itemMainMenu, itemExit);
 
         buttonActions();
@@ -81,13 +81,12 @@ public class GameOver extends AbstractBasicView {
 
         getMenuItem(0).setActive(true);
 
-        pane.getChildren().add(boxImage);
-        pane.getChildren().add(menuBox);
+        Group root = getRoot();
+        root.getChildren().clear();
+        root.getChildren().add(boxImage);
+        root.getChildren().add(menuBox);
 
-        pane.setId("gameOverView");
-        this.getStylesheets().add("Style.css");
-
-        this.setRoot(pane);
+        root.setId("gameOverView");
     }
 
     private MenuItem getMenuItem(int index){
@@ -97,10 +96,10 @@ public class GameOver extends AbstractBasicView {
     @Override
     protected void buttonActions(){
         itemMainMenu.setOnActivate(() -> {
-            getController().showMainMenu(getPrimaryStage(),getViewFactory());
+            /*getController().showMainMenu(getPrimaryStage(),getViewFactory());
             checkResolution();
             getAudioPlayer().stopMusic();
-            getAudioPlayer().playMusic(MENU_TRACK.getPath());
+            getAudioPlayer().playMusic(MENU_TRACK.getPath());*/
 
         });
 

@@ -52,7 +52,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     }
 
     @Override
-    public Scene getScene() {
-        return new Scene(rootView, Resolution.getWidth(), Resolution.getHeight());
+    public Group getGroup() {
+        return this.rootView;
     }
 }

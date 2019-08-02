@@ -4,12 +4,11 @@ import it.unibo.oop.bbgmm.Boundary.AudioPlayerImpl;
 import it.unibo.oop.bbgmm.Boundary.GameFieldViewImpl;
 import it.unibo.oop.bbgmm.Boundary.PrincipalView;
 import it.unibo.oop.bbgmm.Boundary.ViewFactory;
-import it.unibo.oop.bbgmm.Entity.GameField;
 import it.unibo.oop.bbgmm.Entity.GameStatisticsImpl;
 import it.unibo.oop.bbgmm.Entity.ScoreList;
 import it.unibo.oop.bbgmm.Entity.ScoreListImpl;
 import it.unibo.oop.bbgmm.Utilities.Pair;
-import it.unibo.oop.bbgmm.Utilities.Resolution;
+import javafx.scene.Group;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -64,21 +63,23 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
-    public void showMainMenu(final Stage stage, final ViewFactory viewFactory) {
-        stage.setScene(viewFactory.createMainMenu());
+    public void showMainMenu(final ViewFactory viewFactory) {
+        //manca quello per settare a zero il livello
+        viewFactory.createMainMenu();
     }
 
     @Override
-    public void showGameField(final Stage stage) {
+    public void showGameField(final Group group) {
         gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
                 new GameFieldViewImpl(new AudioPlayerImpl(SOUND_VOLUME, MUSIC_VOLUME)), this));
-        stage.setScene(gameControl.get().getGameFieldView().getScene());
+        group.getChildren().clear();
+        group.getChildren().addAll(gameControl.get().getGameFieldView().getGroup().getChildren());
         startGame();
     }
 
     @Override
-    public void showGameOver(Stage stage, ViewFactory viewFactory) {
-        stage.setScene(viewFactory.createGameOver());
+    public void showGameOver(final ViewFactory viewFactory) {
+        viewFactory.createGameOver();
     }
 
 

@@ -3,6 +3,8 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -19,7 +21,6 @@ public class SettingsMenu extends AbstractBasicView {
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 315;
     private static final int BOX_Y_COORDINATE = 300;
-    private final AnchorPane pane;
 
     private VBox menuBox;
     private int currentItem = 0;
@@ -27,11 +28,12 @@ public class SettingsMenu extends AbstractBasicView {
     private final MenuItem itemFullScreen = new MenuItem("Full Screen");
     private final MenuItem itemBack = new MenuItem("BACK");
 
-    public SettingsMenu(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer) {
-        super(primaryStage, controller, audioPlayer);
+    public SettingsMenu(final Stage primaryStage, final PrincipalController controller,
+                        final AudioPlayer audioPlayer, final Group group, final Scene scene) {
+        super(primaryStage, controller, audioPlayer, group, scene);
 
         //it intercepts the button presses
-        this.setOnKeyPressed(event -> {
+        getScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
                 if (currentItem > 0) {
                     playSwitchSound();
@@ -54,7 +56,6 @@ public class SettingsMenu extends AbstractBasicView {
             }
         });
 
-        pane = new AnchorPane();
 
         menuBox = new VBox(SPACE_BETWEEN_ITEM,
                 itemSmallScreen,
@@ -81,12 +82,12 @@ public class SettingsMenu extends AbstractBasicView {
 
         getMenuItem(0).setActive(true);
 
-        pane.getChildren().add(menuBox);
+        Group root = getRoot();
+        root.getChildren().clear();
+        root.getChildren().add(menuBox);
 
-        pane.setId("settingsMenu");
-        this.getStylesheets().add("Style.css");
+        root.setId("settingsMenu");
 
-        this.setRoot(pane);
     }
 
     /**
@@ -99,18 +100,20 @@ public class SettingsMenu extends AbstractBasicView {
     @Override
     protected void buttonActions() {
         itemBack.setOnActivate(() -> {
-            getPrimaryStage().setScene(getViewFactory().createMainMenu());
             checkResolution();
+            getViewFactory().createMainMenu();
         });
         itemSmallScreen.setOnActivate(() -> {
             Resolution.setSmallResolution();
             itemSmallScreen.setUnderline(true);
             itemFullScreen.setUnderline(false);
+
         });
         itemFullScreen.setOnActivate(() -> {
             Resolution.setFullResolution();
             itemSmallScreen.setUnderline(false);
             itemFullScreen.setUnderline(true);
+
         });
     }
 }

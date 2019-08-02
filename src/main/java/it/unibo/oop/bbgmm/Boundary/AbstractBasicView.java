@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -9,19 +10,22 @@ import javafx.stage.Stage;
 import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_PRESS;
 import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_SWITCH;
 
-public abstract class AbstractBasicView extends Scene {
+public abstract class AbstractBasicView {
 
     private final PrincipalController controller;
     private final Stage primaryStage;
     private final ViewFactory viewFactory;
     private final AudioPlayer audioPlayer;
+    private final Group root;
+    private final Scene scene;
 
-    public AbstractBasicView(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer) {
-        super(new AnchorPane(), Resolution.getWidth(), Resolution.getHeight());
+    public AbstractBasicView(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer, final Group root, final Scene scene) {
+        this.root = root;
+        this.scene = scene;
         this.controller = controller;
         this.primaryStage = primaryStage;
         this.audioPlayer = audioPlayer;
-        this.viewFactory = new ViewFactory(primaryStage, controller, audioPlayer);
+        this.viewFactory = new ViewFactory(primaryStage, controller, audioPlayer, root, scene);
     }
 
     /**
@@ -36,11 +40,27 @@ public abstract class AbstractBasicView extends Scene {
     protected PrincipalController getController() { return this.controller; }
 
     /**
+     * Getter for the Root
+     * @return root
+     */
+    protected Group getRoot() {
+        return this.root;
+    }
+
+    /**
+     * Getter for the Scene
+     * @return scene
+     */
+    protected Scene getScene() {
+        return this.scene;
+    }
+
+    /**
      * Getter for the Stage
      * @return primaryStage
      */
     protected Stage getPrimaryStage() {
-        return primaryStage;
+        return this.primaryStage;
     }
 
     /**

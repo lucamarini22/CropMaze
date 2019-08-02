@@ -3,6 +3,8 @@ import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.FontMaker;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,20 +28,19 @@ public class RankingView extends AbstractBasicView {
     //private VBox boxImage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
-    public RankingView(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer){
-        super(primaryStage, controller, audioPlayer);
+    public RankingView(final Stage primaryStage, final PrincipalController controller,
+                       final AudioPlayer audioPlayer, final Group group, final Scene scene){
+        super(primaryStage, controller, audioPlayer, group, scene);
 
-        this.setOnKeyPressed(event->{
+        getScene().setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER ){
                 playPressSound();
                 itemBack.activate();
             }
         });
 
-        AnchorPane pane = new AnchorPane();
-
-
         menuBox = new VBox(SPACE_BETWEEN_ITEM);
+
         if(!controller.getRankingList().isEmpty()) {
             //boxImage = new VBox(crown);
             List<Text> rankList = controller.getRankingList().stream()
@@ -66,20 +67,19 @@ public class RankingView extends AbstractBasicView {
         menuBox.getChildren().addAll(itemBack);
         menuBox.setAlignment(Pos.TOP_CENTER);
         itemBack.setActive(true);
-        pane.getChildren().add(menuBox);
+
+        Group root = getRoot();
+        root.getChildren().clear();
+        root.getChildren().add(menuBox);
 
 
-        pane.setId("rankingView");
-        this.getStylesheets().add("Style.css");
-
-        this.setRoot(pane);
+        root.setId("rankingView");
     }
 
     @Override
     protected void buttonActions() {
         itemBack.setOnActivate(() -> {
-            getPrimaryStage().setScene(getViewFactory().createMainMenu());
-            checkResolution();
+            getViewFactory().createMainMenu();
         });
     }
 

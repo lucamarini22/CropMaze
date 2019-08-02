@@ -76,7 +76,7 @@ public class InsertScoreView extends AbstractBasicView {
         }
 
         getMenuItem(0).setActive(true);
-        
+
         Group root = getRoot();
         root.getChildren().clear();
         root.getChildren().add(menuBox);
@@ -94,23 +94,21 @@ public class InsertScoreView extends AbstractBasicView {
     protected void buttonActions() {
 
         itemMainMenu.setOnActivate(() -> {
-            /*getPrimaryStage().setScene(getViewFactory().createMainMenu());
-            checkResolution();*/
+            getViewFactory().createMainMenu();
         });
 
         itemRanking.setOnActivate(() -> {
-            /*getPrimaryStage().setScene(getViewFactory().createRankingView());
-            checkResolution();*/
+            getViewFactory().createRankingView();
         });
 
         itemScore.setOnActivate(() -> {
-            /*String id = insertID.getText();
+            String id = insertID.getText();
             if(!id.isEmpty()) {
                 String result;
                 result = id.replace(" ", "");
                 getController().InsertNewScore(result, 10);
                 getMenuItem(currentItem).activate();
-            }*/
+            }
         });
     }
 }

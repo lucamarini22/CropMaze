@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Control;
 
 import it.unibo.oop.bbgmm.Boundary.ViewFactory;
 import it.unibo.oop.bbgmm.Utilities.Pair;
+import javafx.scene.Group;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -36,21 +37,19 @@ public interface PrincipalController {
 
     /**
      * Method used by the view to show the main menu
-     * @param stage
      * @param viewFactory
      */
-    void showMainMenu(final Stage stage, final ViewFactory viewFactory);
+    void showMainMenu(final ViewFactory viewFactory);
 
     /**
      * Method used by the view to show the GameField and start the game
-     * @param stage
+     * @param group
      */
-    void showGameField(final Stage stage);
+    void showGameField(final Group group);
 
     /**
      * Method used by the view to show the gameOver screen
-     * @param stage
      * @param viewFactory
      */
-    void showGameOver(final Stage stage, final ViewFactory viewFactory);
+    void showGameOver(final ViewFactory viewFactory);
 }

@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import org.mapeditor.core.TileLayer;
 
@@ -26,8 +27,8 @@ public interface GameFieldView {
     void showField(TileLayer layer, Point2D topLeft, Dimension2D tileSize);
 
     /**
-     * Getter for the Scene
-     * @return Scene
+     * Getter for the Group
+     * @return Group
      */
-    Scene getScene();
+    Group getGroup();
 }
