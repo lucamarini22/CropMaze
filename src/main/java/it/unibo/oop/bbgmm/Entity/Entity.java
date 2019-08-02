@@ -41,5 +41,8 @@ public interface Entity {
      */
     void update(double up);
 
+    /**
+     * destroy the entity
+     */
     void destroy();
 }
