@@ -15,10 +15,6 @@ import java.awt.image.BufferedImage;
 public final class StatusBarImpl implements StatusBarScreen {
 
     private static final int PADDING = 20;
-    private static final Image damageImage = new Image("images/damageBar.png");
-    private static final Image lifeImage = new Image("images/lifeBar.png");
-    private final HBox lifeBar = new HBox();
-    private final HBox damageBar = new HBox();
     private final HBox statusBox = new HBox();
     ProgressBar pb = new ProgressBar(1);
 
