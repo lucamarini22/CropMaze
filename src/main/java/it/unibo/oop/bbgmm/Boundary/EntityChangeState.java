@@ -15,6 +15,4 @@ public interface EntityChangeState<S extends EntityState> extends EntityView{
      *      The state
      */
     void changeState(S state);
-
-
 }
