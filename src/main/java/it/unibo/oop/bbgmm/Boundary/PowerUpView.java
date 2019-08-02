@@ -9,10 +9,11 @@ import javafx.scene.image.Image;
  * Models a view for PowerUp
  */
 
-public class PowerUpView extends AbstractEntityView implements LifelessEntityView{
+public class PowerUpView extends AbstractEntityView implements LifelessEntityView {
+    private static final int WIDTH = 72, HEIGHT = 97;
 
-    public PowerUpView(Group group, Dimension2D dimension, PowerTag tag) {
-        super(group, dimension);
+    public PowerUpView(Group group, PowerTag tag) {
+        super(group, new Dimension2D(WIDTH, HEIGHT));
         setImage(tag);
     }
 
