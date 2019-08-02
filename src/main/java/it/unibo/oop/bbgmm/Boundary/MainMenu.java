@@ -102,16 +102,15 @@ public class MainMenu extends AbstractBasicView {
     @Override
     protected void buttonActions() {
         itemNewGame.setOnActivate(() -> {
-            //getController().showGameField(getPrimaryStage());
             getController().showGameField(getRoot());
             getAudioPlayer().stopMusic();
             checkResolution();
         });
         itemScore.setOnActivate(() -> {
-            getViewFactory().createRankingView();
+            getController().showRankingView(getViewFactory());
         });
         itemSettings.setOnActivate(() -> {
-            getViewFactory().createSettingsMenu();
+            getController().showSettings(getViewFactory());
         });
         itemExit.setOnActivate(() -> {
             getController().stopGame();

@@ -3,6 +3,7 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PlayerInputListener;
 import it.unibo.oop.bbgmm.Utilities.PlayerMoves;
 import javafx.geometry.Point2D;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -10,10 +11,11 @@ import java.util.*;
 
 public class PlayerInputHandler {
     private final Set<KeyCode> input = new HashSet<>();
-    private PlayerInputListener listener;
+    private Optional<PlayerInputListener> listener = Optional.empty();
 
-    public PlayerInputHandler(final PlayerInputListener listener){
-        this.listener = listener;
+    public PlayerInputHandler(final Scene scene){
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, this::onKeyPressed);
+        scene.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyPressed);
     }
 
     /**
@@ -38,19 +40,21 @@ public class PlayerInputHandler {
             if (event.getEventType().equals(KeyEvent.KEY_RELEASED)) {
                 this.input.remove(event.getCode());
             }
+            applyMovement();
         }
     }
-    //If whe want to set inputListener after
-    /*
 
     public void setListener(final PlayerInputListener listener){
-        this.listener = listener;
+        this.listener = Optional.of(listener);
     }
-    */
+
     /**
      * notify the controller that the player wants to move
      */
-    public void applyMovement(){listener.move(computeMovement());}
+    private void applyMovement(){listener.ifPresent(playerInputListener ->{
+        playerInputListener.move(computeMovement());
+        playerInputListener.shoot(computeShooting());
+    }); }
 
     public Point2D computeMovement(){
         Point2D shift = Point2D.ZERO;

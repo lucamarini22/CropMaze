@@ -20,5 +20,11 @@ public interface EntityViewFactory {
      */
     LifelessEntityView createCoinView();
 
+    LifelessEntityView createDoubleSpeedView();
+
+    LifelessEntityView createDoubleDamageView();
+
+    LifelessEntityView createShieldView();
+
     //upgrades and power ups
 }

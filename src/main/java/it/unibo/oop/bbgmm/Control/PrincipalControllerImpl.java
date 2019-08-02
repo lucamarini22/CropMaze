@@ -23,6 +23,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
     private VolumeDataImpl volumeData;
     private final PrincipalView view;
     private ScoreList score;
+    private Optional<PlayerInputHandler> playerInputHandler = Optional.empty();
     private Optional<GameController> gameControl = Optional.empty();
     private AudioPlayer audioPlayer;
 
@@ -45,12 +46,12 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
     @Override
     public List<Pair<String, Integer>> getRankingList() {
-        return score.getRanking();
+        return this.score.getRanking();
     }
 
     @Override
     public void InsertNewScore(final String name, final Integer result) {
-        score.addScore(new Pair<>(name, result));
+        this.score.addScore(new Pair<>(name, result));
     }
 
     @Override
@@ -68,14 +69,14 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void stopGame() {
-        if (gameControl.isPresent()) {
-            gameControl.get().stop();
+        if (this.gameControl.isPresent()) {
+            this.gameControl.get().stop();
         }
     }
 
     @Override
     public void startGame() {
-        gameControl.get().run();
+        this.gameControl.get().run();
     }
 
     @Override
@@ -85,18 +86,50 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
+    public void showRankingView(ViewFactory viewFactory) {
+        viewFactory.createRankingView();
+    }
+
+    /**
+     * Method used by the view to show the settings
+     *
+     * @param viewFactory
+     */
+    @Override
+    public void showSettings(ViewFactory viewFactory) {
+        viewFactory.createSettingsMenu();
+    }
+
+    @Override
     public void showGameField(final Group group) {
+<<<<<<< HEAD
         gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
                 new GameFieldViewImpl(new AudioPlayerImpl(volumeData.getMusicVolume().getValue(),
                         volumeData.getEffectsVolume().getValue())), this));
+=======
+        this.gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
+                new GameFieldViewImpl(new AudioPlayerImpl(SOUND_VOLUME, MUSIC_VOLUME), this.playerInputHandler.get()), this));
+>>>>>>> 728344ef6c352b8380b95d68aec4dc97731bba89
         group.getChildren().clear();
         group.getChildren().addAll(gameControl.get().getGameFieldView().getGroup().getChildren());
         startGame();
     }
 
+
+    @Override
+    public void showInsertScoreView(ViewFactory viewFactory) {
+        viewFactory.createInsertScoreView();
+    }
+
     @Override
     public void showGameOver(final ViewFactory viewFactory) {
         viewFactory.createGameOver();
+    }
+
+
+    @Override
+    public void setPlayerInputHandler(PlayerInputHandler playerInputHandler) {
+        this.playerInputHandler = Optional.of(playerInputHandler);
     }
 
 

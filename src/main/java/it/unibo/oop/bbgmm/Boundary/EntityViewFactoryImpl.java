@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Entity.PowerTag;
 import javafx.scene.Group;
 
 /**
@@ -22,9 +23,8 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
     }
     @Override
     public PlayerView createPlayerView() {
-        //return new PlayerViewImpl(parent, );
-        //change
-        return null;
+        StatusBar statusBar = new StatusBarImpl();
+        return new PlayerViewImpl(parent, statusBar);
     }
 
     @Override
@@ -36,4 +36,19 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
     public LifelessEntityView createCoinView() {
         return new CoinView(parent, audioPlayer);
     }
+
+    @Override
+    public LifelessEntityView createDoubleSpeedView() {
+        return new PowerUpView(parent, PowerTag.DOUBLESPEED);
+    }
+
+    @Override
+    public LifelessEntityView createDoubleDamageView() {
+        return new PowerUpView(parent, PowerTag.DOUBLEDAMAGE);
+    }
+
+    @Override
+    public LifelessEntityView createShieldView() {
+        return new PowerUpView(parent, PowerTag.SHIELD);
+     }
 }

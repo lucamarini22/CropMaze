@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Control.PlayerInputListener;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -31,4 +32,12 @@ public interface GameFieldView {
      * @return Group
      */
     Group getGroup();
+
+    /**
+     * Sets a listener for player input.
+     *
+     * @param playerInputListener
+     *      The listener to set
+     */
+    void setPlayerInputListener(PlayerInputListener playerInputListener);
 }
