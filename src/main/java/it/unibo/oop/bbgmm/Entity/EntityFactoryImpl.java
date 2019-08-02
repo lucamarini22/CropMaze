@@ -9,7 +9,7 @@ import java.util.Set;
  * Factory implementation of the AbstractFactory EntityFactory.
  */
 public final class EntityFactoryImpl implements EntityFactory {
-    private static final double TIMEOUT = 0.1;
+    private static final double TIMEOUT = 10;
 
     private final GameField gameField;
     private final Set<Entity> walls;

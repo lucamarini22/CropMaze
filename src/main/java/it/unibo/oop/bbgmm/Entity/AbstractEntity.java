@@ -3,9 +3,7 @@ package it.unibo.oop.bbgmm.Entity;
 import it.unibo.oop.bbgmm.Entity.Component.EntityBody;
 import it.unibo.oop.bbgmm.Entity.Component.EntityComponent;
 import it.unibo.oop.bbgmm.Utilities.ComponentsContainerImpl;
-
-import java.util.ArrayList;
-import java.util.List;
+import it.unibo.oop.bbgmm.Utilities.ComponentsContainer;
 import java.util.Optional;
 
 /**
