@@ -133,10 +133,8 @@ public final class LevelImpl implements Level {
                 case PLAYER:
                     if (this.gameStatistics.getCurrentLevel() == FIRST_LEVEL) {
                         player = entitySpawner.spawn(EntityType.PLAYER.toString(), position);
-                        //final PlayerController controller = new PlayerController(player,
-                        // view.entityFactory().createPlayer());
-                        ///////view.setPlayerInputListener(controller);
-                        //entitiesControllers.add(controller);
+                        final PlayerController controller = new PlayerController(player, gameFieldView.getEntityViewFactory().createPlayerView());
+                        entitiesControllers.add(controller);
                         playerStatistics = new PlayerStatisticsImpl(player);
                     }
                     //if it is not the first level it doesn't recreate the player
@@ -154,17 +152,17 @@ public final class LevelImpl implements Level {
                     break;
                 case DOUBLESPEED:
                     entity = entitySpawner.spawn(EntityType.DOUBLESPEED.toString(), position);
-                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory()...);
+                    entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().createDoubleSpeedView()));
                     break;
 
                 case DOUBLEDAMAGE:
                     entity = entitySpawner.spawn(EntityType.DOUBLEDAMAGE.toString(), position);
-                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().create...);
+                    entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().createDoubleDamageView()));
                     break;
 
                 case SHIELD:
                     entity = entitySpawner.spawn(EntityType.SHIELD.toString(), position);
-                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().create...);
+                    entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().createShieldView()));
                     break;
 
                 default:
