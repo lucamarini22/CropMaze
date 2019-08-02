@@ -26,6 +26,11 @@ public abstract class AbstractEntityComponent implements EntityComponent {
     }
 
     @Override
+    public void update(double delta) {
+        //
+    }
+
+    @Override
     public Optional<? extends Entity> getOwner() {
         return this.owner;
     }
