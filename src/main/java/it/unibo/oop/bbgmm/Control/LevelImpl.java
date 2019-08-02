@@ -20,8 +20,8 @@ import java.util.Set;
 public final class LevelImpl implements Level {
     private static final float TILE_SIZE = 1f;
     private static final int FIRST_LEVEL = 1;
-    private static final String SOLID_OBJECTS = "SOLID";
-    private static final String ENTITY_OBJECTS = "OBJECTS";
+    private static final String SOLID_OBJECTS = "solid";
+    private static final String ENTITY_OBJECTS = "objects";
 
     private Entity player;
     private final Map map;
@@ -61,9 +61,12 @@ public final class LevelImpl implements Level {
         this.entitiesControllers = new LinkedHashSet<>();
 
         this.map.getLayers().forEach(layer -> {
+
             if (layer instanceof TileLayer) {
+
                 loadTiles((TileLayer) layer);
             } else if (layer instanceof ObjectGroup) {
+
                 loadObjects((ObjectGroup) layer);
             }
         });
@@ -100,14 +103,19 @@ public final class LevelImpl implements Level {
 
     private void loadObjects(final ObjectGroup layer) {
         //final ObjectGroup objLayer = layer;
+        String a = layer.getName().trim().toLowerCase(Locale.UK);
+
         if (layer.getName().trim().toLowerCase(Locale.UK).equals(SOLID_OBJECTS)) {
+
             this.loadSolidObjects(layer);
         }
         if (layer.getName().trim().toLowerCase(Locale.UK).equals(ENTITY_OBJECTS)) {
-          this.loadEntityObjects(layer);
+
+            this.loadEntityObjects(layer);
         }
     }
     private void loadSolidObjects(final ObjectGroup layer) {
+
         layer.forEach(obj -> {
             final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
                     obj.getWidth(), obj.getHeight());
@@ -135,11 +143,13 @@ public final class LevelImpl implements Level {
                     break;
                 //creation of all power ups, coins and enemies
                 case COIN:
+
                     entity = entitySpawner.spawn(EntityType.COIN.toString(), position);
                     entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().createCoinView()));
                     break;
 
                 case ALIEN:
+
                     for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
                         entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
                         entitiesControllers.add(new AliveEntityController(entity, gameFieldView.getEntityViewFactory().createAlienView()));
@@ -147,6 +157,7 @@ public final class LevelImpl implements Level {
                     break;
 
                 case DOUBLESPEED:
+
                     entity = entitySpawner.spawn(EntityType.DOUBLESPEED.toString(), position);
                     //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
                     break;
