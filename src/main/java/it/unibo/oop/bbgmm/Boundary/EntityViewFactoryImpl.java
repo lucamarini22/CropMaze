@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Entity.EntityType;
 import javafx.scene.Group;
 
 /**
@@ -33,5 +34,25 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
     @Override
     public LifelessEntityView createCoinView() {
         return new CoinView(parent, audioPlayer);
+    }
+
+    @Override
+    public LifelessEntityView createDoubleSpeedView() {
+        //return new PowerUpView(parent, , EntityType.DOUBLESPEED);
+        return null;
+    }
+
+    @Override
+    public LifelessEntityView createDoubleDamageView() {
+        //return new PowerUpView(parent, , EntityType.DOUBLEDAMAGE);
+        return null;
+
+    }
+
+    @Override
+    public LifelessEntityView createShieldView() {
+        //return new PowerUpView(parent, , EntityType.SHIELD);
+        return null;
+
     }
 }
