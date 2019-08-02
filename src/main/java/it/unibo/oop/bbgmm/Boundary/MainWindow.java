@@ -49,10 +49,14 @@ public class MainWindow {
         this.primaryStage.setScene(scene);
         this.controller.showMainMenu(this.viewFactory);
 
+        setPlayerInputHandler();
         this.audioPlayer.playMusic(MENU_TRACK.getPath());
         this.primaryStage.show();
     }
 
+    /**
+     * Method used to set the PlayerInputHandler in the PrincipalController
+     */
     private void setPlayerInputHandler(){
         this.controller.setPlayerInputHandler(new PlayerInputHandler(this.scene));
     }
