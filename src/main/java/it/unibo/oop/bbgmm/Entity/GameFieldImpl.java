@@ -2,7 +2,6 @@ package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisor;
-import it.unibo.oop.bbgmm.Entity.Component.CollisionComponent;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;

@@ -11,6 +11,9 @@ public final class GameStatisticsImpl implements GameStatistics {
     private int currentLevel;
     private int score;
 
+    /**
+     * {@link GameStatisticsImpl} constructor.
+     */
     public GameStatisticsImpl() {
         this.currentLevel = FIRST_LEVEL;
         this.score = ZERO_POINTS;
