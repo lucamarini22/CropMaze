@@ -7,6 +7,7 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
