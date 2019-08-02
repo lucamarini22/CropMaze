@@ -143,33 +143,28 @@ public final class LevelImpl implements Level {
                     break;
                 //creation of all power ups, coins and enemies
                 case COIN:
-
                     entity = entitySpawner.spawn(EntityType.COIN.toString(), position);
                     entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().createCoinView()));
                     break;
-
                 case ALIEN:
-
                     for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
                         entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
                         entitiesControllers.add(new AliveEntityController(entity, gameFieldView.getEntityViewFactory().createAlienView()));
                     }
                     break;
-
                 case DOUBLESPEED:
-
                     entity = entitySpawner.spawn(EntityType.DOUBLESPEED.toString(), position);
-                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
+                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory()...);
                     break;
 
                 case DOUBLEDAMAGE:
                     entity = entitySpawner.spawn(EntityType.DOUBLEDAMAGE.toString(), position);
-                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
+                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().create...);
                     break;
 
                 case SHIELD:
                     entity = entitySpawner.spawn(EntityType.SHIELD.toString(), position);
-                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.entityFactory().create...);
+                    //entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().create...);
                     break;
 
                 default:
