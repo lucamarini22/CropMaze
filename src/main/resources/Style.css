@@ -1,6 +1,6 @@
 #mainMenu{
     -fx-background-image:url("images/mainMenu/menu_back.png");
-    -fx-background-size: cover;
+    -fx-background-size: cover, auto;
 }
 
 #settingsMenu{

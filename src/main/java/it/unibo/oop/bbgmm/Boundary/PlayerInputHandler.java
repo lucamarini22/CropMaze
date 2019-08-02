@@ -46,6 +46,7 @@ public class PlayerInputHandler {
     public void setListener(final Optional<PlayerInputListener> listener){
         this.listener = listener;
     }
+
     /**
      * notify the controller that the player wants to move
      */

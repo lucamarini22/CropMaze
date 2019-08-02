@@ -101,7 +101,7 @@ public class SettingsMenu extends AbstractBasicView {
     protected void buttonActions() {
         itemBack.setOnActivate(() -> {
             checkResolution();
-            getViewFactory().createMainMenu();
+            getController().showMainMenu(getViewFactory());
         });
         itemSmallScreen.setOnActivate(() -> {
             Resolution.setSmallResolution();

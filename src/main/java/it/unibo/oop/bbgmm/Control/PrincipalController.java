@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Control;
 
+import it.unibo.oop.bbgmm.Boundary.PlayerInputHandler;
 import it.unibo.oop.bbgmm.Boundary.ViewFactory;
 import it.unibo.oop.bbgmm.Utilities.Pair;
 import javafx.scene.Group;
@@ -42,14 +43,38 @@ public interface PrincipalController {
     void showMainMenu(final ViewFactory viewFactory);
 
     /**
+     * Method used by the view to show the ranking
+     * @param viewFactory
+     */
+    void showRankingView(final ViewFactory viewFactory);
+
+    /**
+     * Method used by the view to show the settings
+     * @param viewFactory
+     */
+    void showSettings(final ViewFactory viewFactory);
+
+    /**
      * Method used by the view to show the GameField and start the game
      * @param group
      */
     void showGameField(final Group group);
 
     /**
+     * Method used by the view to show the insertScore screen
+     * @param viewFactory
+     */
+    void showInsertScoreView(final ViewFactory viewFactory);
+
+    /**
      * Method used by the view to show the gameOver screen
      * @param viewFactory
      */
     void showGameOver(final ViewFactory viewFactory);
+
+    /**
+     * Method invoked by the view to set the PlayerInputListener
+     * @param playerInputHandler
+     */
+    void setPlayerInputHandler(final PlayerInputHandler playerInputHandler);
 }

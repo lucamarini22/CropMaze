@@ -79,7 +79,7 @@ public class RankingView extends AbstractBasicView {
     @Override
     protected void buttonActions() {
         itemBack.setOnActivate(() -> {
-            getViewFactory().createMainMenu();
+            getController().showMainMenu(getViewFactory());
         });
     }
 

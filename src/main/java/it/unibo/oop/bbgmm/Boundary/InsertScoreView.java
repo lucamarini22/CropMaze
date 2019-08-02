@@ -94,11 +94,11 @@ public class InsertScoreView extends AbstractBasicView {
     protected void buttonActions() {
 
         itemMainMenu.setOnActivate(() -> {
-            getViewFactory().createMainMenu();
+            getController().showMainMenu(getViewFactory());
         });
 
         itemRanking.setOnActivate(() -> {
-            getViewFactory().createRankingView();
+            getController().showRankingView(getViewFactory());
         });
 
         itemScore.setOnActivate(() -> {

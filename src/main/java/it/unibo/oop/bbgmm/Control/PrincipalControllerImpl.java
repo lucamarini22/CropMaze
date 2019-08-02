@@ -1,9 +1,6 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Boundary.AudioPlayerImpl;
-import it.unibo.oop.bbgmm.Boundary.GameFieldViewImpl;
-import it.unibo.oop.bbgmm.Boundary.PrincipalView;
-import it.unibo.oop.bbgmm.Boundary.ViewFactory;
+import it.unibo.oop.bbgmm.Boundary.*;
 import it.unibo.oop.bbgmm.Entity.GameStatisticsImpl;
 import it.unibo.oop.bbgmm.Entity.ScoreList;
 import it.unibo.oop.bbgmm.Entity.ScoreListImpl;
@@ -25,6 +22,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
     private static final double MUSIC_VOLUME = 10;
     private final PrincipalView view;
     private ScoreList score;
+    private Optional<PlayerInputHandler> playerInputHandler = Optional.empty();
     private Optional<GameController> gameControl = Optional.empty();
 
     /**
@@ -42,24 +40,24 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
     @Override
     public List<Pair<String, Integer>> getRankingList() {
-        return score.getRanking();
+        return this.score.getRanking();
     }
 
     @Override
     public void InsertNewScore(final String name, final Integer result) {
-        score.addScore(new Pair<>(name, result));
+        this.score.addScore(new Pair<>(name, result));
     }
 
     @Override
     public void stopGame() {
-        if (gameControl.isPresent()) {
-            gameControl.get().stop();
+        if (this.gameControl.isPresent()) {
+            this.gameControl.get().stop();
         }
     }
 
     @Override
     public void startGame() {
-        gameControl.get().run();
+        this.gameControl.get().run();
     }
 
     @Override
@@ -69,17 +67,44 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
+    public void showRankingView(ViewFactory viewFactory) {
+        viewFactory.createRankingView();
+    }
+
+    /**
+     * Method used by the view to show the settings
+     *
+     * @param viewFactory
+     */
+    @Override
+    public void showSettings(ViewFactory viewFactory) {
+        viewFactory.createSettingsMenu();
+    }
+
+    @Override
     public void showGameField(final Group group) {
-        gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
-                new GameFieldViewImpl(new AudioPlayerImpl(SOUND_VOLUME, MUSIC_VOLUME)), this));
+        this.gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
+                new GameFieldViewImpl(new AudioPlayerImpl(SOUND_VOLUME, MUSIC_VOLUME), this.playerInputHandler.get()), this));
         group.getChildren().clear();
         group.getChildren().addAll(gameControl.get().getGameFieldView().getGroup().getChildren());
         startGame();
     }
 
+
+    @Override
+    public void showInsertScoreView(ViewFactory viewFactory) {
+        viewFactory.createInsertScoreView();
+    }
+
     @Override
     public void showGameOver(final ViewFactory viewFactory) {
         viewFactory.createGameOver();
+    }
+
+
+    @Override
+    public void setPlayerInputHandler(PlayerInputHandler playerInputHandler) {
+        this.playerInputHandler = Optional.of(playerInputHandler);
     }
 
 

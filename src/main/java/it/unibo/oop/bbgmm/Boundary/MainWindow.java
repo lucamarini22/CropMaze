@@ -23,8 +23,10 @@ public class MainWindow {
     private final Scene scene;
     private final ViewFactory viewFactory;
     private final AudioPlayer audioPlayer;
+    private final PrincipalController controller;
 
     public MainWindow(final Stage primaryStage, final PrincipalController controller) {
+        this.controller = controller;
         this.primaryStage = primaryStage;
         this.audioPlayer = new AudioPlayerImpl(SOUND_VOLUME,MUSIC_VOLUME);
         this.primaryStage.setTitle("CROP MAZE");
@@ -45,9 +47,13 @@ public class MainWindow {
         this.scene = new Scene(root, Resolution.getWidth(), Resolution.getHeight());
         this.viewFactory = new ViewFactory(primaryStage, controller, audioPlayer, root, scene);
         this.primaryStage.setScene(scene);
-        this.viewFactory.createMainMenu();
+        this.controller.showMainMenu(this.viewFactory);
 
         this.audioPlayer.playMusic(MENU_TRACK.getPath());
         this.primaryStage.show();
+    }
+
+    private void setPlayerInputHandler(){
+        this.controller.setPlayerInputHandler(new PlayerInputHandler(this.scene));
     }
 }
