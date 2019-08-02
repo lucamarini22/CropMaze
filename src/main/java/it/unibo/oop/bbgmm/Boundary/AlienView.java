@@ -15,9 +15,9 @@ public class AlienView extends AbstractAliveEntityView{
     public AlienView(Group group) {
         super(group, new Dimension2D(WIDTH, HEIGHT));
 
-        putAnimation(PossibleEntityState.STABLE, staticAnimation(new Image("")));
-        putAnimation(PossibleEntityState.WALKING, dynamicAnimation(new Image (""), Duration.millis(FRAME_DURATION),2));
-        putAnimation(PossibleEntityState.DYING, staticAnimation(new Image ("")));
+        putAnimation(PossibleEntityState.STABLE, staticAnimation(new Image("images/p1_stand.png")));
+        putAnimation(PossibleEntityState.WALKING, dynamicAnimation(new Image ("images/p1_jump.png"), Duration.millis(FRAME_DURATION),2));
+        putAnimation(PossibleEntityState.DYING, staticAnimation(new Image ("images/p1_hurt.png")));
 
         changeState(PossibleEntityState.WALKING);
 
