@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
+import it.unibo.oop.bbgmm.Entity.Entity;
+
 public class LifeComponent extends AbstractEntityComponent implements Life {
 
     private int maxLifePoints;
@@ -43,13 +45,6 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
     @Override
     public void incrementLife(int moreLife) {
         this.maxLifePoints = this.maxLifePoints + moreLife;
-    }
-
-    @Override
-    public void update(double delta) {
-        if(isDead()) {
-            this.getOwner().get().destroy();
-        }
     }
 
     @Override
