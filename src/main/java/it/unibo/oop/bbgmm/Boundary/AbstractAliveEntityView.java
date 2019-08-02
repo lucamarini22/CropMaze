@@ -6,6 +6,8 @@ import javafx.scene.Group;
 
 public abstract class AbstractAliveEntityView extends AbstractEntityChangeStateView<PossibleEntityState> implements AliveEntityView {
 
+    private PossibleEntityState currentState = PossibleEntityState.STABLE;
+
     public AbstractAliveEntityView(final Group group, final Dimension2D dimension) {
         super(group, dimension);
     }
@@ -13,5 +15,10 @@ public abstract class AbstractAliveEntityView extends AbstractEntityChangeStateV
     @Override
     public void deathView() {
         removeFromView();
+    }
+
+    @Override
+    public PossibleEntityState getCurrentState() {
+        return this.currentState;
     }
 }
