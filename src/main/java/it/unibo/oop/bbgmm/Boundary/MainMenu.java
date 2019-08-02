@@ -107,7 +107,8 @@ public class MainMenu extends AbstractBasicView {
             checkResolution();
         });
         itemScore.setOnActivate(() -> {
-            getPrimaryStage().setScene(getViewFactory().createRankingView());
+            //getPrimaryStage().setScene(getViewFactory().createRankingView());
+            getPrimaryStage().setScene(getViewFactory().createInsertScoreView());
             checkResolution();
         });
         itemSettings.setOnActivate(() -> {

@@ -4,13 +4,13 @@ import it.unibo.oop.bbgmm.Entity.Component.CollisionComponent;
 
 public class Collision {
 
-    private final CollisionComponent object;
+    private final Collidable object;
 
-    public Collision(final CollisionComponent object){
+    public Collision(final Collidable object){
         this.object = object;
     }
 
-    public CollisionComponent getCollisionComponent() {
+    public Collidable getCollisionComponent() {
         return object;
     }
 }

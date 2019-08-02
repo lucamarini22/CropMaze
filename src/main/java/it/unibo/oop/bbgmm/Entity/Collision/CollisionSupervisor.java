@@ -6,7 +6,7 @@ public interface CollisionSupervisor {
 
     void searchCollision();
 
-    void addCollisionComponent(CollisionComponent collisionComponent);
+    void addCollisionComponent(Collidable collidableComponent);
 
-    void removeCollisionComponent(CollisionComponent collisionComponent);
+    void removeCollisionComponent(Collidable collidableComponent);
 }
