@@ -22,9 +22,7 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
     }
     @Override
     public PlayerView createPlayerView() {
-        //return new PlayerViewImpl(parent, );
-        //change
-        return null;
+        return new PlayerViewImpl(parent, );
     }
 
     @Override
