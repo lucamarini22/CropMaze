@@ -3,6 +3,8 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
@@ -24,10 +26,10 @@ public class InsertScoreView extends AbstractBasicView {
     private final MenuItem itemRanking = new MenuItem("RANKING");
 
     public InsertScoreView(final Stage primaryStage, final PrincipalController controller,
-                           final AudioPlayer audioPlayer) {
-        super(primaryStage, controller, audioPlayer);
+                           final AudioPlayer audioPlayer, final Group group, final Scene scene) {
+        super(primaryStage, controller, audioPlayer, group, scene);
 
-        this.setOnKeyPressed(event -> {
+        getScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
                 if (currentItem > 0) {
                     playSwitchSound();
@@ -68,12 +70,11 @@ public class InsertScoreView extends AbstractBasicView {
 
         getMenuItem(0).setActive(true);
 
-        pane.getChildren().add(menuBox);
+        Group root = getRoot();
+        root.getChildren().clear();
+        root.getChildren().add(menuBox);
 
-        pane.setId("insertScore");
-        this.getStylesheets().add("Style.css");
-
-        this.setRoot(pane);
+        root.setId("insertScore");
     }
 
     private MenuItem getMenuItem(int index){
@@ -84,13 +85,13 @@ public class InsertScoreView extends AbstractBasicView {
     protected void buttonActions() {
 
         itemMainMenu.setOnActivate(() -> {
-            getPrimaryStage().setScene(getViewFactory().createMainMenu());
-            checkResolution();
+            /*getPrimaryStage().setScene(getViewFactory().createMainMenu());
+            checkResolution();*/
         });
 
         itemRanking.setOnActivate(() -> {
-            getPrimaryStage().setScene(getViewFactory().createRankingView());
-            checkResolution();
+            /*getPrimaryStage().setScene(getViewFactory().createRankingView());
+            checkResolution();*/
         });
 
         itemScore.setOnActivate(() -> {

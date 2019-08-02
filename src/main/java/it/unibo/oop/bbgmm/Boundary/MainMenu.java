@@ -3,6 +3,8 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 
 import javafx.scene.layout.*;
@@ -20,7 +22,6 @@ public class MainMenu extends AbstractBasicView {
     private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 370;
     private static final int BOX_Y_COORDINATE = 350;
-    private final AnchorPane pane;
     private VBox menuBox;
     private int currentItem = 0;
     private final MenuItem itemNewGame = new MenuItem("NEW GAME");
@@ -28,11 +29,12 @@ public class MainMenu extends AbstractBasicView {
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-    public MainMenu(final Stage primaryStage, final PrincipalController controller, final AudioPlayer audioPlayer) {
-        super(primaryStage,controller, audioPlayer);
+    public MainMenu(final Stage primaryStage, final PrincipalController controller,
+                    final AudioPlayer audioPlayer, final Group group, final Scene scene) {
+        super(primaryStage,controller, audioPlayer, group, scene);
 
         //it intercepts the button presses
-        this.setOnKeyPressed(event -> {
+        getScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
                 if (currentItem > 0) {
                     playSwitchSound();
@@ -55,8 +57,6 @@ public class MainMenu extends AbstractBasicView {
             }
         });
 
-        pane = new AnchorPane();
-
         menuBox = new VBox(SPACE_BETWEEN_ITEM,
                 itemNewGame,
                 itemScore,
@@ -69,8 +69,6 @@ public class MainMenu extends AbstractBasicView {
 
         //calculates the position of the box
         if(Resolution.isFullScreen()){
-            int one = BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA;
-            int two = BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT;
             menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
             menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
         }
@@ -81,12 +79,14 @@ public class MainMenu extends AbstractBasicView {
 
         getMenuItem(0).setActive(true);
 
-        pane.getChildren().add(menuBox);
+        Group root = getRoot();
 
-        pane.setId("mainMenu");
-        this.getStylesheets().add("Style.css");
+        root.getChildren().clear();
+        root.getChildren().add(menuBox);
 
-        this.setRoot(pane);
+        root.setId("mainMenu");
+
+        getScene().getStylesheets().add("Style.css");
     }
 
     /**
@@ -102,17 +102,16 @@ public class MainMenu extends AbstractBasicView {
     @Override
     protected void buttonActions() {
         itemNewGame.setOnActivate(() -> {
-            getController().showGameField(getPrimaryStage());
+            //getController().showGameField(getPrimaryStage());
+            getController().showGameField(getRoot());
             getAudioPlayer().stopMusic();
             checkResolution();
         });
         itemScore.setOnActivate(() -> {
-            getPrimaryStage().setScene(getViewFactory().createRankingView());
-            checkResolution();
+            getViewFactory().createRankingView();
         });
         itemSettings.setOnActivate(() -> {
-            getPrimaryStage().setScene(getViewFactory().createSettingsMenu());
-            checkResolution();
+            getViewFactory().createSettingsMenu();
         });
         itemExit.setOnActivate(() -> {
             getController().stopGame();
