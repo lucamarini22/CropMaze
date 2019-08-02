@@ -11,10 +11,9 @@ import java.util.*;
 
 public class PlayerInputHandler {
     private final Set<KeyCode> input = new HashSet<>();
-    private PlayerInputListener listener;
+    private Optional<PlayerInputListener> listener = Optional.empty();
 
-    public PlayerInputHandler(final Scene scene , final PlayerInputListener listener){
-        this.listener = listener;
+    public PlayerInputHandler(final Scene scene){
         scene.addEventHandler(KeyEvent.KEY_PRESSED, this::onKeyPressed);
         scene.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyPressed);
     }
@@ -43,17 +42,14 @@ public class PlayerInputHandler {
             }
         }
     }
-    //If whe want to set inputListener after
-    /*
 
-    public void setListener(final PlayerInputListener listener){
+    public void setListener(final Optional<PlayerInputListener> listener){
         this.listener = listener;
     }
-    */
     /**
      * notify the controller that the player wants to move
      */
-    public void applyMovement(){listener.move(computeMovement());}
+    public void applyMovement(){listener.ifPresent(playerInputListener -> playerInputListener.move(computeMovement()));}
 
     public Point2D computeMovement(){
         Point2D shift = Point2D.ZERO;
