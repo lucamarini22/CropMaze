@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Control.PlayerInputListener;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Dimension2D;
@@ -55,5 +56,10 @@ public final class GameFieldViewImpl implements GameFieldView {
     @Override
     public Group getGroup() {
         return this.rootView;
+    }
+
+    @Override
+    public void setPlayerInputListener(final PlayerInputListener playerInputListener) {
+        this.playerInputHandler.setListener(playerInputListener);
     }
 }

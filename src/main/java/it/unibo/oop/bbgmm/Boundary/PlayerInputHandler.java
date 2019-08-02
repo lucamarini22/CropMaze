@@ -44,8 +44,8 @@ public class PlayerInputHandler {
         }
     }
 
-    public void setListener(final Optional<PlayerInputListener> listener){
-        this.listener = listener;
+    public void setListener(final PlayerInputListener listener){
+        this.listener = Optional.of(listener);
     }
 
     /**
