@@ -39,6 +39,7 @@ public class Feet extends AbstractMovement {
     @Override
     public void attach(Entity owner) {
         super.attach(owner);
+        updateState();
     }
 
     /**
