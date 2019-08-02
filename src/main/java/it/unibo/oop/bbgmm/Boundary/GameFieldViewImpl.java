@@ -1,9 +1,11 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.mapeditor.core.Tile;
@@ -47,5 +49,10 @@ public final class GameFieldViewImpl implements GameFieldView {
                 }
             }
         }
+    }
+
+    @Override
+    public Scene getScene() {
+        return new Scene(rootView, Resolution.getWidth(), Resolution.getHeight());
     }
 }

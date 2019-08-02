@@ -38,7 +38,7 @@ public class MainWindow {
 
         this.primaryStage.getIcons().add(new Image("images/mainMenu/icon.png"));
         //set the main menu as the scene
-        this.primaryStage.setScene(this.viewFactory.createMainMenu());
+        controller.showMainMenu(this.primaryStage,this.viewFactory);
         this.audioPlayer.playMusic(MENU_TRACK.getPath());
         this.primaryStage.show();
     }

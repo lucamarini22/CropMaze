@@ -1,11 +1,17 @@
 package it.unibo.oop.bbgmm.Control;
 
+import com.google.common.io.Files;
 import it.unibo.oop.bbgmm.Boundary.GameFieldView;
 import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
+import it.unibo.oop.bbgmm.Utilities.ZipExtractor;
 import javafx.animation.AnimationTimer;
+import javafx.stage.Stage;
 import org.mapeditor.core.Map;
 import org.mapeditor.io.TMXMapReader;
+
+import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.Set;
 
@@ -15,7 +21,8 @@ import java.util.Set;
 public final class GameControllerImpl implements GameController {
 
     private static final double FRAME = 1.0 / 60;
-    private static final String MAP_PATH = "images/map/CropMazeMap.tmx";
+    private static final String MAP_PATH = "/images/map/Map.zip";
+    private static final String MAP_NAME = "CropMazeMap.tmx";
 
     private final PrincipalController principalController;
     private GameField gameField;
@@ -57,27 +64,25 @@ public final class GameControllerImpl implements GameController {
         this.entityFactory = new EntityFactoryImpl(this.gameField, this.gameField.getWalls(), new EntityStatisticsImpl(), gameStatistics);
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
         level = new LevelImpl(this.map, this.gameField, this.gameStatistics, this.entitySpawner, this.gameFieldView, this.principalController);
-        run();
     }
+
     /**
      * Method called to load the Map.
      */
     private void loadMap() throws Exception {
-        try {
-            URL url = getUrlFromResources("images/map/CropMazeMap.tmx");
-            this.map = new TMXMapReader().readMap(url.getPath());
+        final File tempDir = Files.createTempDir();
+        try (InputStream is = getClass().getResourceAsStream(MAP_PATH)) {
+            ZipExtractor.extract(is, tempDir);
+            this.map = new TMXMapReader().readMap(new File(tempDir, MAP_NAME).getAbsolutePath());
         } catch (final Exception e) {
             throw new Exception("ERROR: Can't load map\n");
         }
     }
-    private URL getUrlFromResources(final String fileName) {
-        ClassLoader classLoader = this.getClass().getClassLoader();
-        return classLoader.getResource(fileName);
-    }
+
     /**
      * Method called to start the Timer.
      */
-    private void run() {
+    public void run() {
         this.gameField = level.getGameField();
         this.gameFieldView = level.getGameFieldView();
         this.entitiesControllers = level.getEntitiesControllers();
@@ -87,6 +92,11 @@ public final class GameControllerImpl implements GameController {
     @Override
     public void stop() {
         timer.stop();
+    }
+
+    @Override
+    public GameFieldView getGameFieldView(){
+        return this.gameFieldView;
     }
 
     /**

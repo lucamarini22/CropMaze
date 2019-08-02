@@ -97,7 +97,7 @@ public class GameOver extends AbstractBasicView {
     @Override
     protected void buttonActions(){
         itemMainMenu.setOnActivate(() -> {
-            getPrimaryStage().setScene(getViewFactory().createMainMenu());
+            getController().showMainMenu(getPrimaryStage(),getViewFactory());
             checkResolution();
             getAudioPlayer().stopMusic();
             getAudioPlayer().playMusic(MENU_TRACK.getPath());

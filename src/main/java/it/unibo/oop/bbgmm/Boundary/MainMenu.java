@@ -101,9 +101,10 @@ public class MainMenu extends AbstractBasicView {
      */
     @Override
     protected void buttonActions() {
-        //Da togliere i commenti per usare gli altri pulsanti
         itemNewGame.setOnActivate(() -> {
-            getController().startGame();
+            getController().showGameField(getPrimaryStage());
+            getAudioPlayer().stopMusic();
+            checkResolution();
         });
         itemScore.setOnActivate(() -> {
             getPrimaryStage().setScene(getViewFactory().createRankingView());

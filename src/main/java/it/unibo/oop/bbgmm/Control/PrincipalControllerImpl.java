@@ -3,10 +3,13 @@ package it.unibo.oop.bbgmm.Control;
 import it.unibo.oop.bbgmm.Boundary.AudioPlayerImpl;
 import it.unibo.oop.bbgmm.Boundary.GameFieldViewImpl;
 import it.unibo.oop.bbgmm.Boundary.PrincipalView;
+import it.unibo.oop.bbgmm.Boundary.ViewFactory;
+import it.unibo.oop.bbgmm.Entity.GameField;
 import it.unibo.oop.bbgmm.Entity.GameStatisticsImpl;
 import it.unibo.oop.bbgmm.Entity.ScoreList;
 import it.unibo.oop.bbgmm.Entity.ScoreListImpl;
 import it.unibo.oop.bbgmm.Utilities.Pair;
+import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -49,16 +52,34 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
-    public GameController startGame() {
-        gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
-                new GameFieldViewImpl(new AudioPlayerImpl(SOUND_VOLUME, MUSIC_VOLUME)), this));
-        return gameControl.get();
-    }
-
-    @Override
     public void stopGame() {
         if (gameControl.isPresent()) {
             gameControl.get().stop();
         }
     }
+
+    @Override
+    public void startGame() {
+        gameControl.get().run();
+    }
+
+    @Override
+    public void showMainMenu(final Stage stage, final ViewFactory viewFactory) {
+        stage.setScene(viewFactory.createMainMenu());
+    }
+
+    @Override
+    public void showGameField(final Stage stage) {
+        gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
+                new GameFieldViewImpl(new AudioPlayerImpl(SOUND_VOLUME, MUSIC_VOLUME)), this));
+        stage.setScene(gameControl.get().getGameFieldView().getScene());
+        startGame();
+    }
+
+    @Override
+    public void showGameOver(Stage stage, ViewFactory viewFactory) {
+        stage.setScene(viewFactory.createGameOver());
+    }
+
+
 }
