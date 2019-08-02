@@ -39,6 +39,7 @@ public class SettingsMenu extends AbstractBasicView {
                         final AudioPlayer audioPlayer, final Group group, final Scene scene) {
         super(primaryStage, controller, audioPlayer, group, scene);
 
+
         //it intercepts the button presses
         getScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {

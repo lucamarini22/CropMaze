@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
 import it.unibo.oop.bbgmm.Entity.Bullet;
+import it.unibo.oop.bbgmm.Entity.Direction;
 import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Utilities.PlayerMoves;
 import javafx.geometry.Point2D;
@@ -16,14 +17,16 @@ public class LimitedBulletFeet extends Feet{
     private Life lifeComponent;
     private Weapon weapon;
     private final Point2D distanceVector;
+    private final Direction direction;
 
     /**
      * @param walkingSpeed entity speed for the movement
      */
-    public LimitedBulletFeet(final Weapon weapon, final double walkingSpeed, final Life lifeComponent,final Set<Entity> walls) {
+    public LimitedBulletFeet(final Weapon weapon, Direction direction, final double walkingSpeed, final Life lifeComponent, final Set<Entity> walls) {
         super(walkingSpeed, walls);
         this.lifeComponent = lifeComponent;
         this.weapon = weapon;
+        this.direction = direction;
         this.distanceVector = calculateVector();
     }
 
@@ -56,16 +59,16 @@ public class LimitedBulletFeet extends Feet{
     private Point2D calculateVector(){
         Point2D vector = Point2D.ZERO;
 
-        switch(getOwner().get().getBody().getDirection()){
+        switch(this.direction){
 
             case NORTH: vector = new Point2D(PlayerMoves.UP.x, PlayerMoves.UP.y);
-            break;
+                break;
             case SOUTH: vector = new Point2D(PlayerMoves.DOWN.x, PlayerMoves.DOWN.y);
-            break;
+                break;
             case EAST: vector = new Point2D(PlayerMoves.RIGHT.x, PlayerMoves.RIGHT.y);
-            break;
+                break;
             case WEST: vector =  new Point2D(PlayerMoves.LEFT.x, PlayerMoves.LEFT.y);
-            break;
+                break;
         }
 
         return vector;

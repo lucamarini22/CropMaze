@@ -1,6 +1,8 @@
 package it.unibo.oop.bbgmm.Entity.Component;
 
 import it.unibo.oop.bbgmm.Entity.*;
+import it.unibo.oop.bbgmm.Utilities.PlayerMoves;
+import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 import java.util.List;

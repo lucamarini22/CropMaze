@@ -136,6 +136,7 @@ public final class LevelImpl implements Level {
                         final PlayerController controller = new PlayerController(player, gameFieldView.getEntityViewFactory().createPlayerView());
                         entitiesControllers.add(controller);
                         playerStatistics = new PlayerStatisticsImpl(player);
+                        gameFieldView.setPlayerInputListener(controller);
                     }
                     //if it is not the first level it doesn't recreate the player
                     break;
