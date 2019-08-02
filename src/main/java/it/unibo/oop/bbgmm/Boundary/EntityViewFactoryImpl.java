@@ -23,7 +23,8 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
     }
     @Override
     public PlayerView createPlayerView() {
-        return new PlayerViewImpl(parent, );
+        StatusBar statusBar = new StatusBarImpl();
+        return new PlayerViewImpl(parent, statusBar);
     }
 
     @Override
