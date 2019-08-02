@@ -82,6 +82,17 @@ public abstract class AbstractEntityChangeStateView<S extends EntityState> exten
         this.currentAnimation.play();
     }
 
+    /**
+     * Used to start an animation from the mapped animations.
+     *
+     * @param state
+     *            The entity state instance associated to the specific animation that has to start.
+     */
+    protected void startAnimation(final S state) {
+        currentAnimation.stop();
+        animations.get(state).run();
+    }
+
     @Override
     public void changeState(S state) {
         if(this.animations.containsKey(state)){
