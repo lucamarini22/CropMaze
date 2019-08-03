@@ -6,6 +6,7 @@ import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class WeaponImpl extends AbstractEntityComponent implements Weapon {
@@ -69,17 +70,19 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     public void setWeaponSpeed(int speed) { this.weaponSpeed = speed; }
 
     @Override
-    public void shoot(final Direction shootingDirection) {
+    public Optional<Bullet> shoot(final Direction shootingDirection) {
+        Optional<Bullet> bullet = Optional.empty();
         if(this.cooldown.isElapsed() && shootingDirection != Direction.NOTHING) {
-            Bullet bullet = new Bullet(new BodyBuilder(),
+            bullet = Optional.of(new Bullet(new BodyBuilder(),
                                         this,
                                         shootingDirection,
                                         getOwner().get().getBody().getPosition(),
-                                        gameField.getWalls());
-            this.bulletShoted.add(bullet);
-            gameField.addEntity(bullet);
-            bullet.get(Movement.class).get().update(0);
+                                        gameField.getWalls()));
+            this.bulletShoted.add(bullet.get());
+            gameField.addEntity(bullet.get());
+            bullet.get().get(Movement.class).get().update(0);
         }
+        return bullet;
     }
 
     @Override

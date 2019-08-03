@@ -1,20 +1,30 @@
 package it.unibo.oop.bbgmm.Control;
 
+import it.unibo.oop.bbgmm.Boundary.BulletView;
 import it.unibo.oop.bbgmm.Boundary.PlayerView;
+import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Component.Bag;
 import it.unibo.oop.bbgmm.Entity.Component.Life;
 import it.unibo.oop.bbgmm.Entity.Component.Weapon;
 import it.unibo.oop.bbgmm.Entity.Direction;
 import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.Movement;
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 public class PlayerController extends AliveEntityController implements PlayerInputListener {
-    private  PlayerView playerView;
+    private static final int BULLET_WIDTH = 72, BULLET_HEIGHT = 97;
+    private final PlayerView playerView;
+    private final List<EntityController> bulletControllers;
+
     public PlayerController(final Entity player, final PlayerView playerView){
         super(player,playerView);
         this.playerView = playerView;
-
+        this.bulletControllers = new ArrayList<>();
     }
 
     @Override
@@ -37,9 +47,24 @@ public class PlayerController extends AliveEntityController implements PlayerInp
 
     @Override
     public void shoot(Point2D vector) {
-        getEntity().get(Weapon.class).ifPresent(weapon -> {
+        /*getEntity().get(Weapon.class).ifPresent(weapon -> {
             weapon.shoot(this.calculateDirection(vector));
-        });
+        });*/
+        if(getEntity().get(Weapon.class).isPresent()){
+            Direction dir = this.calculateDirection(vector);
+            Optional<Bullet> bullet = getEntity().get(Weapon.class)
+                                                 .get()
+                                                 .shoot(dir);
+            bullet.ifPresent(b -> createBulletController(b, dir));
+        }
+
+
+    }
+
+    private void createBulletController(Bullet bullet, Direction dir){
+        Dimension2D dim = new Dimension2D(BULLET_WIDTH,BULLET_HEIGHT);
+        EntityController controller = new BulletController(bullet, new BulletView(playerView.getGroup(), dim, dir));
+        bulletControllers.add(controller);
     }
 
     private Direction calculateDirection(Point2D vector){
@@ -65,4 +90,9 @@ public class PlayerController extends AliveEntityController implements PlayerInp
                 playerView.setCoins(bag.getMoney()));
     }
 
+    @Override
+    public void update(){
+        super.update();
+        bulletControllers.forEach(EntityController::update);
+    }
 }

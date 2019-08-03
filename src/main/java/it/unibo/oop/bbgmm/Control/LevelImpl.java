@@ -34,7 +34,6 @@ public final class LevelImpl implements Level {
     private PlayerStatistics playerStatistics;
     private final GameFieldView gameFieldView;
     private final Set<EntityController> entitiesControllers;
-    private final PrincipalController principalController;
     private final GameStatistics gameStatistics;
 
     /**
@@ -50,18 +49,14 @@ public final class LevelImpl implements Level {
      *          {@link EntitySpawner} that spawns entities
      * @param gameFieldView
      *          View of the {@link GameField}
-     * @param principalController
-     *          Principal Controller
      */
     public LevelImpl(final Map map, final GameField gameField, final GameStatistics gameStatistics,
-                     final EntitySpawner entitySpawner, final GameFieldView gameFieldView,
-                     final PrincipalController principalController) {
+                     final EntitySpawner entitySpawner, final GameFieldView gameFieldView) {
         this.map = map;
         this.gameField = gameField;
         this.gameStatistics = gameStatistics;
         this.entitySpawner = entitySpawner;
         this.gameFieldView = gameFieldView;
-        this.principalController = principalController;
         this.entitiesControllers = new LinkedHashSet<>();
 
         this.map.getLayers().forEach(layer -> {
