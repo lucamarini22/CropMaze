@@ -87,7 +87,8 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void showMainMenu(final ViewFactory viewFactory) {
-        //manca quello per settare a zero il livello
+        gameControl = Optional.empty();
+        playerInputHandler = Optional.empty();
         viewFactory.createMainMenu();
     }
 
@@ -108,9 +109,6 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void showGameField(final Scene scene) {
-        /*gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
-                new GameFieldViewImpl(new AudioPlayerImpl(volumeData.getMusicVolume().getValue(),
-                        volumeData.getEffectsVolume().getValue()), this.playerInputHandler.get()), this));*/
         gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
                 new GameFieldViewImpl(this.audioPlayer, this.playerInputHandler.get()), this));
         scene.setRoot(gameControl.get().getGameFieldView().getGroup());
