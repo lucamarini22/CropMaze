@@ -110,8 +110,11 @@ public class Feet extends AbstractMovement {
 
         Point2D movementVector = calculateNewDistanceVector(distanceVector);
 
+        Point2D temp = new Point2D(movementVector.getX(),movementVector.getY());
+        Point2D newPos = temp.add(getOwner().get().getBody().getPosition());
+
         //verifico se c'è un muro, se è presente l'entità non può spostarsi e rimane ferma
-        if(wallChecker(movementVector)){
+        if(wallChecker(newPos)){
             setPosition(Point2D.ZERO);
         }
         else{

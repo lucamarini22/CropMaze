@@ -9,7 +9,7 @@ import java.util.Set;
 
 
 public class Bullet extends AbstractEntity {
-    private static final Dimension2D SIZE = new Dimension2D(0.5,0.3);
+    private static final Dimension2D SIZE = new Dimension2D(1.3,1.3);
 
     public Bullet(final BodyBuilder bodyBuilder,
                   final Weapon weapon,

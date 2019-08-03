@@ -17,14 +17,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class PlayerController extends AliveEntityController implements PlayerInputListener {
-    private static final int BULLET_WIDTH = 72, BULLET_HEIGHT = 97;
+
     private final PlayerView playerView;
-    private final List<EntityController> bulletControllers;
+    private final List<BulletController> bulletControllers;
+    private final List<BulletController> removedControllers;
 
     public PlayerController(final Entity player, final PlayerView playerView){
         super(player,playerView);
         this.playerView = playerView;
         this.bulletControllers = new ArrayList<>();
+        this.removedControllers = new ArrayList<>();
     }
 
     @Override
@@ -51,19 +53,18 @@ public class PlayerController extends AliveEntityController implements PlayerInp
             weapon.shoot(this.calculateDirection(vector));
         });*/
         if(getEntity().get(Weapon.class).isPresent()){
-            Direction dir = this.calculateDirection(vector);
+            Direction direction = this.calculateDirection(vector);
             Optional<Bullet> bullet = getEntity().get(Weapon.class)
                                                  .get()
-                                                 .shoot(dir);
-            bullet.ifPresent(b -> createBulletController(b, dir));
+                                                 .shoot(direction);
+            bullet.ifPresent(b -> createBulletController(b, direction));
         }
 
 
     }
 
-    private void createBulletController(Bullet bullet, Direction dir){
-        Dimension2D dim = new Dimension2D(BULLET_WIDTH,BULLET_HEIGHT);
-        EntityController controller = new BulletController(bullet, new BulletView(playerView.getGroup(), dim, dir));
+    private void createBulletController(Bullet bullet, Direction direction){
+        BulletController controller = new BulletController(bullet, new BulletView(playerView.getGroup(), direction));
         bulletControllers.add(controller);
     }
 
@@ -93,6 +94,10 @@ public class PlayerController extends AliveEntityController implements PlayerInp
     @Override
     public void update(){
         super.update();
-        bulletControllers.forEach(EntityController::update);
+        bulletControllers.stream()
+                .filter(c -> !removedControllers.contains(c))
+                .forEach(EntityController::update);
+        removedControllers.forEach(c -> bulletControllers.remove(c));
+        removedControllers.clear();
     }
 }
