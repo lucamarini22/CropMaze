@@ -4,16 +4,17 @@ import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Volume;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ViewFactory {
 
     private final Stage stage;
-    private final Group root;
+    private final AnchorPane root;
     private final Scene scene;
     private final PrincipalController controller;
 
-    public ViewFactory(Stage stage, PrincipalController controller, final Group root, final Scene scene) {
+    public ViewFactory(Stage stage, PrincipalController controller, final AnchorPane root, final Scene scene) {
         this.stage = stage;
         this.root = root;
         this.scene = scene;

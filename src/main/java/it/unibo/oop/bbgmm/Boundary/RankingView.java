@@ -29,8 +29,8 @@ public class RankingView extends AbstractBasicView {
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public RankingView(final Stage primaryStage, final PrincipalController controller,
-                       final Group group, final Scene scene){
-        super(primaryStage, controller, group, scene);
+                       final AnchorPane pane, final Scene scene){
+        super(primaryStage, controller, pane, scene);
 
         getScene().setOnKeyPressed(event->{
             if(event.getCode() == KeyCode.ENTER ){
@@ -68,7 +68,7 @@ public class RankingView extends AbstractBasicView {
         menuBox.setAlignment(Pos.TOP_CENTER);
         itemBack.setActive(true);
 
-        Group root = getRoot();
+        AnchorPane root = getRoot();
         root.getChildren().clear();
         root.getChildren().add(menuBox);
 

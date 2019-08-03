@@ -17,19 +17,16 @@ public abstract class AbstractBasicView {
     private final Stage primaryStage;
     private final ViewFactory viewFactory;
     private final AudioPlayer audioPlayer;
-    private final Group root;
+    private final AnchorPane root;
     private Scene scene;
 
-    public AbstractBasicView(final Stage primaryStage, final PrincipalController controller, final Group root, final Scene scene) {
+    public AbstractBasicView(final Stage primaryStage, final PrincipalController controller, final AnchorPane root, final Scene scene) {
         this.root = root;
         this.scene = scene;
         this.controller = controller;
         this.primaryStage = primaryStage;
         this.audioPlayer = controller.getAudioPlayer();
-        this.viewFactory = new ViewFactory(primaryStage, controller, root, scene);
-        //this.root.setId("gameOverView");
-        //this.scene.getStylesheets().add("Style.css");
-
+        this.viewFactory = new ViewFactory(primaryStage, controller, root, scene);this.root.setId("mainMenu");
     }
 
     /**
@@ -47,7 +44,7 @@ public abstract class AbstractBasicView {
      * Getter for the Root
      * @return root
      */
-    protected Group getRoot() {
+    protected AnchorPane getRoot() {
         return this.root;
     }
 
@@ -59,9 +56,6 @@ public abstract class AbstractBasicView {
         return this.scene;
     }
 
-    protected void setScene(Scene scene){
-        this.scene = scene;
-    }
 
     /**
      * Getter for the viewFactory

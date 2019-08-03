@@ -9,6 +9,7 @@ import it.unibo.oop.bbgmm.Utilities.Volume;
 import it.unibo.oop.bbgmm.Utilities.VolumeData;
 import it.unibo.oop.bbgmm.Utilities.VolumeDataImpl;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -106,14 +107,13 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
-    public void showGameField(final Group group) {
+    public void showGameField(final Scene scene) {
         /*gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
                 new GameFieldViewImpl(new AudioPlayerImpl(volumeData.getMusicVolume().getValue(),
                         volumeData.getEffectsVolume().getValue()), this.playerInputHandler.get()), this));*/
         gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
                 new GameFieldViewImpl(this.audioPlayer, this.playerInputHandler.get()), this));
-        group.getChildren().clear();
-        group.getChildren().addAll(gameControl.get().getGameFieldView().getGroup().getChildren());
+        scene.setRoot(gameControl.get().getGameFieldView().getGroup());
         startGame();
     }
 

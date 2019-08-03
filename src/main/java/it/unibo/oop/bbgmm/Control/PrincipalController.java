@@ -7,6 +7,7 @@ import it.unibo.oop.bbgmm.Utilities.Pair;
 import it.unibo.oop.bbgmm.Utilities.Volume;
 import it.unibo.oop.bbgmm.Utilities.VolumeData;
 import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -78,9 +79,9 @@ public interface PrincipalController {
 
     /**
      * Method used by the view to show the GameField and start the game
-     * @param group
+     * @param scene
      */
-    void showGameField(final Group group);
+    void showGameField(final Scene scene);
 
     /**
      * Method used by the view to show the insertScore screen
