@@ -42,6 +42,15 @@ public abstract class AbstractEntityChangeStateView<S extends EntityState> exten
         this.animations.put(state,animation);
     }
 
+    /**
+     * The current animation is stopped
+     */
+    @Override
+    public void removeFromView(){
+        currentAnimation.stop();
+        super.removeFromView();
+    }
+
     public Runnable dynamicAnimation(final Image image, final Duration duration, final int frames){
         return () -> {
             setImage(image);

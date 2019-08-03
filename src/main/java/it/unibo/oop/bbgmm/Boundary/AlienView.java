@@ -8,7 +8,7 @@ import javafx.util.Duration;
 public class AlienView extends AbstractAliveEntityView{
 
 
-    private static final int WIDTH = 50, HEIGHT = 50;
+    private static final int WIDTH = 72, HEIGHT = 97;
     //private static final Image IMG_HURT = new Image("");
     private static final double FRAME_DURATION=700;
 
