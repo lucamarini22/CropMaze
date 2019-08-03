@@ -87,6 +87,11 @@ public class PlayerInputHandler {
             removeKey(event);
             System.out.println("Remove key");
         }
+        if(!input.stream().anyMatch(keyCode -> keyCode.equals(KeyCode.UP) || keyCode.equals(KeyCode.DOWN) ||
+                keyCode.equals(KeyCode.RIGHT) || keyCode.equals(KeyCode.LEFT )))
+        {
+            applyMovement();
+        }
     }
 
 

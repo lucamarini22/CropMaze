@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class Alien extends AbstractEntity {
 
-    private static final Dimension2D SIZE = new Dimension2D(72,97);
+    private static final Dimension2D SIZE = new Dimension2D(3, 3);
 
     private static final double WALK_SPEED=1;
     private static final int DAMAGE = 5;

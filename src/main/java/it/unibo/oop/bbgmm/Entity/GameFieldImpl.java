@@ -54,6 +54,6 @@ public final class GameFieldImpl implements GameField {
 
     @Override
     public Set<Entity> getWalls() {
-        return this.entities.stream().filter(e -> e.getClass().equals(Wall.class)).collect(Collectors.toSet());
+        return this.entities.stream().filter(e -> e instanceof Wall).collect(Collectors.toSet());
     }
 }

@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 
 public abstract class AbstractEntityView implements EntityView {
     private final ImageView image = new ImageView();
-    private final Dimension2D dimension;
+    private Dimension2D dimension;
     private final Group myGroup;
 
     public AbstractEntityView(final Group group, final Dimension2D dimension){
@@ -26,8 +26,8 @@ public abstract class AbstractEntityView implements EntityView {
 
     @Override
     public void setDimension(final Dimension2D dimension) {
-        this.image.setFitHeight((dimension.getHeight()*Resolution.getHeight())/Resolution.SMALL_HEIGHT);
-        this.image.setFitWidth((dimension.getWidth()*Resolution.getWidth())/Resolution.SMALL_WIDTH);
+        image.setFitWidth(ViewUtils.metersToPixels(dimension.getWidth()));
+        image.setFitHeight(ViewUtils.metersToPixels(dimension.getHeight()));
     }
 
     @Override
