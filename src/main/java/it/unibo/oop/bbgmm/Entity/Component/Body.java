@@ -9,7 +9,7 @@ import javafx.geometry.Rectangle2D;
 
 public class Body extends AbstractEntityComponent implements EntityBody{
 
-    private final Point2D position;
+    private Point2D position;
     private final Dimension2D dimension;
     private final Rectangle2D shape;
     private Direction direction;
@@ -37,7 +37,7 @@ public class Body extends AbstractEntityComponent implements EntityBody{
 
     @Override
     public void addPosition(Point2D position) {
-        this.getPosition().add(position);
+        this.position = this.position.add(position);
     }
 
     @Override
