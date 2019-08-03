@@ -12,7 +12,7 @@ public class Body extends AbstractEntityComponent implements EntityBody{
     private final Point2D position;
     private final Dimension2D dimension;
     private final Rectangle2D shape;
-    private final Direction direction;
+    private Direction direction;
     private final boolean movable;
 
 
@@ -34,6 +34,16 @@ public class Body extends AbstractEntityComponent implements EntityBody{
 
     @Override
     public Direction getDirection() {return this.direction;}
+
+    @Override
+    public void addPosition(Point2D position) {
+        this.getPosition().add(position);
+    }
+
+    @Override
+    public void changeDirection(Direction direction) {
+        this.direction = direction;
+    }
 
     @Override
     public Point2D getPosition() {return this.position;}

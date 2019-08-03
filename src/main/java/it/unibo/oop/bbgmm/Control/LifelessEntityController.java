@@ -18,4 +18,5 @@ public class LifelessEntityController extends AbstractLifelessEntityController<L
         public LifelessEntityController(final Entity entity, final LifelessEntityView entityView) {
             super(entity, entityView);
         }
+
 }

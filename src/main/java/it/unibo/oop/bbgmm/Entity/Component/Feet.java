@@ -18,6 +18,7 @@ public class Feet extends AbstractMovement {
     private double walkingSpeed;
     private final Set<Entity> walls;
 
+
     /**
      *
      * @param walkingSpeed
@@ -29,7 +30,6 @@ public class Feet extends AbstractMovement {
         super();
         this.walls = walls;
         this.walkingSpeed = walkingSpeed;
-
     }
 
     /**
@@ -40,6 +40,11 @@ public class Feet extends AbstractMovement {
     public void attach(Entity owner) {
         super.attach(owner);
         updateState();
+    }
+
+    @Override
+    public void update(double dt) {
+        super.update(dt);
     }
 
     /**

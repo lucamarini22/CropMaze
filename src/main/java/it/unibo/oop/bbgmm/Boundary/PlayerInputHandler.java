@@ -28,20 +28,44 @@ public class PlayerInputHandler {
         if(event.getCode().equals(KeyCode.D) ||
                 event.getCode().equals(KeyCode.S) ||
                 event.getCode().equals(KeyCode.W) ||
-                event.getCode().equals(KeyCode.A)||
-                event.getCode().equals(KeyCode.DOWN)||
+                event.getCode().equals(KeyCode.A)) {
+            if(addOrRemoveKey(event));
+            {
+                applyMovement();
+            }
+        }
+        if(event.getCode().equals(KeyCode.DOWN)||
                 event.getCode().equals(KeyCode.LEFT)||
                 event.getCode().equals(KeyCode.RIGHT)||
-                event.getCode().equals(KeyCode.UP)) {
+                event.getCode().equals(KeyCode.UP)){
+            if(addOrRemoveKey(event)){
+                applyShooting();
+            }
 
-            if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
-                this.input.add(event.getCode());
-            }
-            if (event.getEventType().equals(KeyEvent.KEY_RELEASED)) {
-                this.input.remove(event.getCode());
-            }
-            applyMovement();
         }
+
+
+
+
+
+    }
+
+    /**
+     * Add or remove a key from the list
+     * @param event
+     * The key event
+     * @return if the apply method can be called
+     */
+
+    private boolean addOrRemoveKey(final KeyEvent event){
+        if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
+            this.input.add(event.getCode());
+            return true;
+        }
+        if (event.getEventType().equals(KeyEvent.KEY_RELEASED)) {
+            this.input.remove(event.getCode());
+        }
+        return false;
     }
 
     public void setListener(final PlayerInputListener listener){
@@ -53,6 +77,12 @@ public class PlayerInputHandler {
      */
     private void applyMovement(){listener.ifPresent(playerInputListener ->{
         playerInputListener.move(computeMovement());
+    }); }
+
+    /**
+     * notify the controller that the player wants to shot
+     */
+    private void applyShooting(){listener.ifPresent(playerInputListener ->{
         playerInputListener.shoot(computeShooting());
     }); }
 

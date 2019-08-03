@@ -20,9 +20,10 @@ public abstract class AbstractEntityComponent implements EntityComponent {
 
     @Override
     public void detach() {
-        if(this.owner.isPresent()){
-            this.owner = Optional.empty();
-        }
+        this.owner.ifPresent(entity -> {
+            owner = Optional.empty();
+            entity.remove(this);
+        });
     }
 
     @Override

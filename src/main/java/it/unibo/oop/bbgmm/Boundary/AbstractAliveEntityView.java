@@ -12,6 +12,7 @@ public abstract class AbstractAliveEntityView extends AbstractEntityChangeStateV
         super(group, dimension);
     }
 
+
     @Override
     public void deathView() {
         removeFromView();
@@ -20,5 +21,11 @@ public abstract class AbstractAliveEntityView extends AbstractEntityChangeStateV
     @Override
     public PossibleEntityState getCurrentState() {
         return this.currentState;
+    }
+
+    @Override
+    public void changeState(final PossibleEntityState state){
+        super.changeState(state);
+        currentState = state;
     }
 }

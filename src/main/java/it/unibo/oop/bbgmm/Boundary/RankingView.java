@@ -1,7 +1,11 @@
 package it.unibo.oop.bbgmm.Boundary;
+import it.unibo.oop.bbgmm.Control.PlayerController;
+import it.unibo.oop.bbgmm.Control.PlayerInputListener;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
+import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Utilities.FontMaker;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -14,6 +18,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import javax.swing.text.Position;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
