@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -25,8 +26,8 @@ public abstract class AbstractEntityView implements EntityView {
 
     @Override
     public void setDimension(final Dimension2D dimension) {
-        this.image.setFitHeight(dimension.getHeight());
-        this.image.setFitWidth(dimension.getHeight());
+        this.image.setFitHeight((dimension.getHeight()*Resolution.getHeight())/Resolution.SMALL_HEIGHT);
+        this.image.setFitWidth((dimension.getWidth()*Resolution.getWidth())/Resolution.SMALL_WIDTH);
     }
 
     @Override

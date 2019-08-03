@@ -20,8 +20,8 @@ import java.util.Set;
 public final class LevelImpl implements Level {
     private static final float TILE_SIZE = 1f;
     private static final int FIRST_LEVEL = 1;
-    private static final int TOP_LEFT_X = -200;
-    private static final int TOP_LEFT_Y = -220;
+    private static final int TOP_LEFT_X = -270;
+    private static final int TOP_LEFT_Y = -100;
     private static final String SOLID_OBJECTS = "solid";
     private static final String ENTITY_OBJECTS = "objects";
 
