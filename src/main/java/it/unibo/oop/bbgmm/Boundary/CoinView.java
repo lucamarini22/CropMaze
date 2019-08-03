@@ -25,7 +25,7 @@ public class CoinView extends AbstractEntityView implements LifelessEntityView {
     public CoinView(final Group group, final AudioPlayer audioPlayer) {
         super(group, new Dimension2D(WIDTH, HEIGHT));
         this.audioplayer = audioPlayer;
-        getView().setImage(new Image(new File(COIN_IMAGE).toURI().toString()));
+        getView().setImage(new Image(COIN_IMAGE));
     }
     //remove?
 }
