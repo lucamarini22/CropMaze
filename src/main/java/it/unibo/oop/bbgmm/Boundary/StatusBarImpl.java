@@ -21,8 +21,8 @@ public final class StatusBarImpl implements StatusBarScreen {
 
     public StatusBarImpl(){
         pb.setStyle("-fx-accent: green");
-        pb.setPrefWidth(500);
-        pb.setPrefHeight(100);
+        pb.setPrefWidth(100);
+        pb.setPrefHeight(20);
 
         statusBox.getChildren().add(pb);
     }

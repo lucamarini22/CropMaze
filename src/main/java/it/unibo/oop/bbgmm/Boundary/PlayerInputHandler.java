@@ -14,8 +14,8 @@ public class PlayerInputHandler {
     private Optional<PlayerInputListener> listener = Optional.empty();
 
     public PlayerInputHandler(final Scene scene){
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, this::onKeyPressed);
-        scene.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyPressed);
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, this::onKeyEvent);
+        scene.addEventHandler(KeyEvent.KEY_RELEASED, this::onKeyEvent);
     }
 
     /**
@@ -24,7 +24,7 @@ public class PlayerInputHandler {
      *          The event triggered when a button is pressed
      */
 
-    public void onKeyPressed(final KeyEvent event){
+    public void onKeyEvent(final KeyEvent event){
         if(event.getCode().equals(KeyCode.D) ||
                 event.getCode().equals(KeyCode.S) ||
                 event.getCode().equals(KeyCode.W) ||
