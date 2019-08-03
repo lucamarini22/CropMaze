@@ -60,11 +60,7 @@ public class Feet extends AbstractMovement {
     protected boolean wallChecker(final Point2D distanceVector){
         if(getOwner().isPresent()){
             Dimension2D dimension  = getOwner().get().getBody().getDimension();
-<<<<<<< HEAD
-            Rectangle shape = new Rectangle(newDistanceVector.getX(),newDistanceVector.getY(),
-=======
-            Rectangle2D shape = new Rectangle2D(distanceVector.getX(),distanceVector.getY(),
->>>>>>> 3ef0663d6fd11d48f9fb496f958d4e517a76b164
+            Rectangle shape = new Rectangle(distanceVector.getX(),distanceVector.getY(),
                                                 dimension.getWidth(),dimension.getHeight());
             return this.walls.stream().anyMatch(w -> w.getBody().getShape().intersects(shape.getLayoutBounds()));
         }
