@@ -23,7 +23,7 @@ public final class LevelImpl implements Level {
     private static final int TOP_LEFT_X = 0;
     private static final int TOP_LEFT_Y = -100;
     private static final int POSITION_DIVISOR_SPAWN_X = 30;
-    private static final int POSITION_DIVISOR_SPAWN_Y = 50;
+    private static final int POSITION_DIVISOR_SPAWN_Y = 45;
     private static final String SOLID_OBJECTS = "solid";
     private static final String ENTITY_OBJECTS = "objects";
 
