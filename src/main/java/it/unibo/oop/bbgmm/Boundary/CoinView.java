@@ -11,8 +11,8 @@ import java.io.File;
  */
 public class CoinView extends AbstractEntityView implements LifelessEntityView {
     private static final String COIN_IMAGE = "/images/coinSilver.png";
-    private static final int WIDTH = 70;
-    private static final int HEIGHT = 70;
+    private static final int WIDTH = 72;
+    private static final int HEIGHT = 97;
     private final AudioPlayer audioplayer;
 
     /**
