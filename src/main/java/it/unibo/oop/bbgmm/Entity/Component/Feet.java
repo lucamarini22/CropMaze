@@ -60,11 +60,9 @@ public class Feet extends AbstractMovement {
      *
      */
     protected boolean wallChecker(final Point2D distanceVector){
-<<<<<<< HEAD
+
         Point2D newDistanceVector = this.calculateNewDistanceVector(distanceVector);
 
-=======
->>>>>>> b9c85fec7a6a65ac480dcd8528a16ec4b5759b34
         if(getOwner().isPresent()){
             Dimension2D dimension  = getOwner().get().getBody().getDimension();
             Rectangle shape = new Rectangle(distanceVector.getX(),distanceVector.getY(),
@@ -123,11 +121,8 @@ public class Feet extends AbstractMovement {
         Point2D newPos = temp.add(getOwner().get().getBody().getPosition());
 
         //verifico se c'è un muro, se è presente l'entità non può spostarsi e rimane ferma
-<<<<<<< HEAD
-        if(!wallChecker(distanceVector)){
-=======
+
         if(wallChecker(newPos)){
->>>>>>> b9c85fec7a6a65ac480dcd8528a16ec4b5759b34
             setPosition(Point2D.ZERO);
             //setState(State.STABLE);
             System.out.println("entity stable, find a wall");
@@ -158,7 +153,7 @@ public class Feet extends AbstractMovement {
      * Set the state of the entity
      */
     private void updateState(){
-        if(!getPosition().equals(Point2D.ZERO)){
+        if(getPosition().equals(Point2D.ZERO)){
             setState(State.WALKING);
         }
         else{
