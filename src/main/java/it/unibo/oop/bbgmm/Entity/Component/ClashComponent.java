@@ -7,9 +7,8 @@ import it.unibo.oop.bbgmm.Entity.Entity;
 
 public class ClashComponent extends AbstractEntityComponent implements Clash{
 
+    private boolean registered = false;
     public ClashComponent(){
-        this.getOwner().ifPresent(owner -> owner.get(Collidable.class).ifPresent(
-                c -> c.getEvent().register(this::hit)));
     }
 
     private void hit(Collision collision) {
@@ -25,14 +24,19 @@ public class ClashComponent extends AbstractEntityComponent implements Clash{
                     }));
         if(collision.getCollisionComponent().getCollisionLabel().equals(CollisionLabel.SHOT))
         {
-            collision.getCollisionComponent().getOwner().ifPresent(Entity::destroy);
+            //collision.getCollisionComponent().getOwner().ifPresent(Entity::destroy);
         }else {
-            this.getOwner().ifPresent(owner -> (owner).destroy());
+            //this.getOwner().ifPresent(owner -> (owner).destroy());
         }
     }
 
     @Override
     public void update(double delta) {
+        if(!registered) {
+            this.getOwner().ifPresent(owner -> owner.get(Collidable.class).ifPresent(
+                    c -> c.getEvent().register(this::hit)));
+            registered = true;
+        }
     }
 
 }

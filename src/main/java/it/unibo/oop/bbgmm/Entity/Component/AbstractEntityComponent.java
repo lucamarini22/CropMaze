@@ -22,7 +22,6 @@ public abstract class AbstractEntityComponent implements EntityComponent {
     public void detach() {
         this.owner.ifPresent(entity -> {
             owner = Optional.empty();
-            entity.remove(this);
         });
     }
 

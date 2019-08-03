@@ -6,6 +6,7 @@ import it.unibo.oop.bbgmm.Entity.Entity;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.shape.Rectangle;
 
 import java.util.Optional;
 import java.util.Set;
@@ -16,7 +17,7 @@ import java.util.Set;
 public class Feet extends AbstractMovement {
 
     private double walkingSpeed;
-    private final Set<Entity> walls;
+    private Set<Entity> walls;
 
 
     /**
@@ -59,13 +60,16 @@ public class Feet extends AbstractMovement {
      *
      */
     protected boolean wallChecker(final Point2D distanceVector){
+<<<<<<< HEAD
         Point2D newDistanceVector = this.calculateNewDistanceVector(distanceVector);
 
+=======
+>>>>>>> b9c85fec7a6a65ac480dcd8528a16ec4b5759b34
         if(getOwner().isPresent()){
             Dimension2D dimension  = getOwner().get().getBody().getDimension();
-            Rectangle2D shape = new Rectangle2D(newDistanceVector.getX(),newDistanceVector.getY(),
+            Rectangle shape = new Rectangle(distanceVector.getX(),distanceVector.getY(),
                                                 dimension.getWidth(),dimension.getHeight());
-            return this.walls.stream().anyMatch(w -> w.getBody().getShape().intersects(shape));
+            return this.walls.stream().anyMatch(w -> w.getBody().getShape().intersects(shape.getLayoutBounds()));
         }
         return false;
     }
@@ -115,8 +119,15 @@ public class Feet extends AbstractMovement {
 
         Point2D movementVector = calculateNewDistanceVector(distanceVector);
 
+        Point2D temp = new Point2D(movementVector.getX(),movementVector.getY());
+        Point2D newPos = temp.add(getOwner().get().getBody().getPosition());
+
         //verifico se c'è un muro, se è presente l'entità non può spostarsi e rimane ferma
+<<<<<<< HEAD
         if(!wallChecker(distanceVector)){
+=======
+        if(wallChecker(newPos)){
+>>>>>>> b9c85fec7a6a65ac480dcd8528a16ec4b5759b34
             setPosition(Point2D.ZERO);
             //setState(State.STABLE);
             System.out.println("entity stable, find a wall");

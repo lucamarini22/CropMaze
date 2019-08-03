@@ -24,7 +24,8 @@ public abstract class AbstractAliveEntityView extends AbstractEntityChangeStateV
     }
 
     @Override
-    public void changeState(final PossibleEntityState state){
+    public void
+    changeState(final PossibleEntityState state){
         super.changeState(state);
         currentState = state;
     }

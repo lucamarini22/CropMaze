@@ -47,11 +47,13 @@ public class SpriteAnimation extends Transition {
     }
 
     protected void interpolate(double k) {
-        if(!getStatus().equals(Status.RUNNING)){
+        if (getStatus() != Status.RUNNING) {
+            // sometimes this happens..
             return;
         }
         final int cols = (int) (imageView.getImage().getWidth() / width);
         final int rows = (int) (imageView.getImage().getHeight() / height);
+
         final int index = Math.min((int) Math.floor(k * count), count - 1);
         if (index != lastIndex) {
             final double x = cols == 0 ? 0 : index % cols * width;

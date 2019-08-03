@@ -15,10 +15,9 @@ import java.util.List;
 public class PickupableComponent extends AbstractEntityComponent implements Collector{
 
     private final Power power;
+    private boolean registered = false;
 
     public PickupableComponent(final Power power){
-        this.getOwner().ifPresent(owner -> owner.get(Collidable.class).ifPresent(
-                c -> c.getEvent().register(this::pickUp)));
         this.power = power;
     }
 
@@ -41,10 +40,14 @@ public class PickupableComponent extends AbstractEntityComponent implements Coll
                             }
                         })
         );
-        this.getOwner().ifPresent(Entity::destroy);
+        //this.getOwner().ifPresent(Entity::destroy);
     }
     @Override
     public void update(double delta) {
-
+        if (!registered) {
+            this.getOwner().ifPresent(owner -> owner.get(Collidable.class).ifPresent(
+                    c -> c.getEvent().register(this::pickUp)));
+            registered = true;
+        }
     }
 }

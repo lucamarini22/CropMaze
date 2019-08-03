@@ -30,22 +30,20 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
     }
 
     @Override
+<<<<<<< HEAD
     public final void update(){
         if(getEntity().get(Life.class).isPresent() && getEntity().get(Life.class).get().isAlive()){
+=======
+    public void update(){
+        if(getEntity().get(Life.class).isPresent()){
+>>>>>>> b9c85fec7a6a65ac480dcd8528a16ec4b5759b34
             getEntityView().setPosition(ViewUtils.worldPointToFX(getEntity().getBody().getPosition()));
+            getEntityView().changeState(creatureStateMap().getOrDefault(getEntity().get(Movement.class).get().getState(),PossibleEntityState.STABLE));
         } else {
             getEntityView().deathView();
         }
     }
 
-    /**
-     * it change the entity state
-     * @param movement
-     *         movement that the entity do
-     */
-    public void movementChanged(final Movement movement){
-        getEntityView().changeState(stateMap.getOrDefault(movement.getState(), PossibleEntityState.STABLE ));
-    }
 
     /**
      * it change the entity face direction

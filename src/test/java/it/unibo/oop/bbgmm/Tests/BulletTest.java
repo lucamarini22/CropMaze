@@ -35,8 +35,8 @@ public class BulletTest {
             //make the bullet move
             bullet.update(1);
         }
-        player.destroy();
-        bullet.destroy();
+        //player.destroy();
+        //bullet.destroy();
 
         list = weapon.getBulletList();
 

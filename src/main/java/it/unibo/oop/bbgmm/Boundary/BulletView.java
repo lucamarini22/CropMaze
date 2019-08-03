@@ -7,27 +7,24 @@ import javafx.scene.image.Image;
 
 public class BulletView extends AbstractAliveEntityView{
 
+    private static final int WIDTH = 0, HEIGHT = 4;
     private final Direction direction;
 
-    public BulletView(final Group group, final Dimension2D dimension, final Direction direction) {
-        super(group, dimension);
+    public BulletView(final Group group, final Direction direction) {
+        super(group, new Dimension2D(WIDTH,HEIGHT));
         this.direction = direction;
         setCurrentImage();
     }
 
     private void setCurrentImage(){
         switch(direction){
-            case EAST: putAnimation(PossibleEntityState.STABLE,
-                                    staticAnimation(new Image("images/bullets/BulletRight.png")));
+            case EAST: setImage(new Image("images/bullets/BulletRight.png"));
                         break;
-            case WEST: putAnimation(PossibleEntityState.STABLE,
-                                    staticAnimation(new Image("images/bullets/BulletLeft.png")));
+            case WEST: setImage(new Image("images/bullets/BulletLeft.png"));
                         break;
-            case NORTH: putAnimation(PossibleEntityState.STABLE,
-                                     staticAnimation(new Image("images/bullets/BulletUp.png")));
+            case NORTH: setImage(new Image("images/bullets/BulletUp.png"));
                         break;
-            case SOUTH: putAnimation(PossibleEntityState.STABLE,
-                                     staticAnimation(new Image("images/bullets/BulletDown.png")));
+            case SOUTH: setImage(new Image("images/bullets/BulletDown.png"));
                         break;
         }
     }

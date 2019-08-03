@@ -5,6 +5,7 @@ import it.unibo.oop.bbgmm.Entity.Direction;
 import it.unibo.oop.bbgmm.Entity.Entity;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface Weapon extends EntityComponent {
@@ -13,7 +14,7 @@ public interface Weapon extends EntityComponent {
      * @param ownerDirection
      *                  Tells projectile direction.
      */
-    void shoot (Direction ownerDirection);
+    Optional<Bullet> shoot (Direction ownerDirection);
 
     /**
      *

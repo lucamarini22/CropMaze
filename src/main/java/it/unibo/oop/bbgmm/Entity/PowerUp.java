@@ -7,10 +7,11 @@ import it.unibo.oop.bbgmm.Entity.Component.PickupableComponent;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.shape.Rectangle;
 
 public class PowerUp extends AbstractEntity {
 
-    private static final Dimension2D SIZE = new Dimension2D(1.1,1.2);
+    private static final Dimension2D SIZE = new Dimension2D(3.1,3.2);
     public PowerUp(BodyBuilder bodyBuilder, final Point2D position, final Power power) {
         super(bodyBuilder
                 .setPosition(position)
@@ -18,7 +19,7 @@ public class PowerUp extends AbstractEntity {
                 .setDirection(Direction.NOTHING)
                 .setMovable(false)
                 .build());
-        add(new CollisionComponent(new Rectangle2D(position.getX(), position.getY(),
+        add(new CollisionComponent(new Rectangle(position.getX(), position.getY(),
                 SIZE.getWidth(), SIZE.getHeight()), CollisionLabel.POWER));
         add(new PickupableComponent(power));
     }

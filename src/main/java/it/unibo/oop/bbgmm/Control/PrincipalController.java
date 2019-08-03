@@ -100,4 +100,5 @@ public interface PrincipalController {
      * @param playerInputHandler
      */
     void setPlayerInputHandler(final PlayerInputHandler playerInputHandler);
+
 }
