@@ -9,6 +9,17 @@ import javafx.geometry.Rectangle2D;
 public interface EntityBody extends EntityComponent {
 
     /**
+     * @param position
+     *      The position to add
+     */
+    void addPosition(Point2D position);
+
+    /**
+     * @param direction
+     *      The new direction
+     */
+    void changeDirection(Direction direction);
+    /**
      * @return The position
      */
     Point2D getPosition();

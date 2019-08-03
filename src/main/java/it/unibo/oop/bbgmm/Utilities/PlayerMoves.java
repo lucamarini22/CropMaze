@@ -1,15 +1,15 @@
 package it.unibo.oop.bbgmm.Utilities;
 
 public enum PlayerMoves {
-    UP(1,0),
-    DOWN(-1,0),
-    LEFT(0,-1),
-    RIGHT(0,1);
+    UP(0,1),
+    DOWN(0,-1),
+    LEFT(-1,0),
+    RIGHT(1,0);
 
-    public int x;
-    public int y;
+    public double x;
+    public double y;
 
-    PlayerMoves(final int x, final int y){
+    PlayerMoves(final double x, final double y){
         this.x = x;
         this.y = y;
     }
