@@ -31,17 +31,44 @@ public class PlayerInputHandler {
                 event.getCode().equals(KeyCode.A)) {
             if(addOrRemoveKey(event));
             {
+                if(event.getCode().equals(KeyCode.D)) {
+                    System.out.println("D");
+                }
+                if(event.getCode().equals(KeyCode.A)) {
+                    System.out.println("A");
+                }
+                if(event.getCode().equals(KeyCode.S)) {
+                    System.out.println("S");
+                }
+                if(event.getCode().equals(KeyCode.W)) {
+                    System.out.println("W");
+                }
                 applyMovement();
+                System.out.println("Muovi");
             }
+            System.out.println("Remove key");
         }
         if(event.getCode().equals(KeyCode.DOWN)||
                 event.getCode().equals(KeyCode.LEFT)||
                 event.getCode().equals(KeyCode.RIGHT)||
                 event.getCode().equals(KeyCode.UP)){
             if(addOrRemoveKey(event)){
+                if(event.getCode().equals(KeyCode.UP)) {
+                    System.out.println("UP");
+                }
+                if(event.getCode().equals(KeyCode.DOWN)) {
+                    System.out.println("DOWN");
+                }
+                if(event.getCode().equals(KeyCode.LEFT)) {
+                    System.out.println("LEFT");
+                }
+                if(event.getCode().equals(KeyCode.RIGHT)) {
+                    System.out.println("RIGHT");
+                }
                 applyShooting();
+                System.out.println("Spara");
             }
-
+            System.out.println("Remove key");
         }
 
 
