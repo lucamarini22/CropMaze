@@ -9,8 +9,8 @@ import javafx.geometry.Point2D;
  */
 public class Coin extends AbstractEntity {
 
-    private static final int WIDTH = 72;
-    private static final int HEIGHT = 97;
+    private static final double WIDTH = 2.8;
+    private static final double HEIGHT = 3.5;
     private static final Dimension2D SIZE = new Dimension2D(WIDTH, HEIGHT);
     /**
      *
