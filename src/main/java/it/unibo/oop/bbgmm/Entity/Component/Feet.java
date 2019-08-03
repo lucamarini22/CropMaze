@@ -117,7 +117,7 @@ public class Feet extends AbstractMovement {
         }
         else{
             setPosition(movementVector);
-            calculateNewDirection(movementVector);
+            setDirection(calculateNewDirection(movementVector));
         }
         updateState();
     }
