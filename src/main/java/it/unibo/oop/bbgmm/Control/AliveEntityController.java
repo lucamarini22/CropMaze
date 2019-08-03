@@ -33,19 +33,12 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
     public final void update(){
         if(getEntity().get(Life.class).isPresent()){
             getEntityView().setPosition(ViewUtils.worldPointToFX(getEntity().getBody().getPosition()));
+            getEntityView().changeState(creatureStateMap().getOrDefault(getEntity().get(Movement.class).get().getState(),PossibleEntityState.STABLE));
         } else {
             getEntityView().deathView();
         }
     }
 
-    /**
-     * it change the entity state
-     * @param movement
-     *         movement that the entity do
-     */
-    public void movementChanged(final Movement movement){
-        getEntityView().changeState(stateMap.getOrDefault(movement.getState(), PossibleEntityState.STABLE ));
-    }
 
     /**
      * it change the entity face direction

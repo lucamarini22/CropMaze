@@ -10,6 +10,11 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
 
     @Override
     public State getState() {
+        if(currentState!=State.STABLE) {
+            System.out.println(this.currentState);
+        }else{
+            System.out.println(this.currentState);
+        }
         return currentState;
     }
 

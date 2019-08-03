@@ -26,4 +26,9 @@ public class Wall extends AbstractEntity {
                 .setMovable(false)
                 .build());
     }
+
+    @Override
+    public String toString(){
+        return "Wall";
+    }
 }
