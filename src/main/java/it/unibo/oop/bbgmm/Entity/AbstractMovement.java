@@ -50,6 +50,7 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
      */
     protected final void setPosition(final Point2D newMovement){
         this.desiredPosition = newMovement;
+        getOwner().ifPresent(o -> ((Entity) o).getBody().addPosition(newMovement));
     }
 
     /**
@@ -65,6 +66,6 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
      */
     protected final void setDirection(Direction newDirection) {
         this.direction = newDirection;
-        getOwner().ifPresent(o -> ((Entity) o).getBody());
+        getOwner().ifPresent(o -> ((Entity) o).getBody().changeDirection(direction));
     }
 }
