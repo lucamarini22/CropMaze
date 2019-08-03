@@ -39,7 +39,9 @@ public class Feet extends AbstractMovement {
     @Override
     public void attach(Entity owner) {
         super.attach(owner);
-        updateState();
+        //setState(State.STABLE);
+        //updateState();
+        System.out.println("at attach, state -> " + getState());
     }
 
     @Override
@@ -58,6 +60,7 @@ public class Feet extends AbstractMovement {
      */
     protected boolean wallChecker(final Point2D distanceVector){
         Point2D newDistanceVector = this.calculateNewDistanceVector(distanceVector);
+
         if(getOwner().isPresent()){
             Dimension2D dimension  = getOwner().get().getBody().getDimension();
             Rectangle2D shape = new Rectangle2D(newDistanceVector.getX(),newDistanceVector.getY(),
@@ -77,6 +80,7 @@ public class Feet extends AbstractMovement {
     private Point2D calculateNewDistanceVector(final Point2D distanceVector){
         final double hf = distanceVector.getX() > 0 ? 1 : distanceVector.getX() < 0 ? -1 : 0;
         final double vf = distanceVector.getY() > 0 ? 1 : distanceVector.getY() < 0 ? -1 : 0;
+
         return new Point2D(hf * walkingSpeed, vf * walkingSpeed);
     }
 
@@ -112,21 +116,38 @@ public class Feet extends AbstractMovement {
         Point2D movementVector = calculateNewDistanceVector(distanceVector);
 
         //verifico se c'è un muro, se è presente l'entità non può spostarsi e rimane ferma
-        if(wallChecker(distanceVector)){
+        if(!wallChecker(distanceVector)){
             setPosition(Point2D.ZERO);
+            //setState(State.STABLE);
+            System.out.println("entity stable, find a wall");
         }
         else{
             setPosition(movementVector);
             setDirection(calculateNewDirection(movementVector));
+
+            /*
+            if(getPosition().equals(Point2D.ZERO)){
+                setState(State.STABLE);
+                System.out.println("entity stable - move method --> State =  " + getState());
+            }
+            else {
+                setState(State.WALKING);
+                System.out.println("entity walking -> State = " + getState());
+            }*/
         }
+        System.out.println(" " + getState());
+        //setPosition(Point2D.ZERO);
+        //setState(State.STABLE);
         updateState();
+        System.out.println("end of movement -> State = " + getState());
+
     }
 
     /**
      * Set the state of the entity
      */
     private void updateState(){
-        if(getPosition().getX() != 0 || getPosition().getY() != 0){
+        if(!getPosition().equals(Point2D.ZERO)){
             setState(State.WALKING);
         }
         else{

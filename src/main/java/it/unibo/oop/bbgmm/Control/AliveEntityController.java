@@ -31,7 +31,7 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
 
     @Override
     public final void update(){
-        if(getEntity().get(Life.class).isPresent()){
+        if(getEntity().get(Life.class).isPresent() && getEntity().get(Life.class).get().isAlive()){
             getEntityView().setPosition(ViewUtils.worldPointToFX(getEntity().getBody().getPosition()));
         } else {
             getEntityView().deathView();
