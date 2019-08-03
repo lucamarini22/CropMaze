@@ -1,16 +1,21 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Entity.Collision.CollisionLabel;
 import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
+import it.unibo.oop.bbgmm.Entity.Component.CollectingComponent;
+import it.unibo.oop.bbgmm.Entity.Component.CollisionComponent;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.shape.Rectangle;
 
 /**
  * Represent a coin entity that the player can collect.
  */
 public class Coin extends AbstractEntity {
 
-    private static final int WIDTH = 72;
-    private static final int HEIGHT = 97;
+    private static final int WIDTH = 5;
+    private static final int HEIGHT = 5;
     private static final Dimension2D SIZE = new Dimension2D(WIDTH, HEIGHT);
     /**
      *
@@ -29,5 +34,7 @@ public class Coin extends AbstractEntity {
                 .setMovable(false)
                 .setDirection(Direction.NOTHING)
                 .build());
+        add(new CollisionComponent(new Rectangle(position.getX(), position.getY(), WIDTH, HEIGHT), CollisionLabel.COIN));
+        add(new CollectingComponent());
     }
 }

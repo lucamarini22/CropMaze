@@ -5,6 +5,7 @@ import it.unibo.oop.bbgmm.Entity.Wall;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.shape.Rectangle;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,7 +19,7 @@ public class WallCheckerImpl implements WallChecker {
 
     @Override
     public boolean willCollide(Point2D position, Dimension2D dimension) {
-        Rectangle2D shape = new Rectangle2D(position.getX(),position.getY(),dimension.getWidth(),dimension.getHeight());
-        return this.walls.stream().anyMatch(w -> w.getBody().getShape().intersects(shape));
+        Rectangle shape = new Rectangle(position.getX(),position.getY(),dimension.getWidth(),dimension.getHeight());
+        return this.walls.stream().anyMatch(w -> w.getBody().getShape().getLayoutBounds().intersects(shape.getLayoutBounds()));
     }
 }

@@ -36,6 +36,7 @@ public final class GameFieldImpl implements GameField {
         if (entity.get(Collidable.class).isPresent()) {
             this.collisionSupervisor.addCollisionComponent(entity.get(Collidable.class).get());
         }
+        System.out.println(entity);
         return entity;
     }
 

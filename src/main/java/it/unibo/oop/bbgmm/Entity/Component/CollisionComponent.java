@@ -7,7 +7,10 @@ import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.Event;
 import it.unibo.oop.bbgmm.Entity.EventSource;
 import it.unibo.oop.bbgmm.Utilities.Pair;
+import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.RectangleBuilder;
 
 import java.awt.*;
 
@@ -15,16 +18,16 @@ public class CollisionComponent extends AbstractEntityComponent implements Colli
 
     private final CollisionLabel label;
     private final EventSource<Collision> collisionEvent;
-    private final Rectangle2D shape;
+    private Rectangle shape;
 
-    public CollisionComponent(final Rectangle2D shape, final CollisionLabel label){
+    public CollisionComponent(final Rectangle shape, final CollisionLabel label){
 
         this.shape = shape;
         this.label = label;
-        this.collisionEvent = new EventSource<Collision>();
+        this.collisionEvent = new EventSource<>();
     }
     @Override
-    public Rectangle2D getShape() {
+    public Rectangle getShape() {
         return this.shape;
     }
 
@@ -50,6 +53,7 @@ public class CollisionComponent extends AbstractEntityComponent implements Colli
 
     @Override
     public void update(double delta) {
-
+        Point2D pos = this.getOwner().get().getBody().getPosition();
+        this.shape = new Rectangle(pos.getX(), pos.getY(), shape.getWidth(), shape.getHeight());
     }
 }

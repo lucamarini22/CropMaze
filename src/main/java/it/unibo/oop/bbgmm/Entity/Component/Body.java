@@ -5,13 +5,14 @@ import it.unibo.oop.bbgmm.Entity.Direction;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.shape.Rectangle;
 
 
 public class Body extends AbstractEntityComponent implements EntityBody{
 
     private Point2D position;
     private final Dimension2D dimension;
-    private final Rectangle2D shape;
+    private final Rectangle shape;
     private Direction direction;
     private final boolean movable;
 
@@ -23,7 +24,7 @@ public class Body extends AbstractEntityComponent implements EntityBody{
         this.direction = direction;
         this.position = position;
         this.dimension = dimension;
-        this.shape = new Rectangle2D(position.getX(),position.getY(),dimension.getWidth(),dimension.getHeight());
+        this.shape = new Rectangle(position.getX(),position.getY(),dimension.getWidth(),dimension.getHeight());
     }
 
     @Override
@@ -49,7 +50,7 @@ public class Body extends AbstractEntityComponent implements EntityBody{
     public Point2D getPosition() {return this.position;}
 
     @Override
-    public Rectangle2D getShape() {return this.shape;}
+    public Rectangle getShape() {return this.shape;}
 
     @Override
     public Dimension2D getDimension() {return this.dimension;}

@@ -6,6 +6,7 @@ import it.unibo.oop.bbgmm.Entity.Entity;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.shape.Rectangle;
 
 import java.util.Optional;
 import java.util.Set;
@@ -60,9 +61,9 @@ public class Feet extends AbstractMovement {
         Point2D newDistanceVector = this.calculateNewDistanceVector(distanceVector);
         if(getOwner().isPresent()){
             Dimension2D dimension  = getOwner().get().getBody().getDimension();
-            Rectangle2D shape = new Rectangle2D(newDistanceVector.getX(),newDistanceVector.getY(),
+            Rectangle shape = new Rectangle(newDistanceVector.getX(),newDistanceVector.getY(),
                                                 dimension.getWidth(),dimension.getHeight());
-            return this.walls.stream().anyMatch(w -> w.getBody().getShape().intersects(shape));
+            return this.walls.stream().anyMatch(w -> w.getBody().getShape().intersects(shape.getLayoutBounds()));
         }
         return false;
     }
