@@ -8,6 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
@@ -19,7 +20,7 @@ import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 
 public class MainWindow {
     private final Stage primaryStage;
-    private final Group root;
+    private final AnchorPane root;
     private final Scene scene;
     private final ViewFactory viewFactory;
     private final AudioPlayer audioPlayer;
@@ -43,10 +44,10 @@ public class MainWindow {
 
         this.primaryStage.getIcons().add(new Image("images/mainMenu/icon.png"));
         //set the main menu as the scene
-        this.root = new Group();
+        this.root = new AnchorPane();
         this.scene = new Scene(root, Resolution.getWidth(), Resolution.getHeight());
         this.viewFactory = new ViewFactory(primaryStage, controller, this.root, this.scene);
-
+        this.scene.getStylesheets().add("Style.css");
         this.primaryStage.setScene(scene);
         this.controller.showMainMenu(this.viewFactory);
 

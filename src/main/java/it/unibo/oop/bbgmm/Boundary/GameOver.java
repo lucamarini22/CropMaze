@@ -31,8 +31,8 @@ public class GameOver extends AbstractBasicView {
     private final MenuItem itemExit = new MenuItem("EXIT");
 
     public GameOver(final Stage primaryStage, final PrincipalController controller,
-                    final Group group, final Scene scene){
-        super(primaryStage, controller, group, scene);
+                    final AnchorPane pane, final Scene scene){
+        super(primaryStage, controller, pane, scene);
 
         getScene().setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.UP) {
@@ -82,7 +82,7 @@ public class GameOver extends AbstractBasicView {
 
         getMenuItem(0).setActive(true);
 
-        Group root = getRoot();
+        AnchorPane root = getRoot();
         root.getChildren().clear();
         root.getChildren().add(boxImage);
         root.getChildren().add(menuBox);

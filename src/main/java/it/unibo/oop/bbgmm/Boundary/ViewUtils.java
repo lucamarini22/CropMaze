@@ -6,7 +6,7 @@ import javafx.geometry.Point2D;
  */
 public final class ViewUtils {
 
-    private static final int PIXELS_PER_METER = 10;
+    private static final int PIXELS_PER_METER = 12;
 
     private ViewUtils() {
 

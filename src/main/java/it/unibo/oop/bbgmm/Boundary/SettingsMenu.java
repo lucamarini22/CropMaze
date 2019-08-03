@@ -36,8 +36,8 @@ public class SettingsMenu extends AbstractBasicView {
     private final MenuItem itemBack = new MenuItem("BACK");
 
     public SettingsMenu(final Stage primaryStage, final PrincipalController controller,
-                        final Group group, final Scene scene) {
-        super(primaryStage, controller, group, scene);
+                        final AnchorPane pane, final Scene scene) {
+        super(primaryStage, controller, pane, scene);
 
 
         //it intercepts the button presses
@@ -92,7 +92,7 @@ public class SettingsMenu extends AbstractBasicView {
 
         getMenuItem(0).setActive(true);
 
-        Group root = getRoot();
+        AnchorPane root = getRoot();
         root.getChildren().clear();
         root.getChildren().add(menuBox);
 

@@ -5,6 +5,7 @@ import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
 import javafx.scene.layout.*;
@@ -31,9 +32,8 @@ public class MainMenu extends AbstractBasicView {
 
 
     public MainMenu(final Stage primaryStage, final PrincipalController controller,
-                    final Group group, final Scene scene) {
-        super(primaryStage,controller, group, scene);
-
+                    final AnchorPane pane, final Scene scene) {
+        super(primaryStage,controller, pane, scene);
 
         //it intercepts the button presses
         getScene().setOnKeyPressed(event -> {
@@ -81,12 +81,14 @@ public class MainMenu extends AbstractBasicView {
 
         getMenuItem(0).setActive(true);
 
-        Group root = getRoot();
+        AnchorPane root = getRoot();
 
         root.getChildren().clear();
-        root.getChildren().add(menuBox);
+        pane.getChildren().add(menuBox);
 
-        //root.setId("mainMenu");
+        pane.setId("mainMenu");
+
+        getScene().setRoot(getRoot());
     }
 
     /**
@@ -102,7 +104,7 @@ public class MainMenu extends AbstractBasicView {
     @Override
     protected void buttonActions() {
         itemNewGame.setOnActivate(() -> {
-            getController().showGameField(getRoot());
+            getController().showGameField(getScene());
             getAudioPlayer().stopMusic();
             checkResolution();
             clearEnter();

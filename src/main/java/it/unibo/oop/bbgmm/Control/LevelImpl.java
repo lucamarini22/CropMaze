@@ -20,6 +20,8 @@ import java.util.Set;
 public final class LevelImpl implements Level {
     private static final float TILE_SIZE = 1f;
     private static final int FIRST_LEVEL = 1;
+    private static final int TOP_LEFT_X = -200;
+    private static final int TOP_LEFT_Y = -220;
     private static final String SOLID_OBJECTS = "solid";
     private static final String ENTITY_OBJECTS = "objects";
 
@@ -134,9 +136,9 @@ public final class LevelImpl implements Level {
                     if (this.gameStatistics.getCurrentLevel() == FIRST_LEVEL) {
                         player = entitySpawner.spawn(EntityType.PLAYER.toString(), position);
                         final PlayerController controller = new PlayerController(player, gameFieldView.getEntityViewFactory().createPlayerView());
+                        gameFieldView.setPlayerInputListener(controller);
                         entitiesControllers.add(controller);
                         playerStatistics = new PlayerStatisticsImpl(player);
-                        gameFieldView.setPlayerInputListener(controller);
                     }
                     //if it is not the first level it doesn't recreate the player
                     break;
@@ -173,7 +175,7 @@ public final class LevelImpl implements Level {
     }
 
     private void loadTiles(final TileLayer layer) {
-        gameFieldView.showField(layer, Point2D.ZERO, new Dimension2D(TILE_SIZE, TILE_SIZE));
+        gameFieldView.showField(layer, new Point2D(TOP_LEFT_X, TOP_LEFT_Y), new Dimension2D(TILE_SIZE, TILE_SIZE));
     }
     private Pair<Point2D, Dimension2D> mapPositionToWorld(final Map map, final double x, final double y,
                                                           final double width, final double height) {

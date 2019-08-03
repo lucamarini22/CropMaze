@@ -29,8 +29,8 @@ public class InsertScoreView extends AbstractBasicView {
     private final MenuItem itemRanking = new MenuItem("RANKING");
 
     public InsertScoreView(final Stage primaryStage, final PrincipalController controller,
-                           final Group group, final Scene scene) {
-        super(primaryStage, controller, group, scene);
+                           final AnchorPane pane, final Scene scene) {
+        super(primaryStage, controller, pane, scene);
 
         getScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
@@ -77,7 +77,7 @@ public class InsertScoreView extends AbstractBasicView {
 
         getMenuItem(0).setActive(true);
 
-        Group root = getRoot();
+        AnchorPane root = getRoot();
         root.getChildren().clear();
         root.getChildren().add(menuBox);
         root.getChildren().add(insertMenu);
