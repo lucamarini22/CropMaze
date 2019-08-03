@@ -129,7 +129,7 @@ public final class LevelImpl implements Level {
 
     private void loadEntityObjects(final ObjectGroup layer) {
         layer.forEach(mapObj -> {
-            final Point2D position = invertY(new Point2D(45, 70));
+            final Point2D position = invertY(new Point2D(mapObj.getX() / POSITION_DIVISOR_SPAWN_X, mapObj.getY() / POSITION_DIVISOR_SPAWN_Y));
                 this.gameField.getWalls().forEach(w -> System.out.println(w.getBody().getPosition()));
             this.gameField.getWalls().forEach(w -> System.out.println(w.getBody().getDimension()));
 
