@@ -117,6 +117,7 @@ public class PlayerInputHandler {
         Point2D shift = Point2D.ZERO;
         if(this.input.contains(KeyCode.D)){
             shift = shift.add(PlayerMoves.RIGHT.x,PlayerMoves.RIGHT.y);
+            System.out.println("ciao");
         }
         if(this.input.contains(KeyCode.S)){
             shift = shift.add(PlayerMoves.DOWN.x,PlayerMoves.DOWN.y);

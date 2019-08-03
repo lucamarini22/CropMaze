@@ -104,6 +104,7 @@ public class MainMenu extends AbstractBasicView {
     @Override
     protected void buttonActions() {
         itemNewGame.setOnActivate(() -> {
+            setPlayerInputHandler();
             getController().showGameField(getScene());
             getAudioPlayer().stopMusic();
             checkResolution();
@@ -129,5 +130,12 @@ public class MainMenu extends AbstractBasicView {
             if (event.getCode() == KeyCode.ENTER) {
             }
         });
+    }
+
+    /**
+     * Method used to set the PlayerInputHandler in the PrincipalController
+     */
+    private void setPlayerInputHandler(){
+        getController().setPlayerInputHandler(new PlayerInputHandler(getScene()));
     }
 }
