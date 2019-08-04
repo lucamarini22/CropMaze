@@ -36,8 +36,10 @@ public class PlayerController extends AliveEntityController implements PlayerInp
 
     @Override
     public void move(final Point2D vector) {
-        getEntity().get(Movement.class).ifPresent(movement ->
-                movement.move(vector));
+        getEntity().get(Movement.class).ifPresent(movement -> movement.move(vector));
+        System.out.println(" move in player controller " + getEntity().get(Movement.class).get().getState());
+        movementChanged(getEntity().get(Movement.class).get());
+
     }
 
     private void updateLifeView(){

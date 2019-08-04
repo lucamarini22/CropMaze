@@ -35,7 +35,7 @@ public abstract class AbstractEntity implements Entity {
     @Override
     public void destroy(){
         components.forEach(this::remove);
-        remove(body);
+        //remove(body);
     }
 
 

@@ -4,7 +4,7 @@ import javafx.geometry.Point2D;
 
 
 public abstract class AbstractMovement extends AbstractEntityComponent implements Movement {
-    private State currentState = State.STABLE;
+    private State currentState = Movement.State.STABLE;
     private Point2D desiredPosition = Point2D.ZERO;
     private Direction direction = Direction.NOTHING;
 
