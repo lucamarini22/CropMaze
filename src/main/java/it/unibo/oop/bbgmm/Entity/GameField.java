@@ -43,4 +43,6 @@ public interface GameField {
      * @return all the {@link Wall} present in the game field
      */
     Set<Entity> getWalls();
+
+    void destroyEntity(DeathEvent event);
 }

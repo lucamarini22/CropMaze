@@ -42,7 +42,7 @@ public final class ComponentsContainerImpl<T> implements ComponentsContainer<T> 
 
     @Override
     public void remove(final T element) {
-        this.elements.values().remove(element);
+        this.elements.remove(element.getClass(), element);
     }
 
     @Override

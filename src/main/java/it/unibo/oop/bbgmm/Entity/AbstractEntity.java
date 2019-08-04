@@ -37,7 +37,7 @@ public abstract class AbstractEntity implements Entity {
     @Override
     public void destroy(){
         components.forEach(this::remove);
-        this.deathEvent.trigger(new DeathEvent(this));
+        this.remove(body);
     }
 
 
@@ -48,6 +48,7 @@ public abstract class AbstractEntity implements Entity {
 
     @Override
     public void remove(final EntityComponent component) {
+        this.deathEvent.trigger(new DeathEvent(this));
         components.remove(component);
         component.detach();
     }
@@ -70,4 +71,5 @@ public abstract class AbstractEntity implements Entity {
     public Event<DeathEvent> getDeathEvent(){
         return this.deathEvent;
     }
+
 }
