@@ -44,5 +44,10 @@ public interface GameField {
      */
     Set<Entity> getWalls();
 
+    /**
+     * Destroy an {@link Entity} in the field.
+     * @param event
+     *      {@link Event} that triggers the destruction
+     */
     void destroyEntity(DeathEvent event);
 }
