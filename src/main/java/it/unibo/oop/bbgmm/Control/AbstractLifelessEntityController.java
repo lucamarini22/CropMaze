@@ -21,7 +21,6 @@ public abstract class AbstractLifelessEntityController<L extends EntityView> ext
 
     @Override
     public void update() {
-
         getEntityView().setPosition(ViewUtils.worldPointToFX(getEntity().getBody().getPosition()));
     }
 
