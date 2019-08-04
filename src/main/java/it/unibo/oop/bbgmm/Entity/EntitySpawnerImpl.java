@@ -36,9 +36,9 @@ public final class EntitySpawnerImpl implements EntitySpawner {
                 return gameField.addEntity(entityFactory.createEnemy(position));
             case COIN:
                 return gameField.addEntity(entityFactory.createCoin(position));
-            case DOUBLESPEED:
+            case DOUBLE_SPEED:
                 return gameField.addEntity(entityFactory.createDoubleSpeed(position));
-            case DOUBLEDAMAGE:
+            case DOUBLE_DAMAGE:
                 return gameField.addEntity(entityFactory.createDoubleDamage(position));
             case SHIELD:
                 return gameField.addEntity(entityFactory.createShield(position));

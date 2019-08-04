@@ -68,7 +68,7 @@ public final class GameFieldImpl implements GameField {
     }
 
     @Override
-    public void destroyEntity(DeathEvent event) {
+    public void destroyEntity(final DeathEvent event) {
         this.entitiesToBeRemoved.add(event.getEntity());
     }
 }

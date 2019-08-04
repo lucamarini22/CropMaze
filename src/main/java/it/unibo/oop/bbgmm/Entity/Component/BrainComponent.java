@@ -4,42 +4,40 @@ import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.Movement;
 import javafx.geometry.Point2D;
 
+import java.util.Random;
+
 /**
  * permite to follow a determinate entity and change the desired direciton
  */
 public class BrainComponent extends AbstractEntityComponent implements Brain {
 
-    private Entity entityToFollow;
-    private Point2D nextPosition;
+    private Point2D nextPosition = Point2D.ZERO;
 
 
     /**
-     *
-     * @param entityToFollow
+     * next
      */
-    public BrainComponent(final Entity entityToFollow) {
+    public BrainComponent() {
         super();
-        this.entityToFollow = entityToFollow;
-        this.nextPosition = entityToFollow.getBody().getPosition();
     }
 
 
     @Override
     public void update(double delta) {
-        followEntity();
+        randomMovement();
+        super.update(delta);
     }
 
-    /**
-     * Follow the entity
-     */
-    public void followEntity(){
 
+    @Override
+    public void randomMovement(){
+        int min = -1;
+        int max = 1;
         getOwner().get().get(Movement.class).ifPresent(movement -> {
-
-            this.nextPosition = this.entityToFollow.getBody().getPosition();
-
-        final Point2D direction = this.nextPosition.subtract(getOwner().get().getBody().getPosition());
-        movement.move(direction);
+            double xValue = min + Math.random()*(max-min);
+            double yValue = min + Math.random()*(max-min);
+            this.nextPosition = new Point2D(xValue, yValue);
+        movement.move(this.nextPosition);
         });
     }
 }
