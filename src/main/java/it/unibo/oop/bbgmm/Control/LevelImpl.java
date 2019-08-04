@@ -21,9 +21,9 @@ public final class LevelImpl implements Level {
     private static final float TILE_SIZE = 1f;
     private static final int FIRST_LEVEL = 1;
     private static final int TOP_LEFT_X = 0;
-    private static final int TOP_LEFT_Y = -100;
-    private static final int POSITION_DIVISOR_SPAWN_X = 30;
-    private static final int POSITION_DIVISOR_SPAWN_Y = 45;
+    private static final int TOP_LEFT_Y = 0;
+    private static final int POSITION_DIVISOR_SPAWN_X = 32;
+    private static final int POSITION_DIVISOR_SPAWN_Y = 32;
     private static final String SOLID_OBJECTS = "solid";
     private static final String ENTITY_OBJECTS = "objects";
 
@@ -114,7 +114,6 @@ public final class LevelImpl implements Level {
         }
     }
     private void loadSolidObjects(final ObjectGroup layer) {
-
         layer.forEach(obj -> {
             final Pair<Point2D, Dimension2D> pos = mapPositionToWorld(this.map, obj.getX(), obj.getY(),
                     obj.getWidth(), obj.getHeight());
