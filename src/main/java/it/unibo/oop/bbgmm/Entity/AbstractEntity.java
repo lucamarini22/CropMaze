@@ -36,7 +36,8 @@ public abstract class AbstractEntity implements Entity {
 
     @Override
     public void destroy(){
-        components.forEach(this::remove);
+        components.forEach(c -> c.detach());
+        components.clear();
         this.deathEvent.trigger(new DeathEvent(this));
     }
 

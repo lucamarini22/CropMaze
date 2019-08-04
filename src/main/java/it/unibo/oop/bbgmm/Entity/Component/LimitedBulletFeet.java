@@ -35,29 +35,18 @@ public class LimitedBulletFeet extends Feet{
         if(lifeComponent.isAlive()){
             super.move(distanceVector);
             if(getPosition().equals(Point2D.ZERO)){
-                //remove();
-                //////
-                getOwner().get().remove(lifeComponent);
+                remove();
             }else{
                 lifeComponent.damaged(STEP);
             }
         }
         else {
-            //////
-            getOwner().get().remove(lifeComponent);
-
-            //remove();
+            remove();
         }
     }
 
     @Override
     public void update(double delta) {
-        /*if(wallChecker(distanceVector)){
-            move(distanceVector);
-        }
-        else{
-            remove();
-        }*/
         move(distanceVector);
     }
 
