@@ -153,7 +153,7 @@ public class Feet extends AbstractMovement {
      * Set the state of the entity
      */
     private void updateState(){
-        if(getPosition().equals(Point2D.ZERO)){
+        if(!getPosition().equals(Point2D.ZERO)){
             setState(State.WALKING);
         }
         else{

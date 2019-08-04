@@ -12,7 +12,7 @@ public class Alien extends AbstractEntity {
 
     private static final Dimension2D SIZE = new Dimension2D(5,5);
 
-    private static final double WALK_SPEED=1;
+    private static final double WALK_SPEED=0.5;
     private static final int DAMAGE = 5;
 
     /**
@@ -34,6 +34,7 @@ public class Alien extends AbstractEntity {
 
         add(new LifeComponent(health));
         add(new Feet(WALK_SPEED,walls));
+        add(new BrainComponent());
         add(new CollisionComponent(this.getBody().getShape(), CollisionLabel.ALIEN));
         add(new ClashComponent());
         add(new DamageComponent(DAMAGE));
