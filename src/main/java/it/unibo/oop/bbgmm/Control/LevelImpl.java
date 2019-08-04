@@ -118,12 +118,12 @@ public final class LevelImpl implements Level {
         layer.forEach(solidObject -> {
             final String type = solidObject.getType();
 
-            if (type.equals("VERTICAL")) {
+            if (type.equals("VERTICAL_WALL")) {
                 final Pair<Point2D, Dimension2D> pos = mapPositionToWorldVerticalBlocks(this.map, solidObject.getX(), solidObject.getY(),
                         solidObject.getWidth(), solidObject.getHeight());
                 entitySpawner.spawn(pos.getKey(), pos.getValue());
 
-            } else if (type.equals("HORIZONTAL")) {
+            } else if (type.equals("HORIZONTAL_WALL")) {
                 final Pair<Point2D, Dimension2D> pos = mapPositionToWorldHorizontalBlocks(this.map, solidObject.getX(), solidObject.getY(),
                         solidObject.getWidth(), solidObject.getHeight());
                 entitySpawner.spawn(pos.getKey(), pos.getValue());
@@ -169,13 +169,13 @@ public final class LevelImpl implements Level {
                         entitiesControllers.add(new AliveEntityController(entity, gameFieldView.getEntityViewFactory().createAlienView()));
                     }
                     break;
-                case DOUBLESPEED:
-                    entity = entitySpawner.spawn(EntityType.DOUBLESPEED.toString(), position);
+                case DOUBLE_SPEED:
+                    entity = entitySpawner.spawn(EntityType.DOUBLE_SPEED.toString(), position);
                     entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().createDoubleSpeedView()));
                     break;
 
-                case DOUBLEDAMAGE:
-                    entity = entitySpawner.spawn(EntityType.DOUBLEDAMAGE.toString(), position);
+                case DOUBLE_DAMAGE:
+                    entity = entitySpawner.spawn(EntityType.DOUBLE_DAMAGE.toString(), position);
                     entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().createDoubleDamageView()));
                     break;
 

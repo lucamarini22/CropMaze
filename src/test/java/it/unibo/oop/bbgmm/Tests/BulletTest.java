@@ -5,17 +5,19 @@ import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
 import it.unibo.oop.bbgmm.Entity.Component.Weapon;
 
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Set;
 
 public class BulletTest {
 
     private static final int INITIAL_STEP = 1;
     private final Player player;
-    private final Point2D playerPosition;
+    private Point2D playerPosition;
     private final Weapon weapon;
     private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl());
 
@@ -34,18 +36,140 @@ public class BulletTest {
         Assert.assertEquals(list.size(),1);
 
         Bullet bullet = list.get(0);
-        for(int i = 0; i < weapon.getWeaponRange()+INITIAL_STEP; i++){
+        Point2D oldPosition = bullet.getBody().getPosition();
+
+        int steps = weapon.getWeaponRange();
+        for(int i = 0; i < steps; i++){
             //make the bullet move
             bullet.update(1);
         }
-
-        bullet.destroy();
 
         list = weapon.getBulletList();
 
         //list size should be 0
         Assert.assertEquals(list.size(),0);
 
-        System.out.println("ciao");
+        //check the bullet new position
+
+        Point2D newPosition = new Point2D(oldPosition.getX()+steps-INITIAL_STEP, oldPosition.getY());
+        Assert.assertEquals(bullet.getBody().getPosition(), newPosition);
+    }
+
+    @Test
+    public void shootLeft(){
+        weapon.shoot(Direction.WEST);
+        List<Bullet> list = weapon.getBulletList();
+
+        //list size should be 1
+        Assert.assertEquals(list.size(),1);
+
+        Bullet bullet = list.get(0);
+        Point2D oldPosition = bullet.getBody().getPosition();
+
+        int steps = weapon.getWeaponRange();
+        for(int i = 0; i < steps; i++){
+            //make the bullet move
+            bullet.update(1);
+        }
+
+        list = weapon.getBulletList();
+
+        //list size should be 0
+        Assert.assertEquals(list.size(),0);
+
+        //check the bullet new position
+
+        Point2D newPosition = new Point2D(oldPosition.getX()-steps+INITIAL_STEP, oldPosition.getY());
+        Assert.assertEquals(bullet.getBody().getPosition(), newPosition);
+    }
+
+    @Test
+    public void shootUp(){
+        weapon.shoot(Direction.NORTH);
+        List<Bullet> list = weapon.getBulletList();
+
+        //list size should be 1
+        Assert.assertEquals(list.size(),1);
+
+        Bullet bullet = list.get(0);
+        Point2D oldPosition = bullet.getBody().getPosition();
+
+        int steps = weapon.getWeaponRange();
+        for(int i = 0; i < steps; i++){
+            //make the bullet move
+            bullet.update(1);
+        }
+
+        list = weapon.getBulletList();
+
+        //list size should be 0
+        Assert.assertEquals(list.size(),0);
+
+        //check the bullet new position
+
+        Point2D newPosition = new Point2D(oldPosition.getX(), oldPosition.getY()+steps-INITIAL_STEP);
+        Assert.assertEquals(bullet.getBody().getPosition(), newPosition);
+    }
+
+    @Test
+    public void shootDown(){
+        weapon.shoot(Direction.SOUTH);
+        List<Bullet> list = weapon.getBulletList();
+
+        //list size should be 1
+        Assert.assertEquals(list.size(),1);
+
+        Bullet bullet = list.get(0);
+        Point2D oldPosition = bullet.getBody().getPosition();
+
+        int steps = weapon.getWeaponRange();
+        for(int i = 0; i < steps; i++){
+            //make the bullet move
+            bullet.update(1);
+        }
+
+        list = weapon.getBulletList();
+
+        //list size should be 0
+        Assert.assertEquals(list.size(),0);
+
+        //check the bullet new position
+
+        Point2D newPosition = new Point2D(oldPosition.getX(), oldPosition.getY()-steps+INITIAL_STEP);
+        Assert.assertEquals(bullet.getBody().getPosition(), newPosition);
+    }
+
+    @Test
+    public void shootWithWall(){
+        //use only one direction because with the others it's the same
+
+        //set new playerPosition in order to make collide the bullet with a wall
+        //Position of a wall X:0.25  Y:-48.43
+        playerPosition = new Point2D(0.25, );
+
+        weapon.shoot(Direction.SOUTH);
+        List<Bullet> list = weapon.getBulletList();
+
+        //list size should be 1
+        Assert.assertEquals(list.size(),1);
+
+        Bullet bullet = list.get(0);
+        Point2D oldPosition = bullet.getBody().getPosition();
+
+        int steps = weapon.getWeaponRange();
+        for(int i = 0; i < steps; i++){
+            //make the bullet move
+            bullet.update(1);
+        }
+
+        list = weapon.getBulletList();
+
+        //list size should be 0
+        Assert.assertEquals(list.size(),0);
+
+        //check the bullet new position
+
+        Point2D newPosition = new Point2D(oldPosition.getX()+steps-INITIAL_STEP, oldPosition.getY());
+        Assert.assertEquals(bullet.getBody().getPosition(), newPosition);
     }
 }
