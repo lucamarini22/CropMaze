@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Control;
 
 import it.unibo.oop.bbgmm.Boundary.EntityView;
+import it.unibo.oop.bbgmm.Entity.DeathEvent;
 import it.unibo.oop.bbgmm.Entity.Entity;
 
 /**
@@ -24,6 +25,7 @@ public abstract class AbstractEntityController<V extends EntityView> implements 
         this.entity = entity;
         this.entityView = entityView;
         entityView.setDimension(entity.getBody().getDimension());
+        this.getEntity().getDeathEvent().register(this::entityDestruction);
     }
 
     @Override
@@ -44,7 +46,7 @@ public abstract class AbstractEntityController<V extends EntityView> implements 
     /**
      * it manages the entity destruction
      */
-    public abstract void entityDestruction();
+    public abstract void entityDestruction(DeathEvent event);
 
 
 

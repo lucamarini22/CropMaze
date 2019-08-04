@@ -40,7 +40,7 @@ public class PickupableComponent extends AbstractEntityComponent implements Coll
                             }
                         })
         );
-        //this.getOwner().ifPresent(Entity::destroy);
+        this.getOwner().ifPresent(o -> ((Entity) o).destroy());
     }
     @Override
     public void update(double delta) {

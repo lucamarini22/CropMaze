@@ -13,6 +13,7 @@ import java.util.Optional;
 public abstract class AbstractEntity implements Entity {
     private final EntityBody body;
     private final ComponentsContainerImpl<EntityComponent> components = new ComponentsContainerImpl<>(EntityComponent.class);
+    private final EventSource<DeathEvent> deathEvent;
     /**
      * constructor for Abstract Entity
      * @param body
@@ -20,6 +21,7 @@ public abstract class AbstractEntity implements Entity {
     public AbstractEntity(final EntityBody body /*final GameField gameField*/) {
         this.body = body;
         body.attach(this);
+        this.deathEvent = new EventSource<>();
     }
 
     @Override
@@ -35,7 +37,7 @@ public abstract class AbstractEntity implements Entity {
     @Override
     public void destroy(){
         components.forEach(this::remove);
-        //remove(body);
+        this.deathEvent.trigger(new DeathEvent(this));
     }
 
 
@@ -63,5 +65,9 @@ public abstract class AbstractEntity implements Entity {
      */
     protected void updateComponents(final double up){
         components.forEach(c -> c.update(up));
+    }
+
+    public Event<DeathEvent> getDeathEvent(){
+        return this.deathEvent;
     }
 }

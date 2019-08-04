@@ -39,6 +39,7 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
             this.currentLifePoints -= damageAmount;
             if (this.currentLifePoints < 0) {
                 this.currentLifePoints = 0;
+                this.getOwner().ifPresent(o -> ((Entity) o).destroy());
             }
         }
     }

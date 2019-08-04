@@ -4,6 +4,7 @@ import it.unibo.oop.bbgmm.Boundary.AliveEntityView;
 import it.unibo.oop.bbgmm.Boundary.PossibleEntityState;
 import it.unibo.oop.bbgmm.Boundary.ViewUtils;
 import it.unibo.oop.bbgmm.Entity.Component.Life;
+import it.unibo.oop.bbgmm.Entity.DeathEvent;
 import it.unibo.oop.bbgmm.Entity.Direction;
 import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.Movement;
@@ -72,7 +73,7 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
     }
 
     @Override
-    public void entityDestruction() {
+    public void entityDestruction(DeathEvent event) {
         if(!(this.getEntity().get(Life.class).isPresent() && this.getEntity().get(Life.class).get().isDead())){
             getEntityView().removeFromView();
         }

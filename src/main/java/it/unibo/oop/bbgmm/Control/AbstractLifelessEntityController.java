@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Control;
 
 import it.unibo.oop.bbgmm.Boundary.EntityView;
 import it.unibo.oop.bbgmm.Boundary.ViewUtils;
+import it.unibo.oop.bbgmm.Entity.DeathEvent;
 import it.unibo.oop.bbgmm.Entity.Entity;
 
 /**
@@ -25,7 +26,7 @@ public abstract class AbstractLifelessEntityController<L extends EntityView> ext
     }
 
     @Override
-    public void entityDestruction() {
+    public void entityDestruction(DeathEvent event) {
         getEntityView().removeFromView();
     }
 }
