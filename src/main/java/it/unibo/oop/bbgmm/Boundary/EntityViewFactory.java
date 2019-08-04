@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Entity.Direction;
+
 /**
  * Factory for the views of the entities.
  */
@@ -14,6 +16,11 @@ public interface EntityViewFactory {
      * @return a {@link it.unibo.oop.bbgmm.Entity.Alien} view
      */
     AliveEntityView createAlienView();
+
+    /**
+     * @return a {@link it.unibo.oop.bbgmm.Entity.Bullet} view
+     */
+    BulletView createBulletView(Direction direction);
 
     /**
      * @return a {@link it.unibo.oop.bbgmm.Entity.Coin} view

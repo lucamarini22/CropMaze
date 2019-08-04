@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Control;
 
 import it.unibo.oop.bbgmm.Boundary.BulletView;
+import it.unibo.oop.bbgmm.Boundary.GameFieldView;
 import it.unibo.oop.bbgmm.Boundary.PlayerView;
 import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Component.Bag;
@@ -9,7 +10,6 @@ import it.unibo.oop.bbgmm.Entity.Component.Weapon;
 import it.unibo.oop.bbgmm.Entity.Direction;
 import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.Movement;
-import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
@@ -19,12 +19,14 @@ import java.util.Optional;
 public class PlayerController extends AliveEntityController implements PlayerInputListener {
 
     private final PlayerView playerView;
+    private final GameFieldView gameFieldView;
     private final List<BulletController> bulletControllers;
     private final List<BulletController> removedControllers;
 
-    public PlayerController(final Entity player, final PlayerView playerView){
-        super(player,playerView);
+    public PlayerController(final Entity player, final PlayerView playerView, final GameFieldView gameFieldView){
+        super(player, playerView);
         this.playerView = playerView;
+        this.gameFieldView = gameFieldView;
         this.bulletControllers = new ArrayList<>();
         this.removedControllers = new ArrayList<>();
     }
@@ -67,7 +69,7 @@ public class PlayerController extends AliveEntityController implements PlayerInp
     }
 
     private void createBulletController(Bullet bullet, Direction direction){
-        BulletController controller = new BulletController(bullet, new BulletView(playerView.getGroup(), direction), this);
+        BulletController controller = new BulletController(bullet, gameFieldView.getEntityViewFactory().createBulletView(direction), this);
         bulletControllers.add(controller);
     }
 
