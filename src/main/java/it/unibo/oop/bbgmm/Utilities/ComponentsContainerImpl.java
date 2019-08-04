@@ -4,12 +4,13 @@ package it.unibo.oop.bbgmm.Utilities;
 import com.google.common.reflect.TypeToken;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
 public final class ComponentsContainerImpl<T> implements ComponentsContainer<T> {
-    private final Map<Class<?>, T> elements = new LinkedHashMap<>();
+    private final Map<Class<?>, T> elements = new ConcurrentHashMap<>();
     private final Class<T> interfaceParent;
 
     public ComponentsContainerImpl(final Class<T> interfaceParent){
@@ -42,7 +43,7 @@ public final class ComponentsContainerImpl<T> implements ComponentsContainer<T> 
 
     @Override
     public void remove(final T element) {
-        this.elements.remove(element.getClass(), element);
+        this.elements.values().remove(element);
     }
 
     @Override

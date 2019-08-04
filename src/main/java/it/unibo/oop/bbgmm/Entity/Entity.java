@@ -47,4 +47,6 @@ public interface Entity {
     void destroy();
 
     Event<DeathEvent> getDeathEvent();
+
+    void removeEntity(Entity entity);
 }
