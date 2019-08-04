@@ -7,5 +7,5 @@ public enum EntityType {
     /**
      * Types of entities.
      */
-    PLAYER, ALIEN, COIN, DOUBLESPEED, DOUBLEDAMAGE, SHIELD;
+    PLAYER, ALIEN, COIN, DOUBLE_SPEED, DOUBLE_DAMAGE, SHIELD, HORIZONTAL_WALL, VERTICAL_WALL;
 }
