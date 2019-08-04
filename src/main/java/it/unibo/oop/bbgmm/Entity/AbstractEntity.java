@@ -68,11 +68,6 @@ public abstract class AbstractEntity implements Entity {
      */
     protected void updateComponents(final double up){
         components.forEach(c -> c.update(up));
-        /*if(components.get(Life.class).isPresent()){
-            if (components.get(Life.class).get().isDead()){
-                destroy();
-            }
-        }*/
     }
 
     public Event<DeathEvent> getDeathEvent(){

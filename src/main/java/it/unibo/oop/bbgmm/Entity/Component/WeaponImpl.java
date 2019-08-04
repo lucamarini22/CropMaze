@@ -4,10 +4,7 @@ import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Utilities.PlayerMoves;
 import javafx.geometry.Point2D;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
@@ -87,7 +84,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
     @Override
     public List<Bullet> getBulletList() {
-        return this.bulletShoted;
+        return Collections.unmodifiableList(this.bulletShoted);
     }
 
     public void removeBullet(final Bullet bullet){

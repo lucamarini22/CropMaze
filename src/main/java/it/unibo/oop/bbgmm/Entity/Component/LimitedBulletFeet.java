@@ -52,7 +52,7 @@ public class LimitedBulletFeet extends Feet{
 
     private void remove(){
         weapon.removeBullet((Bullet)getOwner().get());
-        ((Bullet) getOwner().get()).removeEntity(this.getOwner().get());
+        getOwner().get().removeEntity(this.getOwner().get());
     }
 
     private Point2D calculateVector(){

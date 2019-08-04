@@ -161,13 +161,19 @@ public class BulletTest {
         Bullet bullet = list.get(0);
         Point2D oldPosition = bullet.getBody().getPosition();
 
-        for(int i = 0; i < steps; i++){
+
+        int i = 0;
+
+        for(i = 0; i < steps; i++){
             //make the bullet move
             bullet.update(1);
-            if(!bullet.get(Life.class).isPresent()){
+            if(weapon.getBulletList().size() == 0){
                 break;
             }
         }
+
+        //the iteration must be interrupted by a collision with the wall
+        Assert.assertNotEquals(i, steps-1);
 
         list = weapon.getBulletList();
 
