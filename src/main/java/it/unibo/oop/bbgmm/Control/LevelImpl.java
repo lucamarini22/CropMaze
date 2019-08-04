@@ -8,11 +8,7 @@ import javafx.util.Pair;
 import org.mapeditor.core.Map;
 import org.mapeditor.core.ObjectGroup;
 import org.mapeditor.core.TileLayer;
-
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Controls a level.
@@ -58,12 +54,9 @@ public final class LevelImpl implements Level {
         this.entitiesControllers = new LinkedHashSet<>();
 
         this.map.getLayers().forEach(layer -> {
-
             if (layer instanceof TileLayer) {
-
                 loadTiles((TileLayer) layer);
             } else if (layer instanceof ObjectGroup) {
-
                 loadObjects((ObjectGroup) layer);
             }
         });
@@ -114,14 +107,14 @@ public final class LevelImpl implements Level {
 
             switch (EntityType.valueOf(type)) {
                 case HORIZONTAL_WALL:
-                    final Pair<Point2D, Dimension2D> hPosition = mapPositionToWorldHorizontalBlocks(this.map, solidObject.getX(), solidObject.getY(),
-                            solidObject.getWidth(), solidObject.getHeight());
-                    entitySpawner.spawn(hPosition.getKey(), hPosition.getValue());
+                    final Pair<Point2D, Dimension2D> horizontalInfo = getBlockPositionAndDimension(this.map, solidObject.getX(), solidObject.getY(),
+                            solidObject.getWidth(), solidObject.getHeight(), EntityType.HORIZONTAL_WALL);
+                    entitySpawner.spawn(horizontalInfo.getKey(), horizontalInfo.getValue());
                     break;
                 case VERTICAL_WALL:
-                    final Pair<Point2D, Dimension2D> vPosition = mapPositionToWorldVerticalBlocks(this.map, solidObject.getX(), solidObject.getY(),
-                            solidObject.getWidth(), solidObject.getHeight());
-                    entitySpawner.spawn(vPosition.getKey(), vPosition.getValue());
+                    final Pair<Point2D, Dimension2D> verticalInfo = getBlockPositionAndDimension(this.map, solidObject.getX(), solidObject.getY(),
+                            solidObject.getWidth(), solidObject.getHeight(), EntityType.VERTICAL_WALL);
+                    entitySpawner.spawn(verticalInfo.getKey(), verticalInfo.getValue());
                     break;
                 default:
                     break;
@@ -188,31 +181,32 @@ public final class LevelImpl implements Level {
         gameFieldView.showField(layer, new Point2D(TOP_LEFT_X, TOP_LEFT_Y), new Dimension2D(TILE_SIZE, TILE_SIZE));
     }
 
-    private Pair<Point2D, Dimension2D> blockPositionAndDimension(final Map map, final double x, final double y,
+    /**
+     * Gets the {@link Dimension2D} and the position of a solid block in the {@link GameField}.
+     * @param map
+     *      The tiled map
+     * @param x
+     *      Abscissa of the solid block in the tiled map
+     * @param y
+     *      Ordinate of the solid block in the tiled map
+     * @param width
+     *      Width of the solid block in the tiled map
+     * @param height
+     *      Height of the solid block in the tiled map
+     * @param type
+     *      Type of the solid block
+     * @return the position and the dimension that the block should get
+     */
+    private Pair<Point2D, Dimension2D> getBlockPositionAndDimension(final Map map, final double x, final double y,
                                                                  final double width, final double height,
                                                                  final EntityType type) {
         final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
-        Point2D pos = null;
+        Optional<Point2D> pos = Optional.empty();
         if (type.equals(EntityType.HORIZONTAL_WALL)) {
-            pos = new Point2D(x / map.getTileWidth(), -(y / map.getTileHeight() + dim.getHeight() / 2));
+            pos = Optional.of(new Point2D(x / map.getTileWidth(), -(y / map.getTileHeight() + dim.getHeight() / 2)));
         } else if (type.equals(EntityType.VERTICAL_WALL)) {
-            pos = new Point2D(x / map.getTileWidth() + dim.getWidth() / 2, -(y / map.getTileHeight() + dim.getHeight()));
+            pos = Optional.of(new Point2D(x / map.getTileWidth() + dim.getWidth() / 2, -(y / map.getTileHeight() + dim.getHeight())));
         }
-        return new Pair<>(pos, dim);
-    }
-
-
-    private Pair<Point2D, Dimension2D> mapPositionToWorldVerticalBlocks(final Map map, final double x, final double y,
-                                                          final double width, final double height) {
-        final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
-        final Point2D pos = new Point2D(x / map.getTileWidth() + dim.getWidth() / 2, -(y / map.getTileHeight() + dim.getHeight()));
-        return new Pair<>(pos, dim);
-    }
-
-    private Pair<Point2D, Dimension2D> mapPositionToWorldHorizontalBlocks(final Map map, final double x, final double y,
-                                                          final double width, final double height) {
-        final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
-        final Point2D pos = new Point2D(x / map.getTileWidth(), -(y / map.getTileHeight() + dim.getHeight() / 2));
-        return new Pair<>(pos, dim);
+        return new Pair<>(pos.orElse(null), dim);
     }
 }

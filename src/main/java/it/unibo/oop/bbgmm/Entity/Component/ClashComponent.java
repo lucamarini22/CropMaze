@@ -22,10 +22,6 @@ public class ClashComponent extends AbstractEntityComponent implements Clash{
                                     life.damaged(damage);
                                 }));
                     }));
-        if(collision.getCollisionComponent().getCollisionLabel().equals(CollisionLabel.SHOT))
-        {
-            collision.getCollisionComponent().getOwner().ifPresent(Entity::destroy);
-        }
     }
 
     @Override
