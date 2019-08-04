@@ -112,13 +112,13 @@ public final class LevelImpl implements Level {
             final String type = solidObject.getType();
             switch (EntityType.valueOf(type)) {
                 case HORIZONTAL_WALL:
-                    final Pair<Point2D, Dimension2D> hPosition = mapPositionToWorldHorizontalBlocks(this.map, solidObject.getX(), solidObject.getY(),
-                            solidObject.getWidth(), solidObject.getHeight());
+                    final Pair<Point2D, Dimension2D> hPosition = getBlockPositionAndDimension(this.map, solidObject.getX(), solidObject.getY(),
+                            solidObject.getWidth(), solidObject.getHeight(), EntityType.HORIZONTAL_WALL);
                     entitySpawner.spawn(hPosition.getKey(), hPosition.getValue());
                     break;
                 case VERTICAL_WALL:
-                    final Pair<Point2D, Dimension2D> vPosition = mapPositionToWorldVerticalBlocks(this.map, solidObject.getX(), solidObject.getY(),
-                            solidObject.getWidth(), solidObject.getHeight());
+                    final Pair<Point2D, Dimension2D> vPosition = getBlockPositionAndDimension(this.map, solidObject.getX(), solidObject.getY(),
+                            solidObject.getWidth(), solidObject.getHeight(), EntityType.VERTICAL_WALL);
                     entitySpawner.spawn(vPosition.getKey(), vPosition.getValue());
                     break;
                 default:
@@ -186,7 +186,7 @@ public final class LevelImpl implements Level {
         gameFieldView.showField(layer, new Point2D(TOP_LEFT_X, TOP_LEFT_Y), new Dimension2D(TILE_SIZE, TILE_SIZE));
     }
 
-    private Pair<Point2D, Dimension2D> blockPositionAndDimension(final Map map, final double x, final double y,
+    private Pair<Point2D, Dimension2D> getBlockPositionAndDimension(final Map map, final double x, final double y,
                                                                  final double width, final double height,
                                                                  final EntityType type) {
         final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
@@ -196,21 +196,6 @@ public final class LevelImpl implements Level {
         } else if (type.equals(EntityType.VERTICAL_WALL)) {
             pos = new Point2D(x / map.getTileWidth() + dim.getWidth() / 2, -(y / map.getTileHeight() + dim.getHeight()));
         }
-        return new Pair<>(pos, dim);
-    }
-
-
-    private Pair<Point2D, Dimension2D> mapPositionToWorldVerticalBlocks(final Map map, final double x, final double y,
-                                                          final double width, final double height) {
-        final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
-        final Point2D pos = new Point2D(x / map.getTileWidth() + dim.getWidth() / 2, -(y / map.getTileHeight() + dim.getHeight()));
-        return new Pair<>(pos, dim);
-    }
-
-    private Pair<Point2D, Dimension2D> mapPositionToWorldHorizontalBlocks(final Map map, final double x, final double y,
-                                                          final double width, final double height) {
-        final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
-        final Point2D pos = new Point2D(x / map.getTileWidth(), -(y / map.getTileHeight() + dim.getHeight() / 2));
         return new Pair<>(pos, dim);
     }
 }
