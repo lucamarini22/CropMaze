@@ -3,6 +3,7 @@ package it.unibo.oop.bbgmm.Tests;
 import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
+import it.unibo.oop.bbgmm.Entity.Component.Life;
 import it.unibo.oop.bbgmm.Entity.Component.Weapon;
 
 import javafx.geometry.Dimension2D;
@@ -16,9 +17,9 @@ import java.util.Set;
 public class BulletTest {
 
     private static final int INITIAL_STEP = 1;
-    private final Player player;
+    private Player player;
     private Point2D playerPosition;
-    private final Weapon weapon;
+    private Weapon weapon;
     private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl());
 
     public BulletTest() {
@@ -143,11 +144,15 @@ public class BulletTest {
     public void shootWithWall(){
         //use only one direction because with the others it's the same
 
-        //set new playerPosition in order to make collide the bullet with a wall
-        //Position of a wall X:0.25  Y:-48.43
-        playerPosition = new Point2D(0.25, );
+        int steps = weapon.getWeaponRange();
 
-        weapon.shoot(Direction.SOUTH);
+        //creation of a wall
+        Point2D wallPosition = new Point2D(15, 40+steps/2+INITIAL_STEP);
+        Dimension2D wallDimension = new Dimension2D(20, 3);
+        Wall wall = new Wall(new BodyBuilder(), wallPosition, wallDimension);
+        gameField.addEntity(wall);
+
+        weapon.shoot(Direction.NORTH);
         List<Bullet> list = weapon.getBulletList();
 
         //list size should be 1
@@ -156,10 +161,12 @@ public class BulletTest {
         Bullet bullet = list.get(0);
         Point2D oldPosition = bullet.getBody().getPosition();
 
-        int steps = weapon.getWeaponRange();
         for(int i = 0; i < steps; i++){
             //make the bullet move
             bullet.update(1);
+            if(!bullet.get(Life.class).isPresent()){
+                break;
+            }
         }
 
         list = weapon.getBulletList();
@@ -169,7 +176,7 @@ public class BulletTest {
 
         //check the bullet new position
 
-        Point2D newPosition = new Point2D(oldPosition.getX()+steps-INITIAL_STEP, oldPosition.getY());
-        Assert.assertEquals(bullet.getBody().getPosition(), newPosition);
+        Point2D newPosition = new Point2D(oldPosition.getX(), oldPosition.getY()+steps-INITIAL_STEP);
+        Assert.assertNotEquals(bullet.getBody().getPosition(), newPosition);
     }
 }

@@ -67,7 +67,7 @@ public class PlayerController extends AliveEntityController implements PlayerInp
     }
 
     private void createBulletController(Bullet bullet, Direction direction){
-        BulletController controller = new BulletController(bullet, new BulletView(playerView.getGroup(), direction));
+        BulletController controller = new BulletController(bullet, new BulletView(playerView.getGroup(), direction), this);
         bulletControllers.add(controller);
     }
 
@@ -102,5 +102,9 @@ public class PlayerController extends AliveEntityController implements PlayerInp
                 .forEach(EntityController::update);
         removedControllers.forEach(c -> bulletControllers.remove(c));
         removedControllers.clear();
+    }
+
+    public void removeBulletController(final BulletController bulletController){
+        this.removedControllers.add(bulletController);
     }
 }

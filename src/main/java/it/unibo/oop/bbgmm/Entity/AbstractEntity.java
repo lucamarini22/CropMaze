@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Entity.Component.EntityBody;
 import it.unibo.oop.bbgmm.Entity.Component.EntityComponent;
+import it.unibo.oop.bbgmm.Entity.Component.Life;
 import it.unibo.oop.bbgmm.Utilities.ComponentsContainerImpl;
 import it.unibo.oop.bbgmm.Utilities.ComponentsContainer;
 import java.util.Optional;
@@ -66,6 +67,11 @@ public abstract class AbstractEntity implements Entity {
      */
     protected void updateComponents(final double up){
         components.forEach(c -> c.update(up));
+        /*if(components.get(Life.class).isPresent()){
+            if (components.get(Life.class).get().isDead()){
+                destroy();
+            }
+        }*/
     }
 
     public Event<DeathEvent> getDeathEvent(){
