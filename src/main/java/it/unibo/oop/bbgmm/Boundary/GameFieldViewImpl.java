@@ -10,6 +10,9 @@ import javafx.scene.image.ImageView;
 import org.mapeditor.core.Tile;
 import org.mapeditor.core.TileLayer;
 
+import static it.unibo.oop.bbgmm.Boundary.Music.GAMEOVER_TRACK;
+import static it.unibo.oop.bbgmm.Boundary.Music.GAME_TRACK;
+
 /**
  * Implementation of the view of {@link it.unibo.oop.bbgmm.Entity.GameField}.
  */
@@ -31,6 +34,8 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.audioplayer = audioPlayer;
         this.playerInputHandler = playerInputHandler;
         rootView.getChildren().add(statusBar.getStatusBox());
+
+        this.audioplayer.playMusic(GAME_TRACK.getPath());
     }
 
     @Override

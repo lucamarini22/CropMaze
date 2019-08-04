@@ -105,8 +105,8 @@ public class MainMenu extends AbstractBasicView {
     protected void buttonActions() {
         itemNewGame.setOnActivate(() -> {
             setPlayerInputHandler();
-            getController().showGameField(getScene());
             getAudioPlayer().stopMusic();
+            getController().showGameField(getScene());
             checkResolution();
             clearEnter();
         });

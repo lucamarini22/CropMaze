@@ -6,7 +6,7 @@ public enum Music {
 
     MENU_TRACK("sounds/menuSong.wav"),
 
-    GAME_TRACK(""),
+    GAME_TRACK("sounds/gameSong.wav"),
 
     GAMEOVER_TRACK("sounds/gameOver.wav"),
 
