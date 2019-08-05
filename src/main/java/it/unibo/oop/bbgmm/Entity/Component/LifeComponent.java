@@ -11,7 +11,7 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
     @Override
     public void setVulnerability(final boolean vulnerability) {
         this.vulnerable = vulnerability;
-        System.out.println("invulneravile");
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa");
     }
 
     public LifeComponent (final int max) {

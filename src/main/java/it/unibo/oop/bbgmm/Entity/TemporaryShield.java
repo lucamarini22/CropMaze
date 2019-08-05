@@ -22,7 +22,7 @@ public class TemporaryShield extends TemporaryPower {
 
     @Override
     public void deactivate() {
-        super.deactivate();
         getPlayer().get(Life.class).ifPresent(life -> life.setVulnerability(true));
+        super.deactivate();
     }
 }
