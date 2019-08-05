@@ -17,11 +17,14 @@ import static it.unibo.oop.bbgmm.Boundary.Music.GAME_TRACK;
  * Implementation of the view of {@link it.unibo.oop.bbgmm.Entity.GameField}.
  */
 public final class GameFieldViewImpl implements GameFieldView {
+    private static final int TOP_LEFT_POINT_BACKGROUND = -800;
+    private static final String BACKGROUND_PATH = "/images/background.png";
     private final Group fieldView = new Group();
     private final Group rootView = new Group(fieldView);
     private final AudioPlayer audioplayer;
     private final PlayerInputHandler playerInputHandler;
     private final StatusBarScreen statusBar = new StatusBarImpl();
+    private ImageView background;
 
     /**
      * Constructor of {@link GameFieldViewImpl}.
@@ -33,6 +36,8 @@ public final class GameFieldViewImpl implements GameFieldView {
     public GameFieldViewImpl(final AudioPlayer audioPlayer, final PlayerInputHandler playerInputHandler) {
         this.audioplayer = audioPlayer;
         this.playerInputHandler = playerInputHandler;
+        this.setBackground();
+        fieldView.getChildren().add(this.background);
         rootView.getChildren().add(statusBar.getStatusBox());
 
         this.audioplayer.playMusic(GAME_TRACK.getPath());
@@ -69,5 +74,16 @@ public final class GameFieldViewImpl implements GameFieldView {
     @Override
     public void setPlayerInputListener(final PlayerInputListener playerInputListener) {
         this.playerInputHandler.setListener(playerInputListener);
+    }
+
+    /**
+     * Sets an image of background.
+     * @param path
+     *      Path of the image to set
+     */
+    private void setBackground() {
+        this.background = new ImageView(new Image(BACKGROUND_PATH));
+        this.background.setX(TOP_LEFT_POINT_BACKGROUND);
+        this.background.setY(TOP_LEFT_POINT_BACKGROUND);
     }
 }
