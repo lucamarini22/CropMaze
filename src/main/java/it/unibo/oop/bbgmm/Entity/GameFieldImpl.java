@@ -1,5 +1,8 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Boundary.EndLevelView;
+import it.unibo.oop.bbgmm.Control.Level;
+import it.unibo.oop.bbgmm.Control.LevelImpl;
 import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisor;
 import java.util.Collections;
@@ -14,6 +17,8 @@ public final class GameFieldImpl implements GameField {
     private final Set<Entity> entities;
     private final CollisionSupervisor collisionSupervisor;
     private final Set<Entity> entitiesToBeRemoved;
+    private Entity player;
+    private Level level;
 
     /**
      * {@link GameFieldImpl} constructor.
@@ -69,6 +74,33 @@ public final class GameFieldImpl implements GameField {
 
     @Override
     public void destroyEntity(final DeathEvent event) {
+        //if an Alien is killed, it controls the number of alive Aliens, and if it is one (the last Alien killed),
+        // then the next level has to start
+        if (event.getEntity() instanceof Alien && this.getAliveEnemies() == 1) {
+            this.entities.stream().filter(e -> !(e.getClass().equals(Player.class)))
+                                  .forEach(entitiesToBeRemoved::add);
+            this.level.loadMap2();
+            return;
+        }
         this.entitiesToBeRemoved.add(event.getEntity());
     }
+
+    @Override
+    public void setPlayer(final Entity player) {
+        this.player = player;
+    }
+
+    /**
+     * @return the number of alive enemies
+     */
+    private int getAliveEnemies() {
+        return (int) this.entities.stream().filter(e -> e instanceof Alien).count();
+    }
+
+
+
+    public void setLevel(final Level level) {
+        this.level = level;
+    }
+
 }

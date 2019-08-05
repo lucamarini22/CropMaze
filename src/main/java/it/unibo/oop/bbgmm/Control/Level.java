@@ -37,4 +37,7 @@ public interface Level {
      */
     PlayerStatistics getPlayerStatistic();
 
+
+    void loadMap2();
+
 }

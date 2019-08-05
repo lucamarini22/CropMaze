@@ -15,7 +15,7 @@ import java.util.*;
  */
 public final class LevelImpl implements Level {
     private static final float TILE_SIZE = 1f;
-    private static final int FIRST_LEVEL = 1;
+    private static final int LEVEL_ONE = 1;
     private static final int TOP_LEFT_X = 0;
     private static final int TOP_LEFT_Y = 0;
     private static final double WALL_TRANSLATION_X = 1.5;
@@ -54,7 +54,10 @@ public final class LevelImpl implements Level {
         this.entitySpawner = entitySpawner;
         this.gameFieldView = gameFieldView;
         this.entitiesControllers = new LinkedHashSet<>();
+        this.loadMap2();
+    }
 
+    public void loadMap2() {
         this.map.getLayers().forEach(layer -> {
             if (layer instanceof TileLayer) {
                 loadTiles((TileLayer) layer);
@@ -112,6 +115,7 @@ public final class LevelImpl implements Level {
     }
 
     private void loadEntityObjects(final ObjectGroup layer) {
+        this.gameStatistics.setCurrentLevel(this.gameStatistics.getCurrentLevel() + 1);
         layer.forEach(entityObject -> {
             final Point2D position = invertY(new Point2D(entityObject.getX() / map.getTileWidth(),
                     entityObject.getY() / map.getTileHeight()));
@@ -120,8 +124,9 @@ public final class LevelImpl implements Level {
             switch (EntityType.valueOf(type)) {
                 //creation of the player
                 case PLAYER:
-                    if (this.gameStatistics.getCurrentLevel() == FIRST_LEVEL) {
+                    if (this.gameStatistics.getCurrentLevel() == LEVEL_ONE) {
                         player = entitySpawner.spawn(EntityType.PLAYER.toString(), position);
+                        this.gameField.setPlayer(player);
                         final PlayerController controller = new PlayerController(player, gameFieldView.getEntityViewFactory().createPlayerView(), this.gameFieldView);
                         gameFieldView.setPlayerInputListener(controller);
                         entitiesControllers.add(controller);
@@ -136,7 +141,7 @@ public final class LevelImpl implements Level {
                     break;
                 case ALIEN:
                     for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
-                        entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
+                        entity = entitySpawner.spawn(EntityType.ALIEN.toString(), new Point2D(position.getX()+i,position.getY() ));
                         entitiesControllers.add(new AliveEntityController(entity, gameFieldView.getEntityViewFactory().createAlienView()));
                     }
                     break;

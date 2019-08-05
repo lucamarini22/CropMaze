@@ -34,5 +34,4 @@ public interface GameStatistics {
      * Reset the score and the current level.
      */
     void resetStatistics();
-
 }

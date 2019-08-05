@@ -5,7 +5,7 @@ package it.unibo.oop.bbgmm.Entity;
  */
 public final class GameStatisticsImpl implements GameStatistics {
 
-    private static final int FIRST_LEVEL = 1;
+    private static final int FIRST_LEVEL = 0;
     private static final int ZERO_POINTS = 0;
 
     private int currentLevel;
