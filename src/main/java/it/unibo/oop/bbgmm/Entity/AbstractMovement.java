@@ -26,7 +26,6 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
     //devo vedere ancora come usarlo
     @Override
     public void update(double dt) {
-
     }
 
     /**

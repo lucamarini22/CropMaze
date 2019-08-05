@@ -12,7 +12,6 @@ public final class EntityFactoryImpl implements EntityFactory {
     private static final double TIMEOUT = 10;
 
     private final GameField gameField;
-    private final Set<Entity> walls;
     private final EntityStatistics entityStatistics;
     private final GameStatistics gameStatistics;
 
@@ -20,16 +19,13 @@ public final class EntityFactoryImpl implements EntityFactory {
      * Constructor of {@link EntityFactoryImpl}.
      * @param gameField
      *      {@link GameField} instance
-     * @param walls
-     *      Set of all {@link Wall}s in the {@link GameField}
      * @param entityStatistics
      *      Statistics of the various entities
      * @param gameStatistics
      *      Statistics of the game
      */
-    public EntityFactoryImpl(final GameField gameField, final Set<Entity> walls, final EntityStatistics entityStatistics, final GameStatistics gameStatistics) {
+    public EntityFactoryImpl(final GameField gameField, final EntityStatistics entityStatistics, final GameStatistics gameStatistics) {
         this.gameField = gameField;
-        this.walls = walls;
         this.entityStatistics = entityStatistics;
         this.gameStatistics = gameStatistics;
     }
@@ -41,7 +37,7 @@ public final class EntityFactoryImpl implements EntityFactory {
 
     @Override
     public Alien createEnemy(final Point2D position) {
-        return new Alien(new BodyBuilder(), position, entityStatistics.getEnemyHealth(this.gameStatistics.getCurrentLevel()), this.walls);
+        return new Alien(new BodyBuilder(), position, entityStatistics.getEnemyHealth(this.gameStatistics.getCurrentLevel()), gameField.getWalls());
     }
 
     @Override
