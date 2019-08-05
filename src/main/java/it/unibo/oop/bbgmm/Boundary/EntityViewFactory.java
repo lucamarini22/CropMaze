@@ -18,7 +18,9 @@ public interface EntityViewFactory {
     AliveEntityView createAlienView();
 
     /**
-     * @return a {@link it.unibo.oop.bbgmm.Entity.Bullet} view
+     * @param direction
+     *      {@link Direction} of the bullet
+     * @return {@link it.unibo.oop.bbgmm.Entity.Bullet} view
      */
     BulletView createBulletView(Direction direction);
 

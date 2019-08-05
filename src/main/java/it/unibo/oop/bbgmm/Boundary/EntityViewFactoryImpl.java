@@ -37,7 +37,7 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
     }
 
     @Override
-    public BulletView createBulletView(Direction direction){
+    public BulletView createBulletView(final Direction direction) {
         return new BulletView(parent, direction);
     }
 
