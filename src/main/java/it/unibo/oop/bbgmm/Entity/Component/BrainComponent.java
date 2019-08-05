@@ -17,15 +17,17 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
     private final Entity entityToFollow;
     private final Movement feet;
     private double time = MAX_TIME ;
+    private final Life playerLife;
 
 
     /**
      * next
      */
-    public BrainComponent(final Entity eToFollow, final Movement feet) {
+    public BrainComponent(final Entity eToFollow, final Movement feet, final Life life) {
         super();
         this.entityToFollow = eToFollow;
         this.feet = feet;
+        this.playerLife = life;
     }
 
 
@@ -62,7 +64,7 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
         }
 
         //if the alien and the player are collisioning the alien must not move
-        if(getOwner().get().getBody().getShape().getBoundsInLocal().intersects(entityToFollow.getBody().getShape().getBoundsInLocal())){
+        if(getOwner().get().getBody().getShape().getBoundsInLocal().intersects(entityToFollow.getBody().getShape().getBoundsInLocal()) || playerLife.isDead()){
             newDirection = Direction.NOTHING;
         }
 
