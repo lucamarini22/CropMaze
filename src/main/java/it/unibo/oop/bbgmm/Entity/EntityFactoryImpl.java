@@ -34,12 +34,12 @@ public final class EntityFactoryImpl implements EntityFactory {
     @Override
     public Player createPlayer(final Point2D position) {
         this.player = new Player(new BodyBuilder(), position, entityStatistics.getPlayerHealth(), this.gameField);
-        return player;
+        return this.player;
     }
 
     @Override
     public Alien createEnemy(final Point2D position) {
-        return new Alien(new BodyBuilder(), position, entityStatistics.getEnemyHealth(this.gameStatistics.getCurrentLevel()), gameField.getWalls(),player);
+        return new Alien(new BodyBuilder(), position, entityStatistics.getEnemyHealth(this.gameStatistics.getCurrentLevel()), gameField.getWalls(), this.player);
     }
 
     @Override

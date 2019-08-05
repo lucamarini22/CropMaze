@@ -13,16 +13,18 @@ import java.util.Random;
 public class BrainComponent extends AbstractEntityComponent implements Brain {
 
     private Point2D positionToFollow = Point2D.ZERO;
-    private Entity entityToFollow;
+    private final Entity entityToFollow;
+    private final Movement feet;
     private double time = 1 ;
 
 
     /**
      * next
      */
-    public BrainComponent(Entity eToFollow) {
+    public BrainComponent(final Entity eToFollow, final Movement feet) {
         super();
         this.entityToFollow = eToFollow;
+        this.feet = feet;
     }
 
 
@@ -58,17 +60,20 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
         else{
             getOwner().get().getBody().changeDirection(Direction.EAST);
         }
-        Direction newDirection = getOwner().get().getBody().getDirection();
-        Point2D newPosition = getOwner().get().get(Feet.class).get().calculateVector(newDirection);
 
-        getOwner().get().get(Movement.class).ifPresent( movement -> {
+        Direction newDirection = getOwner().get().getBody().getDirection();
+        //Point2D newPosition = getOwner().get().get(Feet.class).get().calculateVector(newDirection);
+        Point2D newPosition = feet.calculateVector(newDirection);
+
+        /*getOwner().get().get(Movement.class).ifPresent( movement -> {
             //double xValue = min + Math.random()*(max-min);
             //double yValue = min + Math.random()*(max-min);
             //this.nextPosition = new Point2D(xValue, yValue);
 
             movement.move(newPosition);
 
-        });
+        });*/
+        feet.move(newPosition);
 
     }
 }

@@ -30,7 +30,12 @@ public interface Movement extends EntityComponent {
     @Override
     void update(double dt);
 
-
+    /**
+     * Calculates the vector of the movement based on the direction
+     * @param direction
+     * @return Point2D
+     */
+    Point2D calculateVector(final Direction direction);
 
     enum State implements EntityState{
         STABLE, WALKING, DYING

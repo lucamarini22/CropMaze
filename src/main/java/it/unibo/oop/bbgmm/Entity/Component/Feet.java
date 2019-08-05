@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Permit at the entity to walk
+ * Allows the entity to walk
  */
 public class Feet extends AbstractMovement {
 
@@ -175,12 +175,8 @@ public class Feet extends AbstractMovement {
         this.walkingSpeed = newSpeed;
     }
 
-    /**
-     * Calculates the vector of the movement based on the direction
-     * @param direction
-     * @return Point2D
-     */
-    protected Point2D calculateVector(final Direction direction){
+    @Override
+    public Point2D calculateVector(final Direction direction){
         Point2D vector = Point2D.ZERO;
 
         switch(direction){
