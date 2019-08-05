@@ -3,7 +3,6 @@ package it.unibo.oop.bbgmm.Entity;
 import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
-import java.util.Set;
 
 /**
  * Factory implementation of the AbstractFactory EntityFactory.

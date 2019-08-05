@@ -19,8 +19,8 @@ import java.util.Set;
 public final class GameControllerImpl implements GameController {
 
     private static final double FRAME = 1.0 / 60;
-    private static final String MAP_PATH = "/images/Map/Map.zip";
-    private static final String MAP_NAME = "provaMappa.tmx";
+    private static final String MAP_PATH = "/images/Map/CropMazeMap.zip";
+    private static final String MAP_NAME = "CropMazeMap.tmx";
 
     private final PrincipalController principalController;
     private GameField gameField;
