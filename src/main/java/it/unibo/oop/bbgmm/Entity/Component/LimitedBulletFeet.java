@@ -17,7 +17,6 @@ public class LimitedBulletFeet extends Feet{
     private Life lifeComponent;
     private Weapon weapon;
     private final Point2D distanceVector;
-    private final Direction direction;
 
     /**
      * @param walkingSpeed entity speed for the movement
@@ -26,8 +25,7 @@ public class LimitedBulletFeet extends Feet{
         super(walkingSpeed, walls);
         this.lifeComponent = lifeComponent;
         this.weapon = weapon;
-        this.direction = direction;
-        this.distanceVector = calculateVector();
+        this.distanceVector = calculateVector(direction);
     }
 
     @Override
@@ -53,23 +51,5 @@ public class LimitedBulletFeet extends Feet{
     private void remove(){
         weapon.removeBullet((Bullet)getOwner().get());
         getOwner().get().removeEntity(this.getOwner().get());
-    }
-
-    private Point2D calculateVector(){
-        Point2D vector = Point2D.ZERO;
-
-        switch(this.direction){
-
-            case NORTH: vector = new Point2D(PlayerMoves.UP.x, PlayerMoves.UP.y);
-                break;
-            case SOUTH: vector = new Point2D(PlayerMoves.DOWN.x, PlayerMoves.DOWN.y);
-                break;
-            case EAST: vector = new Point2D(PlayerMoves.RIGHT.x, PlayerMoves.RIGHT.y);
-                break;
-            case WEST: vector =  new Point2D(PlayerMoves.LEFT.x, PlayerMoves.LEFT.y);
-                break;
-        }
-
-        return vector;
     }
 }

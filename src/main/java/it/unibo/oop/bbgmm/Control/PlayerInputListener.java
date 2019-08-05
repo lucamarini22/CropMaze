@@ -13,8 +13,8 @@ public interface PlayerInputListener {
 
     /**
      * Method called when the player wants to shoot
-     * @param vector
-     *      The vector indicating in which direction the bullet is shot
+     * @param direction
+     *      the direction where the bullet is shot
      */
-    void shoot (Point2D vector);
+    void shoot (Direction direction);
 }

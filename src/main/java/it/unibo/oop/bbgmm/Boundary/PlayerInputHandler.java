@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PlayerInputListener;
+import it.unibo.oop.bbgmm.Entity.Direction;
 import it.unibo.oop.bbgmm.Utilities.PlayerMoves;
 import javafx.event.EventType;
 import javafx.geometry.Point2D;
@@ -151,20 +152,22 @@ public class PlayerInputHandler {
         return shift;
     }
 
-    public Point2D computeShooting(){
-        Point2D shift = Point2D.ZERO;
+    public Direction computeShooting(){
+
+        Direction direction = Direction.NOTHING;
+
         if(this.input.contains(KeyCode.UP)){
-            shift = shift.add(PlayerMoves.UP.x,PlayerMoves.UP.y);
+            direction = Direction.NORTH;
         }
         if(this.input.contains(KeyCode.DOWN)){
-            shift = shift.add(PlayerMoves.DOWN.x,PlayerMoves.DOWN.y);
+            direction = Direction.SOUTH;
         }
         if(this.input.contains(KeyCode.LEFT)){
-            shift = shift.add(PlayerMoves.LEFT.x,PlayerMoves.LEFT.y);
+            direction = Direction.WEST;;
         }
         if(this.input.contains(KeyCode.RIGHT)){
-            shift = shift.add(PlayerMoves.RIGHT.x,PlayerMoves.RIGHT.y);
+            direction = Direction.EAST;
         }
-        return shift;
+        return direction;
     }
 }

@@ -5,6 +5,7 @@ import it.unibo.oop.bbgmm.Boundary.GameFieldView;
 import it.unibo.oop.bbgmm.Boundary.PlayerView;
 import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Component.Bag;
+import it.unibo.oop.bbgmm.Entity.Component.Feet;
 import it.unibo.oop.bbgmm.Entity.Component.Life;
 import it.unibo.oop.bbgmm.Entity.Component.Weapon;
 import it.unibo.oop.bbgmm.Entity.Direction;
@@ -53,9 +54,8 @@ public class PlayerController extends AliveEntityController implements PlayerInp
     }
 
     @Override
-    public void shoot(Point2D vector) {
+    public void shoot(Direction direction) {
         if(getEntity().get(Weapon.class).isPresent()){
-            Direction direction = this.calculateDirection(vector);
             Optional<Bullet> bullet = getEntity().get(Weapon.class)
                                                  .get()
                                                  .shoot(direction);
@@ -66,24 +66,6 @@ public class PlayerController extends AliveEntityController implements PlayerInp
     private void createBulletController(Bullet bullet, Direction direction){
         BulletController controller = new BulletController(bullet, gameFieldView.getEntityViewFactory().createBulletView(direction), this);
         bulletControllers.add(controller);
-    }
-
-    private Direction calculateDirection(Point2D vector){
-        if(vector.getY() != vector.getX() ){
-            if(vector.getX() == 0 && vector.getY() > 0){
-                return Direction.NORTH;
-            }
-            if(vector.getX() == 0 && vector.getY() < 0){
-                return Direction.SOUTH;
-            }
-            if(vector.getX() < 0 && vector.getY() == 0){
-                return Direction.WEST;
-            }
-            if(vector.getX() > 0 && vector.getY() == 0){
-                return Direction.EAST;
-            }
-        }
-        return Direction.NOTHING;
     }
 
     private void updateCoins(){
