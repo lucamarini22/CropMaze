@@ -12,10 +12,11 @@ import java.util.Random;
  */
 public class BrainComponent extends AbstractEntityComponent implements Brain {
 
+    private static final double MAX_TIME = 0.2;
     private Point2D positionToFollow = Point2D.ZERO;
     private final Entity entityToFollow;
     private final Movement feet;
-    private double time = 1 ;
+    private double time = MAX_TIME ;
 
 
     /**
@@ -34,7 +35,7 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
         super.update(delta);
         if(this.time <= 0){
             followPlayer();
-            this.time = 1;
+            this.time = MAX_TIME;
         }
     }
 
