@@ -30,16 +30,13 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
 
     @Override
     public void update(double delta) {
-
         this.time = this.time - delta;
         super.update(delta);
         if(this.time <= 0){
             followPlayer();
             this.time = 1;
         }
-
     }
-
 
     @Override
     public void followPlayer(){
@@ -48,21 +45,26 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
 
         this.positionToFollow = this.entityToFollow.getBody().getPosition();
 
+        Direction newDirection = Direction.NOTHING;
+
         if (this.positionToFollow.getY() < getOwner().get().getBody().getPosition().getY()){
-            getOwner().get().getBody().changeDirection(Direction.NORTH);
+            newDirection = Direction.SOUTH;
         }
         else if (this.positionToFollow.getY() > getOwner().get().getBody().getPosition().getY()) {
-            getOwner().get().getBody().changeDirection(Direction.SOUTH);
+            newDirection = Direction.NORTH;
         }
         else if (this.positionToFollow.getX() < getOwner().get().getBody().getPosition().getX()){
-            getOwner().get().getBody().changeDirection(Direction.WEST);
+            newDirection = Direction.WEST;
         }
         else{
-            getOwner().get().getBody().changeDirection(Direction.EAST);
+            newDirection = Direction.EAST;
         }
 
-        Direction newDirection = getOwner().get().getBody().getDirection();
-        //Point2D newPosition = getOwner().get().get(Feet.class).get().calculateVector(newDirection);
+        //if the alien and the player are collisioning the alien must not move
+        if(getOwner().get().getBody().getShape().getBoundsInLocal().intersects(entityToFollow.getBody().getShape().getBoundsInLocal())){
+            newDirection = Direction.NOTHING;
+        }
+
         Point2D newPosition = feet.calculateVector(newDirection);
 
         /*getOwner().get().get(Movement.class).ifPresent( movement -> {
@@ -74,6 +76,5 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
 
         });*/
         feet.move(newPosition);
-
     }
 }
