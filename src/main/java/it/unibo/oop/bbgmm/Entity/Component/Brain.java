@@ -10,9 +10,9 @@ public interface Brain extends EntityComponent {
 
 
     /**
-     * Method to move random the owner
+     * Method used by the alien to follow the main
      */
-    void randomMovement();
+    void followPlayer();
 
 
 

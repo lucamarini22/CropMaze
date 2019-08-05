@@ -14,6 +14,7 @@ public final class EntityFactoryImpl implements EntityFactory {
     private final GameField gameField;
     private final EntityStatistics entityStatistics;
     private final GameStatistics gameStatistics;
+    private Player player;
 
     /**
      * Constructor of {@link EntityFactoryImpl}.
@@ -32,12 +33,13 @@ public final class EntityFactoryImpl implements EntityFactory {
 
     @Override
     public Player createPlayer(final Point2D position) {
-        return new Player(new BodyBuilder(), position, entityStatistics.getPlayerHealth(), this.gameField);
+        this.player = new Player(new BodyBuilder(), position, entityStatistics.getPlayerHealth(), this.gameField);
+        return player;
     }
 
     @Override
     public Alien createEnemy(final Point2D position) {
-        return new Alien(new BodyBuilder(), position, entityStatistics.getEnemyHealth(this.gameStatistics.getCurrentLevel()), gameField.getWalls());
+        return new Alien(new BodyBuilder(), position, entityStatistics.getEnemyHealth(this.gameStatistics.getCurrentLevel()), gameField.getWalls(),player);
     }
 
     @Override
