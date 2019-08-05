@@ -1,8 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 
-import it.unibo.oop.bbgmm.Boundary.EndLevelView;
 import it.unibo.oop.bbgmm.Control.Level;
-import it.unibo.oop.bbgmm.Control.LevelImpl;
 import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisor;
 import java.util.Collections;
@@ -79,15 +77,17 @@ public final class GameFieldImpl implements GameField {
         if (event.getEntity() instanceof Alien && this.getAliveEnemies() == 1) {
             this.entities.stream().filter(e -> !(e.getClass().equals(Player.class)))
                                   .forEach(entitiesToBeRemoved::add);
-            this.level.loadMap2();
+            this.level.initializeLevel();
             return;
         }
         this.entitiesToBeRemoved.add(event.getEntity());
     }
 
+
+
     @Override
-    public void setPlayer(final Entity player) {
-        this.player = player;
+    public void setLevel(final Level level) {
+        this.level = level;
     }
 
     /**
@@ -96,11 +96,4 @@ public final class GameFieldImpl implements GameField {
     private int getAliveEnemies() {
         return (int) this.entities.stream().filter(e -> e instanceof Alien).count();
     }
-
-
-
-    public void setLevel(final Level level) {
-        this.level = level;
-    }
-
 }
