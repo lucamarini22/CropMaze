@@ -75,7 +75,7 @@ public abstract class AbstractEntity implements Entity {
     }
 
     @Override
-    public void removeEntity(Entity entity) {
+    public void removeEntity() {
         this.deathEvent.trigger(new DeathEvent(this));
     }
 }

@@ -4,6 +4,7 @@ import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.Collision;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionLabel;
 import it.unibo.oop.bbgmm.Entity.Entity;
+import it.unibo.oop.bbgmm.Entity.EntityType;
 
 public class ClashComponent extends AbstractEntityComponent implements Clash{
 
@@ -22,6 +23,13 @@ public class ClashComponent extends AbstractEntityComponent implements Clash{
                                     life.damaged(damage);
                                 }));
                     }));
+        this.getOwner().ifPresent(o -> ((Entity) o).get(Collidable.class).ifPresent(
+                c -> {
+                    if(c.getCollisionLabel().equals(CollisionLabel.SHOT)){
+                        this.getOwner().ifPresent(owner -> owner.removeEntity());
+                    }
+                }
+        ));
     }
 
     @Override

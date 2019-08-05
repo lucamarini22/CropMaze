@@ -73,8 +73,6 @@ public final class GameFieldViewImpl implements GameFieldView {
 
     /**
      * Sets an image of background.
-     * @param path
-     *      Path of the image to set
      */
     private void setBackground() {
         this.background = new ImageView(new Image(BACKGROUND_PATH));

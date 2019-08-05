@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Entity.Direction;
+import it.unibo.oop.bbgmm.Entity.EntityType;
 import it.unibo.oop.bbgmm.Entity.PowerTag;
 import javafx.scene.Group;
 
@@ -46,16 +47,16 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
 
     @Override
     public LifelessEntityView createDoubleSpeedView() {
-        return new PowerUpView(parent, PowerTag.DOUBLESPEED);
+        return new PowerUpView(parent, EntityType.DOUBLE_SPEED);
     }
 
     @Override
     public LifelessEntityView createDoubleDamageView() {
-        return new PowerUpView(parent, PowerTag.DOUBLEDAMAGE);
+        return new PowerUpView(parent, EntityType.DOUBLE_DAMAGE);
     }
 
     @Override
     public LifelessEntityView createShieldView() {
-        return new PowerUpView(parent, PowerTag.SHIELD);
+        return new PowerUpView(parent, EntityType.SHIELD);
      }
 }
