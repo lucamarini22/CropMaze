@@ -54,9 +54,6 @@ public class PlayerController extends AliveEntityController implements PlayerInp
 
     @Override
     public void shoot(Point2D vector) {
-        /*getEntity().get(Weapon.class).ifPresent(weapon -> {
-            weapon.shoot(this.calculateDirection(vector));
-        });*/
         if(getEntity().get(Weapon.class).isPresent()){
             Direction direction = this.calculateDirection(vector);
             Optional<Bullet> bullet = getEntity().get(Weapon.class)
@@ -64,8 +61,6 @@ public class PlayerController extends AliveEntityController implements PlayerInp
                                                  .shoot(direction);
             bullet.ifPresent(b -> createBulletController(b, direction));
         }
-
-
     }
 
     private void createBulletController(Bullet bullet, Direction direction){
