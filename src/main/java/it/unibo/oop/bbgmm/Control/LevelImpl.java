@@ -203,9 +203,9 @@ public final class LevelImpl implements Level {
         final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
         Optional<Point2D> pos = Optional.empty();
         if (type.equals(EntityType.HORIZONTAL_WALL)) {
-            pos = Optional.of(new Point2D(x / map.getTileWidth(), -(y / map.getTileHeight() + dim.getHeight() / 2)));
+            pos = Optional.of(new Point2D(x / map.getTileWidth() + 1, -(y / map.getTileHeight() + dim.getHeight() / 2)));
         } else if (type.equals(EntityType.VERTICAL_WALL)) {
-            pos = Optional.of(new Point2D(x / map.getTileWidth() + dim.getWidth() / 2, -(y / map.getTileHeight() + dim.getHeight())));
+            pos = Optional.of(new Point2D(x / map.getTileWidth() + dim.getWidth() / 2, -(y / map.getTileHeight() + dim.getHeight()) + 2));
         }
         return new Pair<>(pos.orElse(null), dim);
     }

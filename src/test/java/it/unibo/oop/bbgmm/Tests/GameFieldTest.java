@@ -12,7 +12,7 @@ public class GameFieldTest {
     private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl());
     private final EntityStatistics entityStatistics = new EntityStatisticsImpl();
     private final GameStatistics gameStatistics = new GameStatisticsImpl();
-    private final EntityFactory entityFactory = new EntityFactoryImpl(gameField, this.gameField.getWalls(), entityStatistics,
+    private final EntityFactory entityFactory = new EntityFactoryImpl(gameField, entityStatistics,
             gameStatistics);
 
     @Test
