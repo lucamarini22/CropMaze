@@ -6,7 +6,7 @@ package it.unibo.oop.bbgmm.Entity;
 public final class EntityStatisticsImpl implements EntityStatistics {
 
     private static final int COIN_VALUE = 10;
-    private static final int PLAYER_HEALTH = 100;
+    private static final int PLAYER_HEALTH = 1000;
     private static final int ENEMY_HEALTH = 10;
 
     @Override
