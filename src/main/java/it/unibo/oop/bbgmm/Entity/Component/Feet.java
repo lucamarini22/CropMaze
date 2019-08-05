@@ -139,11 +139,11 @@ public class Feet extends AbstractMovement {
                 System.out.println("entity walking -> State = " + getState());
             }*/
         }
-        System.out.println(" " + getState());
+        //System.out.println(" " + getState());
         //setPosition(Point2D.ZERO);
         //setState(State.STABLE);
         updateState();
-        System.out.println("end of movement -> State = " + getState());
+        //System.out.println("end of movement -> State = " + getState());
 
     }
 

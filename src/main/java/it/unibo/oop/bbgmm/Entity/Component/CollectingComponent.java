@@ -12,9 +12,8 @@ public class CollectingComponent extends AbstractEntityComponent implements Coll
 
     private void collect(final Collision collision) {
           collision.getCollisionComponent().getOwner().ifPresent(owner -> owner.get(
-                    Bag.class).ifPresent(b -> b.addMoney(INCREMENT_MONEY)));
-          this.getOwner().get().removeEntity(this.getOwner().get());
-
+                  Bag.class).ifPresent(b -> b.addMoney(INCREMENT_MONEY)));
+          this.getOwner().get().removeEntity();
     }
 
     @Override

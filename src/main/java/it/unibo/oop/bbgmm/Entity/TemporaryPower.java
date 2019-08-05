@@ -18,15 +18,12 @@ public abstract class TemporaryPower extends AbstractPower implements Temporary 
 
     @Override
     public void update(double dt) {
-        if(this.isActive()){
-            this.time = this.time - dt;
+        if(this.time < 0) {
+            this.deactivate();
         }
         else
         {
-            if(this.time < 0)
-            {
-                this.deactivate();
-            }
+            this.time = this.time - dt;
         }
     }
 

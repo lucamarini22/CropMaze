@@ -5,6 +5,7 @@ public class DamageComponent extends AbstractEntityComponent implements Damage {
 
     public DamageComponent(final int damage){
         this.damage = damage;
+        System.out.println("damage " + damage);
     }
     @Override
     public int getDamage() {

@@ -17,26 +17,12 @@ public class TemporaryDoubleSpeed extends TemporaryPower {
     @Override
     public void activate(final Entity player) {
         super.activate(player);
-        player.get(Feet.class).ifPresent(feet -> {
-            double speed = feet.getSpeed();
-            feet.setSpeed(speed * 2);
-        });
-        player.get(Weapon.class).ifPresent(weapon -> {
-            int speed = weapon.getWeaponSpeed();
-            weapon.setWeaponSpeed(speed * 2);
-        });
+        player.get(Movement.class).ifPresent( m -> m.setSpeed(m.getSpeed() * 2));
     }
 
     @Override
     public void deactivate() {
-        getPlayer().get(Feet.class).ifPresent(feet -> {
-            double speed = feet.getSpeed();
-            feet.setSpeed(speed/2);
-        });
-        getPlayer().get(Weapon.class).ifPresent(weapon -> {
-            int speed = weapon.getWeaponSpeed();
-            weapon.setWeaponSpeed(speed * 2);
-        });
         super.deactivate();
+        getPlayer().get(Movement.class).ifPresent(m -> m.setSpeed(m.getSpeed() / 2));
     }
 }

@@ -22,8 +22,7 @@ public final class BagImpl extends AbstractEntityComponent implements Bag {
     @Override
     public void addMoney(final int amount) {
         money += amount;
-        System.out.println(money);
-        //notifyChange();
+        System.out.println(this.money);
     }
 
     @Override
