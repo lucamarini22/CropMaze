@@ -38,8 +38,8 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
     }
 
     @Override
-    public BulletView createBulletView(final Direction direction) {
-        return new BulletView(parent, direction);
+    public BulletView createBulletView(Direction direction) {
+        return new BulletView(parent, direction, audioPlayer);
     }
 
     @Override

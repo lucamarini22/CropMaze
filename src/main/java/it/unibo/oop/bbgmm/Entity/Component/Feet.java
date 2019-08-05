@@ -3,6 +3,7 @@ package it.unibo.oop.bbgmm.Entity.Component;
 import it.unibo.oop.bbgmm.Entity.AbstractMovement;
 import it.unibo.oop.bbgmm.Entity.Direction;
 import it.unibo.oop.bbgmm.Entity.Entity;
+import it.unibo.oop.bbgmm.Utilities.PlayerMoves;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -12,7 +13,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Permit at the entity to walk
+ * Allows the entity to walk
  */
 public class Feet extends AbstractMovement {
 
@@ -59,10 +60,7 @@ public class Feet extends AbstractMovement {
      *
      *
      */
-    protected boolean wallChecker(final Point2D distanceVector){
-
-        Point2D newDistanceVector = this.calculateNewDistanceVector(distanceVector);
-
+    private boolean wallChecker(final Point2D distanceVector){
         if(getOwner().isPresent()){
             Dimension2D dimension  = getOwner().get().getBody().getDimension();
             Rectangle shape = new Rectangle(distanceVector.getX(),distanceVector.getY(),
@@ -111,7 +109,7 @@ public class Feet extends AbstractMovement {
     }
 
     @Override
-    public void move( Point2D distanceVector) {
+    public void move(final Point2D distanceVector) {
         //utilizzando questo distancevector dovrai modificare la posizione dell'entità
         //ovviamente dovrai modificare il metodo e fare in modo che chieda in input un point2d
 
@@ -163,15 +161,35 @@ public class Feet extends AbstractMovement {
 
     /**
      * return the walking speed
-
      * @return the speed
      */
     public double getSpeed(){
         return this.walkingSpeed;
     }
 
+    /**
+     * Setter for the speed
+     * @param newSpeed
+     */
     public void setSpeed(double newSpeed){
         this.walkingSpeed = newSpeed;
     }
 
+    @Override
+    public Point2D calculateVector(final Direction direction){
+        Point2D vector = Point2D.ZERO;
+
+        switch(direction){
+            case NORTH: vector = new Point2D(PlayerMoves.UP.x, PlayerMoves.UP.y);
+                break;
+            case SOUTH: vector = new Point2D(PlayerMoves.DOWN.x, PlayerMoves.DOWN.y);
+                break;
+            case EAST: vector = new Point2D(PlayerMoves.RIGHT.x, PlayerMoves.RIGHT.y);
+                break;
+            case WEST: vector =  new Point2D(PlayerMoves.LEFT.x, PlayerMoves.LEFT.y);
+                break;
+        }
+
+        return vector;
+    }
 }

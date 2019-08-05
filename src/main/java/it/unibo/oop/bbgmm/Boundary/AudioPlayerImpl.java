@@ -28,9 +28,7 @@ public class AudioPlayerImpl implements AudioPlayer{
     @Override
     public void playMusic(String path) {
         loadMusic(path);
-        mediaPlayer.setVolume(musicVolume);
         mediaPlayer.play();
-
     }
 
     @Override

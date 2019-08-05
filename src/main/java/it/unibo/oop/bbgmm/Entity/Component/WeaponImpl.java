@@ -87,6 +87,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
         return Collections.unmodifiableList(this.bulletShoted);
     }
 
+    @Override
     public void removeBullet(final Bullet bullet){
         this.bulletShoted.remove(bullet);
     }

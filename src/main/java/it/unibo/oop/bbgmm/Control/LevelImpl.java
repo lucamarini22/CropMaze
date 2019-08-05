@@ -18,6 +18,8 @@ public final class LevelImpl implements Level {
     private static final int FIRST_LEVEL = 1;
     private static final int TOP_LEFT_X = 0;
     private static final int TOP_LEFT_Y = 0;
+    private static final double WALL_TRANSLATION_X = 1.5;
+    private static final double WALL_TRANSLATION_Y = 2;
     private static final String SOLID_OBJECTS = "solid";
     private static final String ENTITY_OBJECTS = "objects";
 
@@ -103,22 +105,9 @@ public final class LevelImpl implements Level {
 
     private void loadSolidObjects(final ObjectGroup layer) {
         layer.forEach(solidObject -> {
-            final String type = solidObject.getType();
-
-            switch (EntityType.valueOf(type)) {
-                case HORIZONTAL_WALL:
-                    final Pair<Point2D, Dimension2D> horizontalInfo = getBlockPositionAndDimension(this.map, solidObject.getX(), solidObject.getY(),
-                            solidObject.getWidth(), solidObject.getHeight(), EntityType.HORIZONTAL_WALL);
-                    entitySpawner.spawn(horizontalInfo.getKey(), horizontalInfo.getValue());
-                    break;
-                case VERTICAL_WALL:
-                    final Pair<Point2D, Dimension2D> verticalInfo = getBlockPositionAndDimension(this.map, solidObject.getX(), solidObject.getY(),
-                            solidObject.getWidth(), solidObject.getHeight(), EntityType.VERTICAL_WALL);
-                    entitySpawner.spawn(verticalInfo.getKey(), verticalInfo.getValue());
-                    break;
-                default:
-                    break;
-            }
+            final Pair<Point2D, Dimension2D> verticalInfo = getWallPositionAndDimension(this.map, solidObject.getX(), solidObject.getY(),
+                    solidObject.getWidth(), solidObject.getHeight());
+            entitySpawner.spawn(verticalInfo.getKey(), verticalInfo.getValue());
         });
     }
 
@@ -193,20 +182,13 @@ public final class LevelImpl implements Level {
      *      Width of the solid block in the tiled map
      * @param height
      *      Height of the solid block in the tiled map
-     * @param type
-     *      Type of the solid block
      * @return the position and the dimension that the block should get
      */
-    private Pair<Point2D, Dimension2D> getBlockPositionAndDimension(final Map map, final double x, final double y,
-                                                                 final double width, final double height,
-                                                                 final EntityType type) {
+    private Pair<Point2D, Dimension2D> getWallPositionAndDimension(final Map map, final double x, final double y,
+                                                                 final double width, final double height) {
         final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
-        Optional<Point2D> pos = Optional.empty();
-        if (type.equals(EntityType.HORIZONTAL_WALL)) {
-            pos = Optional.of(new Point2D(x / map.getTileWidth(), -(y / map.getTileHeight() + dim.getHeight() / 2)));
-        } else if (type.equals(EntityType.VERTICAL_WALL)) {
-            pos = Optional.of(new Point2D(x / map.getTileWidth() + dim.getWidth() / 2, -(y / map.getTileHeight() + dim.getHeight())));
-        }
-        return new Pair<>(pos.orElse(null), dim);
+        Point2D pos = new Point2D(x / map.getTileWidth() + WALL_TRANSLATION_X,
+                -(y / map.getTileHeight() + dim.getHeight()) + WALL_TRANSLATION_Y);
+        return new Pair<>(pos, dim);
     }
 }

@@ -23,7 +23,7 @@ public final class GameFieldImpl implements GameField {
     public GameFieldImpl(final CollisionSupervisor collisionSupervisor) {
         this.entities =  new LinkedHashSet<>();
         this.collisionSupervisor = collisionSupervisor;
-        entitiesToBeRemoved  = new LinkedHashSet<>();
+        this.entitiesToBeRemoved  = new LinkedHashSet<>();
     }
 
     @Override
