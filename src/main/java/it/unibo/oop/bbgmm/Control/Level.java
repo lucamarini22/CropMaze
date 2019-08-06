@@ -37,4 +37,9 @@ public interface Level {
      */
     PlayerStatistics getPlayerStatistic();
 
+    /**
+     * Loads the entities in the field.
+     */
+    void initializeLevel();
+
 }

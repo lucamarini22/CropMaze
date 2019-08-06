@@ -29,7 +29,7 @@ public interface Movement extends EntityComponent {
      */
     @Override
     void update(double dt);
-    
+
     double getSpeed();
 
     void setSpeed(double speed);

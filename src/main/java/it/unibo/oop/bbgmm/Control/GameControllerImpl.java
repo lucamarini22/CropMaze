@@ -61,6 +61,7 @@ public final class GameControllerImpl implements GameController {
         this.entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
         level = new LevelImpl(this.map, this.gameField, this.gameStatistics, this.entitySpawner, this.gameFieldView);
+        this.gameField.setLevel(level);
     }
 
     /**
