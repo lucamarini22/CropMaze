@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Main controller of the game
@@ -60,6 +61,11 @@ public interface PrincipalController {
     void startGame();
 
     /**
+     * Method that reset the game
+     */
+    void resetGame();
+
+    /**
      * Method used by the view to show the main menu
      * @param viewFactory
      */
@@ -101,4 +107,9 @@ public interface PrincipalController {
      */
     void setPlayerInputHandler(final PlayerInputHandler playerInputHandler);
 
+    /**
+     * Getter for the game controller
+     * @return GameController
+     */
+    Optional<GameController> getGameController();
 }

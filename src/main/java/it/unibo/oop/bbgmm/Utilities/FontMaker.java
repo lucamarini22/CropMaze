@@ -37,6 +37,8 @@ public final class FontMaker {
         return font;
     }
 
+    public static Font getSizedFont(final int size){return Font.font("MS Gothic", FontWeight.BOLD, size);}
+
     public static Font getFontWinner(){
         return Font.font("MS Gothic", FontWeight.BOLD, font.getSize()+30);
     }

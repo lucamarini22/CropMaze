@@ -89,6 +89,7 @@ public class MainMenu extends AbstractBasicView {
         pane.setId("mainMenu");
 
         getScene().setRoot(getRoot());
+
     }
 
     /**

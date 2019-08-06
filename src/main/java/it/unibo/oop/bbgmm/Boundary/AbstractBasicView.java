@@ -84,10 +84,7 @@ public abstract class AbstractBasicView {
         else{
             primaryStage.setFullScreen(false);
             primaryStage.centerOnScreen();
-            this.scene.getWidth();
         }
-        primaryStage.setWidth(Resolution.getWidth());
-        primaryStage.setHeight(Resolution.getHeight());
     }
 
     protected void updateVolume(Volume musicVolume, Volume effectsVolume){

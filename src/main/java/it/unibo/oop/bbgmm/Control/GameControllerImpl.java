@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Control;
 
 import com.google.common.io.Files;
 import it.unibo.oop.bbgmm.Boundary.GameFieldView;
+import it.unibo.oop.bbgmm.Boundary.ViewFactory;
 import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.Utilities.ZipExtractor;
@@ -31,8 +32,6 @@ public final class GameControllerImpl implements GameController {
     private final EntityFactory entityFactory;
     private GameFieldView gameFieldView;
     private final GameStatistics gameStatistics;
-    //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
-    //level crea la mappa di gioco i personaggi e gli alieni
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(final long now) {
@@ -84,6 +83,11 @@ public final class GameControllerImpl implements GameController {
         this.gameField = level.getGameField();
         this.gameFieldView = level.getGameFieldView();
         this.entitiesControllers = level.getEntitiesControllers();
+        start();
+    }
+
+    @Override
+    public void start(){
         timer.start();
     }
 

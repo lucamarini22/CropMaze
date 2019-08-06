@@ -17,7 +17,6 @@ import javafx.scene.text.Text;
 
 public class MenuItem extends HBox {
 
-    private Font usedFont;
     private final Text text;
     private Runnable script;
 
@@ -26,8 +25,7 @@ public class MenuItem extends HBox {
         setAlignment(Pos.CENTER);
         text = new Text(name);
         FontMaker.modifyFont(Resolution.isFullScreen());
-        usedFont = FontMaker.getFont();
-        text.setFont(usedFont);
+        text.setFont(FontMaker.getFont());
         text.setEffect(new GaussianBlur(2));
         getChildren().add(text);
         setActive(false);
@@ -65,5 +63,13 @@ public class MenuItem extends HBox {
      */
     public void setUnderline(final boolean b) {
         text.setUnderline(b);
+    }
+
+    /**
+     * Setter for the font
+     * @param size
+     */
+    public void setFont(final int size){
+        text.setFont(FontMaker.getSizedFont(size));
     }
 }
