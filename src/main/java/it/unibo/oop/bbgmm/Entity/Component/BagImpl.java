@@ -29,8 +29,7 @@ public final class BagImpl extends AbstractEntityComponent implements Bag {
     public void update(final double up) {
         final List<Power> inactivePowers = new LinkedList<>();
         this.powers.forEach(p -> {
-            if(p.isActive())
-            {
+            if (p.isActive()) {
                 p.update(up);
             } else {
                 inactivePowers.add(p);
@@ -40,7 +39,7 @@ public final class BagImpl extends AbstractEntityComponent implements Bag {
     }
 
     @Override
-    public void addPower(Power power) {
+    public void addPower(final Power power) {
         this.powers.add(power);
     }
 
@@ -48,6 +47,4 @@ public final class BagImpl extends AbstractEntityComponent implements Bag {
     public List<Power> getPowers() {
         return this.powers;
     }
-
-    //complete with a notification of the change
 }

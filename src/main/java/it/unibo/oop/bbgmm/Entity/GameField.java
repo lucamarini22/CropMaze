@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Control.Level;
+
 import java.util.Set;
 
 /**
@@ -50,4 +52,12 @@ public interface GameField {
      *      {@link Event} that triggers the destruction
      */
     void destroyEntity(DeathEvent event);
+
+    /**
+     * Sets the level loader.
+     * @param level
+     *      {@link Level} instance
+     */
+    void setLevel(Level level);
+
 }

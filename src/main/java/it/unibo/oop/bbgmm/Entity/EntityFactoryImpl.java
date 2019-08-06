@@ -3,6 +3,7 @@ package it.unibo.oop.bbgmm.Entity;
 import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
+import org.apache.commons.lang.ObjectUtils;
 
 /**
  * Factory implementation of the AbstractFactory EntityFactory.
@@ -38,6 +39,9 @@ public final class EntityFactoryImpl implements EntityFactory {
 
     @Override
     public Alien createEnemy(final Point2D position) {
+        if (this.player == null) {
+            throw new NullPointerException("Error: The Player is not present");
+        }
         return new Alien(new BodyBuilder(), position, entityStatistics.getEnemyHealth(this.gameStatistics.getCurrentLevel()), gameField.getWalls(), this.player);
     }
 

@@ -15,7 +15,7 @@ import java.util.*;
  */
 public final class LevelImpl implements Level {
     private static final float TILE_SIZE = 1f;
-    private static final int FIRST_LEVEL = 1;
+    private static final int LEVEL_ONE = 1;
     private static final int TOP_LEFT_X = 0;
     private static final int TOP_LEFT_Y = 0;
     private static final double WALL_TRANSLATION_X = 1.5;
@@ -54,8 +54,13 @@ public final class LevelImpl implements Level {
         this.entitySpawner = entitySpawner;
         this.gameFieldView = gameFieldView;
         this.entitiesControllers = new LinkedHashSet<>();
-
+        this.initializeLevel();
+    }
+    @Override
+    public void initializeLevel() {
+        this.gameStatistics.setCurrentLevel(this.gameStatistics.getCurrentLevel() + 1);
         this.map.getLayers().forEach(layer -> {
+            //Draws Tiles of terrain only if it is the first level, then it doesn't draw it anymore
             if (layer instanceof TileLayer) {
                 loadTiles((TileLayer) layer);
             } else if (layer instanceof ObjectGroup) {
@@ -94,7 +99,6 @@ public final class LevelImpl implements Level {
     }
 
     private void loadObjects(final ObjectGroup layer) {
-        String a = layer.getName().trim().toLowerCase(Locale.UK);
         if (layer.getName().trim().toLowerCase(Locale.UK).equals(SOLID_OBJECTS)) {
             this.loadSolidObjects(layer);
         }
@@ -118,25 +122,25 @@ public final class LevelImpl implements Level {
             final String type = entityObject.getType();
             Entity entity;
             switch (EntityType.valueOf(type)) {
-                //creation of the player
+                //Creation of the player
                 case PLAYER:
-                    if (this.gameStatistics.getCurrentLevel() == FIRST_LEVEL) {
+                    //Creates the Player only in the first level
+                    if (this.gameStatistics.getCurrentLevel() == LEVEL_ONE) {
                         player = entitySpawner.spawn(EntityType.PLAYER.toString(), position);
-                        final PlayerController controller = new PlayerController(player, gameFieldView.getEntityViewFactory().createPlayerView(), this.gameFieldView);
-                        gameFieldView.setPlayerInputListener(controller);
-                        entitiesControllers.add(controller);
                         playerStatistics = new PlayerStatisticsImpl(player);
                     }
-                    //if it is not the first level it doesn't recreate the player
+                    final PlayerController controller = new PlayerController(player, gameFieldView.getEntityViewFactory().createPlayerView(), this.gameFieldView);
+                    gameFieldView.setPlayerInputListener(controller);
+                    entitiesControllers.add(controller);
                     break;
-                //creation of all power ups, coins and enemies
+                //Creation of all power ups, coins and enemies
                 case COIN:
                     entity = entitySpawner.spawn(EntityType.COIN.toString(), position);
                     entitiesControllers.add(new LifelessEntityController(entity, gameFieldView.getEntityViewFactory().createCoinView()));
                     break;
                 case ALIEN:
                     for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
-                        entity = entitySpawner.spawn(EntityType.ALIEN.toString(), position);
+                        entity = entitySpawner.spawn(EntityType.ALIEN.toString(), new Point2D(position.getX() + i, position.getY()));
                         entitiesControllers.add(new AliveEntityController(entity, gameFieldView.getEntityViewFactory().createAlienView()));
                     }
                     break;
