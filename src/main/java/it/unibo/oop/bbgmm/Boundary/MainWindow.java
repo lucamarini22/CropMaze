@@ -51,7 +51,7 @@ public class MainWindow {
         this.controller.showMainMenu(this.viewFactory);
 
         this.audioPlayer.playMusic(MENU_TRACK.getPath());
-        
+
         this.primaryStage.setFullScreen(fullscreen);
         this.primaryStage.show();
     }

@@ -4,26 +4,31 @@ import it.unibo.oop.bbgmm.Utilities.FontMaker;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_PRESS;
 import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_SWITCH;
 
 public class PauseBox {
 
-    private static final int FONT_SIZE = 40;
+    private static final String MESSAGE = "ATTENTION!\nDo you want to go back to the main menu?\n(All progress will be erased)";
+    private static final int SIZE_MESSAGE = 35;
+    private static final int SIZE_ITEMS = 40;
     private static final int SPACING = 40;
-    private static final int INSETS = 8;
+    private static final int POS = 33;
     private static final int SPACE_BETWEEN_HORIZONTAL_ITEM = 50;
     private static final int SPACE_BETWEEN_VERTICAL_ITEM = 10;
-    private static final double MIN_WIDTH = 350;
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 230;
     private boolean answer = false;
     private final AudioPlayer audioPlayer;
     private int currentItem = 1;
@@ -34,44 +39,50 @@ public class PauseBox {
     }
 
     /**
-     * It displays the MessageBox.
+     * It displays the PauseBox.
      *
-     * @param title
-     *            The title of the MessageBox.
-     * @param message
-     *            The message inside the MessageBox..
-     * @return The choice of the user where true equals yes and false equals no.
+     * @param principalStage
+     * @return the answer
      */
-    public boolean display(final String title, final String message) {
+    public boolean display(final Stage principalStage) {
         final Stage stage = new Stage();
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle(title);
-        stage.setMinWidth(MIN_WIDTH);
+        stage.setWidth(WIDTH);
+        stage.setHeight(HEIGHT);
+        stage.initOwner(principalStage);
+        stage.initStyle(StageStyle.UNDECORATED);
 
-        final Label label = new Label(message);
-        label.setFont(FontMaker.getSizedFont(FONT_SIZE));
+
+        final Label label = new Label(MESSAGE);
+        label.setFont(FontMaker.getSizedFont(SIZE_MESSAGE));
+        label.setEffect(new GaussianBlur(2));
+        label.setTextFill(Color.FORESTGREEN);
 
         final MenuItem itemYes = new MenuItem("Yes");
         final MenuItem itemNo = new MenuItem("No");
 
-        itemYes.setFont(FONT_SIZE);
-        itemNo.setFont(FONT_SIZE);
+        itemYes.setFont(SIZE_ITEMS);
+        itemNo.setFont(SIZE_ITEMS);
 
         final VBox layout = new VBox(SPACE_BETWEEN_VERTICAL_ITEM);
         this.itemLayout = new HBox(SPACE_BETWEEN_HORIZONTAL_ITEM);
 
         this.itemLayout.getChildren().addAll(itemYes, itemNo);
         this.itemLayout.setSpacing(SPACING);
-        this.itemLayout.setPadding(new Insets(INSETS));
         this.itemLayout.setAlignment(Pos.CENTER);
 
-        layout.setMinWidth(MIN_WIDTH);
         layout.getChildren().addAll(label, this.itemLayout);
         layout.setAlignment(Pos.CENTER);
 
-        final Scene scene = new Scene(layout);
+        AnchorPane pane = new AnchorPane();
+        pane.getChildren().add(layout);
+        layout.setLayoutX(POS);
+        layout.setLayoutY(POS);
+        pane.setId("pauseBox");
+
+        final Scene scene = new Scene(pane);
 
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.RIGHT) {
@@ -99,6 +110,8 @@ public class PauseBox {
         });
 
         getMenuItem(this.currentItem).setActive(true);
+
+        scene.getStylesheets().add("Style.css");
 
         stage.setScene(scene);
         stage.showAndWait();

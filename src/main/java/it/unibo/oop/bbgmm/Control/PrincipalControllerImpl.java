@@ -21,7 +21,7 @@ import java.util.Optional;
  */
 public final class PrincipalControllerImpl implements PrincipalController {
 
-    private final Stage stage;
+    private final Stage primaryStage;
     private final AudioPlayer audioPlayer;
     private PrincipalView view;
     private VolumeDataImpl volumeData;
@@ -32,15 +32,15 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     /**
      * {@link PrincipalControllerImpl} constructor.
-     * @param principalStage
+     * @param primaryStage
      *      Principal {@link Stage}
      */
-    public PrincipalControllerImpl(final Stage principalStage) {
-        this.stage = principalStage;
+    public PrincipalControllerImpl(final Stage primaryStage) {
+        this.primaryStage = primaryStage;
         this.volumeData = new VolumeDataImpl();
         this.audioPlayer = new AudioPlayerImpl(volumeData.getMusicVolume().getValue(),
                 volumeData.getEffectsVolume().getValue());
-        this.view = new PrincipalView(principalStage, this);
+        this.view = new PrincipalView(primaryStage, this);
         try {
             this.score = new ScoreListImpl();
         } catch (IOException e) {
@@ -92,7 +92,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
         this.gameControl = Optional.empty();
         this.playerInputHandler = Optional.empty();
 
-        this.view = new PrincipalView(stage, this);
+        this.view = new PrincipalView(primaryStage, this);
     }
 
     @Override
@@ -113,7 +113,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
     @Override
     public void showGameField(final Scene scene) {
        this.gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
-                new GameFieldViewImpl(this.audioPlayer, this.playerInputHandler.get(), this, scene),
+                new GameFieldViewImpl(this.audioPlayer, this.playerInputHandler.get(), this, this.primaryStage),
                this));
         scene.setRoot(this.gameControl.get().getGameFieldView().getGroup());
         startGame();

@@ -16,3 +16,8 @@
 #gameOverView{
     -fx-background-color: black;
 }
+
+#pauseBox{
+    -fx-background-image:url("images/pauseBoxBackground.png");
+    -fx-background-size: cover;
+}

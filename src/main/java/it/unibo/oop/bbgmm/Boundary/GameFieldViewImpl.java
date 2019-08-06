@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import org.mapeditor.core.Tile;
 import org.mapeditor.core.TileLayer;
 
@@ -21,16 +22,18 @@ import static it.unibo.oop.bbgmm.Boundary.Music.*;
  * Implementation of the view of {@link it.unibo.oop.bbgmm.Entity.GameField}.
  */
 public final class GameFieldViewImpl implements GameFieldView {
+
     private static final int TOP_LEFT_POINT_BACKGROUND = -800;
     private static final String BACKGROUND_PATH = "/images/background.png";
+    private final Stage primaryStage;
     private final Group fieldView = new Group();
     private final Group rootView = new Group(fieldView);
     private final AudioPlayer audioplayer;
     private final PlayerInputHandler playerInputHandler;
     private final StatusBarScreen statusBar = new StatusBarImpl();
     private ImageView background;
-    private final PauseBox pauseBox;
     private final PrincipalController principalController;
+
 
     /**
      * Constructor of {@link GameFieldViewImpl}.
@@ -40,18 +43,20 @@ public final class GameFieldViewImpl implements GameFieldView {
      *      {@link PlayerInputHandler} instance
      */
     public GameFieldViewImpl(final AudioPlayer audioPlayer, final PlayerInputHandler playerInputHandler,
-                             final PrincipalController principalController, final Scene scene) {
+                             final PrincipalController principalController, final Stage primaryStage) {
+        this.primaryStage = primaryStage;
         this.audioplayer = audioPlayer;
         this.playerInputHandler = playerInputHandler;
         this.setBackground();
         fieldView.getChildren().add(this.background);
         rootView.getChildren().add(statusBar.getStatusBox());
-        this.pauseBox = new PauseBox(this.audioplayer);
         this.principalController = principalController;
 
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, this::onPress);
+        this.primaryStage.getScene().addEventHandler(KeyEvent.KEY_PRESSED, this::onPress);
 
         this.audioplayer.playMusic(GAME_TRACK.getPath());
+
+
     }
 
     @Override
@@ -103,8 +108,8 @@ public final class GameFieldViewImpl implements GameFieldView {
      */
     private void onPress(final KeyEvent event) {
         if(event.getCode().equals(KeyCode.ESCAPE)){
-            showPauseBox(this.principalController);
             this.audioplayer.playSound(BUTTON_PRESS.getPath());
+            showPauseBox(this.principalController);
         }
     }
 
@@ -114,7 +119,7 @@ public final class GameFieldViewImpl implements GameFieldView {
      */
     private void showPauseBox(final PrincipalController principalController) {
         principalController.getGameController().get().stop();
-        boolean answer = pauseBox.display("ATTENTION !", "Do you want to go back to the main menu?");
+        boolean answer = new PauseBox(this.audioplayer).display(this.primaryStage);
         if(answer){
             this.audioplayer.stopMusic();
             principalController.resetGame();

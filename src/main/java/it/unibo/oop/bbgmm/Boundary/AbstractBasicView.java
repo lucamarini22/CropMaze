@@ -26,7 +26,7 @@ public abstract class AbstractBasicView {
         this.controller = controller;
         this.primaryStage = primaryStage;
         this.audioPlayer = controller.getAudioPlayer();
-        this.viewFactory = new ViewFactory(primaryStage, controller, root, scene);this.root.setId("mainMenu");
+        this.viewFactory = new ViewFactory(primaryStage, controller, root, scene);
     }
 
     /**
