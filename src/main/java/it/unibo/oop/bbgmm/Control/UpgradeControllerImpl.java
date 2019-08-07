@@ -19,7 +19,8 @@ public class UpgradeControllerImpl implements UpgradeController{
     private final Upgrade upgrade;
     private final GameController gameController;
 
-    public UpgradeControllerImpl(final Button upgradeButton,final Entity player, final GameController gameController){
+    public UpgradeControllerImpl(final Button upgradeButton,final Entity player, final GameController gameController,
+                                 final Stage primaryStage){
         upgrade = new UpgradeImpl(player);
         this.gameController = gameController;
 
@@ -28,6 +29,7 @@ public class UpgradeControllerImpl implements UpgradeController{
             try {
                 Parent p = loader.load(getClass().getResourceAsStream("/scene/upgrade.fxml"));
                 Stage upgradeScreen = new Stage();
+                upgradeScreen.initOwner(primaryStage);
                 upgradeView = loader.getController();
                 upgradeView.setController(this);
                 upgradeScreen.setTitle("UPGRADES");

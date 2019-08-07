@@ -62,7 +62,7 @@ public final class GameControllerImpl implements GameController {
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
         this.level = new LevelImpl(this.map, this.gameField, this.gameStatistics, this.entitySpawner, this.gameFieldView);
         this.gameField.setLevel(level);
-        this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this);
+        this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this, primaryStage);
     }
 
     /**
