@@ -70,7 +70,7 @@ public class RankingView extends AbstractBasicView {
             menuBox.setLayoutY(BOX_Y_COORDINATE);
         }
 
-        buttonActions();
+        itemActions();
         menuBox.getChildren().addAll(itemBack);
         menuBox.setAlignment(Pos.TOP_CENTER);
         itemBack.setActive(true);
@@ -84,7 +84,7 @@ public class RankingView extends AbstractBasicView {
     }
 
     @Override
-    protected void buttonActions() {
+    protected void itemActions() {
         itemBack.setOnActivate(() -> {
             getController().showMainMenu(getViewFactory());
         });

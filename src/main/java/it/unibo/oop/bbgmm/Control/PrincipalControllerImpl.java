@@ -32,6 +32,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     /**
      * {@link PrincipalControllerImpl} constructor.
+     *
      * @param primaryStage
      *      Principal {@link Stage}
      */

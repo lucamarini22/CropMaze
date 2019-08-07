@@ -7,11 +7,24 @@ import javafx.scene.image.Image;
 
 import static it.unibo.oop.bbgmm.Boundary.Music.BULLET_SHOT;
 
+/**
+ * Class responsible for the view of the Bullet.
+ */
 public class BulletView extends AbstractAliveEntityView{
 
     private static final int WIDTH = 0, HEIGHT = 4;
     private final Direction direction;
 
+    /**
+     * Constructor for BulletView.
+     *
+     * @param group
+     *          The group to which is added
+     * @param direction
+     *          The direction of the bullet
+     * @param audioPlayer
+     *          The audioPlayer
+     */
     public BulletView(final Group group, final Direction direction, final AudioPlayer audioPlayer) {
         super(group, new Dimension2D(WIDTH,HEIGHT));
         this.direction = direction;
@@ -19,6 +32,9 @@ public class BulletView extends AbstractAliveEntityView{
         audioPlayer.playSound(BULLET_SHOT.getPath());
     }
 
+    /**
+     * Setter for the image.
+     */
     private void setCurrentImage(){
         switch(direction){
             case EAST: setImage(new Image("images/bullets/BulletRight.png"));

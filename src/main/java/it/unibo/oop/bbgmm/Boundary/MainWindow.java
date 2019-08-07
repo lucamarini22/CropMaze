@@ -14,10 +14,8 @@ import javafx.stage.Stage;
 import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 
 /**
- * @author Manuel
- * Class that creates the stage of the application
+ * Class that creates the window for the application.
  */
-
 public class MainWindow {
     private final Stage primaryStage;
     private final AnchorPane root;
@@ -26,6 +24,16 @@ public class MainWindow {
     private final AudioPlayer audioPlayer;
     private final PrincipalController controller;
 
+    /**
+     * Constructor for MainMenu.
+     *
+     * @param primaryStage
+     *          The principal stage
+     * @param controller
+     *          The principal controller
+     * @param fullscreen
+     *          Set the window in fullscreen
+     */
     public MainWindow(final Stage primaryStage, final PrincipalController controller, final boolean fullscreen) {
         this.controller = controller;
         this.primaryStage = primaryStage;

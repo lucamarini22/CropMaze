@@ -11,10 +11,8 @@ import javafx.scene.text.Text;
 
 
 /**
- * @author Manuel
- * Utility class with methods used to get and set the Resolution of the screen
+ * Creator of the Item.
  */
-
 public class MenuItem extends HBox {
 
     private final Text text;
@@ -32,9 +30,11 @@ public class MenuItem extends HBox {
     }
 
     /**
-     *  Setter of the color of the.
-     *  It changes when the item is selected
+     *  Setter for the color of the item.
+     *  It changes when the item is selected.
+     *
      * @param b
+     *          Boolean true or false
      */
     public void setActive(final boolean b) {
         text.setFill(b ? Color.YELLOW : Color.FORESTGREEN);
@@ -42,7 +42,9 @@ public class MenuItem extends HBox {
 
     /**
      * Setter for the code to execute when the item is activated.
+     *
      * @param r
+     *          The code that is run
      */
     public void setOnActivate(final Runnable r) {
         script = r;
@@ -59,15 +61,19 @@ public class MenuItem extends HBox {
 
     /**
      * Setter used to underline the text.
+     *
      * @param b
+     *          Boolean true or false
      */
     public void setUnderline(final boolean b) {
         text.setUnderline(b);
     }
 
     /**
-     * Setter for the font
+     * Setter for the font.
+     *
      * @param size
+     *          The size of the font
      */
     public void setFont(final int size){
         text.setFont(FontMaker.getSizedFont(size));

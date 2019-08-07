@@ -9,7 +9,7 @@ import javafx.geometry.Point2D;
 import java.util.Set;
 
 /**
- * Component used to destroy the Bullet after a number of steps
+ * Component used to destroy the Bullet after a number of steps.
  */
 public class LimitedBulletFeet extends Feet{
 
@@ -19,7 +19,10 @@ public class LimitedBulletFeet extends Feet{
     private final Point2D distanceVector;
 
     /**
-     * @param walkingSpeed entity speed for the movement
+     * Constructor for LimitedBulletFeet.
+     *
+     * @param walkingSpeed
+     *          Entity speed for the movement
      */
     public LimitedBulletFeet(final Weapon weapon, Direction direction, final double walkingSpeed, final Life lifeComponent, final Set<Entity> walls) {
         super(walkingSpeed, walls);

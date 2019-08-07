@@ -19,7 +19,7 @@ import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_PRESS;
 import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_SWITCH;
 
 /**
- * Class used to return to the main menu during the game
+ * Class used to return to the mainMenu during the game.
  */
 public class PauseBox {
 
@@ -45,7 +45,9 @@ public class PauseBox {
      * It displays the PauseBox.
      *
      * @param primaryStage
+     *          The principal stage
      * @return the answer
+     *          The answer of the player
      */
     public boolean display(final Stage primaryStage) {
         final Stage stage = new Stage();
@@ -130,18 +132,16 @@ public class PauseBox {
     }
 
     /**
-     * Method called to play the buttonSwitch sound
+     * Method called to play the buttonSwitch sound.
      */
     private void playSwitchSound(){
         this.audioPlayer.playSound(BUTTON_SWITCH.getPath());
     }
 
     /**
-     * Method called to play the buttonSwitch sound
+     * Method called to play the buttonSwitch sound.
      */
     private void playPressSound(){
         this.audioPlayer.playSound(BUTTON_PRESS.getPath());
     }
-
-
 }
