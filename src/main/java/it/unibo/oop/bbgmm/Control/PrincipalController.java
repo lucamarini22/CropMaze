@@ -27,9 +27,8 @@ public interface PrincipalController {
     /**
      * Method used to insert in the ranking a new score
      * @param name
-     * @param result
      */
-    void InsertNewScore(final String name, final Integer result);
+    void insertNewScore(final String name);
 
     /**
      * Method used to update the audioPlayer
@@ -88,12 +87,6 @@ public interface PrincipalController {
      * @param scene
      */
     void showGameField(final Scene scene);
-
-    /**
-     * Method used by the view to show the insertScore screen
-     * @param viewFactory
-     */
-    void showInsertScoreView(final ViewFactory viewFactory);
 
     /**
      * Method used by the view to show the gameOver screen

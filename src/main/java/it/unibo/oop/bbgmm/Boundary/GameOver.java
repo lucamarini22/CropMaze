@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PrincipalController;
+import it.unibo.oop.bbgmm.Utilities.FontMaker;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import javax.swing.text.DocumentFilter;
 import java.awt.*;
 
 import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
@@ -33,18 +35,21 @@ public class GameOver extends AbstractBasicView {
     private static final int USERBOX_Y_COORDINATE = 450;
     private static final int BOX_X_COORDINATE = 350;
     private static final int BOX_Y_COORDINATE = 520;
-    private final static double SOUND_VOLUME = 1;
-    private final static double MUSIC_VOLUME = 0.4;
     private static final ImageView gameOVer = new ImageView(new Image("images/gameOver.png"));
     private int currentItem = 0;
     private VBox menuBox;
     private VBox boxImage;
     private HBox  userBox;
     private Label label =  new Label ("USER NAME:");
-    private TextField userName = new TextField();
-    private Button insert = new Button ("INSERT");
+    private MenuItem itemInsert = new MenuItem("INSERT");
     private final MenuItem itemMainMenu = new MenuItem("MAIN MENU");
     private final MenuItem itemExit = new MenuItem("EXIT");
+    private TextField userName = new TextField() {
+        @Override public void replaceText(int start, int end, String text) {
+            super.replaceText(start, end, text.toUpperCase());
+        }
+    };
+    private boolean insertActive = true;
 
     public GameOver(final Stage primaryStage, final PrincipalController controller,
                     final AnchorPane pane, final Scene scene){
@@ -69,31 +74,32 @@ public class GameOver extends AbstractBasicView {
 
             if(event.getCode() == KeyCode.ENTER){
                 playPressSound();
-                getMenuItem(currentItem).activate();
+                if(insertActive){
+                    itemInsert.activate();
+                }
+                else{
+                    getMenuItem(currentItem).activate();
+                }
             }
         });
 
+        getAudioPlayer().stopMusic();
         getAudioPlayer().playMusic(Music.GAMEOVER_TRACK.getPath());
 
         boxImage = new VBox(gameOVer);
         boxImage.setAlignment(Pos.TOP_CENTER);
-        boxImage.setTranslateX(GAMEOVER_X_COORDINATE);
-        boxImage.setTranslateY(GAMEOVER_Y_COORDINATE);
 
 
         label.setTextFill(Color.web("#FFFF00"));
-        label.setFont(new Font("MS Gothic", 30));
+        label.setFont(FontMaker.getSizedFont(30));
         userName.setMaxHeight(30);
-        userName.setFont(new Font("MS Gothic", 15));
+        userName.setFont(FontMaker.getSizedFont(15));
         userName.setPrefWidth(100);
-        userName.setStyle("-fx-background-color:LIGHTSLATEGREY");
-        insert.setMaxHeight(30);
-        insert.setFont(new Font("MS Gothic",15));
-        userBox = new HBox(label, userName, insert);
+        userName.setId("userName");
+        itemInsert.setFont(30);
+        userBox = new HBox(label, userName, itemInsert);
         userBox.setSpacing(20);
         userBox.setAlignment(Pos.TOP_CENTER);
-        userBox.setTranslateX(USERBOX_X_COORDINATE);
-        userBox.setTranslateY(USERBOX_Y_COORDINATE);
 
         menuBox = new VBox(SPACE_BETWEEN_ITEM, itemMainMenu, itemExit);
 
@@ -101,17 +107,29 @@ public class GameOver extends AbstractBasicView {
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
-        //calculates the position of the box
+        itemInsert.setActive(true);
+        
+        //calculates the position of the boxes
         if(Resolution.isFullScreen()){
             menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
             menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
+
+            boxImage.setTranslateX(GAMEOVER_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            boxImage.setTranslateY(GAMEOVER_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
+
+            userBox.setTranslateX(USERBOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            userBox.setTranslateY(USERBOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
         }
         else{
             menuBox.setLayoutX(BOX_X_COORDINATE);
             menuBox.setLayoutY(BOX_Y_COORDINATE);
-        }
 
-        getMenuItem(0).setActive(true);
+            boxImage.setTranslateX(GAMEOVER_X_COORDINATE);
+            boxImage.setTranslateY(GAMEOVER_Y_COORDINATE);
+
+            userBox.setTranslateX(USERBOX_X_COORDINATE);
+            userBox.setTranslateY(USERBOX_Y_COORDINATE);
+        }
 
         AnchorPane root = getRoot();
         root.getChildren().clear();
@@ -129,9 +147,8 @@ public class GameOver extends AbstractBasicView {
     @Override
     protected void buttonActions(){
         itemMainMenu.setOnActivate(() -> {
-            getController().showMainMenu(getViewFactory());
             getAudioPlayer().stopMusic();
-            getAudioPlayer().playMusic(MENU_TRACK.getPath());
+            getController().resetGame();
         });
 
         itemExit.setOnActivate(() -> {
@@ -140,20 +157,19 @@ public class GameOver extends AbstractBasicView {
 
         });
 
-        insert.setOnAction( e ->{
-            if(userName.getText().isEmpty()){
-                final Alert alert = new Alert(Alert.AlertType.ERROR, "Please insert user name", new ButtonType("OK"));
-                alert.show();
-            }
-            else{
+        itemInsert.setOnActivate(() -> {
+            if(!userName.getText().isEmpty()){
                 //user name and stats passed to raking ...
                 String result;
                 // remove spaces
                 result = userName.getText().replace(" ", "");
-                getController().InsertNewScore(result, 15 );
-                //insert.setVisible(false);
+                getController().insertNewScore(result);
                 userName.setDisable(true);
                 userBox.setDisable(true);
+                itemInsert.setActive(false);
+
+                getMenuItem(currentItem).setActive(true);
+                insertActive = false;
             }
         });
 

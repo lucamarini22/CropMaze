@@ -79,7 +79,7 @@ public class MainMenu extends AbstractBasicView {
             menuBox.setLayoutY(BOX_Y_COORDINATE);
         }
 
-        getMenuItem(0).setActive(true);
+        getMenuItem(currentItem).setActive(true);
 
         AnchorPane root = getRoot();
 
@@ -112,7 +112,7 @@ public class MainMenu extends AbstractBasicView {
             clearEnter();
         });
         itemScore.setOnActivate(() -> {
-            getController().showRankingView(getViewFactory());
+            getController().showGameOver(getViewFactory());
         });
         itemSettings.setOnActivate(() -> {
             getController().showSettings(getViewFactory());

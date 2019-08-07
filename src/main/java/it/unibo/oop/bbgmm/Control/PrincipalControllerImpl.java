@@ -54,8 +54,8 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
-    public void InsertNewScore(final String name, final Integer result) {
-        this.score.addScore(new Pair<>(name, result));
+    public void insertNewScore(final String name) {
+        //this.score.addScore(new Pair<>(name, result));
     }
 
     @Override
@@ -118,12 +118,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
         scene.setRoot(this.gameControl.get().getGameFieldView().getGroup());
         startGame();
     }
-
-    @Override
-    public void showInsertScoreView(ViewFactory viewFactory) {
-        viewFactory.createInsertScoreView();
-    }
-
+    
     @Override
     public void showGameOver(final ViewFactory viewFactory) {
         viewFactory.createGameOver();

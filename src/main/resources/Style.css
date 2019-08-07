@@ -21,3 +21,7 @@
     -fx-background-image:url("images/pauseBoxBackground.png");
     -fx-background-size: cover;
 }
+
+#userName{
+    -fx-background-color:LIGHTSLATEGREY
+}
