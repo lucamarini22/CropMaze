@@ -5,6 +5,7 @@ package it.unibo.oop.bbgmm.Entity;
  */
 public final class PlayerStatisticsImpl implements PlayerStatistics {
 
+    private static final int INCREASE = 1;
     private int collectedMoney;
     private int killedEnemies;
     private final Entity player;
@@ -20,9 +21,18 @@ public final class PlayerStatisticsImpl implements PlayerStatistics {
     }
 
     @Override
+    public void increaseCollectedMoney() {
+        this.collectedMoney += INCREASE;
+    }
+
+    @Override
+    public void increaseKilledEnemies() {
+        this.killedEnemies += INCREASE;
+    }
+
+    @Override
     public int getCollectedMoney() {
-        return 0;
-        //return player.get(Inventory.class).isPresent() ? player.get(Inventory.class).get().getMoney() : 0;
+        return this.collectedMoney;
     }
 
     @Override

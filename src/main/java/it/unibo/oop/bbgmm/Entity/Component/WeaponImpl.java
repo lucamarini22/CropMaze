@@ -17,9 +17,6 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     private final Timer cooldown = Timer.seconds(COOLDOWN_TIME);
     private final GameField gameField;
 
-
-
-
     /**
      *
      * @param basicWeapon

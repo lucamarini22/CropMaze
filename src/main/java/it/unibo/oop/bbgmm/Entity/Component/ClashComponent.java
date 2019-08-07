@@ -22,6 +22,9 @@ public class ClashComponent extends AbstractEntityComponent implements Clash{
                                     int damage = d.getDamage();
                                     life.damaged(damage);
                                 }));
+                        if(life.isDead()){
+                            ((Entity) owner).removeEntity();
+                        }
                     }));
         this.getOwner().ifPresent(o -> ((Entity) o).get(Collidable.class).ifPresent(
                 c -> {

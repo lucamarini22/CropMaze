@@ -38,7 +38,6 @@ public class Alien extends AbstractEntity {
         add(new CollisionComponent(this.getBody().getShape(), CollisionLabel.ALIEN));
         add(new ClashComponent());
         add(new DamageComponent(DAMAGE));
-
     }
 
     @Override
