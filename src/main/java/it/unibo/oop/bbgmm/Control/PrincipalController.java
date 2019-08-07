@@ -84,12 +84,6 @@ public interface PrincipalController {
     void showGameField(final Scene scene);
 
     /**
-     * Method used by the view to show the insertScore screen
-     * @param viewFactory
-     */
-    void showInsertScoreView(final ViewFactory viewFactory);
-
-    /**
      * Method used by the view to show the gameOver screen
      * @param viewFactory
      */

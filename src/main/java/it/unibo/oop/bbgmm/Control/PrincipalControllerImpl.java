@@ -115,12 +115,6 @@ public final class PrincipalControllerImpl implements PrincipalController {
         startGame();
     }
 
-
-    @Override
-    public void showInsertScoreView(ViewFactory viewFactory) {
-        viewFactory.createInsertScoreView();
-    }
-
     @Override
     public void showGameOver(final ViewFactory viewFactory) {
         viewFactory.createGameOver();

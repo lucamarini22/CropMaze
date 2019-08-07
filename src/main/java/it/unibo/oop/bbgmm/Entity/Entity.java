@@ -46,7 +46,14 @@ public interface Entity {
      */
     void destroy();
 
+    /**
+     * getter the death event
+     * @return Event<DeathEvent>
+     */
     Event<DeathEvent> getDeathEvent();
 
+    /**
+     * notify the death event
+     */
     void removeEntity();
 }
