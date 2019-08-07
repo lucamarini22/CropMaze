@@ -118,7 +118,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
         scene.setRoot(this.gameControl.get().getGameFieldView().getGroup());
         startGame();
     }
-    
+
     @Override
     public void showGameOver(final ViewFactory viewFactory) {
         viewFactory.createGameOver();

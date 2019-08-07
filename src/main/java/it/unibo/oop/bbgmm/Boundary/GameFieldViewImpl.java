@@ -7,15 +7,17 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.mapeditor.core.Tile;
 import org.mapeditor.core.TileLayer;
 
+import static it.unibo.oop.bbgmm.Boundary.Music.GAME_TRACK;
 import static it.unibo.oop.bbgmm.Boundary.Music.*;
 
 /**
@@ -32,6 +34,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     private final PlayerInputHandler playerInputHandler;
     private final StatusBarScreen statusBar = new StatusBarImpl();
     private ImageView background;
+    private Button upgradeButton = new Button("UPGRADE");
     private final PrincipalController principalController;
 
 
@@ -49,11 +52,10 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.playerInputHandler = playerInputHandler;
         this.setBackground();
         fieldView.getChildren().add(this.background);
-        rootView.getChildren().add(statusBar.getStatusBox());
+        rootView.getChildren().add(new HBox(20, statusBar.getStatusBox(), upgradeButton));
         this.principalController = principalController;
 
         this.primaryStage.getScene().addEventHandler(KeyEvent.KEY_PRESSED, this::onPress);
-
         this.audioplayer.playMusic(GAME_TRACK.getPath());
 
 
@@ -101,6 +103,9 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.background.setY(TOP_LEFT_POINT_BACKGROUND);
     }
 
+    public Button getUpgradeButton() {
+        return this.upgradeButton;
+    }
     /**
      * When a button is pressed
      * @param event

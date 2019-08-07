@@ -32,6 +32,9 @@ public final class GameControllerImpl implements GameController {
     private final EntityFactory entityFactory;
     private GameFieldView gameFieldView;
     private final GameStatistics gameStatistics;
+    private final UpgradeController upgradeController;
+    //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
+    //level crea la mappa di gioco i personaggi e gli alieni
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(final long now) {
@@ -62,6 +65,7 @@ public final class GameControllerImpl implements GameController {
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
         level = new LevelImpl(this.map, this.gameField, this.gameStatistics, this.entitySpawner, this.gameFieldView);
         this.gameField.setLevel(level);
+        this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this);
     }
 
     /**
@@ -89,6 +93,11 @@ public final class GameControllerImpl implements GameController {
 
     @Override
     public void start(){
+        timer.start();
+    }
+
+    @Override
+    public void restart() {
         timer.start();
     }
 

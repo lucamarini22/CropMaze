@@ -19,6 +19,11 @@ public interface GameController {
     void stop();
 
     /**
+     * Method used to restart the GameLoop
+     */
+    void restart();
+
+    /**
      * Getter fot the GameFieldView
      * @return GameFieldView
      */

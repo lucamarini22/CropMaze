@@ -1,7 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Entity.Component.Bag;
-import it.unibo.oop.bbgmm.Entity.Component.Feet;
 import it.unibo.oop.bbgmm.Entity.Component.Life;
 import it.unibo.oop.bbgmm.Entity.Component.Weapon;
 
@@ -16,32 +15,16 @@ public class UpgradeImpl implements Upgrade {
     public UpgradeImpl(Entity player){
         values = new HashMap<>();
         for (UpgradeType u : UpgradeType.values()) {
-            values.put(u, 10);
+            values.put(u, 1);
         }
         this.player = player;
     }
     @Override
-    public void canUpgrade(UpgradeType type) {
-        player.get(Bag.class).ifPresent(bag -> {
-            final int money = bag.getMoney();
-            if(values.get(type)<=money){
-                switch (type) {
-                    case LIFE:
-                        upgradeLife();
-                        break;
-                    case SPEED:
-                        upgradeSpeed();
-                        break;
-                    case DAMAGE:
-                        upgradeDamage();
-                        break;
-                    case RANGE:
-                        upgradeRange();
-                        break;
-                }
-                bag.addMoney(-values.get(type));
-            }
-        });
+    public boolean canUpgrade(UpgradeType type) {
+        if(this.values.get(type) > this.player.get(Bag.class).get().getMoney()){
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -54,9 +37,8 @@ public class UpgradeImpl implements Upgrade {
 
     @Override
     public void upgradeSpeed() {
-        player.get(Feet.class).ifPresent( feet -> {
-            double speed = feet.getSpeed();
-            feet.setSpeed(speed + 0.5);
+        player.get(Movement.class).ifPresent( feet -> {
+            feet.setSpeed(feet.getSpeed() + 0.5);
         });
         changePrice(UpgradeType.SPEED);
     }
@@ -73,13 +55,25 @@ public class UpgradeImpl implements Upgrade {
     @Override
     public void upgradeRange() {
         player.get(Weapon.class).ifPresent( w -> {
-            int range = w.getWeaponRange();
-            w.setWeaponRange(range + 1);
+            w.setWeaponRange(w.getWeaponRange() + 1);
         });
+        changePrice(UpgradeType.RANGE);
     }
 
     @Override
     public void changePrice(UpgradeType type) {
-        this.values.put(type, this.values.get(type) + 20);
+        this.player.get(Bag.class).ifPresent(b -> {
+            b.addMoney(-this.values.get(type));
+        });
+        this.values.put(type, this.values.get(type) * 2);
     }
+
+    public int getCurrentMoney(){
+        return this.player.get(Bag.class).get().getMoney();
+    }
+
+    public int getCurrentPrice(UpgradeType upgradeType){
+        return this.values.get(upgradeType);
+    }
+
 }

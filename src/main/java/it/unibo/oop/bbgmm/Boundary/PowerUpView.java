@@ -27,7 +27,7 @@ public class PowerUpView extends AbstractEntityView implements LifelessEntityVie
                 getView().setImage(new Image("/images/wood_case_shield.png"));
                 break;
             case DOUBLE_DAMAGE:
-                getView().setImage(new Image("/images/shield.png"));
+                getView().setImage(new Image("/images/wood_case_damage.png"));
         }
     }
 }

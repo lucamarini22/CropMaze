@@ -5,15 +5,12 @@ package it.unibo.oop.bbgmm.Entity;
  */
 public interface Upgrade {
 
-    enum UpgradeType {
-       SPEED, DAMAGE, LIFE, RANGE
-    }
     /**
      * verify if can be applied the upgrade
      * @param type
      *              type of the Upgrade
      */
-    void canUpgrade(UpgradeType type);
+    boolean canUpgrade(UpgradeType type);
     /**
      * Upgrade Life
      */
@@ -36,4 +33,17 @@ public interface Upgrade {
      *              type of the Upgrade
      */
     void changePrice(UpgradeType type);
+
+    /**
+     * getter for the current player's money
+     * @return the current player's money
+     */
+    int getCurrentMoney();
+
+    /**
+     * getter for the specific upgrade type
+     * @param type
+     * @return the upgrade type price
+     */
+    int getCurrentPrice(UpgradeType type);
 }
