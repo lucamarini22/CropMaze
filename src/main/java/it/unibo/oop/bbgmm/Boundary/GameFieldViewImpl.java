@@ -2,13 +2,20 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PlayerInputListener;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import org.mapeditor.core.Tile;
 import org.mapeditor.core.TileLayer;
+
+import java.awt.*;
 
 import static it.unibo.oop.bbgmm.Boundary.Music.GAMEOVER_TRACK;
 import static it.unibo.oop.bbgmm.Boundary.Music.GAME_TRACK;
@@ -25,6 +32,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     private final PlayerInputHandler playerInputHandler;
     private final StatusBarScreen statusBar = new StatusBarImpl();
     private ImageView background;
+    private Button upgradeButton = new Button("UPGRADE");
 
     /**
      * Constructor of {@link GameFieldViewImpl}.
@@ -38,8 +46,7 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.playerInputHandler = playerInputHandler;
         this.setBackground();
         fieldView.getChildren().add(this.background);
-        rootView.getChildren().add(statusBar.getStatusBox());
-
+        rootView.getChildren().add(new HBox(20, statusBar.getStatusBox(), upgradeButton));
         this.audioplayer.playMusic(GAME_TRACK.getPath());
     }
 
@@ -83,5 +90,9 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.background = new ImageView(new Image(BACKGROUND_PATH));
         this.background.setX(TOP_LEFT_POINT_BACKGROUND);
         this.background.setY(TOP_LEFT_POINT_BACKGROUND);
+    }
+
+    public Button getUpgradeButton(){
+        return this.upgradeButton;
     }
 }
