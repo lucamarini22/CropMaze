@@ -32,8 +32,7 @@ public final class GameControllerImpl implements GameController {
     private GameFieldView gameFieldView;
     private final GameStatistics gameStatistics;
     private final UpgradeController upgradeController;
-    //il loop viene fatto da animation timer che esegue il metodo handle ogni tot secondi
-    //level crea la mappa di gioco i personaggi e gli alieni
+    //the loop is made by animation timer which executes the handle method every few seconds
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(final long now) {
@@ -47,11 +46,11 @@ public final class GameControllerImpl implements GameController {
      *      Statistics of the game
      * @param gameFieldView
      *      View of the field
-     * @param principalController
+     * @param primaryStage
      *      {@link PrincipalController} instance
      */
     public GameControllerImpl(final GameStatistics gameStatistics, final GameFieldView gameFieldView, final Stage primaryStage) {
-        gameField = new GameFieldImpl(new CollisionSupervisorImpl());
+        this.gameField = new GameFieldImpl(new CollisionSupervisorImpl());
         this.gameStatistics = gameStatistics;
         this.gameFieldView = gameFieldView;
         try {
@@ -61,7 +60,7 @@ public final class GameControllerImpl implements GameController {
         }
         this.entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
         this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
-        level = new LevelImpl(this.map, this.gameField, this.gameStatistics, this.entitySpawner, this.gameFieldView);
+        this.level = new LevelImpl(this.map, this.gameField, this.gameStatistics, this.entitySpawner, this.gameFieldView);
         this.gameField.setLevel(level);
         this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this);
     }
@@ -79,9 +78,7 @@ public final class GameControllerImpl implements GameController {
         }
     }
 
-    /**
-     * Method called to start the Timer.
-     */
+    @Override
     public void run() {
         this.gameField = level.getGameField();
         this.gameFieldView = level.getGameFieldView();
@@ -91,17 +88,17 @@ public final class GameControllerImpl implements GameController {
 
     @Override
     public void start(){
-        timer.start();
+        this.timer.start();
     }
 
     @Override
     public void restart() {
-        timer.start();
+        this.timer.start();
     }
 
     @Override
     public void stop() {
-        timer.stop();
+        this.timer.stop();
     }
 
     @Override
@@ -110,12 +107,12 @@ public final class GameControllerImpl implements GameController {
     }
 
     /**
-     * Method called every loop to aupdate the entities in the model and in the view.
+     * Method called every loop to apdate the entities in the model and in the view.
      */
     private void update() {
         //updates the view
-        entitiesControllers.forEach(EntityController::update);
+        this.entitiesControllers.forEach(EntityController::update);
         //updates the model
-        gameField.update(FRAME);
+        this.gameField.update(FRAME);
     }
 }
