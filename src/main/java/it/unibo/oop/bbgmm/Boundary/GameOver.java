@@ -29,16 +29,12 @@ import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 public class GameOver extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 25;
     private static final int DELTA = 80;
-    private static final int GAMEOVER_X_COORDINATE = 250;
-    private static final int GAMEOVER_Y_COORDINATE = 50;
     private static final int USERBOX_X_COORDINATE = 320;
     private static final int USERBOX_Y_COORDINATE = 450;
     private static final int BOX_X_COORDINATE = 350;
     private static final int BOX_Y_COORDINATE = 520;
-    private static final ImageView gameOVer = new ImageView(new Image("images/gameOver.png"));
     private int currentItem = 0;
     private VBox menuBox;
-    private VBox boxImage;
     private HBox  userBox;
     private Label label =  new Label ("USER NAME:");
     private MenuItem itemInsert = new MenuItem("INSERT");
@@ -86,10 +82,6 @@ public class GameOver extends AbstractBasicView {
         getAudioPlayer().stopMusic();
         getAudioPlayer().playMusic(Music.GAMEOVER_TRACK.getPath());
 
-        boxImage = new VBox(gameOVer);
-        boxImage.setAlignment(Pos.TOP_CENTER);
-
-
         label.setTextFill(Color.web("#FFFF00"));
         label.setFont(FontMaker.getSizedFont(30));
         userName.setMaxHeight(30);
@@ -114,26 +106,20 @@ public class GameOver extends AbstractBasicView {
             menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
             menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
 
-            boxImage.setTranslateX(GAMEOVER_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
-            boxImage.setTranslateY(GAMEOVER_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
-
             userBox.setTranslateX(USERBOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
             userBox.setTranslateY(USERBOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
         }
         else{
             menuBox.setLayoutX(BOX_X_COORDINATE);
             menuBox.setLayoutY(BOX_Y_COORDINATE);
-
-            boxImage.setTranslateX(GAMEOVER_X_COORDINATE);
-            boxImage.setTranslateY(GAMEOVER_Y_COORDINATE);
-
+            
             userBox.setTranslateX(USERBOX_X_COORDINATE);
             userBox.setTranslateY(USERBOX_Y_COORDINATE);
         }
 
         AnchorPane root = getRoot();
         root.getChildren().clear();
-        root.getChildren().add(boxImage);
+        //root.getChildren().add(boxImage);
         root.getChildren().add(userBox);
         root.getChildren().add(menuBox);
 

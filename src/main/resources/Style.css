@@ -14,7 +14,8 @@
 }
 
 #gameOverView{
-    -fx-background-color: black;
+    -fx-background-image:url("images/gameOver.png");
+    -fx-background-size: cover, auto;
 }
 
 #pauseBox{
