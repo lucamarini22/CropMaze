@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -33,6 +34,7 @@ public class UpgradeControllerImpl implements UpgradeController{
                 upgradeView = loader.getController();
                 upgradeView.setController(this);
                 upgradeScreen.setTitle("UPGRADES");
+                upgradeScreen.getIcons().add(new Image("images/mainMenu/icon.png"));
                 upgradeScreen.setScene(new Scene(p));
                 upgradeScreen.setResizable(false);
                 upgradeScreen.show();
