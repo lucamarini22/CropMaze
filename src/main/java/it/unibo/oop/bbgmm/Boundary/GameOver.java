@@ -112,14 +112,13 @@ public class GameOver extends AbstractBasicView {
         else{
             menuBox.setLayoutX(BOX_X_COORDINATE);
             menuBox.setLayoutY(BOX_Y_COORDINATE);
-            
+
             userBox.setTranslateX(USERBOX_X_COORDINATE);
             userBox.setTranslateY(USERBOX_Y_COORDINATE);
         }
 
         AnchorPane root = getRoot();
         root.getChildren().clear();
-        //root.getChildren().add(boxImage);
         root.getChildren().add(userBox);
         root.getChildren().add(menuBox);
 

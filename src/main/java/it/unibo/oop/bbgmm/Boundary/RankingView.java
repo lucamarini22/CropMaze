@@ -57,18 +57,19 @@ public class RankingView extends AbstractBasicView {
             rankList.forEach(t -> menuBox.getChildren().add(t));
             //boxImage.setAlignment(Pos.TOP_CENTER);
             //pane.getChildren().add(boxImage);
-            if(Resolution.isFullScreen()){
-                menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
-                menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
-            }
-            else{
-                menuBox.setLayoutX(BOX_X_COORDINATE);
-                menuBox.setLayoutY(BOX_Y_COORDINATE);
-            }
-        }else
-        {
+        }else {
             menuBox.getChildren().add(fontUtil(new Text("NO RANKING")));
         }
+
+        if(Resolution.isFullScreen()){
+            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
+        }
+        else{
+            menuBox.setLayoutX(BOX_X_COORDINATE);
+            menuBox.setLayoutY(BOX_Y_COORDINATE);
+        }
+
         buttonActions();
         menuBox.getChildren().addAll(itemBack);
         menuBox.setAlignment(Pos.TOP_CENTER);
