@@ -18,6 +18,9 @@ import javafx.stage.StageStyle;
 import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_PRESS;
 import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_SWITCH;
 
+/**
+ * Class used to return to the main menu during the game
+ */
 public class PauseBox {
 
     private static final String MESSAGE = "ATTENTION!\nDo you want to go back to the main menu?\n(All progress will be erased)";
@@ -41,17 +44,17 @@ public class PauseBox {
     /**
      * It displays the PauseBox.
      *
-     * @param principalStage
+     * @param primaryStage
      * @return the answer
      */
-    public boolean display(final Stage principalStage) {
+    public boolean display(final Stage primaryStage) {
         final Stage stage = new Stage();
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setWidth(WIDTH);
         stage.setHeight(HEIGHT);
-        stage.initOwner(principalStage);
+        stage.initOwner(primaryStage);
         stage.initStyle(StageStyle.UNDECORATED);
 
 

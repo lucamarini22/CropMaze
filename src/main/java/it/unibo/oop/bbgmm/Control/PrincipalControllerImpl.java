@@ -114,7 +114,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
     public void showGameField(final Scene scene) {
        this.gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
                 new GameFieldViewImpl(this.audioPlayer, this.playerInputHandler.get(), this, this.primaryStage),
-               this));
+               this.primaryStage));
         scene.setRoot(this.gameControl.get().getGameFieldView().getGroup());
         startGame();
     }

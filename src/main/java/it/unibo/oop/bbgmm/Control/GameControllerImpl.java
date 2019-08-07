@@ -7,6 +7,7 @@ import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.Utilities.ZipExtractor;
 import javafx.animation.AnimationTimer;
+import javafx.stage.Stage;
 import org.mapeditor.core.Map;
 import org.mapeditor.io.TMXMapReader;
 
@@ -22,8 +23,6 @@ public final class GameControllerImpl implements GameController {
     private static final double FRAME = 1.0 / 60;
     private static final String MAP_PATH = "/images/Map/CropMazeMap.zip";
     private static final String MAP_NAME = "CropMazeMap.tmx";
-
-    private final PrincipalController principalController;
     private GameField gameField;
     private Level level;
     private Map map;
@@ -51,9 +50,8 @@ public final class GameControllerImpl implements GameController {
      * @param principalController
      *      {@link PrincipalController} instance
      */
-    public GameControllerImpl(final GameStatistics gameStatistics, final GameFieldView gameFieldView, final PrincipalController principalController) {
+    public GameControllerImpl(final GameStatistics gameStatistics, final GameFieldView gameFieldView, final Stage primaryStage) {
         gameField = new GameFieldImpl(new CollisionSupervisorImpl());
-        this.principalController = principalController;
         this.gameStatistics = gameStatistics;
         this.gameFieldView = gameFieldView;
         try {

@@ -16,8 +16,8 @@ import java.io.IOException;
 public class UpgradeControllerImpl implements UpgradeController{
 
     private UpgradeView upgradeView;
-    private Upgrade upgrade;
-    private GameController gameController;
+    private final Upgrade upgrade;
+    private final GameController gameController;
 
     public UpgradeControllerImpl(final Button upgradeButton,final Entity player, final GameController gameController){
         upgrade = new UpgradeImpl(player);
