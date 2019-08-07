@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class Player extends AbstractEntity {
     private static final Dimension2D SIZE = new Dimension2D(2.8, 3.5);
-    private static final double WALKING_SPEED = 1;
+    private static final double WALKING_SPEED = 0.6;
     private static final Inventory weapon = Inventory.GUN;
     public Player(final BodyBuilder bodyBuilder, final Point2D position, final int health, final GameField gameField){
         super(bodyBuilder

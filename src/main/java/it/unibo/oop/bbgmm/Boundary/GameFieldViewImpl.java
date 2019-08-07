@@ -1,31 +1,33 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+
 import it.unibo.oop.bbgmm.Control.PlayerInputListener;
+import it.unibo.oop.bbgmm.Control.PrincipalController;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.mapeditor.core.Tile;
 import org.mapeditor.core.TileLayer;
 
-import java.awt.*;
-
-import static it.unibo.oop.bbgmm.Boundary.Music.GAMEOVER_TRACK;
 import static it.unibo.oop.bbgmm.Boundary.Music.GAME_TRACK;
+import static it.unibo.oop.bbgmm.Boundary.Music.*;
 
 /**
  * Implementation of the view of {@link it.unibo.oop.bbgmm.Entity.GameField}.
  */
 public final class GameFieldViewImpl implements GameFieldView {
+
     private static final int TOP_LEFT_POINT_BACKGROUND = -800;
     private static final String BACKGROUND_PATH = "/images/background.png";
+    private final Stage primaryStage;
     private final Group fieldView = new Group();
     private final Group rootView = new Group(fieldView);
     private final AudioPlayer audioplayer;
@@ -33,6 +35,8 @@ public final class GameFieldViewImpl implements GameFieldView {
     private final StatusBarScreen statusBar = new StatusBarImpl();
     private ImageView background;
     private Button upgradeButton = new Button("UPGRADE");
+    private final PrincipalController principalController;
+
 
     /**
      * Constructor of {@link GameFieldViewImpl}.
@@ -41,13 +45,20 @@ public final class GameFieldViewImpl implements GameFieldView {
      * @param playerInputHandler
      *      {@link PlayerInputHandler} instance
      */
-    public GameFieldViewImpl(final AudioPlayer audioPlayer, final PlayerInputHandler playerInputHandler) {
+    public GameFieldViewImpl(final AudioPlayer audioPlayer, final PlayerInputHandler playerInputHandler,
+                             final PrincipalController principalController, final Stage primaryStage) {
+        this.primaryStage = primaryStage;
         this.audioplayer = audioPlayer;
         this.playerInputHandler = playerInputHandler;
         this.setBackground();
         fieldView.getChildren().add(this.background);
         rootView.getChildren().add(new HBox(20, statusBar.getStatusBox(), upgradeButton));
+        this.principalController = principalController;
+
+        this.primaryStage.getScene().addEventHandler(KeyEvent.KEY_PRESSED, this::onPress);
         this.audioplayer.playMusic(GAME_TRACK.getPath());
+
+
     }
 
     @Override
@@ -92,7 +103,34 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.background.setY(TOP_LEFT_POINT_BACKGROUND);
     }
 
-    public Button getUpgradeButton(){
+    public Button getUpgradeButton() {
         return this.upgradeButton;
+    }
+    /**
+     * When a button is pressed
+     * @param event
+     *          The event triggered when a button is pressed
+     */
+    private void onPress(final KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ESCAPE)){
+            this.audioplayer.playSound(BUTTON_PRESS.getPath());
+            showPauseBox(this.principalController);
+        }
+    }
+
+    /**
+     * Shows the PauseBox
+     * @param principalController
+     */
+    private void showPauseBox(final PrincipalController principalController) {
+        principalController.getGameController().get().stop();
+        boolean answer = new PauseBox(this.audioplayer).display(this.primaryStage);
+        if(answer){
+            this.audioplayer.stopMusic();
+            principalController.resetGame();
+        }
+        else{
+            principalController.getGameController().get().start();
+        }
     }
 }

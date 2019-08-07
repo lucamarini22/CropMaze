@@ -26,12 +26,11 @@ public class MainWindow {
     private final AudioPlayer audioPlayer;
     private final PrincipalController controller;
 
-    public MainWindow(final Stage primaryStage, final PrincipalController controller) {
+    public MainWindow(final Stage primaryStage, final PrincipalController controller, final boolean fullscreen) {
         this.controller = controller;
         this.primaryStage = primaryStage;
         this.audioPlayer = controller.getAudioPlayer();
         this.primaryStage.setTitle("CROP MAZE");
-        this.primaryStage.setFullScreen(false);
         this.primaryStage.setWidth(Resolution.getWidth());
         this.primaryStage.setHeight(Resolution.getHeight());
         this.primaryStage.centerOnScreen();
@@ -52,6 +51,8 @@ public class MainWindow {
         this.controller.showMainMenu(this.viewFactory);
 
         this.audioPlayer.playMusic(MENU_TRACK.getPath());
+
+        this.primaryStage.setFullScreen(fullscreen);
         this.primaryStage.show();
     }
 }

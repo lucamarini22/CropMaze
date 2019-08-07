@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Control;
 
 import com.google.common.io.Files;
 import it.unibo.oop.bbgmm.Boundary.GameFieldView;
+import it.unibo.oop.bbgmm.Boundary.ViewFactory;
 import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.Utilities.ZipExtractor;
@@ -87,6 +88,11 @@ public final class GameControllerImpl implements GameController {
         this.gameField = level.getGameField();
         this.gameFieldView = level.getGameFieldView();
         this.entitiesControllers = level.getEntitiesControllers();
+        start();
+    }
+
+    @Override
+    public void start(){
         timer.start();
     }
 

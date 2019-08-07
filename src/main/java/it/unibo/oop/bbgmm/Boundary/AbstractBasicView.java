@@ -26,7 +26,7 @@ public abstract class AbstractBasicView {
         this.controller = controller;
         this.primaryStage = primaryStage;
         this.audioPlayer = controller.getAudioPlayer();
-        this.viewFactory = new ViewFactory(primaryStage, controller, root, scene);this.root.setId("mainMenu");
+        this.viewFactory = new ViewFactory(primaryStage, controller, root, scene);
     }
 
     /**
@@ -84,10 +84,7 @@ public abstract class AbstractBasicView {
         else{
             primaryStage.setFullScreen(false);
             primaryStage.centerOnScreen();
-            this.scene.getWidth();
         }
-        primaryStage.setWidth(Resolution.getWidth());
-        primaryStage.setHeight(Resolution.getHeight());
     }
 
     protected void updateVolume(Volume musicVolume, Volume effectsVolume){

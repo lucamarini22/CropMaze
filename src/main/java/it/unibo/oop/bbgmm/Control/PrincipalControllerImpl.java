@@ -21,30 +21,33 @@ import java.util.Optional;
  */
 public final class PrincipalControllerImpl implements PrincipalController {
 
+    private final Stage primaryStage;
+    private final AudioPlayer audioPlayer;
+    private PrincipalView view;
     private VolumeDataImpl volumeData;
-    private final PrincipalView view;
     private ScoreList score;
     private Optional<PlayerInputHandler> playerInputHandler = Optional.empty();
     private Optional<GameController> gameControl = Optional.empty();
-    private AudioPlayer audioPlayer;
+
 
     /**
      * {@link PrincipalControllerImpl} constructor.
-     * @param principalStage
+     * @param primaryStage
      *      Principal {@link Stage}
      */
-    public PrincipalControllerImpl(final Stage principalStage) {
+    public PrincipalControllerImpl(final Stage primaryStage) {
+        this.primaryStage = primaryStage;
         this.volumeData = new VolumeDataImpl();
         this.audioPlayer = new AudioPlayerImpl(volumeData.getMusicVolume().getValue(),
                 volumeData.getEffectsVolume().getValue());
-        this.view = new PrincipalView(principalStage, this);
+        this.view = new PrincipalView(primaryStage, this);
         try {
             this.score = new ScoreListImpl();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
     @Override
     public List<Pair<String, Integer>> getRankingList() {
         return this.score.getRanking();
@@ -75,20 +78,25 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void stopGame() {
-        if (this.gameControl.isPresent()) {
-            this.gameControl.get().stop();
-        }
+        this.gameControl.ifPresent(g -> g.stop());
     }
 
     @Override
     public void startGame() {
-        this.gameControl.get().run();
+        this.gameControl.ifPresent(g -> g.run());
+    }
+
+    @Override
+    public void resetGame(){
+        stopGame();
+        this.gameControl = Optional.empty();
+        this.playerInputHandler = Optional.empty();
+
+        this.view = new PrincipalView(primaryStage, this);
     }
 
     @Override
     public void showMainMenu(final ViewFactory viewFactory) {
-        gameControl = Optional.empty();
-        playerInputHandler = Optional.empty();
         viewFactory.createMainMenu();
     }
 
@@ -97,11 +105,6 @@ public final class PrincipalControllerImpl implements PrincipalController {
         viewFactory.createRankingView();
     }
 
-    /**
-     * Method used by the view to show the settings
-     *
-     * @param viewFactory
-     */
     @Override
     public void showSettings(ViewFactory viewFactory) {
         viewFactory.createSettingsMenu();
@@ -109,9 +112,10 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void showGameField(final Scene scene) {
-        gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
-                new GameFieldViewImpl(this.audioPlayer, this.playerInputHandler.get()), this));
-        scene.setRoot(gameControl.get().getGameFieldView().getGroup());
+       this.gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
+                new GameFieldViewImpl(this.audioPlayer, this.playerInputHandler.get(), this, this.primaryStage),
+               this));
+        scene.setRoot(this.gameControl.get().getGameFieldView().getGroup());
         startGame();
     }
 
@@ -120,11 +124,13 @@ public final class PrincipalControllerImpl implements PrincipalController {
         viewFactory.createGameOver();
     }
 
-
     @Override
     public void setPlayerInputHandler(PlayerInputHandler playerInputHandler) {
         this.playerInputHandler = Optional.of(playerInputHandler);
     }
 
-
+    @Override
+    public Optional<GameController> getGameController() {
+        return this.gameControl;
+    }
 }
