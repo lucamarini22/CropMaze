@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Control;
 
 import com.google.common.io.Files;
+import it.unibo.oop.bbgmm.Boundary.EndLevelView;
 import it.unibo.oop.bbgmm.Boundary.GameFieldView;
 import it.unibo.oop.bbgmm.Boundary.ViewFactory;
 import it.unibo.oop.bbgmm.Entity.*;
@@ -39,6 +40,9 @@ public final class GameControllerImpl implements GameController {
             update();
         }
     };
+    private final PrincipalController principalController;
+    private final EndLevelController endLevelController;
+    private final EndLevelView endLevelView;
 
     /**
      * {@link GameControllerImpl} constructor.
@@ -49,19 +53,25 @@ public final class GameControllerImpl implements GameController {
      * @param primaryStage
      *      {@link PrincipalController} instance
      */
-    public GameControllerImpl(final GameStatistics gameStatistics, final GameFieldView gameFieldView, final Stage primaryStage) {
-        this.gameField = new GameFieldImpl(new CollisionSupervisorImpl());
-        this.gameStatistics = gameStatistics;
+    public GameControllerImpl(final GameStatistics gameStatistics, final GameFieldView gameFieldView, final Stage primaryStage,
+                              final PrincipalController principalController) {
         this.gameFieldView = gameFieldView;
+        this.gameField = new GameFieldImpl(new CollisionSupervisorImpl(), this);
+        this.principalController = principalController;
+        this.gameStatistics = gameStatistics;
+        this.entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
+        this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
         try {
             loadMap();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
-        this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
-        this.level = new LevelImpl(this.map, this.gameField, this.gameStatistics, this.entitySpawner, this.gameFieldView);
-        this.gameField.setLevel(level);
+        this.level = new LevelImpl(this.map, this.gameStatistics, this.entitySpawner, this.gameFieldView);
+        this.endLevelView = this.principalController.showEndLevelView();
+        this.endLevelController = new EndLevelControllerImpl(this.principalController, this.gameStatistics, this.level,
+                this.endLevelView);
+
+        //this.gameField.setLevel(level);
         this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this, primaryStage);
     }
 
@@ -80,7 +90,6 @@ public final class GameControllerImpl implements GameController {
 
     @Override
     public void run() {
-        this.gameField = level.getGameField();
         this.gameFieldView = level.getGameFieldView();
         this.entitiesControllers = level.getEntitiesControllers();
         start();
@@ -114,5 +123,10 @@ public final class GameControllerImpl implements GameController {
         this.entitiesControllers.forEach(EntityController::update);
         //updates the model
         this.gameField.update(FRAME);
+    }
+
+    @Override
+    public void triggerEndLevel() {
+        this.endLevelController.goToEndLevel(endLevelView);
     }
 }

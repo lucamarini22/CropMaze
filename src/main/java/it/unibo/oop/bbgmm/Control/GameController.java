@@ -25,7 +25,10 @@ public interface GameController {
 
     /**
      * Getter fot the GameFieldView
+     *
      * @return GameFieldView
      */
     GameFieldView getGameFieldView();
+
+    public void triggerEndLevel();
 }
