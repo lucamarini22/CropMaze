@@ -11,6 +11,8 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import javax.swing.text.View;
+
 import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 
 /**
@@ -54,5 +56,9 @@ public class MainWindow {
 
         this.primaryStage.setFullScreen(fullscreen);
         this.primaryStage.show();
+    }
+
+    public ViewFactory getViewFactory() {
+        return viewFactory;
     }
 }

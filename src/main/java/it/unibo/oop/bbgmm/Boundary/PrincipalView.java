@@ -13,4 +13,7 @@ public class PrincipalView {
         this.window = new MainWindow(primaryStage, controller, Resolution.isFullScreen());
     }
 
+    public MainWindow getWindow() {
+        return this.window;
+    }
 }

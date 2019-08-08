@@ -52,4 +52,9 @@ public class ViewFactory {
     public GameOver createGameOver(){
         return new GameOver(stage,controller, root, scene);
     }
+
+    public EndLevelView createEndLevelView() {
+        return new EndLevelView(stage, controller, root, scene);
+    }
+
 }
