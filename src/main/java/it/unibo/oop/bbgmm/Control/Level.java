@@ -15,14 +15,7 @@ public interface Level {
      * @return the player
      */
     Entity getPlayer();
-
-    /**
-     * @return the field model
-     */
-    GameField getGameField();
-
-
-    /**
+        /**
      * @return the game field view
      */
     GameFieldView getGameFieldView();

@@ -25,7 +25,6 @@ public final class LevelImpl implements Level {
 
     private Entity player;
     private final Map map;
-    private final GameField gameField;
     private final EntitySpawner entitySpawner;
     private PlayerStatistics playerStatistics;
     private final GameFieldView gameFieldView;
@@ -37,8 +36,6 @@ public final class LevelImpl implements Level {
      *
      * @param map
      *          Map to load
-     * @param gameField
-     *          GameField gameField
      * @param gameStatistics
      *          Statistics of the game
      * @param entitySpawner
@@ -46,10 +43,9 @@ public final class LevelImpl implements Level {
      * @param gameFieldView
      *          View of the {@link GameField}
      */
-    public LevelImpl(final Map map, final GameField gameField, final GameStatistics gameStatistics,
+    public LevelImpl(final Map map, final GameStatistics gameStatistics,
                      final EntitySpawner entitySpawner, final GameFieldView gameFieldView) {
         this.map = map;
-        this.gameField = gameField;
         this.gameStatistics = gameStatistics;
         this.entitySpawner = entitySpawner;
         this.gameFieldView = gameFieldView;
@@ -60,7 +56,6 @@ public final class LevelImpl implements Level {
     public void initializeLevel() {
         this.gameStatistics.setCurrentLevel(this.gameStatistics.getCurrentLevel() + 1);
         this.map.getLayers().forEach(layer -> {
-            //Draws Tiles of terrain only if it is the first level, then it doesn't draw it anymore
             if (layer instanceof TileLayer) {
                 loadTiles((TileLayer) layer);
             } else if (layer instanceof ObjectGroup) {
@@ -74,10 +69,6 @@ public final class LevelImpl implements Level {
         return this.player;
     }
 
-    @Override
-    public GameField getGameField() {
-        return this.gameField;
-    }
 
     @Override
     public GameFieldView getGameFieldView() {
@@ -109,9 +100,9 @@ public final class LevelImpl implements Level {
 
     private void loadSolidObjects(final ObjectGroup layer) {
         layer.forEach(solidObject -> {
-            final Pair<Point2D, Dimension2D> verticalInfo = getWallPositionAndDimension(this.map, solidObject.getX(), solidObject.getY(),
+            final Pair<Point2D, Dimension2D> info = getWallPositionAndDimension(this.map, solidObject.getX(), solidObject.getY(),
                     solidObject.getWidth(), solidObject.getHeight());
-            entitySpawner.spawn(verticalInfo.getKey(), verticalInfo.getValue());
+            entitySpawner.spawn(info.getKey(), info.getValue());
         });
     }
 
