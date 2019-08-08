@@ -126,7 +126,7 @@ public final class GameFieldViewImpl implements GameFieldView {
      */
     private void showPauseBox(final PrincipalController principalController) {
         principalController.getGameController().get().stop();
-        boolean answer = new EndLevelView(this.audioplayer).display(this.primaryStage);
+        boolean answer = new PauseBox(this.audioplayer).display(this.primaryStage);
         if (answer) {
             this.audioplayer.stopMusic();
             principalController.resetGame();
@@ -140,7 +140,6 @@ public final class GameFieldViewImpl implements GameFieldView {
     public void showEndLevelBox(final PrincipalController principalController) {
         principalController.getGameController().get().stop();
         boolean answer = new EndLevelView(this.audioplayer).display(this.primaryStage);
-
         if (answer) {
             this.endLevelController.goToNextLevel();
         } else {
