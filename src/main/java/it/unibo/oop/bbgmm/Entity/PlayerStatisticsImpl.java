@@ -8,16 +8,13 @@ public final class PlayerStatisticsImpl implements PlayerStatistics {
     private static final int INCREASE = 1;
     private int collectedMoney;
     private int killedEnemies;
-    private final Entity player;
 
     /**
      * Constructor for the player's statistics.
-     *
-     * @param player
-     *      The {@link Player} tracked
      */
-    public PlayerStatisticsImpl(final Entity player) {
-        this.player = player;
+    public PlayerStatisticsImpl(){
+        this.killedEnemies = 0;
+        this.collectedMoney = 0;
     }
 
     @Override
@@ -39,6 +36,4 @@ public final class PlayerStatisticsImpl implements PlayerStatistics {
     public int getKilledEnemies() {
         return this.killedEnemies;
     }
-
-    //event to increment killedEnemies
 }

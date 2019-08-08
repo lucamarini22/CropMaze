@@ -130,4 +130,9 @@ public final class GameControllerImpl implements GameController {
     public void triggerEndLevel() {
         this.endLevelController.goToEndLevel(endLevelView);
     }
+
+    @Override
+    public int calculateScore(){
+        return new BasicScoreCalculator().getScore(this.gameField.getPlayerStatistic());
+    }
 }

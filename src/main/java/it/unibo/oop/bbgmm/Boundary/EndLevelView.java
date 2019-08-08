@@ -66,7 +66,7 @@ public final class EndLevelView extends AbstractBasicView implements ObservableV
 
         menuBox = new VBox(SPACE_BETWEEN_ITEM, itemNextLevel, itemMainMenu);
 
-        buttonActions();
+        itemActions();
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
@@ -87,6 +87,8 @@ public final class EndLevelView extends AbstractBasicView implements ObservableV
         root.getChildren().add(menuBox);
 
         root.setId("endLevelView");
+
+        getScene().setRoot(root);
     }
 
     private MenuItem getMenuItem(final int index) {
@@ -94,7 +96,7 @@ public final class EndLevelView extends AbstractBasicView implements ObservableV
     }
 
     @Override
-    protected void buttonActions() {
+    protected void itemActions() {
         itemNextLevel.setOnActivate(() -> {
             this.endLevelController.goToNextLevel();
         });

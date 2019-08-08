@@ -56,7 +56,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void insertNewScore(final String name) {
-        //this.score.addScore(new Pair<>(name, result));
+        this.gameControl.ifPresent(controller -> this.score.addScore(new Pair<>(name, controller.calculateScore())));
     }
 
     @Override
