@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 
+import it.unibo.oop.bbgmm.Control.EndLevelController;
 import it.unibo.oop.bbgmm.Control.PlayerInputListener;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import javafx.embed.swing.SwingFXUtils;
@@ -36,6 +37,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     private ImageView background;
     private Button upgradeButton = new Button("UPGRADE");
     private final PrincipalController principalController;
+    private EndLevelController endLevelController;
 
 
     /**
@@ -107,30 +109,48 @@ public final class GameFieldViewImpl implements GameFieldView {
         return this.upgradeButton;
     }
     /**
-     * When a button is pressed
+     * When a button is pressed.
      * @param event
      *          The event triggered when a button is pressed
      */
     private void onPress(final KeyEvent event) {
-        if(event.getCode().equals(KeyCode.ESCAPE)){
+        if (event.getCode().equals(KeyCode.ESCAPE)) {
             this.audioplayer.playSound(BUTTON_PRESS.getPath());
             showPauseBox(this.principalController);
         }
     }
 
     /**
-     * Shows the PauseBox
+     * Shows the PauseBox.
      * @param principalController
      */
     private void showPauseBox(final PrincipalController principalController) {
         principalController.getGameController().get().stop();
-        boolean answer = new PauseBox(this.audioplayer).display(this.primaryStage);
-        if(answer){
+        boolean answer = new EndLevelView(this.audioplayer).display(this.primaryStage);
+        if (answer) {
             this.audioplayer.stopMusic();
             principalController.resetGame();
-        }
-        else{
+        } else {
             principalController.getGameController().get().start();
         }
+    }
+
+
+
+    public void showEndLevelBox(final PrincipalController principalController) {
+        principalController.getGameController().get().stop();
+        boolean answer = new EndLevelView(this.audioplayer).display(this.primaryStage);
+
+        if (answer) {
+            this.endLevelController.goToNextLevel();
+        } else {
+            this.endLevelController.goToMainMenu();
+            this.audioplayer.stopMusic();
+        }
+    }
+
+    @Override
+    public void setObserver(final EndLevelController observer) {
+        this.endLevelController = observer;
     }
 }

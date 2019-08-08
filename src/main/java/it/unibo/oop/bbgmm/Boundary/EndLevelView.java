@@ -1,111 +1,146 @@
 package it.unibo.oop.bbgmm.Boundary;
 
-import it.unibo.oop.bbgmm.Control.EndLevelController;
-import it.unibo.oop.bbgmm.Control.PrincipalController;
-import it.unibo.oop.bbgmm.Utilities.Resolution;
+import it.unibo.oop.bbgmm.Utilities.FontMaker;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public final class EndLevelView extends AbstractBasicView implements ObservableView<EndLevelController> {
-    private static final int SPACE_BETWEEN_ITEM = 25;
-    private static final int DELTA = 80;
-    private static final int BOX_X_COORDINATE = 300;
-    private static final int BOX_Y_COORDINATE = 500;
-    private static final int NEXT_LEVEL_X_COORDINATE = 200;
-    private static final int NEXT_LEVEL_Y_COORDINATE = 50;
-    private static final double SOUND_VOLUME = 1;
-    private static final double MUSIC_VOLUME = 0.4;
-    private static final ImageView nextLevel = new ImageView(new Image("images/nextLevel.png"));
+import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_PRESS;
+import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_SWITCH;
 
-    private EndLevelController endLevelController;
-    private int currentItem = 0;
-    private VBox menuBox;
-    private VBox boxImage;
-    private final MenuItem itemNextLevel = new MenuItem("NEXT LEVEL");
-    private final MenuItem itemMainMenu = new MenuItem("MAIN MENU");
+/**
+ * Class used to return to the mainMenu during the game.
+ */
+public class EndLevelView {
 
-    public EndLevelView(final Stage primaryStage, final PrincipalController controller,
-                    final AnchorPane pane, final Scene scene) {
-        super(primaryStage, controller, pane, scene);
+    private static final String MESSAGE = "ATTENTION!\nDo you want to go back to the main menu?\n(All progress will be erased)";
+    private static final int SIZE_MESSAGE = 35;
+    private static final int SIZE_ITEMS = 40;
+    private static final int SPACING = 40;
+    private static final int POS = 33;
+    private static final int SPACE_BETWEEN_HORIZONTAL_ITEM = 50;
+    private static final int SPACE_BETWEEN_VERTICAL_ITEM = 10;
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 230;
+    private boolean answer = false;
+    private final AudioPlayer audioPlayer;
+    private int currentItem = 1;
+    private HBox itemLayout;
 
-        getScene().setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.UP) {
-                if (currentItem > 0) {
+    public EndLevelView(final AudioPlayer audioPlayer) {
+        this.audioPlayer = audioPlayer;
+    }
+
+    /**
+     * It displays the PauseBox.
+     *
+     * @param primaryStage
+     *          The principal stage
+     * @return the answer
+     *          The answer of the player
+     */
+    public boolean display(final Stage primaryStage) {
+        final Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setWidth(WIDTH);
+        stage.setHeight(HEIGHT);
+        stage.initOwner(primaryStage);
+        stage.initStyle(StageStyle.UNDECORATED);
+
+
+        final Label label = new Label(MESSAGE);
+        label.setFont(FontMaker.getSizedFont(SIZE_MESSAGE));
+        label.setEffect(new GaussianBlur(2));
+        label.setTextFill(Color.FORESTGREEN);
+
+        final MenuItem itemYes = new MenuItem("Next Level");
+        final MenuItem itemNo = new MenuItem("Main Menu");
+
+        itemYes.setFont(SIZE_ITEMS);
+        itemNo.setFont(SIZE_ITEMS);
+
+        final VBox layout = new VBox(SPACE_BETWEEN_VERTICAL_ITEM);
+        this.itemLayout = new HBox(SPACE_BETWEEN_HORIZONTAL_ITEM);
+
+        this.itemLayout.getChildren().addAll(itemYes, itemNo);
+        this.itemLayout.setSpacing(SPACING);
+        this.itemLayout.setAlignment(Pos.CENTER);
+
+        layout.getChildren().addAll(label, this.itemLayout);
+        layout.setAlignment(Pos.CENTER);
+
+        AnchorPane pane = new AnchorPane();
+        pane.getChildren().add(layout);
+        layout.setLayoutX(POS);
+        layout.setLayoutY(POS);
+        pane.setId("endLevelView");
+
+        final Scene scene = new Scene(pane);
+
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.RIGHT) {
+                if (this.currentItem == 0) {
                     playSwitchSound();
-                    getMenuItem(currentItem).setActive(false);
-                    getMenuItem(--currentItem).setActive(true);
+                    getMenuItem(this.currentItem).setActive(false);
+                    getMenuItem(++this.currentItem).setActive(true);
+                    this.answer = false;
                 }
             }
 
-            if (event.getCode() == KeyCode.DOWN) {
-                if (currentItem < menuBox.getChildren().size() - 1) {
+            if (event.getCode() == KeyCode.LEFT) {
+                if (this.currentItem != 0) {
                     playSwitchSound();
-                    getMenuItem(currentItem).setActive(false);
-                    getMenuItem(++currentItem).setActive(true);
+                    getMenuItem(this.currentItem).setActive(false);
+                    getMenuItem(--this.currentItem).setActive(true);
+                    answer = true;
                 }
             }
 
             if (event.getCode() == KeyCode.ENTER) {
                 playPressSound();
-                getMenuItem(currentItem).activate();
+                stage.close();
             }
         });
 
-        getAudioPlayer().playMusic(Music.GAMEOVER_TRACK.getPath());
+        getMenuItem(this.currentItem).setActive(true);
 
-        boxImage = new VBox(nextLevel);
-        boxImage.setAlignment(Pos.TOP_CENTER);
-        boxImage.setTranslateX(NEXT_LEVEL_X_COORDINATE);
-        boxImage.setTranslateY(NEXT_LEVEL_Y_COORDINATE);
+        scene.getStylesheets().add("Style.css");
 
-        menuBox = new VBox(SPACE_BETWEEN_ITEM, itemNextLevel, itemMainMenu);
+        stage.setScene(scene);
+        stage.showAndWait();
 
-        buttonActions();
-
-        menuBox.setAlignment(Pos.TOP_CENTER);
-
-        //calculates the position of the box
-        if (Resolution.isFullScreen()) {
-            menuBox.setLayoutX(BOX_X_COORDINATE * Resolution.getWidth() / Resolution.SMALL_WIDTH + DELTA);
-            menuBox.setLayoutY(BOX_Y_COORDINATE * Resolution.getHeight() / Resolution.SMALL_HEIGHT);
-        } else {
-            menuBox.setLayoutX(BOX_X_COORDINATE);
-            menuBox.setLayoutY(BOX_Y_COORDINATE);
-        }
-
-        getMenuItem(0).setActive(true);
-
-        AnchorPane root = getRoot();
-        root.getChildren().clear();
-        root.getChildren().add(boxImage);
-        root.getChildren().add(menuBox);
-
-        root.setId("endLevelView");
+        return this.answer;
     }
 
+    /**
+     * Method used to get the requested element of the buttons' box.
+     */
     private MenuItem getMenuItem(final int index) {
-        return (MenuItem) menuBox.getChildren().get(index);
+        return (MenuItem) this.itemLayout.getChildren().get(index);
     }
 
-    @Override
-    protected void buttonActions() {
-        itemNextLevel.setOnActivate(() -> {
-            this.endLevelController.goToNextLevel();
-        });
-
-        itemMainMenu.setOnActivate(() -> {
-            this.endLevelController.goToMainMenu();
-        });
+    /**
+     * Method called to play the buttonSwitch sound.
+     */
+    private void playSwitchSound(){
+        this.audioPlayer.playSound(BUTTON_SWITCH.getPath());
     }
 
-    @Override
-    public void setObserver(final EndLevelController observer) {
-        this.endLevelController = observer;
+    /**
+     * Method called to play the buttonSwitch sound.
+     */
+    private void playPressSound(){
+        this.audioPlayer.playSound(BUTTON_PRESS.getPath());
     }
 }

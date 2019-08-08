@@ -135,7 +135,4 @@ public final class PrincipalControllerImpl implements PrincipalController {
         return this.gameControl;
     }
 
-    public EndLevelView showEndLevelView() {
-        return view.getWindow().getViewFactory().createEndLevelView();
-    }
 }

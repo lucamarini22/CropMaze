@@ -25,23 +25,12 @@ public final class GameStatisticsImpl implements GameStatistics {
     }
 
     @Override
-    public int getScore() {
-        return this.score;
-    }
-
-    @Override
     public void setCurrentLevel(final int currentLevel) {
         this.currentLevel = currentLevel;
     }
 
     @Override
-    public void setScore(final int score) {
-        this.score = score;
-    }
-
-    @Override
     public void resetStatistics() {
-        this.setScore(ZERO_POINTS);
         this.setCurrentLevel(FIRST_LEVEL);
     }
 }

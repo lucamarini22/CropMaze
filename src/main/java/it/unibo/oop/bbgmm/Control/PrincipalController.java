@@ -131,7 +131,4 @@ public interface PrincipalController {
      *          The game controller
      */
     Optional<GameController> getGameController();
-
-    public EndLevelView showEndLevelView();
-
 }

@@ -1,19 +1,18 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Control.EndLevelController;
 import it.unibo.oop.bbgmm.Control.PlayerInputListener;
+import it.unibo.oop.bbgmm.Control.PrincipalController;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import org.mapeditor.core.TileLayer;
 
-import java.awt.*;
-
 /**
  * Interface that represent the view of the {@link it.unibo.oop.bbgmm.Entity.GameField}.
  */
-public interface GameFieldView {
-
+public interface GameFieldView extends  ObservableView<EndLevelController> {
     /**
      * @return a factory for the views of entities
      */
@@ -48,4 +47,6 @@ public interface GameFieldView {
      * @return {@link Button}
      */
     Button getUpgradeButton();
+
+    void showEndLevelBox(PrincipalController principalController);
 }
