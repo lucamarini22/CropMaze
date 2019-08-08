@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 
+import it.unibo.oop.bbgmm.Control.GameController;
 import it.unibo.oop.bbgmm.Control.Level;
 import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisor;
@@ -17,16 +18,18 @@ public final class GameFieldImpl implements GameField {
     private final Set<Entity> entitiesToBeRemoved;
     private Entity player;
     private Level level;
+    private GameController gameController;
 
     /**
      * {@link GameFieldImpl} constructor.
      * @param collisionSupervisor
      *      {@link CollisionSupervisor} instance
      */
-    public GameFieldImpl(final CollisionSupervisor collisionSupervisor) {
+    public GameFieldImpl(final CollisionSupervisor collisionSupervisor, final GameController gameController) {
         this.entities =  new LinkedHashSet<>();
         this.collisionSupervisor = collisionSupervisor;
         this.entitiesToBeRemoved  = new LinkedHashSet<>();
+        this.gameController = gameController;
     }
 
     @Override
@@ -77,7 +80,10 @@ public final class GameFieldImpl implements GameField {
         if (event.getEntity() instanceof Alien && this.getAliveEnemies() == 1) {
             this.entities.stream().filter(e -> !(e.getClass().equals(Player.class)))
                                   .forEach(entitiesToBeRemoved::add);
-            this.level.initializeLevel();
+            //this.level.initializeLevel();
+            this.gameController.triggerEndLevel();
+            this.gameController.stop();
+
             return;
         }
         this.entitiesToBeRemoved.add(event.getEntity());

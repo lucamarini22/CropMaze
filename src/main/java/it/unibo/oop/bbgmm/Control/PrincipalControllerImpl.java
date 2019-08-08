@@ -114,7 +114,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
     public void showGameField(final Scene scene) {
        this.gameControl = Optional.of(new GameControllerImpl(new GameStatisticsImpl(),
                 new GameFieldViewImpl(this.audioPlayer, this.playerInputHandler.get(), this, this.primaryStage),
-               this.primaryStage));
+               this.primaryStage, this));
         scene.setRoot(this.gameControl.get().getGameFieldView().getGroup());
         startGame();
     }
@@ -132,5 +132,9 @@ public final class PrincipalControllerImpl implements PrincipalController {
     @Override
     public Optional<GameController> getGameController() {
         return this.gameControl;
+    }
+
+    public EndLevelView showEndLevelView() {
+        return view.getWindow().getViewFactory().createEndLevelView();
     }
 }

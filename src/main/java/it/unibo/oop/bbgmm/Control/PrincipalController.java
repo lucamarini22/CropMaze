@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Control;
 
 import it.unibo.oop.bbgmm.Boundary.AudioPlayer;
+import it.unibo.oop.bbgmm.Boundary.EndLevelView;
 import it.unibo.oop.bbgmm.Boundary.PlayerInputHandler;
 import it.unibo.oop.bbgmm.Boundary.ViewFactory;
 import it.unibo.oop.bbgmm.Utilities.Pair;
@@ -105,4 +106,7 @@ public interface PrincipalController {
      * @return GameController
      */
     Optional<GameController> getGameController();
+
+    public EndLevelView showEndLevelView();
+
 }
