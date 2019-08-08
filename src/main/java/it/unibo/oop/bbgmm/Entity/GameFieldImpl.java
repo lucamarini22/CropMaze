@@ -82,8 +82,6 @@ public final class GameFieldImpl implements GameField {
                                   .forEach(entitiesToBeRemoved::add);
             //this.level.initializeLevel();
             this.gameController.triggerEndLevel();
-            this.gameController.stop();
-
             return;
         }
         this.entitiesToBeRemoved.add(event.getEntity());

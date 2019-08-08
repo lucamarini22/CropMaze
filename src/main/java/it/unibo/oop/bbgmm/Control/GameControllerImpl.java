@@ -42,7 +42,7 @@ public final class GameControllerImpl implements GameController {
     };
     private final PrincipalController principalController;
     private final EndLevelController endLevelController;
-    private final EndLevelView endLevelView;
+   // private final EndLevelView endLevelView;
 
     /**
      * {@link GameControllerImpl} constructor.
@@ -68,9 +68,8 @@ public final class GameControllerImpl implements GameController {
             e.printStackTrace();
         }
         this.level = new LevelImpl(this.map, this.gameStatistics, this.entitySpawner, this.gameFieldView);
-        this.endLevelView = this.principalController.showEndLevelView();
-        this.endLevelController = new EndLevelControllerImpl(this.principalController, this.gameStatistics, this.level,
-                this.endLevelView);
+       // this.endLevelView = this.principalController.showEndLevelView();
+        this.endLevelController = new EndLevelControllerImpl(this.principalController, this.gameStatistics, this.level, this.gameFieldView);
 
         //this.gameField.setLevel(level);
         this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this, primaryStage);
@@ -128,6 +127,6 @@ public final class GameControllerImpl implements GameController {
 
     @Override
     public void triggerEndLevel() {
-        this.endLevelController.goToEndLevel(endLevelView);
+        this.endLevelController.goToEndLevel();
     }
 }

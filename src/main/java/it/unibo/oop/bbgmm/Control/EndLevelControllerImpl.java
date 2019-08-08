@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Control;
 
 import it.unibo.oop.bbgmm.Boundary.EndLevelView;
+import it.unibo.oop.bbgmm.Boundary.GameFieldView;
 import it.unibo.oop.bbgmm.Boundary.ObservableView;
 import it.unibo.oop.bbgmm.Entity.GameField;
 import it.unibo.oop.bbgmm.Entity.GameStatistics;
@@ -13,13 +14,15 @@ public class EndLevelControllerImpl implements EndLevelController {
     private final PrincipalController principalController;
     private final GameStatistics gameStatistics;
     private final Level level;
+    private final GameFieldView gameFieldView;
 
     EndLevelControllerImpl(final PrincipalController principalController, final GameStatistics gameStatistics,
-                           final Level level, final ObservableView<EndLevelController> endLevelView) {
+                           final Level level, final GameFieldView gameFieldView) {
         this.principalController = principalController;
         this.gameStatistics = gameStatistics;
         this.level = level;
-        endLevelView.setObserver(this);
+        this.gameFieldView = gameFieldView;
+        this.gameFieldView.setObserver(this);
     }
 
     @Override
@@ -31,12 +34,11 @@ public class EndLevelControllerImpl implements EndLevelController {
 
     @Override
     public void goToMainMenu() {
-        //this.principalController.showMainMenu();
         this.principalController.resetGame();
     }
 
     @Override
-    public void goToEndLevel(final EndLevelView endLevelView) {
-        this.principalController.showEndLevelView();
+    public void goToEndLevel() {
+        this.gameFieldView.showEndLevelBox(this.principalController);
     }
 }

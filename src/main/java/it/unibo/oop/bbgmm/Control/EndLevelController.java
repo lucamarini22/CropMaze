@@ -18,5 +18,5 @@ public interface EndLevelController {
     void goToMainMenu();
 
 
-    void goToEndLevel(EndLevelView endLevelView);
+    void goToEndLevel();
 }
