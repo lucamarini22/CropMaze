@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 
 public class RankingView extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 40;
-    private static final int DELTA = 140;
     private static final int BOX_X_COORDINATE = 280;
     private static final int BOX_Y_COORDINATE = 70;
     //private static final ImageView crown = new ImageView(new Image("images/crown.png"));
@@ -62,7 +61,7 @@ public class RankingView extends AbstractBasicView {
         }
 
         if(Resolution.isFullScreen()){
-            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH);
             menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
         }
         else{

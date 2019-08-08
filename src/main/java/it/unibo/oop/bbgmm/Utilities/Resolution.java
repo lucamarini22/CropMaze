@@ -54,7 +54,7 @@ public final class Resolution {
     }
 
     /**
-     * Returns if the window is fullscreen.
+     * Returns true if the window is fullscreen.
      *
      * @return boolean
      *          True if fullscreen

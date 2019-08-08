@@ -14,10 +14,11 @@ public final class FontMaker {
     private static final Toolkit TK = Toolkit.getDefaultToolkit();
     private static final Dimension D = TK.getScreenSize();
     private static final String FONT_URL = ClassLoader.getSystemResource("font.ttf").toExternalForm();
-    private static final int SMALL = 768;
-    private static final int FULL = D.height;
+    private static final int PROPORTION_VALUE = 15;
+    private static final int FULL = D.width;
     private static final int SMALL_FONT = 70;
-    private static final int WINNER_FONT = 100;
+    private static final int WINNER_INCREASE = 100;
+    private static int currentDimension;
     private static Font font;
     private static Optional<Integer> fullFont = Optional.empty();
 
@@ -30,12 +31,14 @@ public final class FontMaker {
     public static void modifyFont(final boolean fullscreen){
         if(fullscreen){
             if(!fullFont.isPresent()){
-                fullFont = Optional.of((SMALL_FONT*FULL)/SMALL);
+                currentDimension = FULL/PROPORTION_VALUE;
+                fullFont = Optional.of(currentDimension);
             }
             font = Font.loadFont(FONT_URL, fullFont.get());
         }
         else{
             font = Font.loadFont(FONT_URL, SMALL_FONT);
+            currentDimension = SMALL_FONT;
         }
     }
 
@@ -66,6 +69,6 @@ public final class FontMaker {
      *          The font to use
      */
     public static Font getFontWinner(){
-        return Font.loadFont(FONT_URL, WINNER_FONT);
+        return Font.loadFont(FONT_URL, currentDimension + WINNER_INCREASE);
     }
 }

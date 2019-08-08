@@ -20,7 +20,6 @@ import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 public class SettingsMenu extends AbstractBasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 10;
-    private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 200;
     private static final int BOX_Y_COORDINATE = 185;
 
@@ -89,7 +88,7 @@ public class SettingsMenu extends AbstractBasicView {
 
         //calculates the position of the box and witch item is underlined
         if(Resolution.isFullScreen()){
-            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH);
             menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
             itemSmallScreen.setUnderline(false);
             itemFullScreen.setUnderline(true);

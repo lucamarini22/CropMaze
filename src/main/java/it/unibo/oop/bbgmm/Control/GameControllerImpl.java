@@ -121,7 +121,7 @@ public final class GameControllerImpl implements GameController {
     private void update() {
         //updates the view
         this.entitiesControllers.forEach(EntityController::update);
-        //updates the model
+        //updates the entity
         this.gameField.update(FRAME);
     }
 

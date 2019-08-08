@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 public class MainMenu extends AbstractBasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 25;
-    private static final int DELTA = 80;
     private static final int BOX_X_COORDINATE = 370;
     private static final int BOX_Y_COORDINATE = 350;
     private VBox menuBox;
@@ -80,7 +79,7 @@ public class MainMenu extends AbstractBasicView {
 
         //calculates the position of the box
         if(Resolution.isFullScreen()){
-            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH);
             menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
         }
         else{
@@ -117,7 +116,7 @@ public class MainMenu extends AbstractBasicView {
             clearEnter();
         });
         itemScore.setOnActivate(() -> {
-            getController().showRankingView(getViewFactory());
+            getController().showGameOver(getViewFactory());
         });
         itemSettings.setOnActivate(() -> {
             getController().showSettings(getViewFactory());

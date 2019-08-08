@@ -28,11 +28,13 @@ import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 
 public class GameOver extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 25;
-    private static final int DELTA = 80;
     private static final int USERBOX_X_COORDINATE = 320;
     private static final int USERBOX_Y_COORDINATE = 450;
     private static final int BOX_X_COORDINATE = 350;
     private static final int BOX_Y_COORDINATE = 520;
+    private static final int LABEL_PROPORTION = 34;
+    private static final int TEXT_PROPORTION = 68;
+    private static final int WIDTH_PROPORTION = 10;
     private int currentItem = 0;
     private VBox menuBox;
     private HBox  userBox;
@@ -83,12 +85,12 @@ public class GameOver extends AbstractBasicView {
         getAudioPlayer().playMusic(Music.GAMEOVER_TRACK.getPath());
 
         label.setTextFill(Color.web("#FFFF00"));
-        label.setFont(FontMaker.getSizedFont(30));
-        userName.setMaxHeight(30);
-        userName.setFont(FontMaker.getSizedFont(15));
-        userName.setPrefWidth(100);
+        int width = Resolution.getWidth();
+        label.setFont(FontMaker.getSizedFont(width/LABEL_PROPORTION));
+        userName.setFont(FontMaker.getSizedFont(width/TEXT_PROPORTION));
+        userName.setPrefWidth(width/WIDTH_PROPORTION);
         userName.setId("userName");
-        itemInsert.setFont(30);
+        itemInsert.setFont(width/LABEL_PROPORTION);
         userBox = new HBox(label, userName, itemInsert);
         userBox.setSpacing(20);
         userBox.setAlignment(Pos.TOP_CENTER);
@@ -103,10 +105,10 @@ public class GameOver extends AbstractBasicView {
         
         //calculates the position of the boxes
         if(Resolution.isFullScreen()){
-            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH);
             menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
 
-            userBox.setTranslateX(USERBOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH+DELTA);
+            userBox.setTranslateX(USERBOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH);
             userBox.setTranslateY(USERBOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
         }
         else{
