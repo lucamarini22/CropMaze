@@ -75,7 +75,7 @@ public class ScoreListImpl implements ScoreList{
     @Override
     public List<Pair<String, Integer>> getRanking() {
         return scoreList.stream()
-                .map((s) -> new Pair<String, Integer>(s.getPlayerName(), s.getScore()))
+                .map((s) -> new Pair<>(s.getPlayerName(), s.getScore()))
                 .collect(Collectors.toList());
     }
 

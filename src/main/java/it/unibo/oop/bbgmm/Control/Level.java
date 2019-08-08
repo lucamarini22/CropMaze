@@ -26,11 +26,6 @@ public interface Level {
     Set<EntityController> getEntitiesControllers();
 
     /**
-     * @return the player statistics
-     */
-    PlayerStatistics getPlayerStatistic();
-
-    /**
      * Loads the entities in the field.
      */
     void initializeLevel();

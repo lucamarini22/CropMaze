@@ -28,11 +28,20 @@ public interface GameController {
     void restart();
 
     /**
-     * Getter fot the GameFieldView
+     * Getter fot the GameFieldView.
+     *
      * @return GameFieldView
      *          The view of the Gamefield
      */
     GameFieldView getGameFieldView();
 
-    public void triggerEndLevel();
+    void triggerEndLevel();
+
+    /**
+     * Method that calculates the score of the player.
+     *
+     * @return int
+     *          The score achieved
+     */
+    int calculateScore();
 }

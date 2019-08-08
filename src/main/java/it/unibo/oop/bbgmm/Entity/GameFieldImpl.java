@@ -19,6 +19,7 @@ public final class GameFieldImpl implements GameField {
     private Entity player;
     private Level level;
     private GameController gameController;
+    private final PlayerStatistics playerStatistics;
 
     /**
      * {@link GameFieldImpl} constructor.
@@ -30,6 +31,7 @@ public final class GameFieldImpl implements GameField {
         this.collisionSupervisor = collisionSupervisor;
         this.entitiesToBeRemoved  = new LinkedHashSet<>();
         this.gameController = gameController;
+        this.playerStatistics = new PlayerStatisticsImpl();
     }
 
     @Override
@@ -77,21 +79,34 @@ public final class GameFieldImpl implements GameField {
     public void destroyEntity(final DeathEvent event) {
         //if an Alien is killed, it controls the number of alive Aliens, and if it is one (the last Alien killed),
         // then the next level has to start
-        if (event.getEntity() instanceof Alien && this.getAliveEnemies() == 1) {
-            this.entities.stream().filter(e -> !(e.getClass().equals(Player.class)))
-                                  .forEach(entitiesToBeRemoved::add);
-            //this.level.initializeLevel();
-            this.gameController.triggerEndLevel();
-            return;
+        Entity entity = event.getEntity();
+
+        if (entity instanceof Alien) {
+            this.playerStatistics.increaseKilledEnemies();
+            if (this.getAliveEnemies() == 1) {
+                this.entities.stream().filter(e -> !(e.getClass().equals(Player.class)))
+                        .forEach(entitiesToBeRemoved::add);
+                //this.level.initializeLevel();
+                this.gameController.stop();
+                this.gameController.triggerEndLevel();
+
+                return;
+            }
         }
-        this.entitiesToBeRemoved.add(event.getEntity());
+        if (entity instanceof Coin) {
+            this.playerStatistics.increaseCollectedMoney();
+        }
+        this.entitiesToBeRemoved.add(entity);
     }
-
-
 
     @Override
     public void setLevel(final Level level) {
         this.level = level;
+    }
+
+    @Override
+    public PlayerStatistics getPlayerStatistic() {
+        return this.playerStatistics;
     }
 
     /**

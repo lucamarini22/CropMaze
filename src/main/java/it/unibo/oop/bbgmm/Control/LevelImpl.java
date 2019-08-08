@@ -26,7 +26,6 @@ public final class LevelImpl implements Level {
     private Entity player;
     private final Map map;
     private final EntitySpawner entitySpawner;
-    private PlayerStatistics playerStatistics;
     private final GameFieldView gameFieldView;
     private final Set<EntityController> entitiesControllers;
     private final GameStatistics gameStatistics;
@@ -80,11 +79,6 @@ public final class LevelImpl implements Level {
         return Collections.unmodifiableSet(this.entitiesControllers);
     }
 
-    @Override
-    public PlayerStatistics getPlayerStatistic() {
-        return this.playerStatistics;
-    }
-
     private static Point2D invertY(final Point2D pt) {
         return new Point2D(pt.getX(), -pt.getY());
     }
@@ -118,7 +112,7 @@ public final class LevelImpl implements Level {
                     //Creates the Player only in the first level
                     if (this.gameStatistics.getCurrentLevel() == LEVEL_ONE) {
                         player = entitySpawner.spawn(EntityType.PLAYER.toString(), position);
-                        playerStatistics = new PlayerStatisticsImpl(player);
+                        //playerStatistics = new PlayerStatisticsImpl(player);
                     }
                     final PlayerController controller = new PlayerController(player, gameFieldView.getEntityViewFactory().createPlayerView(), this.gameFieldView);
                     gameFieldView.setPlayerInputListener(controller);

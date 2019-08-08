@@ -60,4 +60,10 @@ public interface GameField {
      */
     void setLevel(Level level);
 
+    /**
+     * Getter for the player's statistics.
+     *
+     * @return the player statistics
+     */
+    PlayerStatistics getPlayerStatistic();
 }

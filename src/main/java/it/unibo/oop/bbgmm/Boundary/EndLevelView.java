@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Utilities.FontMaker;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -84,7 +85,7 @@ public class EndLevelView {
         pane.getChildren().add(layout);
         layout.setLayoutX(POS);
         layout.setLayoutY(POS);
-        pane.setId("endLevelView");
+        pane.setId("pauseBox");
 
         final Scene scene = new Scene(pane);
 
