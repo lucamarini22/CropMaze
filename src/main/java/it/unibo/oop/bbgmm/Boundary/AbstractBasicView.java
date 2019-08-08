@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_PRESS;
 import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_SWITCH;
 
+/**
+ * Model class for the view.
+ */
 public abstract class AbstractBasicView {
 
     private final PrincipalController controller;
@@ -20,6 +23,18 @@ public abstract class AbstractBasicView {
     private final AnchorPane root;
     private Scene scene;
 
+    /**
+     * Constructor for AbstractBasicView.
+     *
+     * @param primaryStage
+     *          The principal stage
+     * @param controller
+     *          The principal controller
+     * @param root
+     *          The root for the scene
+     * @param scene
+     *          The scene displayed in the stage
+     */
     public AbstractBasicView(final Stage primaryStage, final PrincipalController controller, final AnchorPane root, final Scene scene) {
         this.root = root;
         this.scene = scene;
@@ -30,27 +45,33 @@ public abstract class AbstractBasicView {
     }
 
     /**
-     * Method used to set the action for each button.
+     * Method used to set the action for each item.
      */
-    protected abstract void buttonActions();
+    protected abstract void itemActions();
 
     /**
-     * Getter for the controller
+     * Getter for the controller.
+     *
      * @return controller
+     *          The principal controller
      */
     protected PrincipalController getController() { return this.controller; }
 
     /**
-     * Getter for the Root
+     * Getter for the Root.
+     *
      * @return root
+     *          The root of the scene
      */
     protected AnchorPane getRoot() {
         return this.root;
     }
 
     /**
-     * Getter for the Scene
+     * Getter for the Scene.
+     *
      * @return scene
+     *          The scene displayed in the stage
      */
     protected Scene getScene() {
         return this.scene;
@@ -58,23 +79,27 @@ public abstract class AbstractBasicView {
 
 
     /**
-     * Getter for the viewFactory
+     * Getter for the viewFactory.
+     *
      * @return viewFactory
+     *          The factory for the views
      */
     protected ViewFactory getViewFactory() {
         return viewFactory;
     }
 
     /**
-     * Getter for the AudioPlayer
+     * Getter for the AudioPlayer.
+     *
      * @return audioPlayer
+     *          The audioPlayer
      */
     protected AudioPlayer getAudioPlayer() {
         return audioPlayer;
     }
 
     /**
-     * Method used to set or not the stage to FullScreen
+     * Method used to set or not the stage to FullScreen.
      */
     protected void checkResolution(){
         if(Resolution.isFullScreen()){
@@ -87,6 +112,14 @@ public abstract class AbstractBasicView {
         }
     }
 
+    /**
+     * Set the volume for the music and fot the effects.
+     *
+     * @param musicVolume
+     *          The volume of the music
+     * @param effectsVolume
+     *          The volume of the effects
+     */
     protected void updateVolume(Volume musicVolume, Volume effectsVolume){
         this.audioPlayer.setMusicVolume(musicVolume.getValue());
         this.audioPlayer.setSoundVolume(effectsVolume.getValue());
@@ -94,14 +127,14 @@ public abstract class AbstractBasicView {
     }
 
     /**
-     * Method called to play the buttonSwitch sound
+     * Method called to play the buttonSwitch sound.
      */
     protected void playSwitchSound(){
         this.audioPlayer.playSound(BUTTON_SWITCH.getPath());
     }
 
     /**
-     * Method called to play the buttonSwitch sound
+     * Method called to play the buttonPress sound.
      */
     protected void playPressSound(){
         this.audioPlayer.playSound(BUTTON_PRESS.getPath());

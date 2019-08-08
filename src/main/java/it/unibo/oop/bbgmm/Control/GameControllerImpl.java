@@ -46,6 +46,7 @@ public final class GameControllerImpl implements GameController {
 
     /**
      * {@link GameControllerImpl} constructor.
+     *
      * @param gameStatistics
      *      Statistics of the game
      * @param gameFieldView
@@ -116,7 +117,7 @@ public final class GameControllerImpl implements GameController {
     }
 
     /**
-     * Method called every loop to apdate the entities in the model and in the view.
+     * Method called every loop to update the entities in the model and in the view.
      */
     private void update() {
         //updates the view

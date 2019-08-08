@@ -95,7 +95,7 @@ public class GameOver extends AbstractBasicView {
 
         menuBox = new VBox(SPACE_BETWEEN_ITEM, itemMainMenu, itemExit);
 
-        buttonActions();
+        itemActions();
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
@@ -130,7 +130,7 @@ public class GameOver extends AbstractBasicView {
     }
 
     @Override
-    protected void buttonActions(){
+    protected void itemActions(){
         itemMainMenu.setOnActivate(() -> {
             getAudioPlayer().stopMusic();
             getController().resetGame();

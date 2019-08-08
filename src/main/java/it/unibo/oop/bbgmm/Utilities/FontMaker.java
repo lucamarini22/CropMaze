@@ -7,39 +7,65 @@ import java.awt.*;
 import java.util.Optional;
 
 /**
- * Class used to create the rigth font to use based on the dimension of the GameWindow
+ * Class used to create the right font to use based on the dimension of the GameWindow.
  */
 public final class FontMaker {
 
     private static final Toolkit TK = Toolkit.getDefaultToolkit();
     private static final Dimension D = TK.getScreenSize();
+    private static final String FONT_URL = ClassLoader.getSystemResource("font.ttf").toExternalForm();
     private static final int SMALL = 768;
     private static final int FULL = D.height;
     private static final int SMALL_FONT = 70;
+    private static final int WINNER_FONT = 100;
     private static Font font;
     private static Optional<Integer> fullFont = Optional.empty();
 
-    public static void modifyFont(boolean fullscreen){
+    /**
+     * Modifies the font dimension.
+     *
+     * @param fullscreen
+     *          Indicates if the window is fullscreen
+     */
+    public static void modifyFont(final boolean fullscreen){
         if(fullscreen){
             if(!fullFont.isPresent()){
-
-                int two = SMALL_FONT*D.width/1024;
                 fullFont = Optional.of((SMALL_FONT*FULL)/SMALL);
             }
-            font = Font.font("MS Gothic", FontWeight.BOLD, fullFont.get());
+            font = Font.loadFont(FONT_URL, fullFont.get());
         }
         else{
-            font = Font.font("MS Gothic", FontWeight.BOLD, SMALL_FONT);
+            font = Font.loadFont(FONT_URL, SMALL_FONT);
         }
     }
 
+    /**
+     * Getter for the font.
+     *
+     * @return Font
+     *          The font to use
+     */
     public static Font getFont() {
         return font;
     }
 
-    public static Font getSizedFont(final int size){return Font.font("MS Gothic", FontWeight.BOLD, size);}
+    /**
+     * Getter for a sized font.
+     *
+     * @param size
+     *          The dimension of the font
+     * @return Font
+     *          The font to use
+     */
+    public static Font getSizedFont(final int size){return Font.loadFont(FONT_URL, size);}
 
+    /**
+     * Returns a plus sized font.
+     *
+     * @return Font
+     *          The font to use
+     */
     public static Font getFontWinner(){
-        return Font.font("MS Gothic", FontWeight.BOLD, font.getSize()+30);
+        return Font.loadFont(FONT_URL, WINNER_FONT);
     }
 }

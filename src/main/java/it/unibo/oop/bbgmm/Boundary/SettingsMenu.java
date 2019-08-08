@@ -14,8 +14,7 @@ import javafx.stage.Stage;
 import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 
 /**
- * @author Manuel
- * Scene for the settings Menu used to set the Resolution
+ * View for the settings Menu.
  */
 
 public class SettingsMenu extends AbstractBasicView {
@@ -35,6 +34,18 @@ public class SettingsMenu extends AbstractBasicView {
     private MenuItem itemEffectsVolume = new MenuItem("Effects: " + effectsVolume.getText());
     private final MenuItem itemBack = new MenuItem("BACK");
 
+    /**
+     * Constructor for SettingsMenu.
+     *
+     * @param primaryStage
+     *          The principal stage
+     * @param controller
+     *          The principal controller
+     * @param pane
+     *          The root for the scene
+     * @param scene
+     *          The scene displayed in the stage
+     */
     public SettingsMenu(final Stage primaryStage, final PrincipalController controller,
                         final AnchorPane pane, final Scene scene) {
         super(primaryStage, controller, pane, scene);
@@ -72,7 +83,7 @@ public class SettingsMenu extends AbstractBasicView {
                 itemEffectsVolume,
                 itemBack);
 
-        buttonActions();
+        itemActions();
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
@@ -108,7 +119,7 @@ public class SettingsMenu extends AbstractBasicView {
     }
 
     @Override
-    protected void buttonActions() {
+    protected void itemActions() {
         itemBack.setOnActivate(() -> {
             checkResolution();
             getController().showMainMenu(getViewFactory());
@@ -140,10 +151,16 @@ public class SettingsMenu extends AbstractBasicView {
         });
     }
 
+    /**
+     * Setter for the next intensity of music volume.
+     */
     private void nextMusicVolume(){
         this.musicVolume = Volume.values()[(this.musicVolume.ordinal() + 1)% Volume.values().length];
     }
 
+    /**
+     * Setter for the next intensity of effects volume.
+     */
     private void nextEffectsVolume(){
         this.effectsVolume = Volume.values()[(this.effectsVolume.ordinal() + 1)% Volume.values().length];
     }

@@ -7,10 +7,26 @@ import javafx.geometry.Point2D;
 
 import java.util.Set;
 
-
+/**
+ * Bullet entity.
+ */
 public class Bullet extends AbstractEntity {
     private static final Dimension2D SIZE = new Dimension2D(1.3,1.3);
 
+    /**
+     * Constructor for Bullet.
+     *
+     * @param bodyBuilder
+     *          The bodyBuilder
+     * @param weapon
+     *          The weapon used by the player
+     * @param ownerDirection
+     *          The direction of the player
+     * @param position
+     *          The position of the bullet
+     * @param walls
+     *          The set of walls
+     */
     public Bullet(final BodyBuilder bodyBuilder,
                   final Weapon weapon,
                   final Direction ownerDirection,

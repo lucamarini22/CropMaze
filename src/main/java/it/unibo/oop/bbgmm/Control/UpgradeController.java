@@ -2,6 +2,7 @@ package it.unibo.oop.bbgmm.Control;
 
 import it.unibo.oop.bbgmm.Entity.UpgradeType;
 
+
 public interface UpgradeController {
 
     /**

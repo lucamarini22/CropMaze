@@ -11,10 +11,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-
 /**
- * @author Manuel
- * Scene for the MainMenu.
+ * View for the MainMenu.
  */
 
 public class MainMenu extends AbstractBasicView {
@@ -30,7 +28,18 @@ public class MainMenu extends AbstractBasicView {
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
-
+    /**
+     * Constructor for MainMenu.
+     *
+     * @param primaryStage
+     *          The principal stage
+     * @param controller
+     *          The principal controller
+     * @param pane
+     *          The root for the scene
+     * @param scene
+     *          The scene displayed in the stage
+     */
     public MainMenu(final Stage primaryStage, final PrincipalController controller,
                     final AnchorPane pane, final Scene scene) {
         super(primaryStage,controller, pane, scene);
@@ -65,7 +74,7 @@ public class MainMenu extends AbstractBasicView {
                 itemSettings,
                 itemExit);
 
-        buttonActions();
+        itemActions();
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
@@ -89,7 +98,6 @@ public class MainMenu extends AbstractBasicView {
         pane.setId("mainMenu");
 
         getScene().setRoot(getRoot());
-
     }
 
     /**
@@ -99,11 +107,8 @@ public class MainMenu extends AbstractBasicView {
         return (MenuItem) menuBox.getChildren().get(index);
     }
 
-    /**
-     * Method used to set the action for each button.
-     */
     @Override
-    protected void buttonActions() {
+    protected void itemActions() {
         itemNewGame.setOnActivate(() -> {
             setPlayerInputHandler();
             getAudioPlayer().stopMusic();
@@ -124,7 +129,7 @@ public class MainMenu extends AbstractBasicView {
     }
 
     /**
-     * it clears the actions of the button enter
+     * it clears the actions of the button enter.
      */
     private void clearEnter() {
         getScene().setOnKeyPressed(event -> {
@@ -134,7 +139,7 @@ public class MainMenu extends AbstractBasicView {
     }
 
     /**
-     * Method used to set the PlayerInputHandler in the PrincipalController
+     * Method used to set the PlayerInputHandler in the PrincipalController.
      */
     private void setPlayerInputHandler(){
         getController().setPlayerInputHandler(new PlayerInputHandler(getScene()));

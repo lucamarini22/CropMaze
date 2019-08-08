@@ -7,15 +7,17 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
- * Utils class used to extraxt files from a zip folder
+ * Utils class used to extraxt files from a zip folder.
  */
 public final class ZipExtractor {
 
     /**
-     * Method used to extract the file from the zip
+     * Method used to extract the file from the zip.
      *
      * @param inputStream
+     *          The inputStream
      * @param directory
+     *          The file zip
      * @throws IOException
      */
     public static void extract(final InputStream inputStream, final File directory) throws IOException {

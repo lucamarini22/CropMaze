@@ -8,11 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * {@link ScoreList} implementation.
+ */
 public class ScoreListImpl implements ScoreList{
 
     private final URL fileName = ClassLoader.getSystemResource("ScoreList.txt");
     private List<Score> scoreList = new ArrayList<>();
 
+    /**
+     * {@link ScoreList} implementation.
+     *
+     * @throws IOException
+     */
     public ScoreListImpl() throws IOException {
         final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName.getPath())));
         int size = ostream.readInt();
@@ -27,12 +35,12 @@ public class ScoreListImpl implements ScoreList{
     }
 
     @Override
-    public void addScore(Pair<String, Integer> score){
+    public void addScore(final Pair<String, Integer> score){
         //maximux size of the scoreList is 5
         Score newScore = new Score(score.getFst(),score.getSnd());
         if(!scoreList.contains(newScore)){
             scoreList.add(newScore);
-            scoreList.sort((s1,s2) -> s2.getLevel()-s1.getLevel());
+            scoreList.sort((s1,s2) -> s2.getScore()-s1.getScore());
             if(scoreList.size() > 5){
                 scoreList = scoreList.subList(0, 5);
             }
@@ -45,6 +53,11 @@ public class ScoreListImpl implements ScoreList{
         }//if it contains the exact score it does nothing
     }
 
+    /**
+     * Method that writes the list on file.
+     *
+     * @throws IOException
+     */
     private void writeOnFile() throws IOException {
         final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName.getPath(), false)));
         ostream.writeInt(scoreList.size());
@@ -62,7 +75,7 @@ public class ScoreListImpl implements ScoreList{
     @Override
     public List<Pair<String, Integer>> getRanking() {
         return scoreList.stream()
-                .map((s) -> new Pair<String, Integer>(s.getPlayerName(), s.getLevel()))
+                .map((s) -> new Pair<String, Integer>(s.getPlayerName(), s.getScore()))
                 .collect(Collectors.toList());
     }
 
