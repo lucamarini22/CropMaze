@@ -43,6 +43,10 @@ public final class GameFieldImpl implements GameField {
         this.entitiesToBeRemoved.forEach(this::removeEntity);
         this.entitiesToBeRemoved.clear();
         this.collisionSupervisor.searchCollision();
+        if (this.entities.size() == 1) {
+            this.gameController.stop();
+            this.gameController.triggerEndLevel();
+        }
     }
 
     @Override
@@ -87,8 +91,8 @@ public final class GameFieldImpl implements GameField {
                 this.entities.stream().filter(e -> !(e.getClass().equals(Player.class)))
                         .forEach(entitiesToBeRemoved::add);
                 //this.level.initializeLevel();
-                this.gameController.stop();
-                this.gameController.triggerEndLevel();
+               // this.gameController.stop();
+                //this.gameController.triggerEndLevel();
 
                 return;
             }

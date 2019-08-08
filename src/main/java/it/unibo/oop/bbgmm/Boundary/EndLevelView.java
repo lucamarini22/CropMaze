@@ -1,6 +1,8 @@
 package it.unibo.oop.bbgmm.Boundary;
 
+import it.unibo.oop.bbgmm.Control.EndLevelController;
 import it.unibo.oop.bbgmm.Utilities.FontMaker;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -36,9 +38,14 @@ public class EndLevelView {
     private final AudioPlayer audioPlayer;
     private int currentItem = 1;
     private HBox itemLayout;
+    private final EndLevelController endLevelController;
+    final MenuItem itemYes = new MenuItem("Next Level");
+    final MenuItem itemNo = new MenuItem("Main Menu");
 
-    public EndLevelView(final AudioPlayer audioPlayer) {
+
+    public EndLevelView(final AudioPlayer audioPlayer, final EndLevelController endLevelController) {
         this.audioPlayer = audioPlayer;
+        this.endLevelController = endLevelController;
     }
 
     /**
@@ -49,7 +56,7 @@ public class EndLevelView {
      * @return the answer
      *          The answer of the player
      */
-    public boolean display(final Stage primaryStage) {
+    public void display(final Stage primaryStage) {
         final Stage stage = new Stage();
         stage.setResizable(false);
         stage.centerOnScreen();
@@ -65,8 +72,6 @@ public class EndLevelView {
         label.setEffect(new GaussianBlur(2));
         label.setTextFill(Color.FORESTGREEN);
 
-        final MenuItem itemYes = new MenuItem("Next Level");
-        final MenuItem itemNo = new MenuItem("Main Menu");
 
         itemYes.setFont(SIZE_ITEMS);
         itemNo.setFont(SIZE_ITEMS);
@@ -114,14 +119,34 @@ public class EndLevelView {
             }
         });
 
+
+
         getMenuItem(this.currentItem).setActive(true);
 
         scene.getStylesheets().add("Style.css");
 
         stage.setScene(scene);
-        stage.showAndWait();
+        //stage.showAndWait();
+      /*  Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                stage.showAndWait();
+            }
+        });*/
+      stage.show();
 
-        return this.answer;
+        itemActions();
+
+    }
+
+    private void itemActions() {
+        itemYes.setOnActivate(() -> {
+            endLevelController.goToNextLevel();
+        });
+
+        itemNo.setOnActivate(() -> {
+            System.exit(1);
+        });
     }
 
     /**

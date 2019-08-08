@@ -139,13 +139,14 @@ public final class GameFieldViewImpl implements GameFieldView {
 
     public void showEndLevelBox(final PrincipalController principalController) {
         principalController.getGameController().get().stop();
-        boolean answer = new EndLevelView(this.audioplayer).display(this.primaryStage);
-        if (answer) {
+
+        new EndLevelView(this.audioplayer, this.endLevelController).display(this.primaryStage);
+        /*if (answer) {
             this.endLevelController.goToNextLevel();
         } else {
             this.endLevelController.goToMainMenu();
             this.audioplayer.stopMusic();
-        }
+        }*/
     }
 
     @Override

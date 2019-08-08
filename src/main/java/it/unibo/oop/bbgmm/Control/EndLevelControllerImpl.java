@@ -29,7 +29,7 @@ public class EndLevelControllerImpl implements EndLevelController {
     public void goToNextLevel() {
         this.gameStatistics.setCurrentLevel(gameStatistics.getCurrentLevel() + INCREMENT_LEVEL);
         this.level.initializeLevel();
-        this.principalController.getGameController().get().start();
+       // this.principalController.getGameController().get().start();
     }
 
     @Override
