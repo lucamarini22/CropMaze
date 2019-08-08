@@ -123,6 +123,8 @@ public class GameOver extends AbstractBasicView {
         root.getChildren().add(menuBox);
 
         root.setId("gameOverView");
+
+        getScene().setRoot(root);
     }
 
     private MenuItem getMenuItem(int index){

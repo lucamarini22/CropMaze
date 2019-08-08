@@ -79,7 +79,9 @@ public final class GameFieldImpl implements GameField {
     public void destroyEntity(final DeathEvent event) {
         //if an Alien is killed, it controls the number of alive Aliens, and if it is one (the last Alien killed),
         // then the next level has to start
-        if (event.getEntity() instanceof Alien) {
+        Entity entity = event.getEntity();
+
+        if (entity instanceof Alien) {
             this.playerStatistics.increaseKilledEnemies();
             if(this.getAliveEnemies() == 1){
                 this.entities.stream().filter(e -> !(e.getClass().equals(Player.class)))
@@ -91,10 +93,10 @@ public final class GameFieldImpl implements GameField {
                 return;
             }
         }
-        if (event.getEntity() instanceof Coin) {
+        if (entity instanceof Coin) {
             this.playerStatistics.increaseCollectedMoney();
         }
-        this.entitiesToBeRemoved.add(event.getEntity());
+        this.entitiesToBeRemoved.add(entity);
     }
 
     @Override
