@@ -25,7 +25,7 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
     private static final int SIZE_MESSAGE = 35;
     private static final int SIZE_ITEMS = 40;
     private static final int SPACING = 40;
-    private static final int POS = 33;
+    private static final int POS = 30;
     private static final int SPACE_BETWEEN_HORIZONTAL_ITEM = 50;
     private static final int SPACE_BETWEEN_VERTICAL_ITEM = 10;
     private static final int WIDTH = 800;
@@ -98,8 +98,6 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
         stage.setScene(scene);
         stage.show();
     }
-
-
 
     /**
      * Method used to get the requested element of the buttons' box.

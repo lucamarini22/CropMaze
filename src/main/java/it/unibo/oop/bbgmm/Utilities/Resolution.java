@@ -9,8 +9,7 @@ import java.awt.*;
 public final class Resolution {
     public static final int SMALL_HEIGHT = 768;
     public static final int SMALL_WIDTH = 1024;
-    private static final Toolkit TK = Toolkit.getDefaultToolkit();
-    private static final Dimension D = TK.getScreenSize();
+    private static final Dimension D = Toolkit.getDefaultToolkit().getScreenSize();
     private static int width = SMALL_WIDTH;
     private static int height = SMALL_HEIGHT;
     private static boolean fullScreen = false;

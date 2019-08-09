@@ -75,6 +75,4 @@ public class ViewFactory {
     public GameOver createGameOver(){
         return new GameOver(stage,controller, root, scene);
     }
-
-
 }

@@ -116,7 +116,7 @@ public class MainMenu extends AbstractBasicView {
             clearEnter();
         });
         itemScore.setOnActivate(() -> {
-            getController().showGameOver(getViewFactory());
+            getController().showRankingView(getViewFactory());
         });
         itemSettings.setOnActivate(() -> {
             getController().showSettings(getViewFactory());

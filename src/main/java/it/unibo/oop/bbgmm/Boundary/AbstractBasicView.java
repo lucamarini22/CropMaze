@@ -104,9 +104,7 @@ public abstract class AbstractBasicView {
     protected void checkResolution(){
         if(Resolution.isFullScreen()){
             primaryStage.setFullScreen(true);
-
-        }
-        else{
+        } else{
             primaryStage.setFullScreen(false);
             primaryStage.centerOnScreen();
         }
