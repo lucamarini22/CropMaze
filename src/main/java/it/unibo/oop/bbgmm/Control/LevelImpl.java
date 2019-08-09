@@ -53,7 +53,7 @@ public final class LevelImpl implements Level {
     }
     @Override
     public void initializeLevel() {
-        this.gameStatistics.setCurrentLevel(this.gameStatistics.getCurrentLevel() + 1);
+       // this.gameStatistics.setCurrentLevel(this.gameStatistics.getCurrentLevel() + 1);
         this.map.getLayers().forEach(layer -> {
             if (layer instanceof TileLayer) {
                 loadTiles((TileLayer) layer);

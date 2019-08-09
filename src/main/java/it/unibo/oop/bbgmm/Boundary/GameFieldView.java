@@ -43,10 +43,15 @@ public interface GameFieldView extends  ObservableView<EndLevelController> {
     void setPlayerInputListener(PlayerInputListener playerInputListener);
 
     /**
-     * Getter for the upgrade Button
+     * Getter for the upgrade Button.
      * @return {@link Button}
      */
     Button getUpgradeButton();
 
+    /**
+     * Shows a box when a level is finished.
+     * @param principalController
+     *      {@link PrincipalController} instance
+     */
     void showEndLevelBox(PrincipalController principalController);
 }

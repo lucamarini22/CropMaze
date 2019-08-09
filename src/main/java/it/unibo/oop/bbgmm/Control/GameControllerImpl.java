@@ -1,9 +1,7 @@
 package it.unibo.oop.bbgmm.Control;
 
 import com.google.common.io.Files;
-import it.unibo.oop.bbgmm.Boundary.EndLevelView;
 import it.unibo.oop.bbgmm.Boundary.GameFieldView;
-import it.unibo.oop.bbgmm.Boundary.ViewFactory;
 import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.Utilities.ZipExtractor;
@@ -52,6 +50,8 @@ public final class GameControllerImpl implements GameController {
      * @param gameFieldView
      *      View of the field
      * @param primaryStage
+     *      The primary Stage
+     * @param principalController
      *      {@link PrincipalController} instance
      */
     public GameControllerImpl(final GameStatistics gameStatistics, final GameFieldView gameFieldView, final Stage primaryStage,
@@ -68,10 +68,7 @@ public final class GameControllerImpl implements GameController {
             e.printStackTrace();
         }
         this.level = new LevelImpl(this.map, this.gameStatistics, this.entitySpawner, this.gameFieldView);
-       // this.endLevelView = this.principalController.showEndLevelView();
         this.endLevelController = new EndLevelControllerImpl(this.principalController, this.gameStatistics, this.level, this.gameFieldView);
-
-        //this.gameField.setLevel(level);
         this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this, primaryStage);
     }
 
@@ -96,7 +93,7 @@ public final class GameControllerImpl implements GameController {
     }
 
     @Override
-    public void start(){
+    public void start() {
         this.timer.start();
     }
 
@@ -131,7 +128,7 @@ public final class GameControllerImpl implements GameController {
     }
 
     @Override
-    public int calculateScore(){
+    public int calculateScore() {
         return new BasicScoreCalculator().getScore(this.gameField.getPlayerStatistic());
     }
 }

@@ -27,6 +27,7 @@ import static it.unibo.oop.bbgmm.Boundary.Music.*;
 public final class GameFieldViewImpl implements GameFieldView {
 
     private static final int TOP_LEFT_POINT_BACKGROUND = -800;
+    private static final int SPACING = 20;
     private static final String BACKGROUND_PATH = "/images/background.png";
     private final Stage primaryStage;
     private final Group fieldView = new Group();
@@ -38,14 +39,16 @@ public final class GameFieldViewImpl implements GameFieldView {
     private Button upgradeButton = new Button("UPGRADE");
     private final PrincipalController principalController;
     private EndLevelController endLevelController;
-
-
     /**
      * Constructor of {@link GameFieldViewImpl}.
      * @param audioPlayer
      *      {@link AudioPlayer}
      * @param playerInputHandler
      *      {@link PlayerInputHandler} instance
+     * @param principalController
+     *      {@link PrincipalController} instance
+     * @param primaryStage
+     *      The primary {@link Stage}
      */
     public GameFieldViewImpl(final AudioPlayer audioPlayer, final PlayerInputHandler playerInputHandler,
                              final PrincipalController principalController, final Stage primaryStage) {
@@ -54,13 +57,10 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.playerInputHandler = playerInputHandler;
         this.setBackground();
         fieldView.getChildren().add(this.background);
-        rootView.getChildren().add(new HBox(20, statusBar.getStatusBox(), upgradeButton));
+        rootView.getChildren().add(new HBox(SPACING, statusBar.getStatusBox(), upgradeButton));
         this.principalController = principalController;
-
         this.primaryStage.getScene().addEventHandler(KeyEvent.KEY_PRESSED, this::onPress);
         this.audioplayer.playMusic(GAME_TRACK.getPath());
-
-
     }
 
     @Override
@@ -105,6 +105,9 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.background.setY(TOP_LEFT_POINT_BACKGROUND);
     }
 
+    /**
+     * @return the Upgrade Button
+     */
     public Button getUpgradeButton() {
         return this.upgradeButton;
     }
@@ -136,17 +139,12 @@ public final class GameFieldViewImpl implements GameFieldView {
     }
 
 
-
+    @Override
     public void showEndLevelBox(final PrincipalController principalController) {
         principalController.getGameController().get().stop();
-
-        new EndLevelView(this.audioplayer, this.endLevelController).display(this.primaryStage);
-        /*if (answer) {
-            this.endLevelController.goToNextLevel();
-        } else {
-            this.endLevelController.goToMainMenu();
-            this.audioplayer.stopMusic();
-        }*/
+        EndLevelView endLevelView = new EndLevelView(this.audioplayer, this.endLevelController);
+        endLevelView.setObserver(this.endLevelController);
+        endLevelView.display(this.primaryStage);
     }
 
     @Override
