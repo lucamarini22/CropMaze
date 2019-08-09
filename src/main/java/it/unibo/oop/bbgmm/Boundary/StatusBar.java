@@ -3,11 +3,6 @@ package it.unibo.oop.bbgmm.Boundary;
 import javafx.scene.Node;
 
 public interface StatusBar {
-    /**
-     * Set the max health
-     * @param maxLifePoints
-     */
-    void setMaxLifePoints(int maxLifePoints);
 
     /**
      * Set current health
