@@ -37,14 +37,14 @@ public final class StatusBarImpl implements StatusBarScreen {
         pb.setPrefWidth((WIDTHBAR * Resolution.getWidth()) / Resolution.SMALL_WIDTH);
         pb.setPrefHeight((HIGHTBAR * Resolution.getHeight())/Resolution.SMALL_HEIGHT);
         coinsBox.getChildren().add(new ImageView(new Image("images/coinSilver.png")));
-        coinsBox.getChildren().add(new ImageView(new Image("images/X.png")));
+        coinsBox.getChildren().add(new ImageView(new Image("images/numbers/X.png")));
         coinsBox.setPrefWidth((WIDTHBAR * Resolution.getWidth()) / Resolution.SMALL_WIDTH);
         coinsBox.setPrefHeight((HIGHTBAR * Resolution.getHeight())/Resolution.SMALL_HEIGHT);
         statusBox.setAlignment(Pos.CENTER_LEFT);
         coinsBox.setAlignment(Pos.CENTER_LEFT);
         root.setPadding(new Insets(PADDING));
         imageNum = IntStream.range(0,10).
-                mapToObj(value -> "images/number_"+value+".png").
+                mapToObj(value -> "images/numbers/number_"+value+".png").
                 map(Image::new).
                 collect(Collectors.toList());
         statusBox.getChildren().add(pb);
