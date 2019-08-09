@@ -65,8 +65,4 @@ public class MainWindow {
         this.primaryStage.setFullScreen(fullscreen);
         this.primaryStage.show();
     }
-
-    public ViewFactory getViewFactory() {
-        return viewFactory;
-    }
 }
