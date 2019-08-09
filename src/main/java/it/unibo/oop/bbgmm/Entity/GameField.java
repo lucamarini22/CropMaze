@@ -54,13 +54,6 @@ public interface GameField {
     void destroyEntity(DeathEvent event);
 
     /**
-     * Sets the level loader.
-     * @param level
-     *      {@link Level} instance
-     */
-    void setLevel(Level level);
-
-    /**
      * Getter for the player's statistics.
      *
      * @return the player statistics

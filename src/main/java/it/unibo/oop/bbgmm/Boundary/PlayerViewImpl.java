@@ -44,17 +44,12 @@ public final class PlayerViewImpl extends AbstractAliveEntityView implements Pla
 
 
     @Override
-    public void setMaxLifePoints(int maxLifePoints) {
-
-    }
-
-    @Override
     public void setCurrentLifePoints(int currentLifePoints) {
-
+        this.statusBar.setCurrentLifePoints(currentLifePoints);
     }
 
     @Override
     public void setCoins(int coins) {
-
+        this.statusBar.setCoins(coins);
     }
 }

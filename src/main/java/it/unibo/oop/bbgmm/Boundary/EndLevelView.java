@@ -22,6 +22,7 @@ import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_PRESS;
  */
 public final class EndLevelView implements ObservableView<EndLevelController> {
     private static final String MESSAGE = "Press ENTER to go to the next level\n\n\n";
+    private static final String NEXT_LEVEL = "Next Level";
     private static final int SIZE_MESSAGE = 35;
     private static final int SIZE_ITEMS = 40;
     private static final int SPACING = 40;
@@ -33,6 +34,7 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
     private final AudioPlayer audioPlayer;
     private HBox itemLayout;
     private EndLevelController endLevelController;
+    private Stage primaryStage;
 
     /**
      * {@link EndLevelView} constructor.
@@ -52,9 +54,10 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
      * @param primaryStage
      *          The principal stage
      */
-    public void display(final Stage primaryStage) {
+    void display(final Stage primaryStage) {
+        this.primaryStage = primaryStage;
         int currentItem = 0;
-        final MenuItem itemNextLevel = new MenuItem("Next Level");
+        final MenuItem itemNextLevel = new MenuItem(NEXT_LEVEL);
         final Stage stage = new Stage();
         stage.setResizable(false);
         stage.centerOnScreen();

@@ -52,10 +52,12 @@ public class PlayerController extends AliveEntityController implements PlayerInp
 
     private void updateLifeView(){
         getEntity().get(Life.class).ifPresent(life ->{
-            playerView.setMaxLifePoints(life.getMaxLifePoints());
             playerView.setCurrentLifePoints(life.getCurrentLifePoints());
                 });
+        System.out.println("CURRENT LIFE"+getEntity().get(Life.class).get().getCurrentLifePoints());
     }
+
+
 
     @Override
     public void shoot(Direction direction) {
@@ -72,7 +74,7 @@ public class PlayerController extends AliveEntityController implements PlayerInp
         bulletControllers.add(controller);
     }
 
-    private void updateCoins(){
+    private void updateCoinsView(){
         getEntity().get(Bag.class).ifPresent(bag ->
                 playerView.setCoins(bag.getMoney()));
     }
@@ -85,6 +87,8 @@ public class PlayerController extends AliveEntityController implements PlayerInp
                 .forEach(EntityController::update);
         removedControllers.forEach(c -> bulletControllers.remove(c));
         removedControllers.clear();
+        updateCoinsView();
+        updateLifeView();
     }
 
     public void removeBulletController(final BulletController bulletController){
