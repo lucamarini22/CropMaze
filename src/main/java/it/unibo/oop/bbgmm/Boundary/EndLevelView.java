@@ -2,8 +2,6 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.EndLevelController;
 import it.unibo.oop.bbgmm.Utilities.FontMaker;
-import javafx.application.Platform;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -18,14 +16,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_PRESS;
-import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_SWITCH;
 
 /**
- * Class used to return to the mainMenu during the game.
+ * View that it shows when a level is finished, that is when all enemies are dead.
  */
-public class EndLevelView {
-
-    private static final String MESSAGE = "ATTENTION!\nDo you want to go back to the main menu?\n(All progress will be erased)";
+public final class EndLevelView implements ObservableView<EndLevelController> {
+    private static final String MESSAGE = "Press ENTER to go to the next level\n\n\n";
     private static final int SIZE_MESSAGE = 35;
     private static final int SIZE_ITEMS = 40;
     private static final int SPACING = 40;
@@ -34,29 +30,31 @@ public class EndLevelView {
     private static final int SPACE_BETWEEN_VERTICAL_ITEM = 10;
     private static final int WIDTH = 800;
     private static final int HEIGHT = 230;
-    private boolean answer = false;
     private final AudioPlayer audioPlayer;
-    private int currentItem = 1;
     private HBox itemLayout;
-    private final EndLevelController endLevelController;
-    final MenuItem itemYes = new MenuItem("Next Level");
-    final MenuItem itemNo = new MenuItem("Main Menu");
+    private EndLevelController endLevelController;
 
-
+    /**
+     * {@link EndLevelView} constructor.
+     * @param audioPlayer
+     *      {@link AudioPlayer} instance
+     * @param endLevelController
+     *      Controller that manages the end of a level
+     */
     public EndLevelView(final AudioPlayer audioPlayer, final EndLevelController endLevelController) {
         this.audioPlayer = audioPlayer;
-        this.endLevelController = endLevelController;
+        //this.endLevelController = endLevelController;
     }
 
     /**
-     * It displays the PauseBox.
+     * Displays the {@link EndLevelView}.
      *
      * @param primaryStage
      *          The principal stage
-     * @return the answer
-     *          The answer of the player
      */
     public void display(final Stage primaryStage) {
+        int currentItem = 0;
+        final MenuItem itemNextLevel = new MenuItem("Next Level");
         final Stage stage = new Stage();
         stage.setResizable(false);
         stage.centerOnScreen();
@@ -71,18 +69,13 @@ public class EndLevelView {
         label.setFont(FontMaker.getSizedFont(SIZE_MESSAGE));
         label.setEffect(new GaussianBlur(2));
         label.setTextFill(Color.FORESTGREEN);
-
-
-        itemYes.setFont(SIZE_ITEMS);
-        itemNo.setFont(SIZE_ITEMS);
+        itemNextLevel.setFont(SIZE_ITEMS);
 
         final VBox layout = new VBox(SPACE_BETWEEN_VERTICAL_ITEM);
         this.itemLayout = new HBox(SPACE_BETWEEN_HORIZONTAL_ITEM);
-
-        this.itemLayout.getChildren().addAll(itemYes, itemNo);
+        this.itemLayout.getChildren().addAll(itemNextLevel);
         this.itemLayout.setSpacing(SPACING);
         this.itemLayout.setAlignment(Pos.CENTER);
-
         layout.getChildren().addAll(label, this.itemLayout);
         layout.setAlignment(Pos.CENTER);
 
@@ -90,64 +83,23 @@ public class EndLevelView {
         pane.getChildren().add(layout);
         layout.setLayoutX(POS);
         layout.setLayoutY(POS);
-        pane.setId("pauseBox");
+        pane.setId("endLevelView");
 
         final Scene scene = new Scene(pane);
-
         scene.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.RIGHT) {
-                if (this.currentItem == 0) {
-                    playSwitchSound();
-                    getMenuItem(this.currentItem).setActive(false);
-                    getMenuItem(++this.currentItem).setActive(true);
-                    this.answer = false;
-                }
-            }
-
-            if (event.getCode() == KeyCode.LEFT) {
-                if (this.currentItem != 0) {
-                    playSwitchSound();
-                    getMenuItem(this.currentItem).setActive(false);
-                    getMenuItem(--this.currentItem).setActive(true);
-                    answer = true;
-                }
-            }
-
             if (event.getCode() == KeyCode.ENTER) {
                 playPressSound();
                 stage.close();
+                endLevelController.goToNextLevel();
             }
         });
-
-
-
-        getMenuItem(this.currentItem).setActive(true);
-
+        getMenuItem(currentItem).setActive(true);
         scene.getStylesheets().add("Style.css");
-
         stage.setScene(scene);
-        //stage.showAndWait();
-      /*  Platform.runLater(new Runnable(){
-            @Override
-            public void run() {
-                stage.showAndWait();
-            }
-        });*/
-      stage.show();
-
-        itemActions();
-
+        stage.show();
     }
 
-    private void itemActions() {
-        itemYes.setOnActivate(() -> {
-            endLevelController.goToNextLevel();
-        });
 
-        itemNo.setOnActivate(() -> {
-            System.exit(1);
-        });
-    }
 
     /**
      * Method used to get the requested element of the buttons' box.
@@ -159,14 +111,12 @@ public class EndLevelView {
     /**
      * Method called to play the buttonSwitch sound.
      */
-    private void playSwitchSound(){
-        this.audioPlayer.playSound(BUTTON_SWITCH.getPath());
+    private void playPressSound() {
+        this.audioPlayer.playSound(BUTTON_PRESS.getPath());
     }
 
-    /**
-     * Method called to play the buttonSwitch sound.
-     */
-    private void playPressSound(){
-        this.audioPlayer.playSound(BUTTON_PRESS.getPath());
+    @Override
+    public void setObserver(final EndLevelController observer) {
+        this.endLevelController = observer;
     }
 }
