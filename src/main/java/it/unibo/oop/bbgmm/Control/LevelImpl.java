@@ -53,7 +53,6 @@ public final class LevelImpl implements Level {
     }
     @Override
     public void initializeLevel() {
-       // this.gameStatistics.setCurrentLevel(this.gameStatistics.getCurrentLevel() + 1);
         this.map.getLayers().forEach(layer -> {
             if (layer instanceof TileLayer) {
                 loadTiles((TileLayer) layer);
@@ -125,7 +124,8 @@ public final class LevelImpl implements Level {
                     break;
                 case ALIEN:
                     for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
-                        entity = entitySpawner.spawn(EntityType.ALIEN.toString(), new Point2D(position.getX() + i, position.getY()));
+                        entity = entitySpawner.spawn(EntityType.ALIEN.toString(), new Point2D(position.getX() + (2 * i),
+                                position.getY() + (double) (i / 2)));
                         entitiesControllers.add(new AliveEntityController(entity, gameFieldView.getEntityViewFactory().createAlienView()));
                     }
                     break;
