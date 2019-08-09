@@ -34,6 +34,7 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
     private final AudioPlayer audioPlayer;
     private HBox itemLayout;
     private EndLevelController endLevelController;
+    private Stage primaryStage;
 
     /**
      * {@link EndLevelView} constructor.
@@ -53,7 +54,8 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
      * @param primaryStage
      *          The principal stage
      */
-    public void display(final Stage primaryStage) {
+    void display(final Stage primaryStage) {
+        this.primaryStage = primaryStage;
         int currentItem = 0;
         final MenuItem itemNextLevel = new MenuItem(NEXT_LEVEL);
         final Stage stage = new Stage();

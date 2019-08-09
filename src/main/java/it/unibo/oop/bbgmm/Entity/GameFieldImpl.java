@@ -17,7 +17,6 @@ public final class GameFieldImpl implements GameField {
     private final CollisionSupervisor collisionSupervisor;
     private final Set<Entity> entitiesToBeRemoved;
     private Entity player;
-    private Level level;
     private GameController gameController;
     private final PlayerStatistics playerStatistics;
 
@@ -43,14 +42,11 @@ public final class GameFieldImpl implements GameField {
         this.entitiesToBeRemoved.forEach(this::removeEntity);
         this.entitiesToBeRemoved.clear();
         this.collisionSupervisor.searchCollision();
+        //If there are no enemies (aliens) it goes to the next level
         if ((int) this.entities.stream().filter(e -> e instanceof Alien).count() == 0) {
             this.gameController.stop();
             this.gameController.triggerEndLevel();
         }
-       /* if (this.entities.size() == 1) {
-            this.gameController.stop();
-            this.gameController.triggerEndLevel();
-        }*/
     }
 
     @Override
@@ -101,11 +97,6 @@ public final class GameFieldImpl implements GameField {
             this.playerStatistics.increaseCollectedMoney();
         }
         this.entitiesToBeRemoved.add(entity);
-    }
-
-    @Override
-    public void setLevel(final Level level) {
-        this.level = level;
     }
 
     @Override
