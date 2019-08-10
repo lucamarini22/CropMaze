@@ -122,6 +122,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void showGameOver(final ViewFactory viewFactory) {
+        this.playerInputHandler = Optional.empty();
         viewFactory.createGameOver();
     }
 
