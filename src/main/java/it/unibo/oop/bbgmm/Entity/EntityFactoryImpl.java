@@ -39,7 +39,7 @@ public final class EntityFactoryImpl implements EntityFactory {
     @Override
     public Alien createEnemy(final Point2D position) {
         if (this.player == null) {
-            throw new NullPointerException("Error: The Player is not present");
+            throw new IllegalArgumentException("Error: The Player is not present");
         }
         return new Alien(new BodyBuilder(), position, entityStatistics.getEnemyHealth(this.gameStatistics.getCurrentLevel()), gameField.getWalls(), this.player);
     }

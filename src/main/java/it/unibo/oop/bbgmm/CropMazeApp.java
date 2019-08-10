@@ -24,6 +24,6 @@ public class CropMazeApp extends Application {
      */
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        PrincipalController controller = new PrincipalControllerImpl(primaryStage);
+        final PrincipalController controller = new PrincipalControllerImpl(primaryStage);
     }
 }
