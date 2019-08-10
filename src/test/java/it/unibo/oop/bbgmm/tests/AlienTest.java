@@ -1,8 +1,11 @@
-package it.unibo.oop.bbgmm.Tests;
+package it.unibo.oop.bbgmm.tests;
 
-import it.unibo.oop.bbgmm.Entity.*;
-import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
-import it.unibo.oop.bbgmm.Entity.Component.*;
+import it.unibo.oop.bbgmm.entity.*;
+import it.unibo.oop.bbgmm.entity.collision.CollisionSupervisorImpl;
+import it.unibo.oop.bbgmm.entity.component.BodyBuilder;
+import it.unibo.oop.bbgmm.entity.component.Brain;
+import it.unibo.oop.bbgmm.entity.component.ClashComponent;
+import it.unibo.oop.bbgmm.entity.component.LifeComponent;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import org.junit.Assert;
@@ -15,23 +18,22 @@ public class AlienTest {
 
     private static final double INITIAL_POSITION_X = 20;
     private static final double INITIAL_POSITION_Y = 20;
-    private static final Point2D initial_position = new Point2D(INITIAL_POSITION_X,INITIAL_POSITION_Y);
+    private static final Point2D initialPosition = new Point2D(INITIAL_POSITION_X,INITIAL_POSITION_Y);
     private static final int INITIAL_LIFE = 40;
     private static final Dimension2D DIMENSION = new Dimension2D(1,1);
     private static Set<Entity> walls = new HashSet<>();
     private static final BodyBuilder body = new BodyBuilder();
     private Alien alien;
-    private Wall wall;
     private Player player;
     private Movement feet;
-    private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl(), null);
 
 
-    private void initializeAlien(Set<Entity> walls){
+    private void initializeAlien(final Set<Entity> walls){
         //wall = new Wall(body, new Point2D(INITIAL_POSITION_X + 10, INITIAL_POSITION_Y + 10), DIMENSION);
         //walls.add(wall);
+        final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl(), null);
         player = new Player(body, new Point2D(25,23), INITIAL_LIFE, gameField);
-        alien = new Alien(body, initial_position, INITIAL_LIFE, walls, player);
+        alien = new Alien(body, initialPosition, INITIAL_LIFE, walls, player);
 
     }
 
@@ -49,7 +51,6 @@ public class AlienTest {
             alien.add(new LifeComponent(30));
         }
         catch(IllegalArgumentException e){
-            System.out.println("Components already existing in alien");
         }
 
         feet = alien.get(Movement.class).get();
@@ -59,7 +60,6 @@ public class AlienTest {
             alien.add(feet);
         }
         catch(IllegalArgumentException e){
-            System.out.println("Components already existing in alien");
         }
     }
 
@@ -69,8 +69,6 @@ public class AlienTest {
 
         for(int i = 0 ; i < 8 ; i++ ) {
             alien.get(Brain.class).get().followPlayer();
-            System.out.println(alien.getBody().getPosition());
-            System.out.println(alien.getBody().getDirection());
         }
 
         Assert.assertEquals(alien.getBody().getPosition(),player.getBody().getPosition());
@@ -82,14 +80,11 @@ public class AlienTest {
 
     @Test
     public void TextMoveToPlayerWithWalls(){
-        wall = new Wall(body,new Point2D(23,23), DIMENSION);
+         Wall wall = new Wall(body,new Point2D(23,23), DIMENSION);
         walls.add(wall);
         initializeAlien(walls);
         for(int i = 0 ; i < 8 ; i++ ) {
-
             alien.get(Brain.class).get().followPlayer();
-            System.out.println(alien.getBody().getPosition());
-            System.out.println(alien.getBody().getDirection());
         }
 
         //alien can't find the player because there is a wall in the middle and it change its State to Stable
@@ -100,10 +95,7 @@ public class AlienTest {
         player.getBody().addPosition(new Point2D(-2,- 5));
         //System.out.println("PLAYER SPOSTATO IN POSIZIONE " + player.getBody().getPosition());
         for(int i = 0 ; i < 8 ; i++ ) {
-
             alien.get(Brain.class).get().followPlayer();
-            System.out.println(alien.getBody().getPosition());
-            System.out.println(alien.getBody().getDirection());
         }
         Assert.assertEquals(alien.getBody().getPosition(), player.getBody().getPosition());
         Assert.assertEquals(alien.get(Movement.class).get().getState(), Movement.State.WALKING);

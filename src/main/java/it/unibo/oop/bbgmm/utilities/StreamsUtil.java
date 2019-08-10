@@ -30,7 +30,7 @@ public final class StreamsUtil {
      *          the {@link Iterator}
      * @param <T>
      *          Generic
-     * @return the {@link stream}
+     * @return the stream.
      */
     public static <T> Stream <T> stream(final Iterator<T> it ){
         return stream(() -> it);

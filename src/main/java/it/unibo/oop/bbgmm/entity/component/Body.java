@@ -17,7 +17,7 @@ public class Body extends AbstractEntityComponent implements EntityBody{
 
 
 
-    Body(Point2D position, Dimension2D dimension, Direction direction,boolean movable) {
+    Body(final Point2D position, final Dimension2D dimension, final Direction direction,boolean movable) {
         super();
         this.movable = movable;
         this.direction = direction;
@@ -27,7 +27,7 @@ public class Body extends AbstractEntityComponent implements EntityBody{
     }
 
     @Override
-    public void update(double delta) {}
+    public void update(final double delta) {}
 
     @Override
     public boolean canMove() {return this.movable;}
@@ -36,12 +36,12 @@ public class Body extends AbstractEntityComponent implements EntityBody{
     public Direction getDirection() {return this.direction;}
 
     @Override
-    public void addPosition(Point2D position) {
+    public void addPosition(final Point2D position) {
         this.position = this.position.add(position);
     }
 
     @Override
-    public void changeDirection(Direction direction) {
+    public void changeDirection(final Direction direction) {
         this.direction = direction;
     }
 

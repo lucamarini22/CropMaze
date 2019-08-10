@@ -6,14 +6,18 @@ import it.unibo.oop.bbgmm.entity.DeathEvent;
 import it.unibo.oop.bbgmm.entity.Entity;
 
 /**
- * Translates view input to model input and updates the view
+ * Translates view input to model input and updates the view.
  * @param <L>
- *          generic type
+ *          generic type.
  */
 public abstract class AbstractLifelessEntityController<L extends EntityView> extends AbstractEntityController<L> {
+
     /**
-     * @param entity     object to control
+     * Constructor.
+     * @param entity
+     *          related entity.
      * @param entityView
+     *          related entity view.
      */
     public AbstractLifelessEntityController(final Entity entity, final L entityView) {
         super(entity, entityView);
@@ -25,7 +29,7 @@ public abstract class AbstractLifelessEntityController<L extends EntityView> ext
     }
 
     @Override
-    public void entityDestruction(DeathEvent event) {
+    public void entityDestruction(final DeathEvent event) {
         getEntityView().removeFromView();
     }
 }
