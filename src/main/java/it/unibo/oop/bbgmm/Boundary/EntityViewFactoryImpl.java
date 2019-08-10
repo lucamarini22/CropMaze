@@ -2,7 +2,6 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Entity.Direction;
 import it.unibo.oop.bbgmm.Entity.EntityType;
-import it.unibo.oop.bbgmm.Entity.PowerTag;
 import javafx.scene.Group;
 
 /**
@@ -38,12 +37,14 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
     }
 
     @Override
-    public BulletView createBulletView(Direction direction) {
+    public BulletView createBulletView(final Direction direction) {
         return new BulletView(parent, direction, audioPlayer);
     }
 
     @Override
-    public LifelessEntityView createCoinView() { return new CoinView(parent, audioPlayer); }
+    public LifelessEntityView createCoinView() {
+        return new CoinView(parent, audioPlayer);
+    }
 
     @Override
     public LifelessEntityView createDoubleSpeedView() {

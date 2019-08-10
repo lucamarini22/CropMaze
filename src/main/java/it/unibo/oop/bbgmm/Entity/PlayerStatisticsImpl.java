@@ -12,7 +12,7 @@ public final class PlayerStatisticsImpl implements PlayerStatistics {
     /**
      * Constructor for the player's statistics.
      */
-    public PlayerStatisticsImpl(){
+    public PlayerStatisticsImpl() {
         this.killedEnemies = 0;
         this.collectedMoney = 0;
     }

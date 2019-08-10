@@ -4,8 +4,6 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 
-import java.io.File;
-
 /**
  * Class that represent a {@link it.unibo.oop.bbgmm.Entity.Coin} view.
  */

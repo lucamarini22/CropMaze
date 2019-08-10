@@ -6,12 +6,12 @@ package it.unibo.oop.bbgmm.Entity;
 public interface PlayerStatistics {
 
     /**
-     * increases the number of collected money
+     * Increases the number of collected money.
      */
     void increaseCollectedMoney();
 
     /**
-     * increases the number of killed enemies
+     * Increases the number of killed enemies.
      */
     void increaseKilledEnemies();
 

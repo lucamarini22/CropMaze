@@ -6,7 +6,6 @@ import it.unibo.oop.bbgmm.Entity.Component.CollectingComponent;
 import it.unibo.oop.bbgmm.Entity.Component.CollisionComponent;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.shape.Rectangle;
 
 /**

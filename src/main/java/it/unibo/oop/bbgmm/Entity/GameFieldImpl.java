@@ -22,6 +22,8 @@ public final class GameFieldImpl implements GameField {
      * {@link GameFieldImpl} constructor.
      * @param collisionSupervisor
      *      {@link CollisionSupervisor} instance
+     * @param gameController
+     *      {@link GameController} instance
      */
     public GameFieldImpl(final CollisionSupervisor collisionSupervisor, final GameController gameController) {
         this.entities =  new LinkedHashSet<>();
