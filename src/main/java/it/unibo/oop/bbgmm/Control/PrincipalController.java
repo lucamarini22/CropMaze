@@ -4,20 +4,18 @@ import it.unibo.oop.bbgmm.Boundary.*;
 import it.unibo.oop.bbgmm.Utilities.Pair;
 import it.unibo.oop.bbgmm.Utilities.Volume;
 import it.unibo.oop.bbgmm.Utilities.VolumeData;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Main controller of the game
+ * Main controller of the game.
  */
 public interface PrincipalController {
 
     /**
-     * Getter for the ranking list
+     * Getter for the ranking list.
      *
      * @return List<Pair<String, Integer>>
      *          The list of ranking
@@ -25,25 +23,25 @@ public interface PrincipalController {
     List<Pair<String, Integer>> getRankingList();
 
     /**
-     * Method used to insert in the ranking a new score
+     * Method used to insert in the ranking a new score.
      *
      * @param name
      *          The name of the player
      */
-    void insertNewScore(final String name);
+    void insertNewScore(String name);
 
     /**
-     * Method used to update the audioPlayer
+     * Method used to update the audioPlayer.
      *
      * @param musicVolume
      *          The volume of the music
      * @param effectsVolume
      *          The volume of the effects
      */
-    void updateVolume(final Volume musicVolume, final Volume effectsVolume);
+    void updateVolume(Volume musicVolume, Volume effectsVolume);
 
     /**
-     * Getter for the Volume
+     * Getter for the Volume.
      *
      * @return VolumeData
      *          The volume
@@ -51,7 +49,7 @@ public interface PrincipalController {
     VolumeData getVolumeData();
 
     /**
-     *Getter for the AudioPlayer
+     *Getter for the AudioPlayer.
      *
      * @return AudioPlayer
      *          The audioPlayer
@@ -59,30 +57,30 @@ public interface PrincipalController {
     AudioPlayer getAudioPlayer();
 
     /**
-     * Method that stops the game
+     * Method that stops the game.
      */
     void stopGame();
 
     /**
-     * Method that starts the game
+     * Method that starts the game.
      */
     void startGame();
 
     /**
-     * Method that resets the game
+     * Method that resets the game.
      */
     void resetGame();
 
     /**
-     * Method used by the view to show the mainMenu
+     * Method used by the view to show the mainMenu.
      *
      * @param viewFactory
      *          The factory for the views
      */
-    void showMainMenu(final ViewFactory viewFactory);
+    void showMainMenu(ViewFactory viewFactory);
 
     /**
-     * Method used by the view to show the ranking
+     * Method used by the view to show the ranking.
      *
      * @param viewFactory
      *          The factory for the views
@@ -90,39 +88,39 @@ public interface PrincipalController {
     void showRankingView(final ViewFactory viewFactory);
 
     /**
-     * Method used by the view to show the settings
+     * Method used by the view to show the settings.
      *
      * @param viewFactory
      *          The factory for the views
      */
-    void showSettings(final ViewFactory viewFactory);
+    void showSettings(ViewFactory viewFactory);
 
     /**
-     * Method used by the view to show the GameField and start the game
+     * Method used by the view to show the GameField and start the game.
      *
      * @param scene
      *          The scene displayed in the stage
      */
-    void showGameField(final Scene scene);
+    void showGameField(Scene scene);
 
     /**
-     * Method used by the view to show the gameOver screen
+     * Method used by the view to show the gameOver screen.
      *
      * @param viewFactory
      *          The factory for the views
      */
-    void showGameOver(final ViewFactory viewFactory);
+    void showGameOver(ViewFactory viewFactory);
 
     /**
-     * Method invoked by the view to set the PlayerInputListener
+     * Method invoked by the view to set the PlayerInputListener.
      *
      * @param playerInputHandler
      *          The handler for the player moves
      */
-    void setPlayerInputHandler(final PlayerInputHandler playerInputHandler);
+    void setPlayerInputHandler(PlayerInputHandler playerInputHandler);
 
     /**
-     * Getter for the game controller
+     * Getter for the game controller.
      *
      * @return GameController
      *          The game controller

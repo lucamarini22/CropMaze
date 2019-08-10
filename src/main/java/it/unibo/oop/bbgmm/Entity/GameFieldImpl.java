@@ -15,13 +15,15 @@ public final class GameFieldImpl implements GameField {
     private final Set<Entity> entities;
     private final CollisionSupervisor collisionSupervisor;
     private final Set<Entity> entitiesToBeRemoved;
-    private GameController gameController;
+    private final GameController gameController;
     private final PlayerStatistics playerStatistics;
 
     /**
      * {@link GameFieldImpl} constructor.
      * @param collisionSupervisor
      *      {@link CollisionSupervisor} instance
+     * @param gameController
+     *      {@link GameController} instance
      */
     public GameFieldImpl(final CollisionSupervisor collisionSupervisor, final GameController gameController) {
         this.entities =  new LinkedHashSet<>();
@@ -59,7 +61,6 @@ public final class GameFieldImpl implements GameField {
         if (entity.get(Collidable.class).isPresent()) {
             this.collisionSupervisor.addCollisionComponent(entity.get(Collidable.class).get());
         }
-        System.out.println(entity);
         entity.getDeathEvent().register(this::destroyEntity);
         return entity;
     }
@@ -87,7 +88,7 @@ public final class GameFieldImpl implements GameField {
     public void destroyEntity(final DeathEvent event) {
         //if an Alien is killed, it controls the number of alive Aliens, and if it is one (the last Alien killed),
         // then the next level has to start
-        Entity entity = event.getEntity();
+        final Entity entity = event.getEntity();
         if (entity instanceof Alien) {
             this.playerStatistics.increaseKilledEnemies();
         }
@@ -106,7 +107,7 @@ public final class GameFieldImpl implements GameField {
      * @return a boolean that describes if the {@link Player} is dead or not
      */
     private boolean isPlayerDead() {
-        return ((int) this.entities.stream().filter(e -> e instanceof Player).count() == 0);
+        return (int) this.entities.stream().filter(e -> e instanceof Player).count() == 0;
     }
 
     /**

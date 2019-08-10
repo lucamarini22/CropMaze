@@ -5,9 +5,17 @@ import it.unibo.oop.bbgmm.Control.PrincipalControllerImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Launcher class.
+ */
 public class CropMazeApp extends Application {
 
-    public static void main(String[] args) {
+    /**
+     * Main.
+     * @param args
+     *      Arguments
+     */
+    public static void main(final String[] args) {
         launch(args);
     }
 
@@ -15,7 +23,7 @@ public class CropMazeApp extends Application {
      * {@inheritDoc}
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        PrincipalController controller = new PrincipalControllerImpl(primaryStage);
+    public void start(final Stage primaryStage) throws Exception {
+        final PrincipalController controller = new PrincipalControllerImpl(primaryStage);
     }
 }

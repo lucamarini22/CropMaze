@@ -34,18 +34,14 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
     private final AudioPlayer audioPlayer;
     private HBox itemLayout;
     private EndLevelController endLevelController;
-    private Stage primaryStage;
 
     /**
      * {@link EndLevelView} constructor.
      * @param audioPlayer
      *      {@link AudioPlayer} instance
-     * @param endLevelController
-     *      Controller that manages the end of a level
      */
-    public EndLevelView(final AudioPlayer audioPlayer, final EndLevelController endLevelController) {
+    public EndLevelView(final AudioPlayer audioPlayer) {
         this.audioPlayer = audioPlayer;
-        //this.endLevelController = endLevelController;
     }
 
     /**
@@ -54,9 +50,8 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
      * @param primaryStage
      *          The principal stage
      */
-    void display(final Stage primaryStage) {
-        this.primaryStage = primaryStage;
-        int currentItem = 0;
+    public void display(final Stage primaryStage) {
+        final int currentItem = 0;
         final MenuItem itemNextLevel = new MenuItem(NEXT_LEVEL);
         final Stage stage = new Stage();
         stage.setResizable(false);
@@ -82,7 +77,7 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
         layout.getChildren().addAll(label, this.itemLayout);
         layout.setAlignment(Pos.CENTER);
 
-        AnchorPane pane = new AnchorPane();
+        final AnchorPane pane = new AnchorPane();
         pane.getChildren().add(layout);
         layout.setLayoutX(POS);
         layout.setLayoutY(POS);

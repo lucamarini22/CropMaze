@@ -19,7 +19,8 @@ import org.mapeditor.core.Tile;
 import org.mapeditor.core.TileLayer;
 
 import static it.unibo.oop.bbgmm.Boundary.Music.GAME_TRACK;
-import static it.unibo.oop.bbgmm.Boundary.Music.*;
+import static it.unibo.oop.bbgmm.Boundary.Music.BUTTON_PRESS;
+
 
 /**
  * Implementation of the view of {@link it.unibo.oop.bbgmm.Entity.GameField}.
@@ -36,7 +37,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     private final PlayerInputHandler playerInputHandler;
     private final StatusBarScreen statusBar = new StatusBarImpl();
     private ImageView background;
-    private Button upgradeButton = new Button("UPGRADE");
+    private final Button upgradeButton = new Button("UPGRADE");
     private final PrincipalController principalController;
     private EndLevelController endLevelController;
     /**
@@ -143,7 +144,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     public void showEndLevelBox(final PrincipalController principalController) {
         this.playerInputHandler.clearInput();
         principalController.getGameController().get().stop();
-        EndLevelView endLevelView = new EndLevelView(this.audioplayer, this.endLevelController);
+        final EndLevelView endLevelView = new EndLevelView(this.audioplayer);
         endLevelView.setObserver(this.endLevelController);
         endLevelView.display(this.primaryStage);
     }

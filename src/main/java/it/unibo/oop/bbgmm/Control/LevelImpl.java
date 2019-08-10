@@ -176,7 +176,7 @@ public final class LevelImpl implements Level {
     private Pair<Point2D, Dimension2D> getWallPositionAndDimension(final Map map, final double x, final double y,
                                                                  final double width, final double height) {
         final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
-        Point2D pos = new Point2D(x / map.getTileWidth() + WALL_TRANSLATION_X,
+        final Point2D pos = new Point2D(x / map.getTileWidth() + WALL_TRANSLATION_X,
                 -(y / map.getTileHeight() + dim.getHeight()) + WALL_TRANSLATION_Y);
         return new Pair<>(pos, dim);
     }

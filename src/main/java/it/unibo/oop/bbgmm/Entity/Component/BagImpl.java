@@ -12,7 +12,7 @@ import java.util.List;
 public final class BagImpl extends AbstractEntityComponent implements Bag {
 
     private int money;
-    private List<Power> powers = new LinkedList<>();
+    private final List<Power> powers = new LinkedList<>();
 
     @Override
     public int getMoney() {
@@ -22,7 +22,6 @@ public final class BagImpl extends AbstractEntityComponent implements Bag {
     @Override
     public void addMoney(final int amount) {
         money += amount;
-        System.out.println(this.money);
     }
 
     @Override

@@ -7,7 +7,7 @@ import javafx.geometry.Point2D;
 /**
  * Represent a wall.
  */
-public class Wall extends AbstractEntity {
+public final class Wall extends AbstractEntity {
 
     /**
      *
@@ -28,7 +28,7 @@ public class Wall extends AbstractEntity {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Wall";
     }
 }

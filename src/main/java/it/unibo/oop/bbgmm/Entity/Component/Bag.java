@@ -24,13 +24,12 @@ public interface Bag extends EntityComponent {
     /**
      * Adds power.
      * @param power
+     *      {@link Power} instance
      */
-
     void addPower(Power power);
 
     /**
-     * Returns a list of powers.
-     * @return
+     * @return list of powers
      */
     List<Power> getPowers();
 

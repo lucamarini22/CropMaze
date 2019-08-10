@@ -1,7 +1,5 @@
 package it.unibo.oop.bbgmm.Entity;
 
-import it.unibo.oop.bbgmm.Control.Level;
-
 import java.util.Set;
 
 /**
