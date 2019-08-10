@@ -3,7 +3,6 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import it.unibo.oop.bbgmm.Utilities.Volume;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -55,7 +54,9 @@ public abstract class AbstractBasicView {
      * @return controller
      *          The principal controller
      */
-    protected PrincipalController getController() { return this.controller; }
+    protected PrincipalController getController() {
+        return this.controller;
+    }
 
     /**
      * Getter for the Root.
@@ -101,12 +102,12 @@ public abstract class AbstractBasicView {
     /**
      * Method used to set or not the stage to FullScreen.
      */
-    protected void checkResolution(){
-        if(Resolution.isFullScreen()){
-            primaryStage.setFullScreen(true);
-        } else{
-            primaryStage.setFullScreen(false);
-            primaryStage.centerOnScreen();
+    protected void checkResolution() {
+        if (Resolution.isFullScreen()) {
+            this.primaryStage.setFullScreen(true);
+        } else {
+            this.primaryStage.setFullScreen(false);
+            this.primaryStage.centerOnScreen();
         }
     }
 
@@ -118,7 +119,7 @@ public abstract class AbstractBasicView {
      * @param effectsVolume
      *          The volume of the effects
      */
-    protected void updateVolume(Volume musicVolume, Volume effectsVolume){
+    protected void updateVolume(final Volume musicVolume, final Volume effectsVolume) {
         this.audioPlayer.setMusicVolume(musicVolume.getValue());
         this.audioPlayer.setSoundVolume(effectsVolume.getValue());
         getController().updateVolume(musicVolume, effectsVolume);
@@ -127,14 +128,14 @@ public abstract class AbstractBasicView {
     /**
      * Method called to play the buttonSwitch sound.
      */
-    protected void playSwitchSound(){
+    protected void playSwitchSound() {
         this.audioPlayer.playSound(BUTTON_SWITCH.getPath());
     }
 
     /**
      * Method called to play the buttonPress sound.
      */
-    protected void playPressSound(){
+    protected void playPressSound() {
         this.audioPlayer.playSound(BUTTON_PRESS.getPath());
     }
 }

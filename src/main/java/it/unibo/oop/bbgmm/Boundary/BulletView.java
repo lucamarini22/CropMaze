@@ -10,7 +10,7 @@ import static it.unibo.oop.bbgmm.Boundary.Music.BULLET_SHOT;
 /**
  * Class responsible for the view of the Bullet.
  */
-public class BulletView extends AbstractAliveEntityView{
+public class BulletView extends AbstractAliveEntityView {
 
     private static final int WIDTH = 0, HEIGHT = 4;
 
@@ -25,16 +25,16 @@ public class BulletView extends AbstractAliveEntityView{
      *          The audioPlayer
      */
     public BulletView(final Group group, final Direction direction, final AudioPlayer audioPlayer) {
-        super(group, new Dimension2D(WIDTH,HEIGHT));
-        setCurrentImage(direction);
+        super(group, new Dimension2D(WIDTH, HEIGHT));
+        setCurrentImage(Direction.NOTHING);
         audioPlayer.playSound(BULLET_SHOT.getPath());
     }
 
     /**
      * Setter for the image.
      */
-    private void setCurrentImage(Direction direction){
-        switch(direction){
+    private void setCurrentImage(final Direction direction) {
+        switch (direction) {
             case EAST: setImage(new Image("images/bullets/BulletRight.png"));
                         break;
             case WEST: setImage(new Image("images/bullets/BulletLeft.png"));

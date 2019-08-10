@@ -24,8 +24,8 @@ public final class StatusBarImpl implements StatusBarScreen {
     private static final int HIGHTBAR = 40;
     private static final int PADDING = 20;
     private final HBox statusBox = new HBox();
-    private static final HBox coinsBox = new HBox();
-    private static final HBox root = new HBox();
+    private final HBox coinsBox = new HBox();
+    private final HBox root = new HBox();
     private final ProgressBar pb = new ProgressBar(1);
     private double maxLifePoints = 0;
     private final List<Image> imageNum;

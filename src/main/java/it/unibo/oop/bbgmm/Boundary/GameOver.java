@@ -27,7 +27,7 @@ import java.awt.*;
 import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 
 public class GameOver extends AbstractBasicView {
-    private static final int SPACE_BETWEEN_ITEM = 25;
+    private static final int SPACE_BETWEEN_ITEM = 20;
     private static final int USERBOX_X_COORDINATE = 320;
     private static final int USERBOX_Y_COORDINATE = 450;
     private static final int BOX_X_COORDINATE = 350;

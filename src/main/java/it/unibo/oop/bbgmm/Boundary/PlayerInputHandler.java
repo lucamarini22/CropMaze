@@ -14,8 +14,10 @@ import java.util.*;
 public class PlayerInputHandler {
     private final Set<KeyCode> input = new HashSet<>();
     private Optional<PlayerInputListener> listener = Optional.empty();
+    private final Scene scene;
 
     public PlayerInputHandler(final Scene scene){
+        this.scene = scene;
         scene.addEventHandler(KeyEvent.KEY_PRESSED,this::onPress);
         scene.addEventHandler(KeyEvent.KEY_RELEASED,this::onRelease);
     }
@@ -86,7 +88,6 @@ public class PlayerInputHandler {
     private void onRelease(final KeyEvent event) {
         if(checkShooting(event) || checkMovement(event)) {
             removeKey(event);
-            System.out.println("Remove key");
         }
         if(!input.stream().anyMatch(keyCode -> keyCode.equals(KeyCode.UP) || keyCode.equals(KeyCode.DOWN) ||
                 keyCode.equals(KeyCode.RIGHT) || keyCode.equals(KeyCode.LEFT )))
@@ -169,5 +170,21 @@ public class PlayerInputHandler {
             direction = Direction.EAST;
         }
         return direction;
+    }
+
+    /**
+     * Method called to remove the EventHandler
+     */
+    public void reset(){
+        scene.removeEventHandler(KeyEvent.KEY_PRESSED, this::onPress);
+        scene.removeEventHandler(KeyEvent.KEY_RELEASED, this::onRelease);
+        this.listener = Optional.empty();
+    }
+
+    /**
+     * Method called to clear the input set
+     */
+    public void clearInput() {
+        this.input.clear();
     }
 }

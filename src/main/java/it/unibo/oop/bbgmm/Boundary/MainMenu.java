@@ -3,21 +3,19 @@ package it.unibo.oop.bbgmm.Boundary;
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
  * View for the MainMenu.
  */
 
-public class MainMenu extends AbstractBasicView {
+public final class MainMenu extends AbstractBasicView {
 
-    private static final int SPACE_BETWEEN_ITEM = 25;
+    private static final int SPACE_BETWEEN_ITEM = 20;
     private static final int BOX_X_COORDINATE = 370;
     private static final int BOX_Y_COORDINATE = 350;
     private VBox menuBox;
@@ -41,7 +39,7 @@ public class MainMenu extends AbstractBasicView {
      */
     public MainMenu(final Stage primaryStage, final PrincipalController controller,
                     final AnchorPane pane, final Scene scene) {
-        super(primaryStage,controller, pane, scene);
+        super(primaryStage, controller, pane, scene);
 
         //it intercepts the button presses
         getScene().setOnKeyPressed(event -> {
@@ -78,11 +76,10 @@ public class MainMenu extends AbstractBasicView {
         menuBox.setAlignment(Pos.TOP_CENTER);
 
         //calculates the position of the box
-        if(Resolution.isFullScreen()){
-            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH);
-            menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
-        }
-        else{
+        if (Resolution.isFullScreen()) {
+            menuBox.setLayoutX(BOX_X_COORDINATE * Resolution.getWidth() / Resolution.SMALL_WIDTH);
+            menuBox.setLayoutY(BOX_Y_COORDINATE * Resolution.getHeight() / Resolution.SMALL_HEIGHT);
+        } else {
             menuBox.setLayoutX(BOX_X_COORDINATE);
             menuBox.setLayoutY(BOX_Y_COORDINATE);
         }
@@ -140,7 +137,7 @@ public class MainMenu extends AbstractBasicView {
     /**
      * Method used to set the PlayerInputHandler in the PrincipalController.
      */
-    private void setPlayerInputHandler(){
+    private void setPlayerInputHandler() {
         getController().setPlayerInputHandler(new PlayerInputHandler(getScene()));
     }
 }
