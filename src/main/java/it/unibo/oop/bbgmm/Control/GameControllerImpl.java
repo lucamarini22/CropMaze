@@ -40,7 +40,6 @@ public final class GameControllerImpl implements GameController {
     };
     private final PrincipalController principalController;
     private final EndLevelController endLevelController;
-   // private final EndLevelView endLevelView;
 
     /**
      * {@link GameControllerImpl} constructor.
@@ -125,6 +124,11 @@ public final class GameControllerImpl implements GameController {
     @Override
     public void triggerEndLevel() {
         this.endLevelController.goToEndLevel();
+    }
+
+    @Override
+    public void triggerGameOver() {
+        this.principalController.showGameOver(this.principalController.getView().getWindow().getViewFactory());
     }
 
     @Override

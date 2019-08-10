@@ -1,9 +1,6 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Boundary.AudioPlayer;
-import it.unibo.oop.bbgmm.Boundary.EndLevelView;
-import it.unibo.oop.bbgmm.Boundary.PlayerInputHandler;
-import it.unibo.oop.bbgmm.Boundary.ViewFactory;
+import it.unibo.oop.bbgmm.Boundary.*;
 import it.unibo.oop.bbgmm.Utilities.Pair;
 import it.unibo.oop.bbgmm.Utilities.Volume;
 import it.unibo.oop.bbgmm.Utilities.VolumeData;
@@ -131,4 +128,9 @@ public interface PrincipalController {
      *          The game controller
      */
     Optional<GameController> getGameController();
+
+    /**
+     * @return the {@link PrincipalView}
+     */
+    PrincipalView getView();
 }

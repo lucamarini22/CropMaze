@@ -1,7 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Control.GameController;
-import it.unibo.oop.bbgmm.Control.Level;
 import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisor;
 import java.util.Collections;
@@ -16,7 +15,6 @@ public final class GameFieldImpl implements GameField {
     private final Set<Entity> entities;
     private final CollisionSupervisor collisionSupervisor;
     private final Set<Entity> entitiesToBeRemoved;
-    private Entity player;
     private GameController gameController;
     private final PlayerStatistics playerStatistics;
 
@@ -46,6 +44,11 @@ public final class GameFieldImpl implements GameField {
         if ((int) this.entities.stream().filter(e -> e instanceof Alien).count() == 0) {
             this.gameController.stop();
             this.gameController.triggerEndLevel();
+        }
+        //If there is not a Player, he's dead and it is a Game Over
+        if ((int) this.entities.stream().filter(e -> e instanceof Player).count() == 0) {
+            this.gameController.stop();
+            this.gameController.triggerGameOver();
         }
     }
 

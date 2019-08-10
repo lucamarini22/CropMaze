@@ -2,16 +2,11 @@ package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
-import it.unibo.oop.bbgmm.Utilities.Volume;
-import it.unibo.oop.bbgmm.Utilities.VolumeData;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import javax.swing.text.View;
 
 import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 
@@ -64,5 +59,12 @@ public class MainWindow {
 
         this.primaryStage.setFullScreen(fullscreen);
         this.primaryStage.show();
+    }
+
+    /**
+     * @return the view factory
+     */
+    public ViewFactory getViewFactory() {
+        return this.viewFactory;
     }
 }

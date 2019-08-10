@@ -30,11 +30,6 @@ public final class EndLevelControllerImpl implements EndLevelController {
     }
 
     @Override
-    public void goToMainMenu() {
-        this.principalController.resetGame();
-    }
-
-    @Override
     public void goToEndLevel() {
         this.gameFieldView.showEndLevelBox(this.principalController);
     }
