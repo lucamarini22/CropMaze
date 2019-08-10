@@ -1,11 +1,12 @@
 package it.unibo.oop.bbgmm.Utilities;
 
-import java.awt.*;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  * Class used to set and get the resolution of the GameWindow.
  */
-
 public final class Resolution {
     public static final int SMALL_HEIGHT = 768;
     public static final int SMALL_WIDTH = 1024;
@@ -13,6 +14,12 @@ public final class Resolution {
     private static int width = SMALL_WIDTH;
     private static int height = SMALL_HEIGHT;
     private static boolean fullScreen = false;
+
+    /**
+     * Private constructor for Resolution.
+     */
+    private Resolution() {
+    }
 
     /**
      * Getter for the Height.
@@ -37,7 +44,7 @@ public final class Resolution {
     /**
      * Setter the height and the width for the small resolution.
      */
-    public static void setSmallResolution(){
+    public static void setSmallResolution() {
         width = SMALL_WIDTH;
         height = SMALL_HEIGHT;
         fullScreen = false;
@@ -46,7 +53,7 @@ public final class Resolution {
     /**
      * Setter the height and the width for the full resolution.
      */
-    public static void setFullResolution(){
+    public static void setFullResolution() {
         width = D.width;
         height = D.height;
         fullScreen = true;
@@ -58,5 +65,7 @@ public final class Resolution {
      * @return boolean
      *          True if fullscreen
      */
-    public static boolean isFullScreen(){return fullScreen;}
+    public static boolean isFullScreen() {
+        return fullScreen;
+    }
 }

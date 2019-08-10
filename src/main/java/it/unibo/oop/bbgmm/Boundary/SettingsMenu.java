@@ -4,7 +4,6 @@ import it.unibo.oop.bbgmm.Control.PrincipalController;
 import it.unibo.oop.bbgmm.Utilities.Resolution;
 import it.unibo.oop.bbgmm.Utilities.Volume;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
@@ -16,8 +15,7 @@ import static it.unibo.oop.bbgmm.Boundary.Music.MENU_TRACK;
 /**
  * View for the settings Menu.
  */
-
-public class SettingsMenu extends AbstractBasicView {
+public final class SettingsMenu extends AbstractBasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 10;
     private static final int BOX_X_COORDINATE = 200;
@@ -53,18 +51,18 @@ public class SettingsMenu extends AbstractBasicView {
         //it intercepts the button presses
         getScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
-                if (currentItem > 0) {
+                if (this.currentItem > 0) {
                     playSwitchSound();
-                    getMenuItem(currentItem).setActive(false);
-                    getMenuItem(--currentItem).setActive(true);
+                    getMenuItem(this.currentItem).setActive(false);
+                    getMenuItem(--this.currentItem).setActive(true);
                 }
             }
 
             if (event.getCode() == KeyCode.DOWN) {
-                if (currentItem < menuBox.getChildren().size() - 1) {
+                if (this.currentItem < this.menuBox.getChildren().size() - 1) {
                     playSwitchSound();
-                    getMenuItem(currentItem).setActive(false);
-                    getMenuItem(++currentItem).setActive(true);
+                    getMenuItem(this.currentItem).setActive(false);
+                    getMenuItem(++this.currentItem).setActive(true);
                 }
             }
 
@@ -75,36 +73,35 @@ public class SettingsMenu extends AbstractBasicView {
         });
 
 
-        menuBox = new VBox(SPACE_BETWEEN_ITEM,
-                itemSmallScreen,
-                itemFullScreen,
-                itemMusicVolume,
-                itemEffectsVolume,
-                itemBack);
+        this.menuBox = new VBox(SPACE_BETWEEN_ITEM,
+                                this.itemSmallScreen,
+                                this.itemFullScreen,
+                                this.itemMusicVolume,
+                                this.itemEffectsVolume,
+                                this.itemBack);
 
         itemActions();
 
-        menuBox.setAlignment(Pos.TOP_CENTER);
+        this.menuBox.setAlignment(Pos.TOP_CENTER);
 
         //calculates the position of the box and witch item is underlined
-        if(Resolution.isFullScreen()){
-            menuBox.setLayoutX(BOX_X_COORDINATE*Resolution.getWidth()/Resolution.SMALL_WIDTH);
-            menuBox.setLayoutY(BOX_Y_COORDINATE*Resolution.getHeight()/Resolution.SMALL_HEIGHT);
-            itemSmallScreen.setUnderline(false);
-            itemFullScreen.setUnderline(true);
-        }
-        else {
-            menuBox.setLayoutX(BOX_X_COORDINATE);
-            menuBox.setLayoutY(BOX_Y_COORDINATE);
-            itemSmallScreen.setUnderline(true);
-            itemFullScreen.setUnderline(false);
+        if (Resolution.isFullScreen()) {
+            this.menuBox.setLayoutX(BOX_X_COORDINATE * Resolution.getWidth() / Resolution.SMALL_WIDTH);
+            this.menuBox.setLayoutY(BOX_Y_COORDINATE * Resolution.getHeight() / Resolution.SMALL_HEIGHT);
+            this.itemSmallScreen.setUnderline(false);
+            this.itemFullScreen.setUnderline(true);
+        } else {
+            this.menuBox.setLayoutX(BOX_X_COORDINATE);
+            this.menuBox.setLayoutY(BOX_Y_COORDINATE);
+            this.itemSmallScreen.setUnderline(true);
+            this.itemFullScreen.setUnderline(false);
         }
 
-        getMenuItem(0).setActive(true);
+        getMenuItem(this.currentItem).setActive(true);
 
         AnchorPane root = getRoot();
         root.getChildren().clear();
-        root.getChildren().add(menuBox);
+        root.getChildren().add(this.menuBox);
 
         root.setId("settingsMenu");
 
@@ -114,38 +111,38 @@ public class SettingsMenu extends AbstractBasicView {
      * Method used to get the requested element of the buttons' box.
      */
     private MenuItem getMenuItem(final int index) {
-        return (MenuItem) menuBox.getChildren().get(index);
+        return (MenuItem) this.menuBox.getChildren().get(index);
     }
 
     @Override
     protected void itemActions() {
-        itemBack.setOnActivate(() -> {
+        this.itemBack.setOnActivate(() -> {
             checkResolution();
             getController().showMainMenu(getViewFactory());
         });
-        itemSmallScreen.setOnActivate(() -> {
+        this.itemSmallScreen.setOnActivate(() -> {
             Resolution.setSmallResolution();
-            itemSmallScreen.setUnderline(true);
-            itemFullScreen.setUnderline(false);
+            this.itemSmallScreen.setUnderline(true);
+            this.itemFullScreen.setUnderline(false);
 
         });
-        itemFullScreen.setOnActivate(() -> {
+        this.itemFullScreen.setOnActivate(() -> {
             Resolution.setFullResolution();
-            itemSmallScreen.setUnderline(false);
-            itemFullScreen.setUnderline(true);
+            this.itemSmallScreen.setUnderline(false);
+            this.itemFullScreen.setUnderline(true);
         });
 
-        itemMusicVolume.setOnActivate(() -> {
+        this.itemMusicVolume.setOnActivate(() -> {
             nextMusicVolume();
-            updateVolume(this.musicVolume,this.effectsVolume);
+            updateVolume(this.musicVolume, this.effectsVolume);
             getAudioPlayer().stopMusic();
             getAudioPlayer().playMusic(MENU_TRACK.getPath());
             getViewFactory().createSettingsMenu();
         });
 
-        itemEffectsVolume.setOnActivate(() -> {
+        this.itemEffectsVolume.setOnActivate(() -> {
             nextEffectsVolume();
-            updateVolume(this.musicVolume,this.effectsVolume);
+            updateVolume(this.musicVolume, this.effectsVolume);
             getViewFactory().createSettingsMenu();
         });
     }
@@ -153,14 +150,14 @@ public class SettingsMenu extends AbstractBasicView {
     /**
      * Setter for the next intensity of music volume.
      */
-    private void nextMusicVolume(){
-        this.musicVolume = Volume.values()[(this.musicVolume.ordinal() + 1)% Volume.values().length];
+    private void nextMusicVolume() {
+        this.musicVolume = Volume.values()[(this.musicVolume.ordinal() + 1) % Volume.values().length];
     }
 
     /**
      * Setter for the next intensity of effects volume.
      */
-    private void nextEffectsVolume(){
-        this.effectsVolume = Volume.values()[(this.effectsVolume.ordinal() + 1)% Volume.values().length];
+    private void nextEffectsVolume() {
+        this.effectsVolume = Volume.values()[(this.effectsVolume.ordinal() + 1) % Volume.values().length];
     }
 }

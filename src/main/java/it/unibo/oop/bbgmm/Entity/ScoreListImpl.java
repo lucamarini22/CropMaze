@@ -2,7 +2,13 @@ package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Utilities.Pair;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +17,9 @@ import java.util.stream.Collectors;
 /**
  * {@link ScoreList} implementation.
  */
-public class ScoreListImpl implements ScoreList{
+public final class ScoreListImpl implements ScoreList {
 
+    private static final int RANKING_SIZE = 5;
     private final URL fileName = ClassLoader.getSystemResource("ScoreList.txt");
     private List<Score> scoreList = new ArrayList<>();
 
@@ -20,11 +27,12 @@ public class ScoreListImpl implements ScoreList{
      * {@link ScoreList} implementation.
      *
      * @throws IOException
+     *          Exception if the file does not exist
      */
     public ScoreListImpl() throws IOException {
         final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName.getPath())));
         int size = ostream.readInt();
-        for(int i = 0; i<size; i++) {
+        for (int i = 0; i < size; i++) {
             try {
                 scoreList.add((Score) ostream.readObject());
             } catch (ClassNotFoundException e) {
@@ -35,14 +43,14 @@ public class ScoreListImpl implements ScoreList{
     }
 
     @Override
-    public void addScore(final Pair<String, Integer> score){
+    public void addScore(final Pair<String, Integer> score) {
         //maximux size of the scoreList is 5
-        Score newScore = new Score(score.getFst(),score.getSnd());
-        if(!scoreList.contains(newScore)){
+        Score newScore = new Score(score.getFst(), score.getSnd());
+        if (!scoreList.contains(newScore)) {
             scoreList.add(newScore);
-            scoreList.sort((s1,s2) -> s2.getScore()-s1.getScore());
-            if(scoreList.size() > 5){
-                scoreList = scoreList.subList(0, 5);
+            scoreList.sort((s1, s2) -> s2.getScore() - s1.getScore());
+            if (scoreList.size() > RANKING_SIZE) {
+                scoreList = scoreList.subList(0, RANKING_SIZE);
             }
             try {
                 writeOnFile();
@@ -50,13 +58,14 @@ public class ScoreListImpl implements ScoreList{
                 System.out.println("Error on writing on file\n");
                 e.printStackTrace();
             }
-        }//if it contains the exact score it does nothing
+        } //if it contains the exact score it does nothing
     }
 
     /**
      * Method that writes the list on file.
      *
      * @throws IOException
+     *          Exception if the file does not exist
      */
     private void writeOnFile() throws IOException {
         final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName.getPath(), false)));

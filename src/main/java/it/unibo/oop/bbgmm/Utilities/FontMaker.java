@@ -1,9 +1,8 @@
 package it.unibo.oop.bbgmm.Utilities;
 
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Optional;
 
 /**
@@ -22,20 +21,25 @@ public final class FontMaker {
     private static Optional<Integer> fullFont = Optional.empty();
 
     /**
+     * Private constructor for FontMaker.
+     */
+    private FontMaker() {
+    }
+
+    /**
      * Modifies the font dimension.
      *
      * @param fullscreen
      *          Indicates if the window is fullscreen
      */
-    public static void modifyFont(final boolean fullscreen){
-        if(fullscreen){
-            if(!fullFont.isPresent()){
-                currentDimension = FULL/PROPORTION_VALUE;
+    public static void modifyFont(final boolean fullscreen) {
+        if (fullscreen) {
+            if (!fullFont.isPresent()) {
+                currentDimension = FULL / PROPORTION_VALUE;
                 fullFont = Optional.of(currentDimension);
             }
             font = Font.loadFont(FONT_URL, fullFont.get());
-        }
-        else{
+        } else {
             font = Font.loadFont(FONT_URL, SMALL_FONT);
             currentDimension = SMALL_FONT;
         }
@@ -59,15 +63,17 @@ public final class FontMaker {
      * @return Font
      *          The font to use
      */
-    public static Font getSizedFont(final int size){return Font.loadFont(FONT_URL, size);}
+    public static Font getSizedFont(final int size) {
+        return Font.loadFont(FONT_URL, size);
+    }
 
     /**
-     * Returns a plus sized font.
+     *  * Returns a plus sized font.
      *
      * @return Font
      *          The font to use
      */
-    public static Font getFontWinner(){
-        return Font.loadFont(FONT_URL, currentDimension*WINNER_FONT/SMALL_FONT);
+    public static Font getFontWinner() {
+        return Font.loadFont(FONT_URL, currentDimension * WINNER_FONT / SMALL_FONT);
     }
 }

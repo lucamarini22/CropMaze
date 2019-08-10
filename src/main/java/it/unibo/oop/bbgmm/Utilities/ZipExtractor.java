@@ -2,14 +2,26 @@ package it.unibo.oop.bbgmm.Utilities;
 
 import com.google.common.io.ByteStreams;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+
 /**
- * Utils class used to extraxt files from a zip folder.
+ * Utils class used to extract files from a zip folder.
  */
 public final class ZipExtractor {
+
+    /**
+     * Private construtor for ZipExtractor.
+     */
+    private ZipExtractor() {
+    }
 
     /**
      * Method used to extract the file from the zip.
@@ -19,6 +31,7 @@ public final class ZipExtractor {
      * @param directory
      *          The file zip
      * @throws IOException
+     *          Exception if the file does not exist
      */
     public static void extract(final InputStream inputStream, final File directory) throws IOException {
         try (ZipInputStream zis = new ZipInputStream(inputStream)) {

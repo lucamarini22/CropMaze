@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * Class to represent a score.
  */
-public class Score implements Serializable {
+public final class Score implements Serializable {
     private static final long serialVersionUID = 5044857723462203092L;
     private final String playerName;
     private final int score;
@@ -44,16 +44,20 @@ public class Score implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Score score1 = (Score) o;
-        return score == score1.score &&
-                playerName.equals(score1.playerName);
+        return this.score == score1.score
+                && this.playerName.equals(score1.playerName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(playerName, score);
+        return Objects.hash(this.playerName, this.score);
     }
 }

@@ -8,9 +8,9 @@ import it.unibo.oop.bbgmm.Entity.Entity;
 /**
  * Controller for the Bullet.
  */
-public class BulletController extends AliveEntityController{
+public final class BulletController extends AliveEntityController {
 
-    private final PlayerController  playerController;
+    private final PlayerController playerController;
 
     /**
      * Constructor for BulletController.
@@ -23,17 +23,17 @@ public class BulletController extends AliveEntityController{
      *          The controller for the Player
      */
     public BulletController(final Entity bullet, final BulletView bulletView, final PlayerController playerController) {
-        super(bullet,bulletView);
+        super(bullet, bulletView);
         this.playerController = playerController;
     }
 
     @Override
-    public void update(){
-        if(getEntity().get(Life.class).isPresent() && getEntity().get(Life.class).get().isAlive()){
+    public void update() {
+        if (getEntity().get(Life.class).isPresent() && getEntity().get(Life.class).get().isAlive()) {
             getEntityView().setPosition(ViewUtils.worldPointToFX(getEntity().getBody().getPosition()));
         } else {
             getEntityView().deathView();
-            playerController.removeBulletController(this);
+            this.playerController.removeBulletController(this);
         }
     }
 }

@@ -49,10 +49,10 @@ public class MainWindow {
         this.primaryStage.getIcons().add(new Image("images/mainMenu/icon.png"));
         //set the main menu as the scene
         this.root = new AnchorPane();
-        this.scene = new Scene(root, Resolution.getWidth(), Resolution.getHeight());
+        this.scene = new Scene(this.root, Resolution.getWidth(), Resolution.getHeight());
         this.viewFactory = new ViewFactory(primaryStage, controller, this.root, this.scene);
         this.scene.getStylesheets().add("Style.css");
-        this.primaryStage.setScene(scene);
+        this.primaryStage.setScene(this.scene);
         this.controller.showMainMenu(this.viewFactory);
 
         this.audioPlayer.playMusic(MENU_TRACK.getPath());

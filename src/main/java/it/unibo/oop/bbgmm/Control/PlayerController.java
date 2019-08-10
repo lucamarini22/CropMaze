@@ -1,18 +1,15 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Boundary.BulletView;
 import it.unibo.oop.bbgmm.Boundary.GameFieldView;
 import it.unibo.oop.bbgmm.Boundary.PlayerView;
 import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Component.Bag;
-import it.unibo.oop.bbgmm.Entity.Component.Feet;
 import it.unibo.oop.bbgmm.Entity.Component.Life;
 import it.unibo.oop.bbgmm.Entity.Component.Weapon;
 import it.unibo.oop.bbgmm.Entity.Direction;
 import it.unibo.oop.bbgmm.Entity.Entity;
 import it.unibo.oop.bbgmm.Entity.Movement;
 import javafx.geometry.Point2D;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

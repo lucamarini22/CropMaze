@@ -1,6 +1,11 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Boundary.*;
+import it.unibo.oop.bbgmm.Boundary.AudioPlayer;
+import it.unibo.oop.bbgmm.Boundary.AudioPlayerImpl;
+import it.unibo.oop.bbgmm.Boundary.ViewFactory;
+import it.unibo.oop.bbgmm.Boundary.PlayerInputHandler;
+import it.unibo.oop.bbgmm.Boundary.PrincipalView;
+import it.unibo.oop.bbgmm.Boundary.GameFieldViewImpl;
 import it.unibo.oop.bbgmm.Entity.GameStatisticsImpl;
 import it.unibo.oop.bbgmm.Entity.ScoreList;
 import it.unibo.oop.bbgmm.Entity.ScoreListImpl;
@@ -8,7 +13,6 @@ import it.unibo.oop.bbgmm.Utilities.Pair;
 import it.unibo.oop.bbgmm.Utilities.Volume;
 import it.unibo.oop.bbgmm.Utilities.VolumeData;
 import it.unibo.oop.bbgmm.Utilities.VolumeDataImpl;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -60,7 +64,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
-    public void updateVolume(Volume musicVolume, Volume effectsVolume) {
+    public void updateVolume(final Volume musicVolume, final Volume effectsVolume) {
         this.volumeData.setMusicVolume(musicVolume);
         this.volumeData.setEffectsVolume(effectsVolume);
         this.audioPlayer.setMusicVolume(this.volumeData.getMusicVolume().getValue());
@@ -88,7 +92,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
-    public void resetGame(){
+    public void resetGame() {
         stopGame();
         this.gameControl = Optional.empty();
         this.playerInputHandler = Optional.empty();
@@ -102,12 +106,12 @@ public final class PrincipalControllerImpl implements PrincipalController {
     }
 
     @Override
-    public void showRankingView(ViewFactory viewFactory) {
+    public void showRankingView(final ViewFactory viewFactory) {
         viewFactory.createRankingView();
     }
 
     @Override
-    public void showSettings(ViewFactory viewFactory) {
+    public void showSettings(final ViewFactory viewFactory) {
         viewFactory.createSettingsMenu();
     }
 
@@ -122,12 +126,12 @@ public final class PrincipalControllerImpl implements PrincipalController {
 
     @Override
     public void showGameOver(final ViewFactory viewFactory) {
-        this.playerInputHandler.ifPresent(input -> input.reset());
+        this.playerInputHandler.ifPresent(PlayerInputHandler::reset);
         viewFactory.createGameOver();
     }
 
     @Override
-    public void setPlayerInputHandler(PlayerInputHandler playerInputHandler) {
+    public void setPlayerInputHandler(final PlayerInputHandler playerInputHandler) {
         this.playerInputHandler = Optional.of(playerInputHandler);
     }
 

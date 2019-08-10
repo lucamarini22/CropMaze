@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 
@@ -15,17 +14,23 @@ import javafx.scene.text.Text;
  */
 public class MenuItem extends HBox {
 
+    private static final int RADIUS = 2;
     private final Text text;
     private Runnable script;
 
+    /**
+     * Constructor for MenuItem.
+     * @param name
+     *          The string shown
+     */
     public MenuItem(final String name) {
         super();
         setAlignment(Pos.CENTER);
-        text = new Text(name);
+        this.text = new Text(name);
         FontMaker.modifyFont(Resolution.isFullScreen());
-        text.setFont(FontMaker.getFont());
-        text.setEffect(new GaussianBlur(2));
-        getChildren().add(text);
+        this.text.setFont(FontMaker.getFont());
+        this.text.setEffect(new GaussianBlur(RADIUS));
+        getChildren().add(this.text);
         setActive(false);
     }
 
@@ -37,7 +42,7 @@ public class MenuItem extends HBox {
      *          Boolean true or false
      */
     public void setActive(final boolean b) {
-        text.setFill(b ? Color.YELLOW : Color.FORESTGREEN);
+        this.text.setFill(b ? Color.YELLOW : Color.FORESTGREEN);
     }
 
     /**
@@ -47,15 +52,15 @@ public class MenuItem extends HBox {
      *          The code that is run
      */
     public void setOnActivate(final Runnable r) {
-        script = r;
+        this.script = r;
     }
 
     /**
      * Method that activates the action of the item.
      */
     public void activate() {
-        if (script != null) {
-            script.run();
+        if (this.script != null) {
+            this.script.run();
         }
     }
 
@@ -66,7 +71,7 @@ public class MenuItem extends HBox {
      *          Boolean true or false
      */
     public void setUnderline(final boolean b) {
-        text.setUnderline(b);
+        this.text.setUnderline(b);
     }
 
     /**
@@ -75,7 +80,7 @@ public class MenuItem extends HBox {
      * @param size
      *          The size of the font
      */
-    public void setFont(final int size){
-        text.setFont(FontMaker.getSizedFont(size));
+    public void setFont(final int size) {
+        this.text.setFont(FontMaker.getSizedFont(size));
     }
 }

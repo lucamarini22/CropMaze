@@ -1,6 +1,9 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Boundary.*;
+import it.unibo.oop.bbgmm.Boundary.AudioPlayer;
+import it.unibo.oop.bbgmm.Boundary.ViewFactory;
+import it.unibo.oop.bbgmm.Boundary.PlayerInputHandler;
+import it.unibo.oop.bbgmm.Boundary.PrincipalView;
 import it.unibo.oop.bbgmm.Utilities.Pair;
 import it.unibo.oop.bbgmm.Utilities.Volume;
 import it.unibo.oop.bbgmm.Utilities.VolumeData;
@@ -85,7 +88,7 @@ public interface PrincipalController {
      * @param viewFactory
      *          The factory for the views
      */
-    void showRankingView(final ViewFactory viewFactory);
+    void showRankingView(ViewFactory viewFactory);
 
     /**
      * Method used by the view to show the settings.

@@ -20,7 +20,7 @@ public abstract class AbstractBasicView {
     private final ViewFactory viewFactory;
     private final AudioPlayer audioPlayer;
     private final AnchorPane root;
-    private Scene scene;
+    private final Scene scene;
 
     /**
      * Constructor for AbstractBasicView.

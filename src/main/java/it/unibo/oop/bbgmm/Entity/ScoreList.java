@@ -16,7 +16,7 @@ public interface ScoreList {
      * @param score
      *          The score to insert
      */
-    void addScore(final Pair<String, Integer> score);
+    void addScore(Pair<String, Integer> score);
 
     /**
      * Getter for the list of the ranking.
@@ -30,6 +30,7 @@ public interface ScoreList {
      * Clears the ranking list.
      *
      * @throws IOException
+     *          Exception if the file does not exist
      */
     void deleteAll() throws IOException;
 }

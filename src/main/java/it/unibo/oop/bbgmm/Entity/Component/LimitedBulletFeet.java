@@ -3,7 +3,6 @@ package it.unibo.oop.bbgmm.Entity.Component;
 import it.unibo.oop.bbgmm.Entity.Bullet;
 import it.unibo.oop.bbgmm.Entity.Direction;
 import it.unibo.oop.bbgmm.Entity.Entity;
-import it.unibo.oop.bbgmm.Utilities.PlayerMoves;
 import javafx.geometry.Point2D;
 
 import java.util.Set;
@@ -11,7 +10,7 @@ import java.util.Set;
 /**
  * Component used to destroy the Bullet after a number of steps.
  */
-public class LimitedBulletFeet extends Feet{
+public final class LimitedBulletFeet extends Feet {
 
     private static final int STEP = 1;
     private Life lifeComponent;
@@ -20,11 +19,18 @@ public class LimitedBulletFeet extends Feet{
 
     /**
      * Constructor for LimitedBulletFeet.
-     *
+     * @param weapon
+     *          The weapon of the player
+     * @param direction
+     *          The direction of the bullet
      * @param walkingSpeed
-     *          Entity speed for the movement
+     *          speed for the movement
+     * @param lifeComponent
+     *          lifeComponent of the bullet
+     * @param walls
+     *          set of walls
      */
-    public LimitedBulletFeet(final Weapon weapon, Direction direction, final double walkingSpeed, final Life lifeComponent, final Set<Entity> walls) {
+    public LimitedBulletFeet(final Weapon weapon, final Direction direction, final double walkingSpeed, final Life lifeComponent, final Set<Entity> walls) {
         super(walkingSpeed, walls);
         this.lifeComponent = lifeComponent;
         this.weapon = weapon;
@@ -32,27 +38,26 @@ public class LimitedBulletFeet extends Feet{
     }
 
     @Override
-    public void move(Point2D distanceVector) {
-        if(lifeComponent.isAlive()){
+    public void move(final Point2D distanceVector) {
+        if (lifeComponent.isAlive()) {
             super.move(distanceVector);
-            if(getPosition().equals(Point2D.ZERO)){
+            if (getPosition().equals(Point2D.ZERO)) {
                 remove();
-            }else{
+            } else {
                 lifeComponent.damaged(STEP);
             }
-        }
-        else {
+        } else {
             remove();
         }
     }
 
     @Override
-    public void update(double delta) {
+    public void update(final double delta) {
         move(distanceVector);
     }
 
-    private void remove(){
-        weapon.removeBullet((Bullet)getOwner().get());
+    private void remove() {
+        weapon.removeBullet((Bullet) getOwner().get());
         getOwner().get().removeEntity();
     }
 }

@@ -44,52 +44,52 @@ public final class MainMenu extends AbstractBasicView {
         //it intercepts the button presses
         getScene().setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.UP) {
-                if (currentItem > 0) {
+                if (this.currentItem > 0) {
                     playSwitchSound();
-                    getMenuItem(currentItem).setActive(false);
-                    getMenuItem(--currentItem).setActive(true);
+                    getMenuItem(this.currentItem).setActive(false);
+                    getMenuItem(--this.currentItem).setActive(true);
                 }
             }
 
             if (event.getCode() == KeyCode.DOWN) {
-                if (currentItem < menuBox.getChildren().size() - 1) {
+                if (this.currentItem < this.menuBox.getChildren().size() - 1) {
                     playSwitchSound();
-                    getMenuItem(currentItem).setActive(false);
-                    getMenuItem(++currentItem).setActive(true);
+                    getMenuItem(this.currentItem).setActive(false);
+                    getMenuItem(++this.currentItem).setActive(true);
                 }
             }
 
             if (event.getCode() == KeyCode.ENTER) {
                 playPressSound();
-                getMenuItem(currentItem).activate();
+                getMenuItem(this.currentItem).activate();
             }
         });
 
-        menuBox = new VBox(SPACE_BETWEEN_ITEM,
-                itemNewGame,
-                itemScore,
-                itemSettings,
-                itemExit);
+        this.menuBox = new VBox(SPACE_BETWEEN_ITEM,
+                                this.itemNewGame,
+                                this.itemScore,
+                                this.itemSettings,
+                                this.itemExit);
 
         itemActions();
 
-        menuBox.setAlignment(Pos.TOP_CENTER);
+        this.menuBox.setAlignment(Pos.TOP_CENTER);
 
         //calculates the position of the box
         if (Resolution.isFullScreen()) {
-            menuBox.setLayoutX(BOX_X_COORDINATE * Resolution.getWidth() / Resolution.SMALL_WIDTH);
-            menuBox.setLayoutY(BOX_Y_COORDINATE * Resolution.getHeight() / Resolution.SMALL_HEIGHT);
+            this.menuBox.setLayoutX(BOX_X_COORDINATE * Resolution.getWidth() / Resolution.SMALL_WIDTH);
+            this.menuBox.setLayoutY(BOX_Y_COORDINATE * Resolution.getHeight() / Resolution.SMALL_HEIGHT);
         } else {
-            menuBox.setLayoutX(BOX_X_COORDINATE);
-            menuBox.setLayoutY(BOX_Y_COORDINATE);
+            this.menuBox.setLayoutX(BOX_X_COORDINATE);
+            this.menuBox.setLayoutY(BOX_Y_COORDINATE);
         }
 
-        getMenuItem(currentItem).setActive(true);
+        getMenuItem(this.currentItem).setActive(true);
 
         AnchorPane root = getRoot();
 
         root.getChildren().clear();
-        pane.getChildren().add(menuBox);
+        pane.getChildren().add(this.menuBox);
 
         pane.setId("mainMenu");
 
@@ -100,25 +100,25 @@ public final class MainMenu extends AbstractBasicView {
      * Method used to get the requested element of the buttons' box.
      */
     private MenuItem getMenuItem(final int index) {
-        return (MenuItem) menuBox.getChildren().get(index);
+        return (MenuItem) this.menuBox.getChildren().get(index);
     }
 
     @Override
     protected void itemActions() {
-        itemNewGame.setOnActivate(() -> {
+        this.itemNewGame.setOnActivate(() -> {
             setPlayerInputHandler();
             getAudioPlayer().stopMusic();
             getController().showGameField(getScene());
             checkResolution();
             clearEnter();
         });
-        itemScore.setOnActivate(() -> {
+        this.itemScore.setOnActivate(() -> {
             getController().showRankingView(getViewFactory());
         });
-        itemSettings.setOnActivate(() -> {
+        this.itemSettings.setOnActivate(() -> {
             getController().showSettings(getViewFactory());
         });
-        itemExit.setOnActivate(() -> {
+        this.itemExit.setOnActivate(() -> {
             getController().stopGame();
             System.exit(0);
         });

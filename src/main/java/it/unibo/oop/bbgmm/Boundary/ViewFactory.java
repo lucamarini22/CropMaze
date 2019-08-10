@@ -1,8 +1,6 @@
 package it.unibo.oop.bbgmm.Boundary;
 
 import it.unibo.oop.bbgmm.Control.PrincipalController;
-import it.unibo.oop.bbgmm.Utilities.Volume;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -29,7 +27,8 @@ public class ViewFactory {
      * @param scene
      *          The scene displayed in the stage
      */
-    public ViewFactory(Stage stage, PrincipalController controller, final AnchorPane root, final Scene scene) {
+    public ViewFactory(final Stage stage, final PrincipalController controller,
+                       final AnchorPane root, final Scene scene) {
         this.stage = stage;
         this.root = root;
         this.scene = scene;
@@ -42,8 +41,8 @@ public class ViewFactory {
      * @return MainMenu
      *          The view for MainMenu
      */
-    public MainMenu createMainMenu(){
-        return new MainMenu(stage,controller, root, scene);
+    public MainMenu createMainMenu() {
+        return new MainMenu(this.stage, this.controller, this.root, this.scene);
     }
 
     /**
@@ -52,8 +51,8 @@ public class ViewFactory {
      * @return RankingView
      *          The view for RankingView
      */
-    public RankingView createRankingView(){
-        return new RankingView(stage,controller, root, scene);
+    public RankingView createRankingView() {
+        return new RankingView(this.stage, this.controller, this.root, this.scene);
     }
 
     /**
@@ -62,8 +61,8 @@ public class ViewFactory {
      * @return SettingsMenu
      *          The view for SettingsMenu
      */
-    public SettingsMenu createSettingsMenu(){
-        return new SettingsMenu(stage,controller, root, scene);
+    public SettingsMenu createSettingsMenu() {
+        return new SettingsMenu(this.stage, this.controller, this.root, this.scene);
     }
 
     /**
@@ -72,7 +71,7 @@ public class ViewFactory {
      * @return GameOver
      *          The view for GameOver
      */
-    public GameOver createGameOver(){
-        return new GameOver(stage,controller, root, scene);
+    public GameOver createGameOver() {
+        return new GameOver(this.stage, this.controller, this.root, this.scene);
     }
 }

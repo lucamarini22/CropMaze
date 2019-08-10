@@ -2,8 +2,16 @@ package it.unibo.oop.bbgmm.Control;
 
 import com.google.common.io.Files;
 import it.unibo.oop.bbgmm.Boundary.GameFieldView;
-import it.unibo.oop.bbgmm.Entity.*;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisorImpl;
+import it.unibo.oop.bbgmm.Entity.EntityFactory;
+import it.unibo.oop.bbgmm.Entity.EntityFactoryImpl;
+import it.unibo.oop.bbgmm.Entity.EntitySpawnerImpl;
+import it.unibo.oop.bbgmm.Entity.EntitySpawner;
+import it.unibo.oop.bbgmm.Entity.GameField;
+import it.unibo.oop.bbgmm.Entity.GameFieldImpl;
+import it.unibo.oop.bbgmm.Entity.GameStatistics;
+import it.unibo.oop.bbgmm.Entity.EntityStatisticsImpl;
+import it.unibo.oop.bbgmm.Entity.BasicScoreCalculator;
 import it.unibo.oop.bbgmm.Utilities.ZipExtractor;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
@@ -60,7 +68,7 @@ public final class GameControllerImpl implements GameController {
         this.principalController = principalController;
         this.gameStatistics = gameStatistics;
         this.entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
-        this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, gameField);
+        this.entitySpawner = new EntitySpawnerImpl(this.entityFactory, this.gameField);
         try {
             loadMap();
         } catch (Exception e) {
@@ -86,8 +94,8 @@ public final class GameControllerImpl implements GameController {
 
     @Override
     public void run() {
-        this.gameFieldView = level.getGameFieldView();
-        this.entitiesControllers = level.getEntitiesControllers();
+        this.gameFieldView = this.level.getGameFieldView();
+        this.entitiesControllers = this.level.getEntitiesControllers();
         start();
     }
 

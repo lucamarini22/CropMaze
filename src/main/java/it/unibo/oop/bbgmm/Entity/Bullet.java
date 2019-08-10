@@ -1,7 +1,14 @@
 package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionLabel;
-import it.unibo.oop.bbgmm.Entity.Component.*;
+import it.unibo.oop.bbgmm.Entity.Component.BodyBuilder;
+import it.unibo.oop.bbgmm.Entity.Component.DamageComponent;
+import it.unibo.oop.bbgmm.Entity.Component.LifeComponent;
+import it.unibo.oop.bbgmm.Entity.Component.Weapon;
+import it.unibo.oop.bbgmm.Entity.Component.CollisionComponent;
+import it.unibo.oop.bbgmm.Entity.Component.ClashComponent;
+import it.unibo.oop.bbgmm.Entity.Component.LimitedBulletFeet;
+import it.unibo.oop.bbgmm.Entity.Component.Life;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
@@ -11,7 +18,7 @@ import java.util.Set;
  * Bullet entity.
  */
 public class Bullet extends AbstractEntity {
-    private static final Dimension2D SIZE = new Dimension2D(1.3,1.3);
+    private static final Dimension2D SIZE = new Dimension2D(1.3, 1.3);
 
     /**
      * Constructor for Bullet.
