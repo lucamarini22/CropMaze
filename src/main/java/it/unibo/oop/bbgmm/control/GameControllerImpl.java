@@ -91,7 +91,7 @@ public final class GameControllerImpl implements GameController {
             ZipExtractorUtil.extract(is, tempDir);
             this.map = new TMXMapReader().readMap(new File(tempDir, MAP_NAME).getAbsolutePath());
         } catch (final Exception e) {
-            throw new Exception("ERROR: Can't load map\n");
+            System.out.println("ERROR: Can't load map\n");
         }
     }
 

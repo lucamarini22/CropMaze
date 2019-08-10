@@ -13,12 +13,12 @@ public final class FontMakerUtil {
     private static final Dimension D = Toolkit.getDefaultToolkit().getScreenSize();
     private static final String FONT_URL = ClassLoader.getSystemResource("font.ttf").toExternalForm();
     private static final int PROPORTION_VALUE = 15;
-    private static final int FULL = D.width;
+    private static final double FULL = D.getWidth();
     private static final int SMALL_FONT = 70;
     private static final int WINNER_FONT = 100;
-    private static int currentDimension;
+    private static double currentDimension;
     private static Font font;
-    private static Optional<Integer> fullFont = Optional.empty();
+    private static Optional<Double> fullFont = Optional.empty();
 
     /**
      * Private constructor for FontMakerUtil.
@@ -63,7 +63,7 @@ public final class FontMakerUtil {
      * @return Font
      *          The font to use
      */
-    public static Font getSizedFont(final int size) {
+    public static Font getSizedFont(final double size) {
         return Font.loadFont(FONT_URL, size);
     }
 

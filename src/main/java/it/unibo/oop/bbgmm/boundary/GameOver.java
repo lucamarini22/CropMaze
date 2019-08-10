@@ -73,8 +73,8 @@ public class GameOver extends AbstractBasicView {
         getAudioPlayer().playMusic(Music.GAMEOVER_TRACK.getPath());
 
         label.setTextFill(Color.web("#FFFF00"));
-        int width = ResolutionUtil.getWidth();
-        label.setFont(FontMakerUtil.getSizedFont(width/LABEL_PROPORTION));
+        double width = ResolutionUtil.getWidth();
+        //label.setFont(FontMakerUtil.getSizedFont(width/LABEL_PROPORTION));
         userName.setFont(FontMakerUtil.getSizedFont(width/TEXT_PROPORTION));
         userName.setPrefWidth(width/WIDTH_PROPORTION);
         userName.setId("userName");

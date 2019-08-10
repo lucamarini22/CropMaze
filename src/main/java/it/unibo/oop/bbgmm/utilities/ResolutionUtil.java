@@ -8,11 +8,11 @@ import java.awt.Toolkit;
  * Class used to set and get the resolution of the GameWindow.
  */
 public final class ResolutionUtil {
-    public static final int SMALL_HEIGHT = 768;
-    public static final int SMALL_WIDTH = 1024;
+    public static final double SMALL_HEIGHT = 768;
+    public static final double SMALL_WIDTH = 1024;
     private static final Dimension D = Toolkit.getDefaultToolkit().getScreenSize();
-    private static int width = SMALL_WIDTH;
-    private static int height = SMALL_HEIGHT;
+    private static double width = SMALL_WIDTH;
+    private static double height = SMALL_HEIGHT;
     private static boolean fullScreen = false;
 
     /**
@@ -27,7 +27,7 @@ public final class ResolutionUtil {
      * @return int
      *          The height
      */
-    public static int getHeight() {
+    public static double getHeight() {
         return height;
     }
 
@@ -37,7 +37,7 @@ public final class ResolutionUtil {
      * @return int
      *          The width
      */
-    public static int getWidth() {
+    public static double getWidth() {
         return width;
     }
 
@@ -54,8 +54,8 @@ public final class ResolutionUtil {
      * Setter the height and the width for the full resolution.
      */
     public static void setFullResolution() {
-        width = D.width;
-        height = D.height;
+        width = D.getWidth();
+        height = D.getHeight();
         fullScreen = true;
     }
 

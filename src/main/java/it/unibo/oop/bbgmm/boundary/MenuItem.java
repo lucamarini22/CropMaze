@@ -80,7 +80,7 @@ public class MenuItem extends HBox {
      * @param size
      *          The size of the font
      */
-    public void setFont(final int size) {
+    public void setFont(final double size) {
         this.text.setFont(FontMakerUtil.getSizedFont(size));
     }
 }
