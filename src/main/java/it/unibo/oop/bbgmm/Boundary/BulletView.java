@@ -26,7 +26,7 @@ public class BulletView extends AbstractAliveEntityView {
      */
     public BulletView(final Group group, final Direction direction, final AudioPlayer audioPlayer) {
         super(group, new Dimension2D(WIDTH, HEIGHT));
-        setCurrentImage(Direction.NOTHING);
+        setCurrentImage(direction);
         audioPlayer.playSound(BULLET_SHOT.getPath());
     }
 
