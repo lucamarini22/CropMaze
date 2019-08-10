@@ -1,7 +1,7 @@
 package it.unibo.oop.bbgmm;
 
-import it.unibo.oop.bbgmm.Control.PrincipalController;
-import it.unibo.oop.bbgmm.Control.PrincipalControllerImpl;
+import it.unibo.oop.bbgmm.control.PrincipalController;
+import it.unibo.oop.bbgmm.control.PrincipalControllerImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
