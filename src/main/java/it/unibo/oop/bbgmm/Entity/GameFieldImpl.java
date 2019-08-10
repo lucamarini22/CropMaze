@@ -1,7 +1,6 @@
 package it.unibo.oop.bbgmm.Entity;
 
 import it.unibo.oop.bbgmm.Control.GameController;
-import it.unibo.oop.bbgmm.Control.Level;
 import it.unibo.oop.bbgmm.Entity.Collision.Collidable;
 import it.unibo.oop.bbgmm.Entity.Collision.CollisionSupervisor;
 import java.util.Collections;
@@ -16,7 +15,6 @@ public final class GameFieldImpl implements GameField {
     private final Set<Entity> entities;
     private final CollisionSupervisor collisionSupervisor;
     private final Set<Entity> entitiesToBeRemoved;
-    private Entity player;
     private GameController gameController;
     private final PlayerStatistics playerStatistics;
 
@@ -35,17 +33,23 @@ public final class GameFieldImpl implements GameField {
 
     @Override
     public void update(final double up) {
-        this.entities.stream()
-                .filter(e -> !entitiesToBeRemoved.contains(e))
-                .forEach(e -> e.update(up));
-        this.entitiesToBeRemoved.forEach(e -> e.getDeathEvent().deregister(this::destroyEntity));
-        this.entitiesToBeRemoved.forEach(this::removeEntity);
-        this.entitiesToBeRemoved.clear();
+        //Updates all the entities
+        this.updateEntities(up);
+        this.manageEntitiesToBeRemoved();
+        //Searches for collisions
         this.collisionSupervisor.searchCollision();
-        //If there are no enemies (aliens) it goes to the next level
-        if ((int) this.entities.stream().filter(e -> e instanceof Alien).count() == 0) {
+        //If there are no enemies (aliens) it removes all the entities except the Player and it goes to the next level
+        if (this.areAllEnemiesDead()) {
+            this.entities.stream()
+                         .filter(e -> !(e.getClass().equals(Player.class)))
+                         .forEach(entitiesToBeRemoved::add);
             this.gameController.stop();
             this.gameController.triggerEndLevel();
+        }
+        //If there is not a Player, he's dead and it is a Game Over
+        if (this.isPlayerDead()) {
+            this.gameController.stop();
+            this.gameController.triggerGameOver();
         }
     }
 
@@ -84,14 +88,8 @@ public final class GameFieldImpl implements GameField {
         //if an Alien is killed, it controls the number of alive Aliens, and if it is one (the last Alien killed),
         // then the next level has to start
         Entity entity = event.getEntity();
-
         if (entity instanceof Alien) {
             this.playerStatistics.increaseKilledEnemies();
-            if (this.getAliveEnemies() == 1) {
-                this.entities.stream().filter(e -> !(e.getClass().equals(Player.class)))
-                        .forEach(entitiesToBeRemoved::add);
-                return;
-            }
         }
         if (entity instanceof Coin) {
             this.playerStatistics.increaseCollectedMoney();
@@ -105,9 +103,36 @@ public final class GameFieldImpl implements GameField {
     }
 
     /**
-     * @return the number of alive enemies
+     * @return a boolean that describes if the {@link Player} is dead or not
      */
-    private int getAliveEnemies() {
-        return (int) this.entities.stream().filter(e -> e instanceof Alien).count();
+    private boolean isPlayerDead() {
+        return ((int) this.entities.stream().filter(e -> e instanceof Player).count() == 0);
+    }
+
+    /**
+     * @return a boolean that describes if all the enemies are dead or not
+     */
+    private boolean areAllEnemiesDead() {
+        return (int) this.entities.stream().filter(e -> e instanceof Alien).count() == 0;
+    }
+
+    /**
+     * Manages the entities to be removed.
+     */
+    private void manageEntitiesToBeRemoved() {
+        this.entitiesToBeRemoved.forEach(e -> e.getDeathEvent().deregister(this::destroyEntity));
+        this.entitiesToBeRemoved.forEach(this::removeEntity);
+        this.entitiesToBeRemoved.clear();
+    }
+
+    /**
+     * Updates the entities that should not be removed.
+     * @param up
+     *      Time to simulate, in seconds
+     */
+    private void updateEntities(final double up) {
+        this.entities.stream()
+                     .filter(e -> !entitiesToBeRemoved.contains(e))
+                     .forEach(e -> e.update(up));
     }
 }

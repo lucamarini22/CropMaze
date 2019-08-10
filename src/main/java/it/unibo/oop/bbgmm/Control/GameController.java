@@ -35,8 +35,6 @@ public interface GameController {
      */
     GameFieldView getGameFieldView();
 
-    void triggerEndLevel();
-
     /**
      * Method that calculates the score of the player.
      *
@@ -44,4 +42,14 @@ public interface GameController {
      *          The score achieved
      */
     int calculateScore();
+
+    /**
+     * Triggers end level.
+     */
+    void triggerEndLevel();
+
+    /**
+     * Triggers game over.
+     */
+    void triggerGameOver();
 }

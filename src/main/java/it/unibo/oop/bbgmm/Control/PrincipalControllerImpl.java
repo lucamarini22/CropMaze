@@ -136,4 +136,8 @@ public final class PrincipalControllerImpl implements PrincipalController {
         return this.gameControl;
     }
 
+    public PrincipalView getView() {
+        return this.view;
+    }
+
 }

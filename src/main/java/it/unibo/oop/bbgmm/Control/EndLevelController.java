@@ -1,7 +1,5 @@
 package it.unibo.oop.bbgmm.Control;
 
-import it.unibo.oop.bbgmm.Boundary.EndLevelView;
-
 /**
  * Controller that manages the end of a level.
  */
@@ -13,10 +11,7 @@ public interface EndLevelController {
     void goToNextLevel();
 
     /**
-     * Goes to the {@link it.unibo.oop.bbgmm.Boundary.MainMenu}.
+     * Shows the end level view.
      */
-    void goToMainMenu();
-
-
     void goToEndLevel();
 }
