@@ -141,6 +141,7 @@ public final class GameFieldViewImpl implements GameFieldView {
 
     @Override
     public void showEndLevelBox(final PrincipalController principalController) {
+        this.playerInputHandler.clearInput();
         principalController.getGameController().get().stop();
         EndLevelView endLevelView = new EndLevelView(this.audioplayer, this.endLevelController);
         endLevelView.setObserver(this.endLevelController);
