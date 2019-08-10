@@ -4,7 +4,7 @@
   <component name="PDMPlugin">
     <option name="customRuleSets">
       <list>
-        <option value="C:\Users\utente\Desktop\oop18-bernabe-stefania-bombardi-luca-gabrielli-manuel-marini\plugins\pmd.xml" />
+        <option value="LOCAL_FILE:$PROJECT_DIR$\plugins\pmd.xml" />
       </list>
     </option>
     <option name="options">
