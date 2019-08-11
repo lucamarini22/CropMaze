@@ -5,13 +5,22 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 
-
+/**
+ * Abstract Entity View class.
+ */
 public abstract class AbstractEntityView implements EntityView {
     private final ImageView image = new ImageView();
-    private Dimension2D dimension;
+    private final Dimension2D dimension;
     private final Group myGroup;
 
-    public AbstractEntityView(final Group group, final Dimension2D dimension){
+    /**
+     * Constructor.
+     * @param group
+     *          the related group.
+     * @param dimension
+     *          the related dimension.
+     */
+    public AbstractEntityView(final Group group, final Dimension2D dimension) {
         this.myGroup = group;
         this.dimension = dimension;
         //setDimension(dimension);

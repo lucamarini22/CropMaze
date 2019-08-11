@@ -11,71 +11,68 @@ import javafx.scene.shape.Rectangle;
 import java.util.Set;
 
 /**
- * Allows the entity to walk
+ * Allows the entity to walk.
  */
 public class Feet extends AbstractMovement {
 
     private double walkingSpeed;
-    private Set<Entity> walls;
+    private final Set<Entity> walls;
 
 
     /**
-     *
+     * Constructor.
      * @param walkingSpeed
      *      entity speed for the movement
      * @param walls
      *      walls for checking collisions
      */
-    public Feet(final double walkingSpeed, final Set<Entity> walls){
+    public Feet(final double walkingSpeed, final Set<Entity> walls) {
         super();
         this.walls = walls;
         this.walkingSpeed = walkingSpeed;
     }
 
     /**
-     * attach the component to the entity
+     * attach the component to the entity.
      * @param owner
      */
     @Override
-    public void attach(Entity owner) {
+    public void attach(final Entity owner) {
         super.attach(owner);
         //setState(State.STABLE);
         //updateState();
-        System.out.println("at attach, state -> " + getState());
     }
 
     @Override
-    public void update(double dt) {
+    public void update(final double dt) {
         super.update(dt);
     }
 
     /**
-     * Util method that check wall collision and stop the movement
+     * Util method that check wall collision and stop the movement.
      * @param distanceVector
-     *      The distance vector
+     *      The distance vector.
      * @return
-     *      True if the entity can move
-     *
-     *
+     *      True if the entity can move.
      */
-    private boolean wallChecker(final Point2D distanceVector){
-        if(getOwner().isPresent()){
-            Dimension2D dimension  = getOwner().get().getBody().getDimension();
-            Rectangle shape = new Rectangle(distanceVector.getX(),distanceVector.getY(),
-                                                dimension.getWidth(),dimension.getHeight());
+    private boolean wallChecker(final Point2D distanceVector) {
+        if (getOwner().isPresent()) {
+            final Dimension2D dimension  = getOwner().get().getBody().getDimension();
+            final Rectangle shape = new Rectangle(distanceVector.getX(), distanceVector.getY(),
+                                                dimension.getWidth(), dimension.getHeight());
             return this.walls.stream().anyMatch(w -> w.getBody().getShape().intersects(shape.getLayoutBounds()));
         }
         return false;
     }
 
     /**
-     * Calculate new distance vector based on the speed
+     * Calculate new distance vector based on the speed.
      * @param distanceVector
-     *      The distance vector
+     *      The distance vector.
      * @return
-     *      The new distance vector
+     *      The new distance vector.
      */
-    private Point2D calculateNewDistanceVector(final Point2D distanceVector){
+    private Point2D calculateNewDistanceVector(final Point2D distanceVector) {
         final double hf = distanceVector.getX() > 0 ? 1 : distanceVector.getX() < 0 ? -1 : 0;
         final double vf = distanceVector.getY() > 0 ? 1 : distanceVector.getY() < 0 ? -1 : 0;
 
@@ -83,47 +80,41 @@ public class Feet extends AbstractMovement {
     }
 
     /**
-     * Modify the direction that the entity will follow
+     * Modify the direction that the entity will follow.
      * @param vector
-     *
+     *          Point2D to analyze.
+     * @return
+     *          vector direction.
      */
-    public Direction calculateNewDirection(final Point2D vector){
-        if(vector.getY() != vector.getX() ){
-            if(vector.getX() == 0 && vector.getY() > 0){
+    public Direction calculateNewDirection(final Point2D vector) {
+        if (vector.getY() != vector.getX()) {
+            if (vector.getX() == 0 && vector.getY() > 0) {
                 return Direction.NORTH;
             }
-            if(vector.getX() == 0 && vector.getY() < 0){
+            if (vector.getX() == 0 && vector.getY() < 0) {
                 return Direction.SOUTH;
             }
-            if(vector.getX() < 0 && vector.getY() == 0){
+            if (vector.getX() < 0 && vector.getY() == 0) {
                 return Direction.WEST;
             }
-            if(vector.getX() > 0 && vector.getY() == 0){
+            if (vector.getX() > 0 && vector.getY() == 0) {
                 return Direction.EAST;
             }
         }
         return Direction.NOTHING;
-
     }
 
     @Override
     public void move(final Point2D distanceVector) {
-        //utilizzando questo distancevector dovrai modificare la posizione dell'entità
-        //ovviamente dovrai modificare il metodo e fare in modo che chieda in input un point2d
+        final Point2D movementVector = calculateNewDistanceVector(distanceVector);
+        final Point2D temp = new Point2D(movementVector.getX(), movementVector.getY());
+        final Point2D newPos = temp.add(getOwner().get().getBody().getPosition());
 
-        Point2D movementVector = calculateNewDistanceVector(distanceVector);
-
-        Point2D temp = new Point2D(movementVector.getX(),movementVector.getY());
-        Point2D newPos = temp.add(getOwner().get().getBody().getPosition());
-
-        //verifico se c'è un muro, se è presente l'entità non può spostarsi e rimane ferma
-
-        if(wallChecker(newPos)){
+        if (wallChecker(newPos)) {
             setPosition(Point2D.ZERO);
             //setState(State.STABLE);
-            System.out.println("entity stable, find a wall");
-        }
-        else{
+            //System.out.println("entity stable, find a wall");
+        } else {
             setPosition(movementVector);
             setDirection(calculateNewDirection(movementVector));
 
@@ -146,45 +137,51 @@ public class Feet extends AbstractMovement {
     }
 
     /**
-     * Set the state of the entity
+     * Set the state of the entity.
      */
-    private void updateState(){
-        if(!getPosition().equals(Point2D.ZERO)){
+    private void updateState() {
+        if (!getPosition().equals(Point2D.ZERO)) {
             setState(State.WALKING);
-        }
-        else{
+        } else {
             setState(State.STABLE);
         }
     }
 
     /**
-     * return the walking speed
-     * @return the speed
+     * return the walking speed.
+     * @return the speed.
      */
-    public double getSpeed(){
+    public double getSpeed() {
         return this.walkingSpeed;
     }
 
     /**
-     * Setter for the speed
+     * Setter for the speed.
      * @param newSpeed
+     *          new speed to set
      */
-    public void setSpeed(double newSpeed){
+    public void setSpeed(final double newSpeed) {
         this.walkingSpeed = newSpeed;
     }
 
     @Override
-    public Point2D calculateVector(final Direction direction){
+    public Point2D calculateVector(final Direction direction) {
         Point2D vector = Point2D.ZERO;
 
-        switch(direction){
-            case NORTH: vector = new Point2D(PlayerMoves.UP.x, PlayerMoves.UP.y);
+        switch (direction) {
+            case NORTH:
+                vector = new Point2D(PlayerMoves.UP.x, PlayerMoves.UP.y);
                 break;
-            case SOUTH: vector = new Point2D(PlayerMoves.DOWN.x, PlayerMoves.DOWN.y);
+            case SOUTH:
+                vector = new Point2D(PlayerMoves.DOWN.x, PlayerMoves.DOWN.y);
                 break;
-            case EAST: vector = new Point2D(PlayerMoves.RIGHT.x, PlayerMoves.RIGHT.y);
+            case EAST:
+                vector = new Point2D(PlayerMoves.RIGHT.x, PlayerMoves.RIGHT.y);
                 break;
-            case WEST: vector =  new Point2D(PlayerMoves.LEFT.x, PlayerMoves.LEFT.y);
+            case WEST:
+                vector =  new Point2D(PlayerMoves.LEFT.x, PlayerMoves.LEFT.y);
+                break;
+            default:
                 break;
         }
 

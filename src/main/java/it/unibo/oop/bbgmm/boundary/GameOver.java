@@ -14,6 +14,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+
+/**
+ * The Game Over View.
+ */
 public class GameOver extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 20;
     private static final int USERBOX_X_COORDINATE = 320;
@@ -23,47 +28,59 @@ public class GameOver extends AbstractBasicView {
     private static final int LABEL_PROPORTION = 34;
     private static final int TEXT_PROPORTION = 68;
     private static final int WIDTH_PROPORTION = 10;
-    private int currentItem = 0;
-    private VBox menuBox;
-    private HBox  userBox;
-    private Label label =  new Label ("USER NAME:");
-    private MenuItem itemInsert = new MenuItem("INSERT");
+    private int currentItem;
+    private final VBox menuBox;
+    private final HBox  userBox;
+    private final Label label =  new Label("USER NAME:");
+    private final MenuItem itemInsert = new MenuItem("INSERT");
     private final MenuItem itemMainMenu = new MenuItem("MAIN MENU");
     private final MenuItem itemExit = new MenuItem("EXIT");
-    private TextField userName = new TextField() {
-        @Override public void replaceText(int start, int end, String text) {
-            super.replaceText(start, end, text.toUpperCase());
+    private final TextField userName = new TextField() {
+        @Override public void replaceText(final int start, final int end, final String text) {
+            super.replaceText(start, end, text.toUpperCase(Locale.ENGLISH));
         }
     };
     private boolean insertActive = true;
 
+    /**
+     * Game Over constructor.
+     * @param primaryStage
+     *          the related primary stage.
+     * @param controller
+     *          the related controller.
+     * @param pane
+     *          the related pane.
+     * @param scene
+     *          the related scene.
+     */
     public GameOver(final Stage primaryStage, final PrincipalController controller,
-                    final AnchorPane pane, final Scene scene){
+                    final AnchorPane pane, final Scene scene) {
         super(primaryStage, controller, pane, scene);
 
+        menuBox = new VBox(SPACE_BETWEEN_ITEM, itemMainMenu, itemExit);
+
         getScene().setOnKeyPressed(event -> {
-            if(event.getCode() == KeyCode.UP) {
-                if(currentItem > 0) {
+            if (event.getCode() == KeyCode.UP) {
+                if (currentItem > 0) {
                     playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(--currentItem).setActive(true);
                 }
             }
 
-            if(event.getCode() == KeyCode.DOWN) {
-                if(currentItem < (menuBox.getChildren().size()) - 1 ){
+            if (event.getCode() == KeyCode.DOWN) {
+                if (currentItem < (menuBox.getChildren().size()) - 1) {
                     playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
                     getMenuItem(++currentItem).setActive(true);
                 }
             }
 
-            if(event.getCode() == KeyCode.ENTER){
+            if (event.getCode() == KeyCode.ENTER) {
                 playPressSound();
-                if(insertActive){
+                if (insertActive) {
                     itemInsert.activate();
-                }
-                else{
+                } else {
                     getMenuItem(currentItem).activate();
                 }
             }
@@ -73,33 +90,29 @@ public class GameOver extends AbstractBasicView {
         getAudioPlayer().playMusic(Music.GAMEOVER_TRACK.getPath());
 
         label.setTextFill(Color.web("#FFFF00"));
-        double width = ResolutionUtil.getWidth();
+        final double width = ResolutionUtil.getWidth();
         //label.setFont(FontMakerUtil.getSizedFont(width/LABEL_PROPORTION));
-        userName.setFont(FontMakerUtil.getSizedFont(width/TEXT_PROPORTION));
-        userName.setPrefWidth(width/WIDTH_PROPORTION);
+        userName.setFont(FontMakerUtil.getSizedFont(width / TEXT_PROPORTION));
+        userName.setPrefWidth(width / WIDTH_PROPORTION);
         userName.setId("userName");
-        itemInsert.setFont(width/LABEL_PROPORTION);
+        itemInsert.setFont(width / LABEL_PROPORTION);
         userBox = new HBox(label, userName, itemInsert);
-        userBox.setSpacing(20);
+        userBox.setSpacing(SPACE_BETWEEN_ITEM);
         userBox.setAlignment(Pos.TOP_CENTER);
 
-        menuBox = new VBox(SPACE_BETWEEN_ITEM, itemMainMenu, itemExit);
+
 
         itemActions();
 
         menuBox.setAlignment(Pos.TOP_CENTER);
 
         itemInsert.setActive(true);
-        
-        //calculates the position of the boxes
-        if(ResolutionUtil.isFullScreen()){
-            menuBox.setLayoutX(BOX_X_COORDINATE* ResolutionUtil.getWidth()/ ResolutionUtil.SMALL_WIDTH);
-            menuBox.setLayoutY(BOX_Y_COORDINATE* ResolutionUtil.getHeight()/ ResolutionUtil.SMALL_HEIGHT);
-
-            userBox.setTranslateX(USERBOX_X_COORDINATE* ResolutionUtil.getWidth()/ ResolutionUtil.SMALL_WIDTH);
-            userBox.setTranslateY(USERBOX_Y_COORDINATE* ResolutionUtil.getHeight()/ ResolutionUtil.SMALL_HEIGHT);
-        }
-        else{
+        if (ResolutionUtil.isFullScreen()) {
+            menuBox.setLayoutX(BOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.SMALL_WIDTH);
+            menuBox.setLayoutY(BOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.SMALL_HEIGHT);
+            userBox.setTranslateX(USERBOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.SMALL_WIDTH);
+            userBox.setTranslateY(USERBOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.SMALL_HEIGHT);
+        } else {
             menuBox.setLayoutX(BOX_X_COORDINATE);
             menuBox.setLayoutY(BOX_Y_COORDINATE);
 
@@ -107,7 +120,7 @@ public class GameOver extends AbstractBasicView {
             userBox.setTranslateY(USERBOX_Y_COORDINATE);
         }
 
-        AnchorPane root = getRoot();
+        final AnchorPane root = getRoot();
         root.getChildren().clear();
         root.getChildren().add(userBox);
         root.getChildren().add(menuBox);
@@ -117,12 +130,12 @@ public class GameOver extends AbstractBasicView {
         getScene().setRoot(root);
     }
 
-    private MenuItem getMenuItem(int index){
-        return (MenuItem)menuBox.getChildren().get(index);
+    private MenuItem getMenuItem(final int index) {
+        return (MenuItem) menuBox.getChildren().get(index);
     }
 
     @Override
-    protected void itemActions(){
+    protected void itemActions() {
         itemMainMenu.setOnActivate(() -> {
             getAudioPlayer().stopMusic();
             getController().resetGame();
@@ -135,7 +148,7 @@ public class GameOver extends AbstractBasicView {
         });
 
         itemInsert.setOnActivate(() -> {
-            if(!userName.getText().isEmpty()){
+            if (!userName.getText().isEmpty()) {
                 //user name and stats passed to raking ...
                 String result;
                 // remove spaces

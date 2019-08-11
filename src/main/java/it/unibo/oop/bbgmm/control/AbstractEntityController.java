@@ -5,11 +5,11 @@ import it.unibo.oop.bbgmm.entity.DeathEvent;
 import it.unibo.oop.bbgmm.entity.Entity;
 
 /**
- * Base class for EntityController
+ * Base class for EntityController.
  * @param <V>
- *     Generic EntityView type
+ *     Generic EntityView type.
  */
-public abstract class AbstractEntityController<V extends EntityView> implements EntityController{
+public abstract class AbstractEntityController<V extends EntityView> implements EntityController {
 
     private final Entity entity;
     private final V entityView;
@@ -17,9 +17,9 @@ public abstract class AbstractEntityController<V extends EntityView> implements 
     /**
      *
      * @param entity
-     *          object to control
+     *          object to control.
      * @param entityView
-     *          object to update
+     *          object to update.
      */
     public AbstractEntityController(final Entity entity, final V entityView) {
         this.entity = entity;
@@ -35,16 +35,23 @@ public abstract class AbstractEntityController<V extends EntityView> implements 
      *
      * @return the entity
      */
-    protected final Entity getEntity(){ return entity; }
+    protected final Entity getEntity() {
+        return entity;
+    }
 
     /**
      *
-     * @return the entity view
+     * @return the entity view.
      */
-    protected final V getEntityView(){ return entityView; }
+    protected final V getEntityView() {
+        return entityView;
+    }
 
     /**
-     * it manages the entity destruction
+     * it manages the entity destruction.
+     *
+     * @param event
+     *          death event.
      */
     public abstract void entityDestruction(DeathEvent event);
 

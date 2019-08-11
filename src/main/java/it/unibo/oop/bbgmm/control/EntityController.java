@@ -1,12 +1,12 @@
 package it.unibo.oop.bbgmm.control;
 
 /**
- * Translates view input to model input and update the view
+ * Translates view input to model input and update the view.
  */
-public interface EntityController{
+public interface EntityController {
 
     /**
-     * synchronize the entity controller
+     * synchronize the entity controller.
      */
     void update();
 }
