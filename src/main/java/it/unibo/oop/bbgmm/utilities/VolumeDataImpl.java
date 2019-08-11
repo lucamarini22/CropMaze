@@ -1,9 +1,12 @@
 package it.unibo.oop.bbgmm.utilities;
 
-public class VolumeDataImpl implements VolumeData {
+/**
+ * Implementation of {@link VolumeData}.
+ */
+public final class VolumeDataImpl implements VolumeData {
 
-    private  Volume musicVolume = Volume.LOW;
-    private  Volume effectsVolume = Volume.LOW;
+    private Volume musicVolume = Volume.LOW;
+    private Volume effectsVolume = Volume.LOW;
 
     @Override
     public Volume getMusicVolume() {
@@ -16,12 +19,12 @@ public class VolumeDataImpl implements VolumeData {
     }
 
     @Override
-    public void setMusicVolume(Volume volume) {
-        this.musicVolume=volume;
+    public void setMusicVolume(final Volume volume) {
+        this.musicVolume = volume;
     }
 
     @Override
-    public void setEffectsVolume(Volume volume) {
-        this.effectsVolume=volume;
+    public void setEffectsVolume(final Volume volume) {
+        this.effectsVolume = volume;
     }
 }

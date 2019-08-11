@@ -35,7 +35,7 @@ public final class UpgradeImpl implements Upgrade {
     @Override
     public void upgradeLife() {
         player.get(Life.class).ifPresent(life ->
-                life.incrementLife(life.getMaxLifePoints() - life.getCurrentLifePoints())
+               life.incrementLife(life.getMaxLifePoints() - life.getCurrentLifePoints())
         );
         changePrice(UpgradeType.LIFE);
     }

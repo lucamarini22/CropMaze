@@ -36,11 +36,6 @@ public abstract class TemporaryPower extends AbstractPower implements Temporary 
     }
 
     @Override
-    public final double getRemainingTimePercentage() {
-        return this.time / this.timeout;
-    }
-
-    @Override
     public final double getRemainingTime() {
         return this.time;
     }

@@ -13,22 +13,34 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class UpgradeControllerImpl implements UpgradeController{
+/**
+ * The implementation of {@link UpgradeController}.
+ */
+public final class UpgradeControllerImpl implements UpgradeController {
 
     private UpgradeView upgradeView;
     private final Upgrade upgrade;
-    private final GameController gameController;
 
-    public UpgradeControllerImpl(final Button upgradeButton,final Entity player, final GameController gameController,
-                                 final Stage primaryStage){
+    /**
+     * Creates a new {@link UpgradeController} instance.
+     * @param upgradeButton
+     *      the upgrade Button in the {@link it.unibo.oop.bbgmm.boundary.GameFieldView}
+     * @param player
+     *      the {@link it.unibo.oop.bbgmm.entity.Player} instance
+     * @param gameController
+     *      the {@link GameController} instance
+     * @param primaryStage
+     *      the primary stage
+     */
+    public UpgradeControllerImpl(final Button upgradeButton, final Entity player, final GameController gameController,
+                                 final Stage primaryStage) {
         upgrade = new UpgradeImpl(player);
-        this.gameController = gameController;
 
-        upgradeButton.setOnMouseClicked( event -> {
-            FXMLLoader loader = new FXMLLoader();
+        upgradeButton.setOnMouseClicked(event -> {
+            final FXMLLoader loader = new FXMLLoader();
             try {
-                Parent p = loader.load(getClass().getResourceAsStream("/scene/upgrade.fxml"));
-                Stage upgradeScreen = new Stage();
+                final Parent p = loader.load(getClass().getResourceAsStream("/scene/upgrade.fxml"));
+                final Stage upgradeScreen = new Stage();
                 upgradeScreen.initOwner(primaryStage);
                 upgradeView = loader.getController();
                 upgradeView.setController(this);
@@ -50,15 +62,15 @@ public class UpgradeControllerImpl implements UpgradeController{
 
     @Override
     public void updateView() {
-        for (UpgradeType type : UpgradeType.values()) {
+        for (final UpgradeType type : UpgradeType.values()) {
             this.upgradeView.setVisible(type, this.upgrade.canUpgrade(type));
             this.upgradeView.setPrice(type, this.upgrade.getCurrentPrice(type), this.upgrade.getCurrentMoney());
         }
     }
 
     @Override
-    public void upgradePlayer(UpgradeType type) {
-        switch (type){
+    public void upgradePlayer(final UpgradeType type) {
+        switch (type) {
             case LIFE:
                 this.upgrade.upgradeLife();
                 break;
@@ -71,6 +83,7 @@ public class UpgradeControllerImpl implements UpgradeController{
             case RANGE:
                 this.upgrade.upgradeRange();
                 break;
+                default:
         }
         this.updateView();
     }

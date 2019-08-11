@@ -6,19 +6,25 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 
 /**
- * Models a view for PowerUp
+ * Models a view for PowerUp.
  */
-
 public class PowerUpView extends AbstractEntityView implements LifelessEntityView {
     private static final int WIDTH = 72, HEIGHT = 97;
 
-    public PowerUpView(Group group, EntityType tag) {
+    /**
+     * Creates a new PowerUpView.
+     * @param group
+     *      the group to be added
+     * @param tag
+     *      the entity type tag of the power
+     */
+    public PowerUpView(final Group group, final EntityType tag) {
         super(group, new Dimension2D(WIDTH, HEIGHT));
         this.setImage(tag);
     }
 
-    private void setImage(EntityType tag){
-        switch (tag){
+    private void setImage(final EntityType tag) {
+        switch (tag) {
             case DOUBLE_SPEED:
                 getView().setImage(new Image("/images/wood_case_speed.png"));
                 break;
@@ -27,6 +33,8 @@ public class PowerUpView extends AbstractEntityView implements LifelessEntityVie
                 break;
             case DOUBLE_DAMAGE:
                 getView().setImage(new Image("/images/wood_case_damage.png"));
+                break;
+                default:
         }
     }
 }
