@@ -150,7 +150,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     }
 
     @Override
-    public void setObserver(final EndLevelController observer) {
-        this.endLevelController = observer;
+    public void setEndLevelController(final EndLevelController endLevelController) {
+        this.endLevelController = endLevelController;
     }
 }

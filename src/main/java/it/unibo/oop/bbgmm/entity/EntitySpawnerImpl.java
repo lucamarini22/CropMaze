@@ -49,8 +49,8 @@ public final class EntitySpawnerImpl implements EntitySpawner {
     }
 
     @Override
-    public Entity spawn(final Point2D position, final Dimension2D dimension) {
-        return gameField.addEntity(entityFactory.createWall(position, dimension));
+    public void spawn(final Point2D position, final Dimension2D dimension) {
+        gameField.addEntity(entityFactory.createWall(position, dimension));
     }
 
     @Override
