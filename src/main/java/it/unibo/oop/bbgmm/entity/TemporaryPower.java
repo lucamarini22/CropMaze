@@ -3,42 +3,50 @@ package it.unibo.oop.bbgmm.entity;
 import it.unibo.oop.bbgmm.utilities.Temporary;
 
 /**
- * This class represents a power that have a limited life time
+ * This class represents a power that have a limited life time.
  */
 public abstract class TemporaryPower extends AbstractPower implements Temporary {
 
     private double time;
     private double timeout;
 
-    public TemporaryPower(final double timeout, final PowerTag powerTag){
+    /**
+     * This constructor set the timeout.
+     * @param timeout
+     *      the duration of the power
+     * @param powerTag
+     *      the power tag
+     */
+    public TemporaryPower(final double timeout, final PowerTag powerTag) {
         super(powerTag);
-        this.time=timeout;
-        this.timeout=timeout;
+        this.time = timeout;
+        this.timeout = timeout;
     }
 
+    /**
+     * It must be called in extended method.
+     */
     @Override
-    public void update(double dt) {
-        if(this.time < 0) {
+    public void update(final double dt) {
+        if (this.time < 0) {
             this.deactivate();
-        }
-        else
-        {
+        } else {
             this.time = this.time - dt;
         }
     }
 
     @Override
-    public double getRemainingTimePercentage() {
-        return this.time/this.timeout;
+    public final double getRemainingTimePercentage() {
+        return this.time / this.timeout;
     }
 
     @Override
-    public double getRemainingTime() {
+    public final double getRemainingTime() {
         return this.time;
     }
 
     @Override
-    public void addTime(double time) {
+    public final void addTime(final double time) {
         this.time = this.time + time;
         this.timeout = this.timeout + time;
     }
