@@ -19,7 +19,7 @@ public final class SettingsMenu extends AbstractBasicView {
 
     private static final int SPACE_BETWEEN_ITEM = 10;
     private static final int BOX_X_COORDINATE = 200;
-    private static final int BOX_Y_COORDINATE = 185;
+    private static final int BOX_Y_COORDINATE = 130;
 
     private final VBox menuBox;
     private int currentItem;
@@ -29,6 +29,7 @@ public final class SettingsMenu extends AbstractBasicView {
     private final MenuItem itemFullScreen = new MenuItem("Full Screen");
     private final MenuItem itemMusicVolume = new MenuItem("Music: " + musicVolume.getText());
     private final MenuItem itemEffectsVolume = new MenuItem("Effects: " + effectsVolume.getText());
+    private final MenuItem itemEmptyRanking = new MenuItem("Empty Ranking");
     private final MenuItem itemBack = new MenuItem("BACK");
 
     /**
@@ -54,6 +55,7 @@ public final class SettingsMenu extends AbstractBasicView {
                                 this.itemFullScreen,
                                 this.itemMusicVolume,
                                 this.itemEffectsVolume,
+                                this.itemEmptyRanking,
                                 this.itemBack);
 
         //it intercepts the button presses
@@ -141,6 +143,10 @@ public final class SettingsMenu extends AbstractBasicView {
             nextEffectsVolume();
             updateVolume(this.musicVolume, this.effectsVolume);
             getViewFactory().createSettingsMenu();
+        });
+
+        this.itemEmptyRanking.setOnActivate(() -> {
+            getController().emptyRanking();
         });
     }
 

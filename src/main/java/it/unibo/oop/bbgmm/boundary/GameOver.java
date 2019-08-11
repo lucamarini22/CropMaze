@@ -74,7 +74,7 @@ public class GameOver extends AbstractBasicView {
 
         label.setTextFill(Color.web("#FFFF00"));
         double width = ResolutionUtil.getWidth();
-        //label.setFont(FontMakerUtil.getSizedFont(width/LABEL_PROPORTION));
+        label.setFont(FontMakerUtil.getSizedFont(width/LABEL_PROPORTION));
         userName.setFont(FontMakerUtil.getSizedFont(width/TEXT_PROPORTION));
         userName.setPrefWidth(width/WIDTH_PROPORTION);
         userName.setId("userName");
