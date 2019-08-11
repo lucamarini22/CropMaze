@@ -111,7 +111,6 @@ public final class LevelImpl implements Level {
                     //Creates the Player only in the first level
                     if (this.gameStatistics.getCurrentLevel() == LEVEL_ONE) {
                         player = entitySpawner.spawn(EntityType.PLAYER.toString(), position);
-                        //playerStatistics = new PlayerStatisticsImpl(player);
                     }
                     final PlayerController controller = new PlayerController(player, gameFieldView.getEntityViewFactory().createPlayerView(), this.gameFieldView);
                     gameFieldView.setPlayerInputListener(controller);
