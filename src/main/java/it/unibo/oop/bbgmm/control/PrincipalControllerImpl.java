@@ -49,7 +49,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
         try {
             this.score = new ScoreListImpl();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Can't find ScoreList.txt");
         }
     }
 
@@ -61,6 +61,15 @@ public final class PrincipalControllerImpl implements PrincipalController {
     @Override
     public void insertNewScore(final String name) {
         this.gameControl.ifPresent(controller -> this.score.addScore(new Pair<>(name, controller.calculateScore())));
+    }
+
+    @Override
+    public void emptyRanking() {
+        try {
+            this.score.deleteAll();
+        } catch (IOException e) {
+            System.out.println("Can't find ScoreList.txt");
+        }
     }
 
     @Override

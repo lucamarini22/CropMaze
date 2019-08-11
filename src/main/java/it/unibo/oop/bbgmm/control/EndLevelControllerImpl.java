@@ -19,7 +19,7 @@ public final class EndLevelControllerImpl implements EndLevelController {
         this.gameStatistics = gameStatistics;
         this.level = level;
         this.gameFieldView = gameFieldView;
-        this.gameFieldView.setObserver(this);
+        this.gameFieldView.setEndLevelController(this);
     }
 
     @Override

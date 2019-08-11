@@ -12,7 +12,7 @@ import org.mapeditor.core.TileLayer;
 /**
  * Interface that represent the view of the {@link it.unibo.oop.bbgmm.entity.GameField}.
  */
-public interface GameFieldView extends  ObservableView<EndLevelController> {
+public interface GameFieldView {
     /**
      * @return a factory for the views of entities
      */
@@ -54,4 +54,12 @@ public interface GameFieldView extends  ObservableView<EndLevelController> {
      *      {@link PrincipalController} instance
      */
     void showEndLevelBox(PrincipalController principalController);
+
+    /**
+     * Sets the {@link EndLevelController}.
+     * @param endLevelController
+     *      {@link EndLevelController} instance to set
+     */
+    void setEndLevelController(EndLevelController endLevelController);
+
 }
