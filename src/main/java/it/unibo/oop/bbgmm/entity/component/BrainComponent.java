@@ -6,7 +6,7 @@ import it.unibo.oop.bbgmm.entity.Movement;
 import javafx.geometry.Point2D;
 
 /**
- * permite to follow a determinate entity and change the desired direciton
+ * permit to follow a determinate entity and change the desired direction.
  */
 public class BrainComponent extends AbstractEntityComponent implements Brain {
 
@@ -15,12 +15,18 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
     private Point2D positionToFollow = Point2D.ZERO;
     private final Entity entityToFollow;
     private final Movement feet;
-    private double time = MAX_TIME ;
+    private double time = MAX_TIME;
     private final Life playerLife;
 
 
     /**
-     * next
+     * Constructor.
+     * @param eToFollow
+     *          entity to stalk.
+     * @param feet
+     *          component feet.
+     * @param life
+     *          component life.
      */
     public BrainComponent(final Entity eToFollow, final Movement feet, final Life life) {
         super();
@@ -31,72 +37,45 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
 
 
     @Override
-    public void update(double delta) {
+    public void update(final double delta) {
         this.time = this.time - delta;
         super.update(delta);
-        if(this.time <= 0){
+        if (this.time <= 0) {
             followPlayer();
             this.time = MAX_TIME;
         }
     }
 
     @Override
-    public void followPlayer(){
-        //int min = - 1;
-        //int max = 1;
-
+    public void followPlayer() {
         this.positionToFollow = this.entityToFollow.getBody().getPosition();
-        Point2D currentPosition = getOwner().get().getBody().getPosition();
+        final Point2D currentPosition = getOwner().get().getBody().getPosition();
 
         Direction newDirection;
 
-        /*if (this.positionToFollow.getY() < currentPosition.getY()){
+        if (this.positionToFollow.getY() < currentPosition.getY()) {
             newDirection = Direction.SOUTH;
-        }
-        else if (this.positionToFollow.getY() > currentPosition.getY()) {
-            newDirection = Direction.NORTH;
-        }
-        else if (this.positionToFollow.getX() < currentPosition.getX()){
-            newDirection = Direction.WEST;
-        }
-        else{
-            newDirection = Direction.EAST;
-        }*/
-
-        if (this.positionToFollow.getY() < currentPosition.getY()){
-            newDirection = Direction.SOUTH;
-        }
-        else {
+        } else {
             newDirection = Direction.NORTH;
         }
 
-        if(this.positionToFollow.getY() <= currentPosition.getY()+RANGE &&
-            positionToFollow.getY() >= currentPosition.getY()-RANGE){
-            if (this.positionToFollow.getX() < currentPosition.getX()){
+        if (this.positionToFollow.getY() <= currentPosition.getY() + RANGE
+                && positionToFollow.getY() >= currentPosition.getY() - RANGE) {
+            if (this.positionToFollow.getX() < currentPosition.getX()) {
                 newDirection = Direction.WEST;
-            }
-            else{
+            } else {
                 newDirection = Direction.EAST;
             }
         }
 
 
         //if the alien and the player are collisioning the alien must not move
-        if(getOwner().get().getBody().getShape().getBoundsInLocal().intersects(entityToFollow.getBody().getShape().getBoundsInLocal())
-           || playerLife.isDead()){
+        if (getOwner().get().getBody().getShape().getBoundsInLocal().intersects(entityToFollow.getBody().getShape().getBoundsInLocal())
+           || playerLife.isDead()) {
             newDirection = Direction.NOTHING;
         }
 
-        Point2D newPosition = feet.calculateVector(newDirection);
-
-        /*getOwner().get().get(Movement.class).ifPresent( movement -> {
-            //double xValue = min + Math.random()*(max-min);
-            //double yValue = min + Math.random()*(max-min);
-            //this.nextPosition = new Point2D(xValue, yValue);
-
-            movement.move(newPosition);
-
-        });*/
+        final Point2D newPosition = feet.calculateVector(newDirection);
         feet.move(newPosition);
     }
 }

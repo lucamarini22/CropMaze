@@ -7,7 +7,7 @@ import it.unibo.oop.bbgmm.utilities.ComponentsContainerImpl;
 import java.util.Optional;
 
 /**
- * base class for entity type
+ * base class for entity type.
  */
 
 public abstract class AbstractEntity implements Entity {
@@ -15,31 +15,32 @@ public abstract class AbstractEntity implements Entity {
     private final ComponentsContainerImpl<EntityComponent> components = new ComponentsContainerImpl<>(EntityComponent.class);
     private final EventSource<DeathEvent> deathEvent;
     /**
-     * constructor for Abstract entity
+     * constructor for Abstract entity.
      * @param body
+     *          the related body.
      */
-    public AbstractEntity(final EntityBody body /*final GameField gameField*/) {
+    public AbstractEntity(final EntityBody body) {
         this.body = body;
         body.attach(this);
         this.deathEvent = new EventSource<>();
     }
 
     @Override
-    public final EntityBody getBody(){
+    public final EntityBody getBody() {
         return body;
     }
 
     @Override
-    public void update(final double up){
+    public void update(final double up) {
         updateComponents(up);
     }
 
     @Override
-    public void destroy(){
-        System.out.println(this);
+    public void destroy() {
+        //System.out.println(this);
         components.forEach(this::remove);
         this.remove(body);
-        System.out.println(components.stream().count());
+        //System.out.println(components.stream().count());
     }
 
 
@@ -61,15 +62,19 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
-     * Calls {@link EntityComponent#update} on the component
+     * Calls update on the component.
      * @param up
-     *          Time for the update since last call
+     *          Time for the update since last call.
      */
-    protected void updateComponents(final double up){
+    protected void updateComponents(final double up) {
         components.forEach(c -> c.update(up));
     }
 
-    public Event<DeathEvent> getDeathEvent(){
+    /**
+     * Method that get death event.
+     * @return death event
+     */
+    public Event<DeathEvent> getDeathEvent() {
         return this.deathEvent;
     }
 

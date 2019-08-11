@@ -3,14 +3,19 @@ package it.unibo.oop.bbgmm.entity;
 import it.unibo.oop.bbgmm.entity.component.Life;
 
 /**
- * Create a shield around the player and makes it invulnerable
+ * Create a shield around the player and makes it invulnerable.
  */
-public class TemporaryShield extends TemporaryPower {
+public final class TemporaryShield extends TemporaryPower {
 
-    private static final PowerTag powerTag = PowerTag.SHIELD;
+    private static final PowerTag POWER_TAG = PowerTag.SHIELD;
 
-    public TemporaryShield(double timeout) {
-        super(timeout, powerTag);
+    /**
+     * This constructor set the timeout.
+     * @param timeout
+     *      the duration of the power
+     */
+    public TemporaryShield(final double timeout) {
+        super(timeout, POWER_TAG);
     }
 
     @Override
