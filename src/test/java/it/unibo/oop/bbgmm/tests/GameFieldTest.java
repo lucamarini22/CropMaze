@@ -67,5 +67,4 @@ public class GameFieldTest {
     }
 =======
     }*/
->>>>>>> eef20877e41618db5f38eb2403149c3fd3504ac0:src/test/java/it/unibo/oop/bbgmm/tests/GameFieldTest.java
 }
