@@ -130,7 +130,7 @@ public final class GameFieldViewImpl implements GameFieldView {
      */
     private void showPauseBox(final PrincipalController principalController) {
         principalController.getGameController().get().stop();
-        boolean answer = new PauseBox(this.audioplayer).display(this.primaryStage);
+        final boolean answer = new PauseBox(this.audioplayer).display(this.primaryStage);
         if (answer) {
             this.audioplayer.stopMusic();
             principalController.resetGame();

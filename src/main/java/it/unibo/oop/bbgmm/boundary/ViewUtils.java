@@ -27,7 +27,7 @@ public final class ViewUtils {
      * @return pixels in meters.
      */
     public static double pixelsToMeters(final int pixels) {
-        return pixels / PIXELS_PER_METER;
+        return (double) pixels / PIXELS_PER_METER;
     }
 
     /**
