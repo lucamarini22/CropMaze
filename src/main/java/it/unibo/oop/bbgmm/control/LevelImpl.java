@@ -29,6 +29,8 @@ public final class LevelImpl implements Level {
     private static final int TOP_LEFT_Y = 0;
     private static final double WALL_TRANSLATION_X = 1.5;
     private static final double WALL_TRANSLATION_Y = 2;
+    private static final double ENEMY_TRANSLATION_X = 2.5;
+    private static final double ENEMY_TRANSLATION_Y = 2;
     private static final String SOLID_OBJECTS = "solid";
     private static final String ENTITY_OBJECTS = "objects";
 
@@ -62,6 +64,7 @@ public final class LevelImpl implements Level {
     }
     @Override
     public void initializeLevel() {
+        this.entitiesControllers.clear();
         this.map.getLayers().forEach(layer -> {
             if (layer instanceof TileLayer) {
                 loadTiles((TileLayer) layer);
@@ -132,8 +135,8 @@ public final class LevelImpl implements Level {
                     break;
                 case ALIEN:
                     for (int i = 0; i < entitySpawner.getEnemiesNumber(this.gameStatistics.getCurrentLevel()); i++) {
-                        entity = entitySpawner.spawn(EntityType.ALIEN.toString(), new Point2D(position.getX() + (2 * i),
-                                position.getY() + (double) (i / 2)));
+                        entity = entitySpawner.spawn(EntityType.ALIEN.toString(), new Point2D(position.getX() + (ENEMY_TRANSLATION_X * i),
+                                position.getY() + (double) (i / ENEMY_TRANSLATION_Y)));
                         entitiesControllers.add(new AliveEntityController(entity, gameFieldView.getEntityViewFactory().createAlienView()));
                     }
                     break;
@@ -168,7 +171,7 @@ public final class LevelImpl implements Level {
     }
 
     /**
-     * Gets the {@link Dimension2D} and the position of a solid block in the {@link GameField}.
+     * Gets the {@link Dimension2D} and the position of a solid block in the GameField.
      * @param map
      *      The tiled map
      * @param x
