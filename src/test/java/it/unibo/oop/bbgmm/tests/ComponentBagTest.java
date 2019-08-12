@@ -61,10 +61,10 @@ public class ComponentBagTest {
         bag.put(a);
         bag.put(b);
 
-        assertTrue(bag.get(ChildA.class).isPresent());
-        assertEquals(a, bag.get(ChildA.class).get());
-        assertTrue(bag.get(ChildB.class).isPresent());
-        assertEquals(b, bag.get(ChildB.class).get());
+        assertEquals("The element a is not present",true, bag.get(ChildA.class).isPresent());
+        assertEquals("Should have returned element a but returned something else",a, bag.get(ChildA.class).get());
+        assertEquals("The element b is not present",true, bag.get(ChildB.class).isPresent());
+        assertEquals("Should have returned element a but returned something else",b, bag.get(ChildB.class).get());
     }
 
     /**
@@ -84,8 +84,8 @@ public class ComponentBagTest {
         final Parent a = new ConcreteChildA();
         final Parent b = new ChildB() {
         };
-        bag.put(a);
         bag.put(b);
+        bag.put(a);
 
         bag.get(ConcreteChildA.class);
     }
@@ -101,7 +101,7 @@ public class ComponentBagTest {
         bag.put(new ChildA() {
         });
 
-        assertFalse(bag.get(Parent.class).isPresent());
+        assertEquals("It returned an element by the parent interface",false, bag.get(Parent.class).isPresent());
     }
 
     /**
@@ -118,8 +118,8 @@ public class ComponentBagTest {
         bag.put(a);
         bag.remove(a);
 
-        assertTrue(bag.get(ChildB.class).isPresent());
-        assertFalse(bag.get(ChildA.class).isPresent());
+        assertEquals("The element b is not present",true, bag.get(ChildB.class).isPresent());
+        assertEquals("The element id still in the map",false, bag.get(ChildA.class).isPresent());
     }
 
     /**
@@ -136,8 +136,8 @@ public class ComponentBagTest {
         bag.put(a);
         bag.remove(ChildA.class);
 
-        assertTrue(bag.get(ChildB.class).isPresent());
-        assertFalse(bag.get(ChildA.class).isPresent());
+        assertEquals("The element b is not present",true, bag.get(ChildB.class).isPresent());
+        assertEquals("The element a is still in the map",false, bag.get(ChildA.class).isPresent());
     }
 
     /**
@@ -151,12 +151,12 @@ public class ComponentBagTest {
 
         bag.put(ab);
 
-        assertTrue(bag.get(ChildA.class).isPresent());
-        assertEquals(ab, bag.get(ChildA.class).get());
-        assertTrue(bag.get(ChildB.class).isPresent());
-        assertEquals(ab, bag.get(ChildB.class).get());
-        assertTrue(bag.get(ChildofAB.class).isPresent());
-        assertEquals(ab, bag.get(ChildofAB.class).get());
+        assertEquals("The element ab is not present",true, bag.get(ChildA.class).isPresent());
+        assertEquals("Should have returned element ab but returned something else",ab, bag.get(ChildA.class).get());
+        assertEquals("The element ab is not present",true, bag.get(ChildB.class).isPresent());
+        assertEquals("Should have returned element ab but returned something else",ab, bag.get(ChildB.class).get());
+        assertEquals("The element ab is not present",true, bag.get(ChildofAB.class).isPresent());
+        assertEquals("Should have returned element a but returned something else",ab, bag.get(ChildofAB.class).get());
     }
 
     /**
@@ -185,10 +185,11 @@ public class ComponentBagTest {
         final ChildB b = new ChildB() {
         };
 
-        bag.put(a);
         bag.put(b);
+        bag.put(a);
 
-        assertEquals(bag.stream().collect(Collectors.toList()), Arrays.asList(a, b));
+        assertEquals("The list obtained from the stream is different from (b,a)"
+                ,bag.stream().collect(Collectors.toList()), Arrays.asList(b, a));
     }
 }
 

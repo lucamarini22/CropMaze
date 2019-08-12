@@ -13,8 +13,7 @@ public class BodyBuilder {
     private Dimension2D dimension;
     private Point2D position;
     private Direction direction;
-    private boolean movable = false;
-
+    private boolean movable;
 
     /**
      * Method for set direction.
@@ -23,7 +22,7 @@ public class BodyBuilder {
      * @return
      *          new direction
      */
-    public BodyBuilder setDirection(final Direction direction) {
+    public BodyBuilder bodyDirection(final Direction direction) {
         this.direction = direction;
         return this;
     }
@@ -35,7 +34,7 @@ public class BodyBuilder {
      * @return
      *          new dimension.
      */
-    public BodyBuilder setDimension(final Dimension2D dimension) {
+    public BodyBuilder bodyDimension(final Dimension2D dimension) {
         this.dimension = dimension;
         return this;
     }
@@ -47,7 +46,7 @@ public class BodyBuilder {
      * @return
      *          if is movable or not.
      */
-    public BodyBuilder setMovable(final boolean movable) {
+    public BodyBuilder bodyMovable(final boolean movable) {
         this.movable = movable;
         return this;
     }
@@ -59,7 +58,7 @@ public class BodyBuilder {
      * @return
      *          new position.
      */
-    public BodyBuilder setPosition(final Point2D position) {
+    public BodyBuilder bodyPosition(final Point2D position) {
         this.position = position;
         return this;
     }
@@ -72,10 +71,9 @@ public class BodyBuilder {
     public Body build() {
         if (this.checkBuild()) {
             throw new IllegalStateException("The build is incomplete");
-        } else {
-            final Body body = new Body(this.position, this.dimension, this.direction, this.movable);
-            return body;
         }
+        return new Body(this.position, this.dimension, this.direction, this.movable);
+
     }
 
     /**

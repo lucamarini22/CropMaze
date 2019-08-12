@@ -39,10 +39,10 @@ public class Bullet extends AbstractEntity {
                   final Direction ownerDirection,
                   final Point2D position,
                   final Set<Entity> walls) {
-        super(bodyBuilder.setPosition(position)
-                         .setDimension(SIZE)
-                         .setDirection(ownerDirection)
-                         .setMovable(true)
+        super(bodyBuilder.bodyPosition(position)
+                         .bodyDimension(SIZE)
+                         .bodyDirection(ownerDirection)
+                         .bodyMovable(true)
                          .build());
         add(new LifeComponent(weapon.getWeaponRange()));
         add(new DamageComponent(weapon.getWeaponDamage()));

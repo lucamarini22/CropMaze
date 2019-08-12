@@ -24,9 +24,9 @@ public final class StatusBarImpl implements StatusBarScreen {
     private final HBox coinsBox = new HBox();
     private final HBox root = new HBox();
     private final ProgressBar pb = new ProgressBar(1);
-    private double maxLifePoints = 0;
+    private double maxLifePoints;
     private final List<Image> imageNum;
-    private List<ImageView> coinsList = new LinkedList<>();
+    private final List<ImageView> coinsList = new LinkedList<>();
 
 
     public StatusBarImpl(){
@@ -56,9 +56,9 @@ public final class StatusBarImpl implements StatusBarScreen {
 
 
     @Override
-    public void setCurrentLifePoints(int currentLifePoints) {
+    public void setCurrentLifePoints(final int currentLifePoints) {
         if(maxLifePoints != 0) {
-            double newPercentage = currentLifePoints/maxLifePoints;
+            final double newPercentage = currentLifePoints/maxLifePoints;
             pb.setProgress(newPercentage);
         }else {
             maxLifePoints = currentLifePoints;
@@ -66,7 +66,7 @@ public final class StatusBarImpl implements StatusBarScreen {
     }
 
     @Override
-    public void setCoins(int coins) {
+    public void setCoins(final int coins) {
         coinsList.forEach(view -> coinsBox.getChildren().remove(view));
         coinsList.clear();
         for (final String ch : Integer.toString(coins).split("")) {

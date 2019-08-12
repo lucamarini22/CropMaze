@@ -11,7 +11,7 @@ public abstract class AbstractEntityComponent implements EntityComponent {
 
 
     @Override
-    public void attach(Entity owner) {
+    public void attach(final Entity owner) {
         if(this.owner.isPresent()){
             throw new IllegalStateException("This component is already attached to an entity");
         }
@@ -26,7 +26,7 @@ public abstract class AbstractEntityComponent implements EntityComponent {
     }
 
     @Override
-    public void update(double delta) {
+    public void update(final double delta) {
         //
     }
 

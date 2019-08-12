@@ -24,7 +24,7 @@ public abstract class AbstractEntityChangeStateView<S extends EntityState> exten
         super(group,dimension);
         this.currentAnimation = new Transition() {
             @Override
-            protected void interpolate(double frac) {
+            protected void interpolate(final double frac) {
                 //it's an empty animation
             }
         };
@@ -104,7 +104,7 @@ public abstract class AbstractEntityChangeStateView<S extends EntityState> exten
     }
 
     @Override
-    public void changeState(S state) {
+    public void changeState(final S state) {
         if(this.animations.containsKey(state)){
             this.animations.get(state).run();
         }

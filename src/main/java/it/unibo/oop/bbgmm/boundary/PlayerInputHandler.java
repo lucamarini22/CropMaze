@@ -43,26 +43,10 @@ public class PlayerInputHandler {
 
     private void onPress(final KeyEvent event) {
         if (checkMovement(event)) {
-            if (event.getCode().equals(KeyCode.D)) {
-            }
-            if (event.getCode().equals(KeyCode.A)) {
-            }
-            if (event.getCode().equals(KeyCode.S)) {
-            }
-            if (event.getCode().equals(KeyCode.W)) {
-            }
             addKey(event);
             applyMovement();
         }
         if (checkShooting(event)) {
-            if (event.getCode().equals(KeyCode.UP)) {
-            }
-            if (event.getCode().equals(KeyCode.DOWN)) {
-            }
-            if (event.getCode().equals(KeyCode.LEFT)) {
-            }
-            if (event.getCode().equals(KeyCode.RIGHT)) {
-            }
             addKey(event);
             applyShooting();
 
@@ -153,7 +137,7 @@ public class PlayerInputHandler {
             direction = Direction.SOUTH;
         }
         if(this.input.contains(KeyCode.LEFT)){
-            direction = Direction.WEST;;
+            direction = Direction.WEST;
         }
         if(this.input.contains(KeyCode.RIGHT)){
             direction = Direction.EAST;

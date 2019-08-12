@@ -30,16 +30,11 @@ public class PlayerController extends AliveEntityController implements PlayerInp
     }
 
     @Override
-    public void lifeChange(final Life life) {
-        super.lifeChange(life);
-    }
-
-    @Override
     public void move(final Point2D vector) {
-        Direction after = getEntity().getBody().getDirection();
+        final Direction after = getEntity().getBody().getDirection();
         getEntity().get(Movement.class).ifPresent(movement -> movement.move(vector));
-        Direction before = getEntity().getBody().getDirection();
-        if(after != before) {
+        final Direction before = getEntity().getBody().getDirection();
+        if(!after.equals(before)) {
             movementChanged(getEntity().get(Movement.class).get());
             if(before == Direction.NOTHING){
                 faceDirectionChanged(after);
@@ -61,17 +56,17 @@ public class PlayerController extends AliveEntityController implements PlayerInp
 
 
     @Override
-    public void shoot(Direction direction) {
+    public void shoot(final Direction direction) {
         if(getEntity().get(Weapon.class).isPresent()){
-            Optional<Bullet> bullet = getEntity().get(Weapon.class)
+            final Optional<Bullet> bullet = getEntity().get(Weapon.class)
                                                  .get()
                                                  .shoot(direction);
             bullet.ifPresent(b -> createBulletController(b, direction));
         }
     }
 
-    private void createBulletController(Bullet bullet, Direction direction){
-        BulletController controller = new BulletController(bullet, gameFieldView.getEntityViewFactory().createBulletView(direction), this);
+    private void createBulletController(final Bullet bullet, final Direction direction){
+        final BulletController controller = new BulletController(bullet, gameFieldView.getEntityViewFactory().createBulletView(direction), this);
         bulletControllers.add(controller);
     }
 

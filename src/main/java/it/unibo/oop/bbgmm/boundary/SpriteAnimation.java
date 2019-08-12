@@ -35,9 +35,10 @@ public class SpriteAnimation extends Transition {
      *          The height.
      */
     public SpriteAnimation(
-            ImageView imageView,
-            Duration duration,
-            int count, double width, double height) {
+            final ImageView imageView,
+            final Duration duration,
+            final int count, final double width, final double height) {
+        super();
         this.imageView = imageView;
         this.count     = count;
         this.width     = width;
@@ -46,15 +47,13 @@ public class SpriteAnimation extends Transition {
         setInterpolator(Interpolator.LINEAR);
     }
 
-    protected void interpolate(double k) {
+    protected void interpolate(final double k) {
         if (getStatus() != Status.RUNNING) {
             // sometimes this happens..
             return;
         }
         final int cols = (int) (imageView.getImage().getWidth() / width);
-        System.out.println(imageView.getImage().getWidth());
         final int rows = (int) (imageView.getImage().getHeight() / height);
-        System.out.println(imageView.getImage().getHeight());
 
         final int index = Math.min((int) Math.floor(k * count), count - 1);
         if (index != lastIndex) {

@@ -18,7 +18,7 @@ public final class ComponentsContainerImpl<T> implements ComponentsContainer<T> 
         this.interfaceParent = interfaceParent;
     }
     @Override
-    public <C extends T> Optional<C> get(Class<C> interfaceClass) throws IllegalArgumentException {
+    public <C extends T> Optional<C> get(final Class<C> interfaceClass) throws IllegalArgumentException {
         this.isInterface(interfaceClass);
         return Optional.ofNullable(interfaceClass.cast(this.elements.get(interfaceClass)));
     }
@@ -67,7 +67,7 @@ public final class ComponentsContainerImpl<T> implements ComponentsContainer<T> 
         return elements.values().stream();
     }
 
-    private Set<Class<?>> allInterfaces(Class<?> type){
+    private Set<Class<?>> allInterfaces(final Class<?> type){
 
         return TypeToken.of(type).getTypes().interfaces()
                 .stream()

@@ -15,12 +15,12 @@ import javafx.stage.Stage;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class RankingView extends AbstractBasicView {
+public final class RankingView extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 40;
     private static final int BOX_X_COORDINATE = 280;
     private static final int BOX_Y_COORDINATE = 70;
     //private static final ImageView crown = new ImageView(new Image("images/crown.png"));
-    private VBox menuBox;
+    private final VBox menuBox;
     //private VBox boxImage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
@@ -39,7 +39,7 @@ public class RankingView extends AbstractBasicView {
 
         if(!controller.getRankingList().isEmpty()) {
             //boxImage = new VBox(crown);
-            List<Text> rankList = controller.getRankingList().stream()
+            final List<Text> rankList = controller.getRankingList().stream()
                     .map(l -> new Text(l.getFst() + " " + l.getSnd()))
                     .collect(Collectors.toList());
             rankList.forEach(this::fontUtil);
@@ -65,7 +65,7 @@ public class RankingView extends AbstractBasicView {
         menuBox.setAlignment(Pos.TOP_CENTER);
         itemBack.setActive(true);
 
-        AnchorPane root = getRoot();
+        final AnchorPane root = getRoot();
         root.getChildren().clear();
         root.getChildren().add(menuBox);
 

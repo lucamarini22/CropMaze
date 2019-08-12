@@ -24,11 +24,6 @@ public final class PlayerViewImpl extends AbstractAliveEntityView implements Pla
     }
 
     @Override
-    public void changeState(final PossibleEntityState state){
-        super.changeState(state);
-    }
-
-    @Override
     public void setPosition(final Point2D position){
         super.setPosition(position);
         getView().getParent()
@@ -44,12 +39,12 @@ public final class PlayerViewImpl extends AbstractAliveEntityView implements Pla
 
 
     @Override
-    public void setCurrentLifePoints(int currentLifePoints) {
+    public void setCurrentLifePoints(final int currentLifePoints) {
         this.statusBar.setCurrentLifePoints(currentLifePoints);
     }
 
     @Override
-    public void setCoins(int coins) {
+    public void setCoins(final int coins) {
         this.statusBar.setCoins(coins);
     }
 }

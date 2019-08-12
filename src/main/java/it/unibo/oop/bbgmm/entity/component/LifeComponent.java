@@ -4,7 +4,7 @@ import it.unibo.oop.bbgmm.entity.Entity;
 
 public class LifeComponent extends AbstractEntityComponent implements Life {
 
-    private int maxLifePoints;
+    private final int maxLifePoints;
     private int currentLifePoints;
     private boolean vulnerable= true;
 
@@ -33,7 +33,7 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
     }
 
     @Override
-    public void damaged(int damageAmount) {
+    public void damaged(final int damageAmount) {
         if(vulnerable) {
             this.currentLifePoints -= damageAmount;
             if (this.currentLifePoints < 0) {
@@ -44,7 +44,7 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
     }
 
     @Override
-    public void incrementLife(int moreLife) {
+    public void incrementLife(final int moreLife) {
         this.currentLifePoints = this.currentLifePoints + moreLife;
     }
 
