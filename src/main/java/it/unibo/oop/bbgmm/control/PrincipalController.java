@@ -34,6 +34,11 @@ public interface PrincipalController {
     void insertNewScore(String name);
 
     /**
+     * Method used to empty the ranking list.
+     */
+    void emptyRanking();
+
+    /**
      * Method used to update the audioPlayer.
      *
      * @param musicVolume

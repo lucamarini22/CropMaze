@@ -27,12 +27,8 @@ public interface EntitySpawner {
      *      Position of the {@link Entity}
      * @param dimension
      *      Dimension of the {@link Entity}
-     * @return the {@link Entity} to spawn
      */
-    Entity spawn(Point2D position, Dimension2D dimension);
-
-
-    // Levels start from one
+    void spawn(Point2D position, Dimension2D dimension);
 
     /**
      * @param currentLevel

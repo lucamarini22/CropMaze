@@ -33,9 +33,9 @@
                         <Insets left="100.0" />
                      </HBox.margin>
                      <children>
-                        <Button id="UpgradeLife" fx:id="UpgradeLife" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#upgradeLife" style="-fx-background-color: green;" text="UPGRADE" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
-                        <Button id="UpgradeDamage" fx:id="UpgradeDamage" mnemonicParsing="false" onMouseClicked="#upgradeDamage" style="-fx-background-color: green;" text="UPGRADE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
-                        <Label text="UPGRADE LIFE" textFill="#10a319" GridPane.halignment="CENTER">
+                        <Button id="UpgradeLife" fx:id="upgradeLifeButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#upgradeLife" style="-fx-background-color: green;" text="UPGRADE" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                        <Button id="UpgradeDamage" fx:id="upgradeDamageButton" mnemonicParsing="false" onMouseClicked="#upgradeDamage" style="-fx-background-color: green;" text="UPGRADE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" />
+                        <Label text="REFILL LIFE" textFill="#10a319" GridPane.halignment="CENTER">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -45,11 +45,11 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ImageView id="lifeIcon" fitHeight="140.0" fitWidth="130.0" pickOnBounds="true" style="-fx-image: url('/scene/lifeUpgrade.png');" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <ImageView id="damageIcon" fitHeight="140.0" fitWidth="130.0" pickOnBounds="true" style="-fx-image: url('/scene/damageUpgrade.png');" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ImageView id="lifeIcon" fitHeight="140.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url('/scene/lifeUpgrade.png');" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ImageView id="damageIcon" fitHeight="140.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url('/scene/damageUpgrade.png');" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <ImageView id="coin1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url('/scene/coin.png');" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <ImageView id="coin2" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url('/scene/coin.png');" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                        <Label fx:id="LifeCost" prefHeight="19.0" prefWidth="64.0" style="-fx-background-color: white;" textAlignment="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                        <Label fx:id="lifeCost" prefHeight="19.0" prefWidth="64.0" style="-fx-background-color: white;" textAlignment="RIGHT" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="80.0" />
                            </GridPane.margin>
@@ -60,7 +60,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="DamageCost" prefHeight="19.0" prefWidth="63.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                        <Label fx:id="damageCost" prefHeight="19.0" prefWidth="63.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="80.0" />
                            </GridPane.margin>
@@ -92,8 +92,8 @@
                         <Insets left="100.0" />
                      </HBox.margin>
                      <children>
-                        <Button id="UpgradeSpeed" fx:id="UpgradeSpeed" mnemonicParsing="false" onMouseClicked="#upgradeSpeed" style="-fx-background-color: green;" text="UPGRADE" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
-                        <Button id="UpgradeRange" fx:id="UpgradeRange" mnemonicParsing="false" onMouseClicked="#upgradeRange" style="-fx-background-color: green;" text="UPGRADE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                        <Button id="UpgradeSpeed" fx:id="upgradeSpeedButton" mnemonicParsing="false" onMouseClicked="#upgradeSpeed" style="-fx-background-color: green;" text="UPGRADE" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                        <Button id="UpgradeRange" fx:id="upgradeRangeButton" mnemonicParsing="false" onMouseClicked="#upgradeRange" style="-fx-background-color: green;" text="UPGRADE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
                         <Label text="UPGRADE SPEED" textFill="#10a319" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -106,7 +106,7 @@
                         <ImageView id="rangeIcon" fitHeight="140.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url('/scene/rangeUpgrade.png');" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <ImageView id="coin3" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url('/scene/coin.png');" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                         <ImageView id="coin4" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url('/scene/coin.png');" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                        <Label fx:id="SpeedCost" prefHeight="19.0" prefWidth="62.0" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <Label fx:id="speedCost" prefHeight="19.0" prefWidth="62.0" style="-fx-background-color: white;" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="80.0" />
                            </GridPane.margin>
@@ -117,7 +117,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label fx:id="RangeCost" prefHeight="19.0" prefWidth="61.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <Label fx:id="rangeCost" prefHeight="19.0" prefWidth="61.0" style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="80.0" />
                            </GridPane.margin>

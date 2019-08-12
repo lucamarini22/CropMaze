@@ -8,32 +8,37 @@ import it.unibo.oop.bbgmm.utilities.Temporary;
 import java.util.List;
 
 /**
- * this component is responsible for collecting power
+ * It represents a component that makes an Entity able to collect pickup.
  */
-
-public class PickupableComponent extends AbstractEntityComponent implements Collector{
+public final class PickupableComponent extends AbstractEntityComponent implements Collector {
 
     private final Power power;
-    private boolean registered = false;
+    private boolean registered;
 
-    public PickupableComponent(final Power power){
+    /**
+     * Create a new PickupableComponent.
+     * @param power
+     *      the power of the pickUp
+     */
+    public PickupableComponent(final Power power) {
+        super();
         this.power = power;
     }
 
-    private void pickUp(Collision collision){
+    private void pickUp(final Collision collision) {
 
         collision.getCollisionComponent().getOwner().ifPresent(
                 owner -> owner.get(Bag.class).ifPresent(
                         bag -> {
-                            List<Power> powers = bag.getPowers();
+                            final List<Power> powers = bag.getPowers();
                             boolean found = false;
-                            for(final Power p : powers){
-                                if(p.getPowerTag() == power.getPowerTag()){
+                            for (final Power p : powers) {
+                                if (p.getPowerTag() == power.getPowerTag()) {
                                     ((Temporary) p).addTime(((Temporary) power).getRemainingTime());
                                     found = true;
                                 }
                             }
-                            if(!found){
+                            if (!found) {
                                 powers.add(power);
                                 power.activate(collision.getCollisionComponent().getOwner().get());
                             }
@@ -42,7 +47,7 @@ public class PickupableComponent extends AbstractEntityComponent implements Coll
         this.getOwner().get().removeEntity();
     }
     @Override
-    public void update(double delta) {
+    public void update(final double delta) {
         if (!registered) {
             this.getOwner().ifPresent(owner -> owner.get(Collidable.class).ifPresent(
                     c -> c.getEvent().register(this::pickUp)));

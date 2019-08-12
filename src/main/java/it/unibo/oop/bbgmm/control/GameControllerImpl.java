@@ -1,6 +1,5 @@
 package it.unibo.oop.bbgmm.control;
 
-import com.google.common.io.Files;
 import it.unibo.oop.bbgmm.boundary.GameFieldView;
 import it.unibo.oop.bbgmm.entity.collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.entity.EntityFactory;
@@ -11,14 +10,9 @@ import it.unibo.oop.bbgmm.entity.GameFieldImpl;
 import it.unibo.oop.bbgmm.entity.GameStatistics;
 import it.unibo.oop.bbgmm.entity.EntityStatisticsImpl;
 import it.unibo.oop.bbgmm.entity.BasicScoreCalculator;
-import it.unibo.oop.bbgmm.utilities.ZipExtractorUtil;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 import org.mapeditor.core.Map;
-import org.mapeditor.io.TMXMapReader;
-
-import java.io.File;
-import java.io.InputStream;
 import java.util.Set;
 
 /**
@@ -27,8 +21,6 @@ import java.util.Set;
 public final class GameControllerImpl implements GameController {
 
     private static final double FRAME = 1.0 / 60;
-    private static final String MAP_PATH = "/images/Map/CropMazeMap.zip";
-    private static final String MAP_NAME = "CropMazeMap.tmx";
     private final GameField gameField;
     private final Level level;
     private Map map;
@@ -46,6 +38,7 @@ public final class GameControllerImpl implements GameController {
     };
     private final PrincipalController principalController;
     private final EndLevelController endLevelController;
+    private final MapLoader mapLoader;
 
     /**
      * {@link GameControllerImpl} constructor.
@@ -66,8 +59,9 @@ public final class GameControllerImpl implements GameController {
         this.principalController = principalController;
         this.gameStatistics = gameStatistics;
         this.entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
+        this.mapLoader = new TMXMapLoader();
         try {
-            loadMap();
+            this.map = (Map) this.mapLoader.loadMap();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,22 +71,6 @@ public final class GameControllerImpl implements GameController {
                                    this.gameFieldView);
         this.endLevelController = new EndLevelControllerImpl(this.principalController, this.gameStatistics, this.level, this.gameFieldView);
         this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this, primaryStage);
-    }
-
-    /**
-     * Method called to load the Map.
-     *
-     * @throws Exception
-     *          Throw exception if the file does not exist
-     */
-    private void loadMap() throws Exception {
-        final File tempDir = Files.createTempDir();
-        try (InputStream is = getClass().getResourceAsStream(MAP_PATH)) {
-            ZipExtractorUtil.extract(is, tempDir);
-            this.map = new TMXMapReader().readMap(new File(tempDir, MAP_NAME).getAbsolutePath());
-        } catch (final Exception e) {
-            System.out.println("ERROR: Can't load map\n");
-        }
     }
 
     @Override

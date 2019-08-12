@@ -1,14 +1,23 @@
 package it.unibo.oop.bbgmm.control;
 
 import it.unibo.oop.bbgmm.boundary.GameFieldView;
-import it.unibo.oop.bbgmm.entity.*;
+import it.unibo.oop.bbgmm.entity.Entity;
+import it.unibo.oop.bbgmm.entity.GameStatistics;
+import it.unibo.oop.bbgmm.entity.EntitySpawner;
+import it.unibo.oop.bbgmm.entity.EntityType;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.util.Pair;
 import org.mapeditor.core.Map;
 import org.mapeditor.core.ObjectGroup;
 import org.mapeditor.core.TileLayer;
-import java.util.*;
+import java.util.Set;
+import java.util.LinkedHashSet;
+import java.util.Collections;
+import java.util.Locale;
+
+
+
 
 /**
  * Controls a level.
@@ -40,7 +49,7 @@ public final class LevelImpl implements Level {
      * @param entitySpawner
      *          {@link EntitySpawner} that spawns entities
      * @param gameFieldView
-     *          View of the {@link GameField}
+     *          View of the GameField
      */
     public LevelImpl(final Map map, final GameStatistics gameStatistics,
                      final EntitySpawner entitySpawner, final GameFieldView gameFieldView) {
@@ -111,7 +120,6 @@ public final class LevelImpl implements Level {
                     //Creates the Player only in the first level
                     if (this.gameStatistics.getCurrentLevel() == LEVEL_ONE) {
                         player = entitySpawner.spawn(EntityType.PLAYER.toString(), position);
-                        //playerStatistics = new PlayerStatisticsImpl(player);
                     }
                     final PlayerController controller = new PlayerController(player, gameFieldView.getEntityViewFactory().createPlayerView(), this.gameFieldView);
                     gameFieldView.setPlayerInputListener(controller);

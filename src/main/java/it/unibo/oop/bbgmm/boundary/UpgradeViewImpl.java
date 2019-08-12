@@ -6,85 +6,111 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class UpgradeViewImpl implements UpgradeView {
+/**
+ * It represents the {@link UpgradeView} implementation.
+ */
+public final class UpgradeViewImpl implements UpgradeView {
 
+    private static final String SLASH = " / ";
     private UpgradeController controller;
 
     @FXML
-    private Button UpgradeLife;
+    private Button upgradeLifeButton;
 
     @FXML
-    private Button UpgradeDamage;
+    private Button upgradeDamageButton;
 
     @FXML
-    private Label LifeCost;
+    private Label lifeCost;
 
     @FXML
-    private Label DamageCost;
+    private Label damageCost;
 
     @FXML
-    private Button UpgradeSpeed;
+    private Button upgradeSpeedButton;
 
     @FXML
-    private Button UpgradeRange;
+    private Button upgradeRangeButton;
 
     @FXML
-    private Label SpeedCost;
+    private Label speedCost;
 
     @FXML
-    private Label RangeCost;
+    private Label rangeCost;
 
+    /**
+     * Method that upgrade the {@link it.unibo.oop.bbgmm.entity.Player} damage.
+     */
     @FXML
-    void upgradeDamage() { controller.upgradePlayer(UpgradeType.DAMAGE);}
+    public void upgradeDamage() {
+        controller.upgradePlayer(UpgradeType.DAMAGE);
+    }
 
+    /**
+     * Method that refill the {@link it.unibo.oop.bbgmm.entity.Player} life.
+     */
     @FXML
-    void upgradeLife() { controller.upgradePlayer(UpgradeType.LIFE); }
+    public void upgradeLife() {
+        controller.upgradePlayer(UpgradeType.LIFE);
+    }
 
+    /**
+     * Method that upgrade the {@link it.unibo.oop.bbgmm.entity.Player} range.
+     */
     @FXML
-    void upgradeRange() { controller.upgradePlayer(UpgradeType.RANGE);}
+    public void upgradeRange() {
+        controller.upgradePlayer(UpgradeType.RANGE);
+    }
 
+    /**
+     * Method that upgrade the {@link it.unibo.oop.bbgmm.entity.Player} speed.
+     */
     @FXML
-    void upgradeSpeed() { controller.upgradePlayer(UpgradeType.SPEED);}
+    public void upgradeSpeed() {
+        controller.upgradePlayer(UpgradeType.SPEED);
+    }
 
 
     @Override
-    public void setVisible(UpgradeType type, boolean visible) {
-        switch(type){
+    public void setVisible(final UpgradeType type, final boolean visible) {
+        switch (type) {
             case LIFE:
-                this.UpgradeLife.setDisable(visible);
+                this.upgradeLifeButton.setDisable(visible);
                 break;
             case RANGE:
-                this.UpgradeRange.setDisable(visible);
+                this.upgradeRangeButton.setDisable(visible);
                 break;
             case DAMAGE:
-                this.UpgradeDamage.setDisable(visible);
+                this.upgradeDamageButton.setDisable(visible);
                 break;
             case SPEED:
-                this.UpgradeSpeed.setDisable(visible);
+                this.upgradeSpeedButton.setDisable(visible);
                 break;
+                default:
         }
     }
 
     @Override
-    public void setPrice(UpgradeType type, int price, int currentMoney) {
-        switch(type){
+    public void setPrice(final UpgradeType type, final int price, final int currentMoney) {
+        switch (type) {
             case LIFE:
-                this.LifeCost.setText(currentMoney + " / " + price);
+                this.lifeCost.setText(currentMoney + SLASH + price);
                 break;
             case RANGE:
-                this.RangeCost.setText(currentMoney+ " / " + price);
+                this.rangeCost.setText(currentMoney + SLASH + price);
                 break;
             case DAMAGE:
-                this.DamageCost.setText(currentMoney + " / " + price);
+                this.damageCost.setText(currentMoney + SLASH + price);
                 break;
             case SPEED:
-                this.SpeedCost.setText(currentMoney + " / " + price);
+                this.speedCost.setText(currentMoney + SLASH + price);
                 break;
+                default:
         }
     }
 
     @Override
-    public void setController(UpgradeController controller) {
+    public void setController(final UpgradeController controller) {
         this.controller = controller;
     }
 }

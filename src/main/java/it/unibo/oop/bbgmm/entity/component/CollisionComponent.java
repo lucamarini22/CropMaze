@@ -5,18 +5,27 @@ import it.unibo.oop.bbgmm.entity.collision.Collision;
 import it.unibo.oop.bbgmm.entity.collision.CollisionLabel;
 import it.unibo.oop.bbgmm.entity.Event;
 import it.unibo.oop.bbgmm.entity.EventSource;
-import it.unibo.oop.bbgmm.utilities.Pair;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
-public class CollisionComponent extends AbstractEntityComponent implements Collidable {
+/**
+ * It represents a component that makes the Entity able to collide.
+ */
+public final class CollisionComponent extends AbstractEntityComponent implements Collidable {
 
     private final CollisionLabel label;
     private final EventSource<Collision> collisionEvent;
     private Rectangle shape;
 
-    public CollisionComponent(final Rectangle shape, final CollisionLabel label){
-
+    /**
+     * Creates a new Collision component.
+     * @param shape
+     *      the shape of the Entity
+     * @param label
+     *      the {@link CollisionLabel}
+     */
+    public CollisionComponent(final Rectangle shape, final CollisionLabel label) {
+        super();
         this.shape = shape;
         this.label = label;
         this.collisionEvent = new EventSource<>();
@@ -27,17 +36,12 @@ public class CollisionComponent extends AbstractEntityComponent implements Colli
     }
 
     @Override
-    public Pair<Double, Double> getPosition() {
-        return null;
-    }
-
-    @Override
     public CollisionLabel getCollisionLabel() {
         return this.label;
     }
 
     @Override
-    public void notifyCollision(Collision collision) {
+    public void notifyCollision(final Collision collision) {
         this.collisionEvent.trigger(collision);
     }
 
@@ -47,8 +51,8 @@ public class CollisionComponent extends AbstractEntityComponent implements Colli
     }
 
     @Override
-    public void update(double delta) {
-        Point2D pos = this.getOwner().get().getBody().getPosition();
+    public void update(final double delta) {
+        final Point2D pos = this.getOwner().get().getBody().getPosition();
         this.shape = new Rectangle(pos.getX(), pos.getY(), shape.getWidth(), shape.getHeight());
     }
 }

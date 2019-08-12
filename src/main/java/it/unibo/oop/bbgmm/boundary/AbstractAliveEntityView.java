@@ -1,6 +1,7 @@
 package it.unibo.oop.bbgmm.boundary;
 
 
+import it.unibo.oop.bbgmm.entity.Direction;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Group;
 
@@ -29,4 +30,11 @@ public abstract class AbstractAliveEntityView extends AbstractEntityChangeStateV
         super.changeState(state);
         currentState = state;
     }
+
+
+    @Override
+    public final void changeFaceDirection(final Direction direction) {
+        getView().setScaleX(direction == Direction.EAST ? 1 : -1);
+    }
+
 }

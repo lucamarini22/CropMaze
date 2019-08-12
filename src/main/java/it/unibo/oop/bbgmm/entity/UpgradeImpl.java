@@ -7,37 +7,42 @@ import it.unibo.oop.bbgmm.entity.component.Weapon;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpgradeImpl implements Upgrade {
+/**
+ * {@link Upgrade} implementation.
+ */
+public final class UpgradeImpl implements Upgrade {
 
-    private Map<UpgradeType, Integer> values;
-    private Entity player;
+    private final Map<UpgradeType, Integer> values;
+    private final Entity player;
 
-    public UpgradeImpl(Entity player){
+    /**
+     * {@link Upgrade} constructor.
+     * @param player
+     *      the player instance
+     */
+    public UpgradeImpl(final Entity player) {
         values = new HashMap<>();
-        for (UpgradeType u : UpgradeType.values()) {
+        for (final UpgradeType u : UpgradeType.values()) {
             values.put(u, 1);
         }
         this.player = player;
     }
     @Override
-    public boolean canUpgrade(UpgradeType type) {
-        if(this.values.get(type) > this.player.get(Bag.class).get().getMoney()){
-            return true;
-        }
-        return false;
+    public boolean canUpgrade(final UpgradeType type) {
+        return this.values.get(type) > this.player.get(Bag.class).get().getMoney();
     }
 
     @Override
     public void upgradeLife() {
-        player.get(Life.class).ifPresent( life ->
-                life.incrementLife(20)
+        player.get(Life.class).ifPresent(life ->
+               life.incrementLife(life.getMaxLifePoints() - life.getCurrentLifePoints())
         );
         changePrice(UpgradeType.LIFE);
     }
 
     @Override
     public void upgradeSpeed() {
-        player.get(Movement.class).ifPresent( feet -> {
+        player.get(Movement.class).ifPresent(feet -> {
             feet.setSpeed(feet.getSpeed() + 0.5);
         });
         changePrice(UpgradeType.SPEED);
@@ -46,7 +51,7 @@ public class UpgradeImpl implements Upgrade {
     @Override
     public void upgradeDamage() {
         player.get(Weapon.class).ifPresent(w -> {
-            int damage = w.getWeaponDamage();
+            final int damage = w.getWeaponDamage();
             w.setWeaponDamage(damage + 10);
         });
         changePrice(UpgradeType.DAMAGE);
@@ -54,25 +59,27 @@ public class UpgradeImpl implements Upgrade {
 
     @Override
     public void upgradeRange() {
-        player.get(Weapon.class).ifPresent( w -> {
+        player.get(Weapon.class).ifPresent(w -> {
             w.setWeaponRange(w.getWeaponRange() + 1);
         });
         changePrice(UpgradeType.RANGE);
     }
 
     @Override
-    public void changePrice(UpgradeType type) {
+    public void changePrice(final UpgradeType type) {
         this.player.get(Bag.class).ifPresent(b -> {
             b.addMoney(-this.values.get(type));
         });
         this.values.put(type, this.values.get(type) * 2);
     }
 
-    public int getCurrentMoney(){
+    @Override
+    public int getCurrentMoney() {
         return this.player.get(Bag.class).get().getMoney();
     }
 
-    public int getCurrentPrice(UpgradeType upgradeType){
+    @Override
+    public int getCurrentPrice(final UpgradeType upgradeType) {
         return this.values.get(upgradeType);
     }
 

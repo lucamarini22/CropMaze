@@ -4,21 +4,22 @@ import it.unibo.oop.bbgmm.control.UpgradeController;
 import it.unibo.oop.bbgmm.entity.UpgradeType;
 
 /**
- * Upgrade view interface
+ * Upgrade view interface.
  */
 public interface UpgradeView {
 
     /**
-     * Set visible or not the upgrade Buttons
+     * Set visible or not the upgrade Buttons.
      * @param type
-     *       the Upgrade type
+     *      the Upgrade type
      * @param visible
+     *      if can be set visible the button
      *
      */
     void setVisible(UpgradeType type, boolean visible);
 
     /**
-     * Set the cost of the Upgrades
+     * Set the cost of the Upgrades.
      * @param type
      *       the Upgrade type
      * @param price
@@ -29,9 +30,9 @@ public interface UpgradeView {
     void setPrice(UpgradeType type, int price, int currentMoney);
 
     /**
-     * Set the controller to the view
+     * Set the controller to the view.
      * @param controller
-     *       the view's controller
+     *       the view's upgrade controller
      */
     void setController(UpgradeController controller);
 }

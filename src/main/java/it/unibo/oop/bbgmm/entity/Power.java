@@ -1,11 +1,13 @@
 package it.unibo.oop.bbgmm.entity;
 
 /**
- * This interface represents the specific power associated to PowerUp
+ * This interface represents the specific power associated to PowerUp.
  */
 public interface Power {
     /**
      * Activate the power.
+     * @param player
+     *      the {@link Player} instance
      */
     void activate(Entity player);
     /**
@@ -26,7 +28,7 @@ public interface Power {
     PowerTag getPowerTag();
 
     /**
-     * Return the power's state
+     * Return the power's state.
      * @return
      *      the powers's state
      */

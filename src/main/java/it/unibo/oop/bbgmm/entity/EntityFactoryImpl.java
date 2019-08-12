@@ -46,7 +46,7 @@ public final class EntityFactoryImpl implements EntityFactory {
 
     @Override
     public Coin createCoin(final Point2D position) {
-        return new Coin(new BodyBuilder(), position, entityStatistics.getCoinValue());
+        return new Coin(new BodyBuilder(), position);
     }
 
     @Override
