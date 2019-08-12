@@ -63,7 +63,7 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
      * @param direction
      *          where the entity is going.
      */
-    public void faceDirectionChanged(final Direction direction){
+    public void faceDirectionChanged(final Direction direction) {
         getEntityView().changeFaceDirection(direction);
     }
 

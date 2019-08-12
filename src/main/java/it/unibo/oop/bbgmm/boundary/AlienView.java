@@ -28,7 +28,7 @@ public class AlienView extends AbstractAliveEntityView {
         putAnimation(PossibleEntityState.WALKING, dynamicAnimation(new Image("images/alienWalking.png"), Duration.millis(FRAME_DURATION), 11));
         putAnimation(PossibleEntityState.DYING, staticAnimation(new Image("images/alienDying.png")));
 
-        changeState(PossibleEntityState.STABLE);
+        changeState(PossibleEntityState.WALKING);
 
     }
 }
