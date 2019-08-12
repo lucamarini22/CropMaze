@@ -116,19 +116,25 @@ public final class SettingsMenu extends AbstractBasicView {
     @Override
     protected void itemActions() {
         this.itemBack.setOnActivate(() -> {
-            checkResolution();
             getController().showMainMenu(getViewFactory());
         });
         this.itemSmallScreen.setOnActivate(() -> {
-            ResolutionUtil.setSmallResolution();
-            this.itemSmallScreen.setUnderline(true);
-            this.itemFullScreen.setUnderline(false);
-
+            if (ResolutionUtil.isFullScreen()) {
+                ResolutionUtil.setSmallResolution();
+                this.itemSmallScreen.setUnderline(true);
+                this.itemFullScreen.setUnderline(false);
+                getController().showSettings(getViewFactory());
+                checkResolution();
+            }
         });
         this.itemFullScreen.setOnActivate(() -> {
-            ResolutionUtil.setFullResolution();
-            this.itemSmallScreen.setUnderline(false);
-            this.itemFullScreen.setUnderline(true);
+            if (!ResolutionUtil.isFullScreen()) {
+                ResolutionUtil.setFullResolution();
+                this.itemSmallScreen.setUnderline(false);
+                this.itemFullScreen.setUnderline(true);
+                getController().showSettings(getViewFactory());
+                checkResolution();
+            }
         });
 
         this.itemMusicVolume.setOnActivate(() -> {
