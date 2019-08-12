@@ -44,37 +44,27 @@ public class PlayerInputHandler {
     private void onPress(final KeyEvent event) {
         if (checkMovement(event)) {
             if (event.getCode().equals(KeyCode.D)) {
-                System.out.println("D");
             }
             if (event.getCode().equals(KeyCode.A)) {
-                System.out.println("A");
             }
             if (event.getCode().equals(KeyCode.S)) {
-                System.out.println("S");
             }
             if (event.getCode().equals(KeyCode.W)) {
-                System.out.println("W");
             }
             addKey(event);
             applyMovement();
-            System.out.println("Muovi");
         }
         if (checkShooting(event)) {
             if (event.getCode().equals(KeyCode.UP)) {
-                System.out.println("UP");
             }
             if (event.getCode().equals(KeyCode.DOWN)) {
-                System.out.println("DOWN");
             }
             if (event.getCode().equals(KeyCode.LEFT)) {
-                System.out.println("LEFT");
             }
             if (event.getCode().equals(KeyCode.RIGHT)) {
-                System.out.println("RIGHT");
             }
             addKey(event);
             applyShooting();
-            System.out.println("Spara");
 
         }
     }

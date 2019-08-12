@@ -54,7 +54,6 @@ public class GameFieldTest {
         Assert.assertFalse(gameField.getEntities().contains(wall1));
         Assert.assertEquals(gameField.getWalls().size(), 1);
         Assert.assertEquals(gameField.getEntities().size(), 3);
-<<<<<<< HEAD:src/test/java/it/unibo/oop/bbgmm/Tests/GameFieldTest.java
     }
 
     @Test(expected = NullPointerException.class)
@@ -65,6 +64,5 @@ public class GameFieldTest {
         //Player creation
         entityFactory.createPlayer(new Point2D(2.5,2.5));
     }
-=======
     }*/
 }

@@ -3,6 +3,7 @@ package it.unibo.oop.bbgmm.control;
 import it.unibo.oop.bbgmm.boundary.AliveEntityView;
 import it.unibo.oop.bbgmm.boundary.PossibleEntityState;
 import it.unibo.oop.bbgmm.boundary.ViewUtils;
+import it.unibo.oop.bbgmm.entity.Direction;
 import it.unibo.oop.bbgmm.entity.component.Life;
 import it.unibo.oop.bbgmm.entity.DeathEvent;
 import it.unibo.oop.bbgmm.entity.Entity;
@@ -62,9 +63,9 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
      * @param direction
      *          where the entity is going.
      */
-    /*public void faceDirectionChanged(final Direction direction){
+    public void faceDirectionChanged(final Direction direction) {
         getEntityView().changeFaceDirection(direction);
-    }*/
+    }
 
     /**
      * it updates the entity state.

@@ -39,10 +39,15 @@ public class PlayerController extends AliveEntityController implements PlayerInp
         Direction after = getEntity().getBody().getDirection();
         getEntity().get(Movement.class).ifPresent(movement -> movement.move(vector));
         Direction before = getEntity().getBody().getDirection();
-        System.out.println("Player Position: "+ getEntity().getBody().getPosition());
-        System.out.println(" move in player controller " + getEntity().get(Movement.class).get().getState());
         if(after != before) {
             movementChanged(getEntity().get(Movement.class).get());
+            if(before == Direction.NOTHING){
+                faceDirectionChanged(after);
+            }
+            else{
+                faceDirectionChanged(before);
+            }
+            //getEntityView().changeFaceDirection(getEntity().getBody().getDirection());
         }
 
     }
@@ -51,7 +56,6 @@ public class PlayerController extends AliveEntityController implements PlayerInp
         getEntity().get(Life.class).ifPresent(life ->{
             playerView.setCurrentLifePoints(life.getCurrentLifePoints());
                 });
-        System.out.println("CURRENT LIFE"+getEntity().get(Life.class).get().getCurrentLifePoints());
     }
 
 
