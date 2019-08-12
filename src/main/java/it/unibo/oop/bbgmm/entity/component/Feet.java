@@ -101,7 +101,7 @@ public class Feet extends AbstractMovement {
                 return Direction.EAST;
             }
         }
-        return Direction.NOTHING;
+        return getOwner().get().getBody().getDirection();
     }
 
     @Override
@@ -143,6 +143,7 @@ public class Feet extends AbstractMovement {
         if (!getPosition().equals(Point2D.ZERO)) {
             setState(State.WALKING);
         } else {
+            setDirection(Direction.NOTHING);
             setState(State.STABLE);
         }
     }

@@ -34,7 +34,7 @@ public abstract class AbstractAliveEntityView extends AbstractEntityChangeStateV
 
     @Override
     public final void changeFaceDirection(final Direction direction) {
-        getView().setScaleX(direction == Direction.EAST ? 1 : -1);
+        getView().setScaleX(direction == Direction.EAST ? 1 : direction == Direction.NOTHING  ? 1: -1);
     }
 
 }
