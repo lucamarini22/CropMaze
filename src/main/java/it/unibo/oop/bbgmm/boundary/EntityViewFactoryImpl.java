@@ -33,7 +33,7 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
 
     @Override
     public AliveEntityView createAlienView() {
-        return new AlienView(parent);
+        return new AlienView(parent, audioPlayer);
     }
 
     @Override
@@ -48,16 +48,16 @@ public final class EntityViewFactoryImpl implements EntityViewFactory {
 
     @Override
     public LifelessEntityView createDoubleSpeedView() {
-        return new PowerUpView(parent, EntityType.DOUBLE_SPEED);
+        return new PowerUpView(parent, EntityType.DOUBLE_SPEED, audioPlayer);
     }
 
     @Override
     public LifelessEntityView createDoubleDamageView() {
-        return new PowerUpView(parent, EntityType.DOUBLE_DAMAGE);
+        return new PowerUpView(parent, EntityType.DOUBLE_DAMAGE, audioPlayer);
     }
 
     @Override
     public LifelessEntityView createShieldView() {
-        return new PowerUpView(parent, EntityType.SHIELD);
+        return new PowerUpView(parent, EntityType.SHIELD, audioPlayer);
      }
 }

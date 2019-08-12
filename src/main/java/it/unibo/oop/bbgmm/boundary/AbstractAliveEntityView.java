@@ -51,4 +51,6 @@ public abstract class AbstractAliveEntityView extends AbstractEntityChangeStateV
 
     }
 
+    @Override
+    public void playDeathSound() { }
 }

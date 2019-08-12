@@ -1,6 +1,17 @@
 package it.unibo.oop.bbgmm.tests;
 
-import it.unibo.oop.bbgmm.entity.*;
+import it.unibo.oop.bbgmm.entity.EntityStatistics;
+import it.unibo.oop.bbgmm.entity.EntityStatisticsImpl;
+import it.unibo.oop.bbgmm.entity.GameStatistics;
+import it.unibo.oop.bbgmm.entity.GameStatisticsImpl;
+import it.unibo.oop.bbgmm.entity.GameField;
+import it.unibo.oop.bbgmm.entity.GameFieldImpl;
+import it.unibo.oop.bbgmm.entity.EntityFactory;
+import it.unibo.oop.bbgmm.entity.EntityFactoryImpl;
+import it.unibo.oop.bbgmm.entity.Coin;
+import it.unibo.oop.bbgmm.entity.Alien;
+import it.unibo.oop.bbgmm.entity.Wall;
+import it.unibo.oop.bbgmm.entity.Player;
 import it.unibo.oop.bbgmm.entity.collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.entity.component.Life;
 import javafx.geometry.Dimension2D;

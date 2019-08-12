@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
  */
 public class PowerUpView extends AbstractEntityView implements LifelessEntityView {
     private static final int WIDTH = 72, HEIGHT = 97;
+    private final AudioPlayer audioPlayer;
 
     /**
      * Creates a new PowerUpView.
@@ -17,10 +18,13 @@ public class PowerUpView extends AbstractEntityView implements LifelessEntityVie
      *      the group to be added
      * @param tag
      *      the entity type tag of the power
+     * @param audioPlayer
+     *      the audioPlayer
      */
-    public PowerUpView(final Group group, final EntityType tag) {
+    public PowerUpView(final Group group, final EntityType tag, final AudioPlayer audioPlayer) {
         super(group, new Dimension2D(WIDTH, HEIGHT));
         this.setImage(tag);
+        this.audioPlayer = audioPlayer;
     }
 
     private void setImage(final EntityType tag) {
@@ -36,5 +40,10 @@ public class PowerUpView extends AbstractEntityView implements LifelessEntityVie
                 break;
                 default:
         }
+    }
+
+    @Override
+    public void playDeathSound() {
+
     }
 }
