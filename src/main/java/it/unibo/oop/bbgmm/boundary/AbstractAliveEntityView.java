@@ -18,7 +18,9 @@ public abstract class AbstractAliveEntityView extends AbstractEntityChangeStateV
 
 
     @Override
-    public void deathView() {
+    public void deathView()
+    {
+        changeState(PossibleEntityState.DYING);
         removeFromView();
     }
 
