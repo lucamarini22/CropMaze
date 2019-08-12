@@ -23,7 +23,7 @@ public class Coin extends AbstractEntity {
      * @param position
      *            The position of the bodyBuilder
      */
-    public Coin(final BodyBuilder bodyBuilder, final Point2D position, final int value) {
+    public Coin(final BodyBuilder bodyBuilder, final Point2D position) {
         super(bodyBuilder
                 .setPosition(position)
                 .setDimension(SIZE)

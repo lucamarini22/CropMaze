@@ -1,6 +1,5 @@
 package it.unibo.oop.bbgmm.control;
 
-import com.google.common.io.Files;
 import it.unibo.oop.bbgmm.boundary.GameFieldView;
 import it.unibo.oop.bbgmm.entity.collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.entity.EntityFactory;
@@ -11,14 +10,9 @@ import it.unibo.oop.bbgmm.entity.GameFieldImpl;
 import it.unibo.oop.bbgmm.entity.GameStatistics;
 import it.unibo.oop.bbgmm.entity.EntityStatisticsImpl;
 import it.unibo.oop.bbgmm.entity.BasicScoreCalculator;
-import it.unibo.oop.bbgmm.utilities.ZipExtractorUtil;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 import org.mapeditor.core.Map;
-import org.mapeditor.io.TMXMapReader;
-
-import java.io.File;
-import java.io.InputStream;
 import java.util.Set;
 
 /**

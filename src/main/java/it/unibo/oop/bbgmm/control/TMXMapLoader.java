@@ -8,7 +8,10 @@ import org.mapeditor.io.TMXMapReader;
 import java.io.File;
 import java.io.InputStream;
 
-public class TMXMapLoader implements  MapLoader {
+/**
+ * Implementation of {@link MapLoader} with a ".tmx" map loader.
+ */
+public final class TMXMapLoader implements  MapLoader {
     private static final String MAP_PATH = "/images/Map/CropMazeMap.zip";
     private static final String MAP_NAME = "CropMazeMap.tmx";
     private Map map;
