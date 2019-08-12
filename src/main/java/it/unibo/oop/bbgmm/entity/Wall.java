@@ -20,10 +20,10 @@ public final class Wall extends AbstractEntity {
      */
     public Wall(final BodyBuilder bodyBuilder, final Point2D position, final Dimension2D dimension) {
         super(bodyBuilder
-                .setDirection(Direction.NOTHING)
-                .setPosition(position)
-                .setDimension(dimension)
-                .setMovable(false)
+                .bodyDirection(Direction.NOTHING)
+                .bodyPosition(position)
+                .bodyDimension(dimension)
+                .bodyMovable(false)
                 .build());
     }
 

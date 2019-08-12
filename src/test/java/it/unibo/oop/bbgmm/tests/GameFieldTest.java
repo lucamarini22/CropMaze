@@ -1,6 +1,17 @@
 package it.unibo.oop.bbgmm.tests;
 
-import it.unibo.oop.bbgmm.entity.*;
+import it.unibo.oop.bbgmm.entity.EntityStatistics;
+import it.unibo.oop.bbgmm.entity.EntityStatisticsImpl;
+import it.unibo.oop.bbgmm.entity.GameStatistics;
+import it.unibo.oop.bbgmm.entity.GameStatisticsImpl;
+import it.unibo.oop.bbgmm.entity.GameField;
+import it.unibo.oop.bbgmm.entity.GameFieldImpl;
+import it.unibo.oop.bbgmm.entity.EntityFactory;
+import it.unibo.oop.bbgmm.entity.EntityFactoryImpl;
+import it.unibo.oop.bbgmm.entity.Coin;
+import it.unibo.oop.bbgmm.entity.Alien;
+import it.unibo.oop.bbgmm.entity.Wall;
+import it.unibo.oop.bbgmm.entity.Player;
 import it.unibo.oop.bbgmm.entity.collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.entity.component.Life;
 import javafx.geometry.Dimension2D;
@@ -8,10 +19,12 @@ import javafx.geometry.Point2D;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class GameFieldTest {
-    /*private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl());
+
+public class GameFieldTest{
+
     private final EntityStatistics entityStatistics = new EntityStatisticsImpl();
     private final GameStatistics gameStatistics = new GameStatisticsImpl();
+    private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl());
     private final EntityFactory entityFactory = new EntityFactoryImpl(gameField, entityStatistics,
             gameStatistics);
 
@@ -56,7 +69,7 @@ public class GameFieldTest {
         Assert.assertEquals(gameField.getEntities().size(), 3);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testInitializeAlienBeforePlayer() {
         //Enemy creation
         entityFactory.createEnemy(new Point2D(12,12));
@@ -64,5 +77,4 @@ public class GameFieldTest {
         //Player creation
         entityFactory.createPlayer(new Point2D(2.5,2.5));
     }
-    }*/
 }

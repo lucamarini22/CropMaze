@@ -32,10 +32,10 @@ public class Alien extends AbstractEntity {
      */
     public Alien(final BodyBuilder bodyBuilder, final Point2D position, final int health, final Set<Entity> walls, final Entity eToStalk) {
         super(bodyBuilder
-                .setPosition(position)
-                .setDimension(SIZE)
-                .setDirection(Direction.NOTHING)
-                .setMovable(true)
+                .bodyPosition(position)
+                .bodyDimension(SIZE)
+                .bodyDirection(Direction.NOTHING)
+                .bodyMovable(true)
                 .build());
 
         add(new LifeComponent(health));

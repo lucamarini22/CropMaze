@@ -1,6 +1,9 @@
 package it.unibo.oop.bbgmm.entity.component;
 
-import it.unibo.oop.bbgmm.entity.*;
+import it.unibo.oop.bbgmm.entity.Bullet;
+import it.unibo.oop.bbgmm.entity.Direction;
+import it.unibo.oop.bbgmm.entity.GameField;
+import it.unibo.oop.bbgmm.entity.Movement;
 
 import java.util.*;
 
@@ -11,7 +14,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     private int weaponDamage;
     private int weaponSpeed;
     private int weaponRange;
-    private List<Bullet> bulletShoted;
+    private final List<Bullet> bulletShoted;
     private final Timer cooldown = Timer.seconds(COOLDOWN_TIME);
     private final GameField gameField;
 
@@ -46,7 +49,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     }
 
     @Override
-    public void update(double delta) {
+    public void update(final double delta) {
         cooldown.update(delta);
     }
 
@@ -59,7 +62,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     public int getWeaponSpeed() { return this.weaponSpeed; }
 
     @Override
-    public void setWeaponSpeed(int speed) { this.weaponSpeed = speed; }
+    public void setWeaponSpeed(final int speed) { this.weaponSpeed = speed; }
 
     @Override
     public Optional<Bullet> shoot(final Direction shootingDirection) {
