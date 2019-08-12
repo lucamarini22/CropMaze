@@ -11,9 +11,10 @@ import javafx.util.Duration;
 public class AlienView extends AbstractAliveEntityView {
 
 
-    private static final int WIDTH = 72, HEIGHT = 97;
+    private static final int WIDTH = 31, HEIGHT = 72;
+
     //private static final Image IMG_HURT = new Image("");
-    private static final double FRAME_DURATION = 700;
+    private static final double FRAME_DURATION = 1000;
 
     /**
      * Constructor for AlienView.
@@ -23,9 +24,9 @@ public class AlienView extends AbstractAliveEntityView {
     public AlienView(final Group group) {
         super(group, new Dimension2D(WIDTH, HEIGHT));
 
-        putAnimation(PossibleEntityState.STABLE, staticAnimation(new Image("images/slimeGreen.png")));
-        putAnimation(PossibleEntityState.WALKING, dynamicAnimation(new Image("images/slimeGreen_moving.png"), Duration.millis(FRAME_DURATION), 2));
-        putAnimation(PossibleEntityState.DYING, staticAnimation(new Image("images/slimeGreen_dead.png")));
+        putAnimation(PossibleEntityState.STABLE, staticAnimation(new Image("images/alienStanding.png")));
+        putAnimation(PossibleEntityState.WALKING, dynamicAnimation(new Image("images/alienWalking.png"), Duration.millis(FRAME_DURATION), 11));
+        putAnimation(PossibleEntityState.DYING, staticAnimation(new Image("images/alienDying.png")));
 
         changeState(PossibleEntityState.STABLE);
 
