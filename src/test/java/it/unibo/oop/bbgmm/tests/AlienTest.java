@@ -64,7 +64,7 @@ public class AlienTest {
     }
 
     @Test
-    public void TestMoveToPlayerWithoutWalls(){
+    public void testMoveToPlayerWithoutWalls(){
         initializeAlien(walls);
 
         for(int i = 0 ; i < 8 ; i++ ) {
@@ -79,8 +79,8 @@ public class AlienTest {
     }
 
     @Test
-    public void TextMoveToPlayerWithWalls(){
-         Wall wall = new Wall(body,new Point2D(23,23), DIMENSION);
+    public void testMoveToPlayerWithWalls(){
+        final Wall wall = new Wall(body,new Point2D(23,23), DIMENSION);
         walls.add(wall);
         initializeAlien(walls);
         for(int i = 0 ; i < 8 ; i++ ) {
