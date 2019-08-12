@@ -52,7 +52,9 @@ public class SpriteAnimation extends Transition {
             return;
         }
         final int cols = (int) (imageView.getImage().getWidth() / width);
+        System.out.println(imageView.getImage().getWidth());
         final int rows = (int) (imageView.getImage().getHeight() / height);
+        System.out.println(imageView.getImage().getHeight());
 
         final int index = Math.min((int) Math.floor(k * count), count - 1);
         if (index != lastIndex) {
