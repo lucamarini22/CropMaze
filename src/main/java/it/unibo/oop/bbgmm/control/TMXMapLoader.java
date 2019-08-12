@@ -23,8 +23,10 @@ public final class TMXMapLoader implements  MapLoader {
         try (InputStream is = getClass().getResourceAsStream(MAP_PATH)) {
             ZipExtractorUtil.extract(is, tempDir);
             map = new TMXMapReader().readMap(new File(tempDir, MAP_NAME).getAbsolutePath());
-        } catch (final Exception e) {
+        } catch (final IOException e) {
             throw new IOException("ERROR: Can't load map\n");
+        } catch (final Exception e) {
+            throw new IllegalArgumentException("ERROR: the file doesn't exist\n");
         }
         return map;
     }
