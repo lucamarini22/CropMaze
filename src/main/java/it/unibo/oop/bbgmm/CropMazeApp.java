@@ -1,6 +1,5 @@
 package it.unibo.oop.bbgmm;
 
-import it.unibo.oop.bbgmm.control.PrincipalController;
 import it.unibo.oop.bbgmm.control.PrincipalControllerImpl;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -24,6 +23,6 @@ public class CropMazeApp extends Application {
      */
     @Override
     public void start(final Stage primaryStage) throws Exception {
-        final PrincipalController controller = new PrincipalControllerImpl(primaryStage);
+       new PrincipalControllerImpl(primaryStage);
     }
 }

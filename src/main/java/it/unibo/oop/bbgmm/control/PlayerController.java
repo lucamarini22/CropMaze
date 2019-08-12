@@ -43,6 +43,13 @@ public class PlayerController extends AliveEntityController implements PlayerInp
         System.out.println(" move in player controller " + getEntity().get(Movement.class).get().getState());
         if(after != before) {
             movementChanged(getEntity().get(Movement.class).get());
+            if(before == Direction.NOTHING){
+                faceDirectionChanged(after);
+            }
+            else{
+                faceDirectionChanged(before);
+            }
+            //getEntityView().changeFaceDirection(getEntity().getBody().getDirection());
         }
 
     }

@@ -41,7 +41,7 @@ public class MenuItem extends HBox {
      * @param b
      *          Boolean true or false
      */
-    public void setActive(final boolean b) {
+    public final void setActive(final boolean b) {
         this.text.setFill(b ? Color.YELLOW : Color.FORESTGREEN);
     }
 

@@ -52,7 +52,7 @@ public abstract class AbstractBasicView {
      * Getter for the controller.
      *
      * @return controller
-     *          The principal controller
+     *          The principal controller.
      */
     protected PrincipalController getController() {
         return this.controller;

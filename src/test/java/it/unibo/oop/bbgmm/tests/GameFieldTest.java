@@ -17,7 +17,10 @@ import javafx.stage.Stage;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class GameFieldTest extends Application {
+/*
+public class GameFieldTest {
+    private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl());
+    private final EntityStatistics entityStatistics = new EntityStatisticsImpl();
     private final GameStatistics gameStatistics = new GameStatisticsImpl();
     private final AudioPlayer audioPlayer = new AudioPlayerImpl(20,20);
     private final Stage stage = new Stage();
@@ -83,9 +86,4 @@ public class GameFieldTest extends Application {
         //Player creation
         entityFactory.createPlayer(new Point2D(2.5,2.5));
     }
-
-    @Override
-    public void start(final Stage stage) throws Exception {
-        launch();
-    }
-}
+}*/
