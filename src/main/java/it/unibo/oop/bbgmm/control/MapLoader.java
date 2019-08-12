@@ -1,5 +1,7 @@
 package it.unibo.oop.bbgmm.control;
 
+import java.io.IOException;
+
 /**
  * Interface for a map loader.
  * @param <T>
@@ -12,5 +14,5 @@ public interface MapLoader<T> {
      * @throws Exception
      *      if there is not the map or the file is wrong
      */
-     T loadMap() throws Exception;
+     T loadMap() throws IOException;
 }

@@ -6,6 +6,7 @@ import org.mapeditor.core.Map;
 import org.mapeditor.io.TMXMapReader;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -14,17 +15,17 @@ import java.io.InputStream;
 public final class TMXMapLoader implements  MapLoader {
     private static final String MAP_PATH = "/images/Map/CropMazeMap.zip";
     private static final String MAP_NAME = "CropMazeMap.tmx";
-    private Map map;
 
     @Override
-    public Map loadMap() throws Exception {
+    public Map loadMap() throws IOException {
+        Map map;
         final File tempDir = Files.createTempDir();
         try (InputStream is = getClass().getResourceAsStream(MAP_PATH)) {
             ZipExtractorUtil.extract(is, tempDir);
-            this.map = new TMXMapReader().readMap(new File(tempDir, MAP_NAME).getAbsolutePath());
+            map = new TMXMapReader().readMap(new File(tempDir, MAP_NAME).getAbsolutePath());
         } catch (final Exception e) {
-            System.out.println("ERROR: Can't load map\n");
+            throw new IOException("ERROR: Can't load map\n");
         }
-        return this.map;
+        return map;
     }
 }
