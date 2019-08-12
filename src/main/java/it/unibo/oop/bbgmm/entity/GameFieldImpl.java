@@ -33,6 +33,19 @@ public final class GameFieldImpl implements GameField {
         this.playerStatistics = new PlayerStatisticsImpl();
     }
 
+    /**
+     * Constructor for the test class.
+     * @param collisionSupervisor
+     *      {@link CollisionSupervisor} instance
+     */
+    public GameFieldImpl(final CollisionSupervisor collisionSupervisor) {
+        this.entities =  new LinkedHashSet<>();
+        this.collisionSupervisor = collisionSupervisor;
+        this.entitiesToBeRemoved  = new LinkedHashSet<>();
+        this.playerStatistics = new PlayerStatisticsImpl();
+        this.gameController = null;
+    }
+
     @Override
     public void update(final double up) {
         //Updates all the entities
@@ -45,11 +58,13 @@ public final class GameFieldImpl implements GameField {
             this.entities.stream()
                          .filter(e -> !(e.getClass().equals(Player.class)))
                          .forEach(entitiesToBeRemoved::add);
+            assert this.gameController != null;
             this.gameController.stop();
             this.gameController.triggerEndLevel();
         }
         //If there is not a Player, he's dead and it is a Game Over
         if (this.isPlayerDead()) {
+            assert this.gameController != null;
             this.gameController.stop();
             this.gameController.triggerGameOver();
         }

@@ -1,39 +1,19 @@
 package it.unibo.oop.bbgmm.tests;
 
-import it.unibo.oop.bbgmm.boundary.*;
-import it.unibo.oop.bbgmm.control.GameController;
-import it.unibo.oop.bbgmm.control.GameControllerImpl;
-import it.unibo.oop.bbgmm.control.PrincipalController;
-import it.unibo.oop.bbgmm.control.PrincipalControllerImpl;
 import it.unibo.oop.bbgmm.entity.*;
 import it.unibo.oop.bbgmm.entity.collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.entity.component.Life;
-import javafx.application.Application;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import org.junit.Assert;
 import org.junit.Test;
 
-/*
-public class GameFieldTest {
-    private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl());
+
+public class GameFieldTest{
+
     private final EntityStatistics entityStatistics = new EntityStatisticsImpl();
     private final GameStatistics gameStatistics = new GameStatisticsImpl();
-    private final AudioPlayer audioPlayer = new AudioPlayerImpl(20,20);
-    private final Stage stage = new Stage();
-
-    private final PrincipalController principalController =  new PrincipalControllerImpl(stage);
-    private final GameFieldView gameFieldView = new GameFieldViewImpl(audioPlayer, new PlayerInputHandler(new Scene(new Parent() {
-    })), this.principalController, stage);
-    private final GameController gameController = new GameControllerImpl(gameStatistics, gameFieldView, stage, this.principalController);
-
-
-
-    private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl(), gameController);
-    private final EntityStatistics entityStatistics = new EntityStatisticsImpl();
+    private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl());
     private final EntityFactory entityFactory = new EntityFactoryImpl(gameField, entityStatistics,
             gameStatistics);
 
@@ -78,7 +58,7 @@ public class GameFieldTest {
         Assert.assertEquals(gameField.getEntities().size(), 3);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testInitializeAlienBeforePlayer() {
         //Enemy creation
         entityFactory.createEnemy(new Point2D(12,12));
@@ -86,4 +66,4 @@ public class GameFieldTest {
         //Player creation
         entityFactory.createPlayer(new Point2D(2.5,2.5));
     }
-}*/
+}
