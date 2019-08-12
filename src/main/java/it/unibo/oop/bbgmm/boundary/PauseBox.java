@@ -31,13 +31,14 @@ public class PauseBox {
     private static final int SPACE_BETWEEN_VERTICAL_ITEM = 10;
     private static final int WIDTH = 800;
     private static final int HEIGHT = 230;
-    private boolean answer = false;
+    private boolean answer;
     private final AudioPlayer audioPlayer;
     private int currentItem = 1;
     private HBox itemLayout;
 
     public PauseBox(final AudioPlayer audioPlayer) {
         this.audioPlayer = audioPlayer;
+        this.answer = false;
     }
 
     /**
@@ -80,7 +81,7 @@ public class PauseBox {
         layout.getChildren().addAll(label, this.itemLayout);
         layout.setAlignment(Pos.CENTER);
 
-        AnchorPane pane = new AnchorPane();
+        final AnchorPane pane = new AnchorPane();
         pane.getChildren().add(layout);
         layout.setLayoutX(POS);
         layout.setLayoutY(POS);

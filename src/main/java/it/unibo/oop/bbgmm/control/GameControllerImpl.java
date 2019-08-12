@@ -29,6 +29,8 @@ public final class GameControllerImpl implements GameController {
     private GameFieldView gameFieldView;
     private final GameStatistics gameStatistics;
     private final UpgradeController upgradeController;
+    private final PrincipalController principalController;
+    private final EndLevelController endLevelController;
     //the loop is made by animation timer which executes the handle method every few seconds
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -36,9 +38,6 @@ public final class GameControllerImpl implements GameController {
             update();
         }
     };
-    private final PrincipalController principalController;
-    private final EndLevelController endLevelController;
-    private final MapLoader mapLoader;
 
     /**
      * {@link GameControllerImpl} constructor.
@@ -59,9 +58,8 @@ public final class GameControllerImpl implements GameController {
         this.principalController = principalController;
         this.gameStatistics = gameStatistics;
         this.entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
-        this.mapLoader = new TMXMapLoader();
         try {
-            this.map = (Map) this.mapLoader.loadMap();
+            this.map = new TMXMapLoader().loadMap();
         } catch (Exception e) {
             e.printStackTrace();
         }
