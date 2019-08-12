@@ -46,6 +46,9 @@ public class LifeComponent extends AbstractEntityComponent implements Life {
     @Override
     public void incrementLife(final int moreLife) {
         this.currentLifePoints = this.currentLifePoints + moreLife;
+        if(currentLifePoints > maxLifePoints){
+            currentLifePoints = maxLifePoints;
+        }
     }
 
     @Override
