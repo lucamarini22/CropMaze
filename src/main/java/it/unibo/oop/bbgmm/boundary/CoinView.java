@@ -11,6 +11,7 @@ public class CoinView extends AbstractEntityView implements LifelessEntityView {
     private static final String COIN_IMAGE = "/images/coinSilver.png";
     private static final int WIDTH = 72;
     private static final int HEIGHT = 97;
+    private final AudioPlayer audioPlayer;
 
     /**
      * {@link CoinView} constructor.
@@ -22,5 +23,11 @@ public class CoinView extends AbstractEntityView implements LifelessEntityView {
     public CoinView(final Group group, final AudioPlayer audioPlayer) {
         super(group, new Dimension2D(WIDTH, HEIGHT));
         getView().setImage(new Image(COIN_IMAGE));
+        this.audioPlayer = audioPlayer;
+    }
+
+    @Override
+    public void playDeathSound() {
+        this.audioPlayer.playSound(Music.BULLET_SHOT.getPath());
     }
 }

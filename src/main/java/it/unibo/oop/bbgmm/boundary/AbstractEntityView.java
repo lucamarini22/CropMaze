@@ -47,6 +47,7 @@ public abstract class AbstractEntityView implements EntityView {
     @Override
     public void removeFromView() {
         this.myGroup.getChildren().remove(this.image);
+        this.playDeathSound();
     }
 
     @Override
@@ -63,4 +64,9 @@ public abstract class AbstractEntityView implements EntityView {
     public Group getGroup() {
         return this.myGroup;
     }
+
+    /**
+     * Play the death sound
+     */
+    abstract public void playDeathSound();
 }
