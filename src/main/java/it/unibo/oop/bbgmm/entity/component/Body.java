@@ -17,7 +17,7 @@ public class Body extends AbstractEntityComponent implements EntityBody{
 
 
 
-    Body(final Point2D position, final Dimension2D dimension, final Direction direction,boolean movable) {
+    Body(final Point2D position, final Dimension2D dimension, final Direction direction,final boolean movable) {
         super();
         this.movable = movable;
         this.direction = direction;
