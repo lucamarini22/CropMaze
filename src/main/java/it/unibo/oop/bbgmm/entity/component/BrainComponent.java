@@ -69,7 +69,7 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
         }
 
 
-        //if the alien and the player are collisioning the alien must not move
+        //if the alien and the player are colliding the alien must not move
         if (getOwner().get().getBody().getShape().getBoundsInLocal().intersects(entityToFollow.getBody().getShape().getBoundsInLocal())
            || playerLife.isDead()) {
             newDirection = Direction.NOTHING;

@@ -30,6 +30,9 @@ public abstract class AbstractEntity implements Entity {
         return body;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(final double up) {
         updateComponents(up);

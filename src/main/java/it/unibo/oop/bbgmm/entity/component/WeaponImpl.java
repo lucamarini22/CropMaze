@@ -9,7 +9,7 @@ import java.util.*;
 
 public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
-    private static final double COOLDOWN_TIME = 0.5;
+    private static final double COOLDOWN_TIME = 0.2;
     private static final int INITIAL_STEP = 1;
     private int weaponDamage;
     private int weaponSpeed;
