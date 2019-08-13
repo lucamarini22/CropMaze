@@ -31,6 +31,7 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
+     * 
      * {@inheritDoc}
      */
     @Override
@@ -38,26 +39,37 @@ public abstract class AbstractEntity implements Entity {
         updateComponents(up);
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void destroy() {
-        //System.out.println(this);
         components.forEach(this::remove);
         this.remove(body);
-        //System.out.println(components.stream().count());
     }
 
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public final <C extends EntityComponent> Optional<C> get(final Class<C> component) {
         return components.get(component);
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void remove(final EntityComponent component) {
         components.remove(component);
         component.detach();
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void add(final EntityComponent component) {
         components.put(component);
@@ -80,7 +92,10 @@ public abstract class AbstractEntity implements Entity {
     public Event<DeathEvent> getDeathEvent() {
         return this.deathEvent;
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void removeEntity() {
         this.deathEvent.trigger(new DeathEvent(this));

@@ -68,7 +68,7 @@ public class GameOver extends AbstractBasicView {
                 }
             }
 
-            if (event.getCode() == KeyCode.DOWN) {
+            else if (event.getCode() == KeyCode.DOWN) {
                 if (currentItem < (menuBox.getChildren().size()) - 1) {
                     playSwitchSound();
                     getMenuItem(currentItem).setActive(false);
@@ -76,7 +76,7 @@ public class GameOver extends AbstractBasicView {
                 }
             }
 
-            if (event.getCode() == KeyCode.ENTER) {
+            else if (event.getCode() == KeyCode.ENTER) {
                 playPressSound();
                 if (insertActive) {
                     itemInsert.activate();

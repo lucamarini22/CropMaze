@@ -45,11 +45,4 @@ public class Alien extends AbstractEntity {
         add(new ClashComponent());
         add(new DamageComponent(DAMAGE));
     }
-
-    @Override
-    public String toString() {
-        return "Alien";
-    }
-
-
 }

@@ -22,12 +22,18 @@ public abstract class AbstractLifelessEntityController<L extends EntityView> ext
     public AbstractLifelessEntityController(final Entity entity, final L entityView) {
         super(entity, entityView);
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         getEntityView().setPosition(ViewUtils.worldPointToFX(getEntity().getBody().getPosition()));
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void entityDestruction(final DeathEvent event) {
         getEntityView().removeFromView();
