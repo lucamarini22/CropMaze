@@ -30,7 +30,7 @@ public final class ScoreListImpl implements ScoreList {
      *          Exception if the file does not exist
      */
     public ScoreListImpl() throws IOException {
-        final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName.getPath())));
+        final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(ClassLoader.getSystemResourceAsStream("ScoreList.txt")));
         final int size = ostream.readInt();
         for (int i = 0; i < size; i++) {
             try {

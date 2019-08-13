@@ -19,7 +19,7 @@ public final class TMXMapLoader implements  MapLoader {
     @Override
     public Map loadMap() throws IOException {
         Map map;
-        final File tempDir = Files.createTempDir();
+        final File tempDir = java.nio.file.Files.createTempDirectory("plugin").toFile();
         try (InputStream is = getClass().getResourceAsStream(MAP_PATH)) {
             ZipExtractorUtil.extract(is, tempDir);
             map = new TMXMapReader().readMap(new File(tempDir, MAP_NAME).getAbsolutePath());
