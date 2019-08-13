@@ -58,6 +58,7 @@ public final class GameFieldImpl implements GameField {
             this.entities.stream()
                          .filter(e -> !(e.getClass().equals(Player.class)))
                          .forEach(entitiesToBeRemoved::add);
+            this.manageEntitiesToBeRemoved();
             assert this.gameController != null;
             this.gameController.stop();
             this.gameController.triggerEndLevel();

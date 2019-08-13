@@ -136,19 +136,12 @@ public class Feet extends AbstractMovement {
         }
     }
 
-    /**
-     * return the walking speed.
-     * @return the speed.
-     */
+    @Override
     public double getSpeed() {
         return this.walkingSpeed;
     }
-
-    /**
-     * Setter for the speed.
-     * @param newSpeed
-     *          new speed to set
-     */
+    
+    @Override
     public void setSpeed(final double newSpeed) {
         this.walkingSpeed = newSpeed;
     }
