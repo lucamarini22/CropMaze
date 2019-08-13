@@ -49,8 +49,8 @@ public final class GameFieldImpl implements GameField {
     @Override
     public void update(final double up) {
         //Updates all the entities
-        this.updateEntities(up);
         this.manageEntitiesToBeRemoved();
+        this.updateEntities(up);
         //Searches for collisions
         this.collisionSupervisor.searchCollision();
         //If there are no enemies (aliens) it removes all the entities except the Player and it goes to the next level
