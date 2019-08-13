@@ -74,10 +74,6 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
         if (life.isDead()) {
             getEntityView().changeState(PossibleEntityState.DYING);
         }
-        //else if (life.getCurrentLifePoints() > 0){
-            //the entity is damaged but still alive
-            //getEntityView().changeState(PossibleEntityState.SUFFERING);
-        //}
     }
 
     @Override

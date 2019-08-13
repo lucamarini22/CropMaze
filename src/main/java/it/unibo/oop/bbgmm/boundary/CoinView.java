@@ -28,6 +28,6 @@ public class CoinView extends AbstractEntityView implements LifelessEntityView {
 
     @Override
     public void playDeathSound() {
-        this.audioPlayer.playSound(Music.BULLET_SHOT.getPath());
+        this.audioPlayer.playSound(Music.TAKE_COIN.getPath());
     }
 }

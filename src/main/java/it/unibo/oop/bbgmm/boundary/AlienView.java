@@ -36,6 +36,6 @@ public class AlienView extends AbstractAliveEntityView {
     @Override
     public void playDeathSound() {
         super.playDeathSound();
-        this.audioPlayer.playSound(Music.BULLET_SHOT.getPath());
+        this.audioPlayer.playSound(Music.ALIEN_DYING.getPath());
     }
 }

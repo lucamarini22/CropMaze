@@ -5,7 +5,7 @@ import it.unibo.oop.bbgmm.entity.Entity;
 
 
 /**
- * Base class for AbstractLifeEntityController
+ * Base class for AbstractLifeEntityController.
  */
 public class LifelessEntityController extends AbstractLifelessEntityController<LifelessEntityView> {
 
