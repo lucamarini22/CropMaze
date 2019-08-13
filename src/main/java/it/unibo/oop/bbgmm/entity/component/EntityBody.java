@@ -5,7 +5,9 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
-
+/**
+ * Permit to manage the Entity Body.
+ */
 public interface EntityBody extends EntityComponent {
 
     /**

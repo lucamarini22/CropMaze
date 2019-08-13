@@ -9,7 +9,10 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
     private State currentState = Movement.State.STABLE;
     private Point2D desiredPosition = Point2D.ZERO;
     private Direction direction = Direction.NOTHING;
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public State getState() {
         return currentState;

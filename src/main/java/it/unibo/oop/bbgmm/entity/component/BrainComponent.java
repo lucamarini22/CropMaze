@@ -35,7 +35,10 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
         this.playerLife = life;
     }
 
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void update(final double delta) {
         this.time = this.time - delta;
@@ -45,7 +48,10 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
             this.time = MAX_TIME;
         }
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void followPlayer() {
         this.positionToFollow = this.entityToFollow.getBody().getPosition();
