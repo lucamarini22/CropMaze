@@ -53,7 +53,7 @@ public interface GameFieldView {
      * @param principalController
      *      {@link PrincipalController} instance
      */
-    void showEndLevelBox(PrincipalController principalController);
+    void showEndLevelBox(PrincipalController principalController, int currentLevel);
 
     /**
      * Sets the {@link EndLevelController}.
