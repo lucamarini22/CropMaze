@@ -42,7 +42,7 @@ public abstract class AbstractMovement extends AbstractEntityComponent implement
      *Method to get the actual position.
      * @return the desired movement vector.
      */
-    protected final Point2D getPosition() {
+    public final Point2D getPosition() {
         return desiredPosition;
     }
 

@@ -12,7 +12,7 @@ import static it.unibo.oop.bbgmm.boundary.Music.BULLET_SHOT;
  */
 public class BulletView extends AbstractAliveEntityView {
 
-    private static final int WIDTH = 0, HEIGHT = 4;
+    private static final int WIDTH = 33, HEIGHT = 33;
 
     /**
      * Constructor for BulletView.
