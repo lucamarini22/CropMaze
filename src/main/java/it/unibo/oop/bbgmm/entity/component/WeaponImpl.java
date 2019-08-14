@@ -24,9 +24,9 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
      *                  The entity weapon.
      */
     public WeaponImpl (final Inventory basicWeapon, final GameField gameField) {
-        this.weaponDamage = basicWeapon.damage;
-        this.weaponRange = basicWeapon.range+INITIAL_STEP;
-        this.weaponSpeed = basicWeapon.speed;
+        this.weaponDamage = basicWeapon.getDamage();
+        this.weaponRange = basicWeapon.getRange()+INITIAL_STEP;
+        this.weaponSpeed = basicWeapon.getSpeed();
         this.bulletShoted = new ArrayList<>();
         cooldown.update(COOLDOWN_TIME);
         this.gameField = gameField;

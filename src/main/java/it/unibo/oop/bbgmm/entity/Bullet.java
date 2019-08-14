@@ -42,7 +42,6 @@ public class Bullet extends AbstractEntity {
         super(bodyBuilder.bodyPosition(position)
                          .bodyDimension(SIZE)
                          .bodyDirection(ownerDirection)
-                         .bodyMovable(true)
                          .build());
         add(new LifeComponent(weapon.getWeaponRange()));
         add(new DamageComponent(weapon.getWeaponDamage()));

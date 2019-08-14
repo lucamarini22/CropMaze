@@ -23,7 +23,6 @@ public final class Wall extends AbstractEntity {
                 .bodyDirection(Direction.NOTHING)
                 .bodyPosition(position)
                 .bodyDimension(dimension)
-                .bodyMovable(false)
                 .build());
     }
 
