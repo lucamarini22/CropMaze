@@ -52,6 +52,8 @@ public interface GameFieldView {
      * Shows a box when a level is finished.
      * @param principalController
      *      {@link PrincipalController} instance
+     * @param currentLevel
+     *      The number of the current level
      */
     void showEndLevelBox(PrincipalController principalController, int currentLevel);
 

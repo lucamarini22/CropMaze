@@ -1,6 +1,5 @@
 package it.unibo.oop.bbgmm.control;
 
-import com.badlogic.gdx.Game;
 import it.unibo.oop.bbgmm.boundary.GameFieldView;
 import it.unibo.oop.bbgmm.entity.Entity;
 import it.unibo.oop.bbgmm.entity.GameStatistics;
@@ -16,8 +15,6 @@ import java.util.Set;
 import java.util.LinkedHashSet;
 import java.util.Collections;
 import java.util.Locale;
-
-
 
 
 /**

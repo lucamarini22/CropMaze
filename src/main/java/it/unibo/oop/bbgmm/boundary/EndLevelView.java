@@ -48,6 +48,8 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
      *
      * @param primaryStage
      *          The principal stage
+     * @param currentLevel
+     *          The number of the current level
      */
     public void display(final Stage primaryStage, final int currentLevel) {
         final String message = "Press ENTER to go to the next level\nCurrent Level:   " + currentLevel + "\n\n";
