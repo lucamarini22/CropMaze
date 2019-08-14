@@ -36,14 +36,6 @@ public final class BulletFeetDecorator extends AbstractMovement {
         this.feet = feet;
     }
 
-    /**
-     * Method to remove the bullet.
-     */
-    private void remove() {
-        weapon.removeBullet((Bullet) getOwner().get());
-        getOwner().get().removeEntity();
-    }
-
     @Override
     public void move(final Point2D direction) {
         if (this.lifeComponent.isAlive()) {
@@ -82,5 +74,13 @@ public final class BulletFeetDecorator extends AbstractMovement {
     public void attach(final Entity owner) {
         super.attach(owner);
         this.feet.attach(owner);
+    }
+
+    /**
+     * Method to remove the bullet.
+     */
+    private void remove() {
+        weapon.removeBullet((Bullet) getOwner().get());
+        getOwner().get().removeEntity();
     }
 }
