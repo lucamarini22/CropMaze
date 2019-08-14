@@ -33,19 +33,6 @@ public final class GameFieldImpl implements GameField {
         this.playerStatistics = new PlayerStatisticsImpl();
     }
 
-    /**
-     * Constructor for the test class.
-     * @param collisionSupervisor
-     *      {@link CollisionSupervisor} instance
-     */
-    public GameFieldImpl(final CollisionSupervisor collisionSupervisor) {
-        this.entities =  new LinkedHashSet<>();
-        this.collisionSupervisor = collisionSupervisor;
-        this.entitiesToBeRemoved  = new LinkedHashSet<>();
-        this.playerStatistics = new PlayerStatisticsImpl();
-        this.gameController = null;
-    }
-
     @Override
     public void update(final double up) {
         //Updates all the entities
