@@ -2,6 +2,8 @@ package it.unibo.oop.bbgmm.control;
 
 import it.unibo.oop.bbgmm.boundary.GameFieldView;
 
+import java.util.Set;
+
 /**
  * The controller of the game.
  */

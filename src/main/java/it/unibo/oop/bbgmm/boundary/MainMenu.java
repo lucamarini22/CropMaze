@@ -21,7 +21,7 @@ public final class MainMenu extends AbstractBasicView {
     private final VBox menuBox;
     private int currentItem;
     private final MenuItem itemNewGame = new MenuItem("NEW GAME");
-    private final MenuItem itemScore = new MenuItem("SCORE");
+    private final MenuItem itemRanking = new MenuItem("RANKING");
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
@@ -45,7 +45,7 @@ public final class MainMenu extends AbstractBasicView {
 
         this.menuBox = new VBox(SPACE_BETWEEN_ITEM,
                                 this.itemNewGame,
-                                this.itemScore,
+                                this.itemRanking,
                                 this.itemSettings,
                                 this.itemExit);
 
@@ -113,7 +113,7 @@ public final class MainMenu extends AbstractBasicView {
             checkResolution();
             clearEnter();
         });
-        this.itemScore.setOnActivate(() -> {
+        this.itemRanking.setOnActivate(() -> {
             getController().showRankingView(getViewFactory());
         });
         this.itemSettings.setOnActivate(() -> {

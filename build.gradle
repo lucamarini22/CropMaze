@@ -29,6 +29,8 @@ dependencies {
     implementation 'com.badlogicgames.gdx:gdx:1.9.9'
 
     implementation 'com.google.guava:guava-gwt:28.0-jre'
+    
+    compile 'com.google.apis:google-api-services-classroom:v1-rev302-1.25.0'
 }
 
 //PMD rules (More rigid rules)

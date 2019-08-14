@@ -1,7 +1,7 @@
 package it.unibo.oop.bbgmm.entity.component;
 
 public enum Inventory {
-    GUN(10, 100, 1),
+    GUN(10, 10, 1),
     PUNCH(5, 20, 1),
     RPG(30, 100, 1);
 

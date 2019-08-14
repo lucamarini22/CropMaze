@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 public final class ScoreListImpl implements ScoreList {
 
     private static final int RANKING_SIZE = 5;
-    private final URL fileName = ClassLoader.getSystemResource("ScoreList.txt");
+    private static final String FILE_NAME = "ScoreList.txt";
+    private static final String OUTPUT_PATH = ClassLoader.getSystemResource(FILE_NAME).getPath();
     private List<Score> scoreList = new ArrayList<>();
 
     /**
@@ -30,7 +31,7 @@ public final class ScoreListImpl implements ScoreList {
      *          Exception if the file does not exist
      */
     public ScoreListImpl() throws IOException {
-        final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileName.getPath())));
+        final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(ClassLoader.getSystemResourceAsStream(FILE_NAME)));
         final int size = ostream.readInt();
         for (int i = 0; i < size; i++) {
             try {
@@ -68,7 +69,7 @@ public final class ScoreListImpl implements ScoreList {
      *          Exception if the file does not exist
      */
     private void writeOnFile() throws IOException {
-        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName.getPath(), false)));
+        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(OUTPUT_PATH, false)));
         ostream.writeInt(scoreList.size());
         scoreList.forEach(s -> {
             try {
@@ -90,7 +91,7 @@ public final class ScoreListImpl implements ScoreList {
 
     @Override
     public void deleteAll() throws IOException {
-        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName.getPath(), false)));
+        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(OUTPUT_PATH, false)));
         scoreList.clear();
         ostream.writeInt(0);
         ostream.flush();
