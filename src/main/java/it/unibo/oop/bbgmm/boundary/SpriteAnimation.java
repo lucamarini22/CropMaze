@@ -12,7 +12,7 @@ import javafx.util.Duration;
  * From https://netopyr.com/2012/03/09/creating-a-sprite-animation-with-javafx/
  */
 
-public class SpriteAnimation extends Transition {
+public final class SpriteAnimation extends Transition {
 
     private final ImageView imageView;
     private final int count;
@@ -22,7 +22,7 @@ public class SpriteAnimation extends Transition {
     private int lastIndex;
 
     /**
-     * Creats a sprite animation
+     * Creats a sprite animation.
      * @param imageView
      *          The image view.
      * @param duration
@@ -47,6 +47,9 @@ public class SpriteAnimation extends Transition {
         setInterpolator(Interpolator.LINEAR);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     protected void interpolate(final double k) {
         if (getStatus() != Status.RUNNING) {
             // sometimes this happens..

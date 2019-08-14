@@ -12,12 +12,12 @@ public interface Timer {
      * Acknowledge the passage of time.
      *
      * @param dt
-     *            Amount of time passed in seconds
+     *      Amount of time passed in seconds.
      */
     void update(double dt);
 
     /**
-     * @return true if the timer is elapsed.
+     * @return True if the timer is elapsed.
      */
     boolean isElapsed();
 
@@ -25,9 +25,11 @@ public interface Timer {
      * Static factory for a timer working with seconds.
      *
      * @param time
-     *            in seconds
-     * @return A {@link Timer} object.
+     *      Time in seconds.
+     * @return A timer object.
      */
-    static Timer seconds(final double time) {return new TimerImpl(time);}
+    static Timer seconds(final double time) {
+        return new TimerImpl(time);
+    }
 
 }
