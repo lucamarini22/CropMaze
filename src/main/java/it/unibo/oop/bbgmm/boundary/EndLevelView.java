@@ -50,7 +50,7 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
      *          The principal stage
      */
     public void display(final Stage primaryStage, final int currentLevel) {
-        final String MESSAGE = "Press ENTER to go to the next level\nCurrent Level:   " + currentLevel + "\n\n";
+        final String message = "Press ENTER to go to the next level\nCurrent Level:   " + currentLevel + "\n\n";
         final int currentItem = 0;
         final MenuItem itemNextLevel = new MenuItem(NEXT_LEVEL);
         final Stage stage = new Stage();
@@ -63,7 +63,7 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
         stage.initStyle(StageStyle.UNDECORATED);
 
 
-        final Label label = new Label(MESSAGE);
+        final Label label = new Label(message);
         label.setFont(FontMakerUtil.getSizedFont(SIZE_MESSAGE));
         label.setEffect(new GaussianBlur(2));
         label.setTextFill(Color.FORESTGREEN);

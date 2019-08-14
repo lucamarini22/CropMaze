@@ -65,7 +65,7 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.playerInputHandler = playerInputHandler;
         this.setBackground();
         fieldView.getChildren().add(this.background);
-        this.upgradeButton.setPrefHeight((HEIGHT_BUTTON * ResolutionUtil.getHeight())/ ResolutionUtil.SMALL_HEIGHT);
+        this.upgradeButton.setPrefHeight((HEIGHT_BUTTON * ResolutionUtil.getHeight())/ ResolutionUtil.getSmallHeight());
         this.upgradeButton.setPadding(new Insets(PADDING));
         rootView.getChildren().add(new HBox(SPACING, statusBar.getStatusBox(), upgradeButton));
         this.principalController = principalController;

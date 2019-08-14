@@ -85,8 +85,8 @@ public final class SettingsMenu extends AbstractBasicView {
 
         //calculates the position of the box and witch item is underlined
         if (ResolutionUtil.isFullScreen()) {
-            this.menuBox.setLayoutX(BOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.SMALL_WIDTH);
-            this.menuBox.setLayoutY(BOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.SMALL_HEIGHT);
+            this.menuBox.setLayoutX(BOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.getSmallWidth());
+            this.menuBox.setLayoutY(BOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.getSmallHeight());
             this.itemSmallScreen.setUnderline(false);
             this.itemFullScreen.setUnderline(true);
         } else {

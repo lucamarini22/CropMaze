@@ -78,8 +78,8 @@ public final class MainMenu extends AbstractBasicView {
 
         //calculates the position of the box
         if (ResolutionUtil.isFullScreen()) {
-            this.menuBox.setLayoutX(BOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.SMALL_WIDTH);
-            this.menuBox.setLayoutY(BOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.SMALL_HEIGHT);
+            this.menuBox.setLayoutX(BOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.getSmallWidth());
+            this.menuBox.setLayoutY(BOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.getSmallHeight());
         } else {
             this.menuBox.setLayoutX(BOX_X_COORDINATE);
             this.menuBox.setLayoutY(BOX_Y_COORDINATE);

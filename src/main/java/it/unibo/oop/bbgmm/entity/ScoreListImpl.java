@@ -6,8 +6,9 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +20,6 @@ public final class ScoreListImpl implements ScoreList {
 
     private static final int RANKING_SIZE = 5;
     private static final String FILE_NAME = "ScoreList.txt";
-    private static final String OUTPUT_PATH = ClassLoader.getSystemResource(FILE_NAME).getPath();
     private List<Score> scoreList = new ArrayList<>();
 
     /**
@@ -30,6 +30,7 @@ public final class ScoreListImpl implements ScoreList {
      */
     public ScoreListImpl() throws IOException {
         final ObjectInputStream ostream = new ObjectInputStream(new BufferedInputStream(ClassLoader.getSystemResourceAsStream(FILE_NAME)));
+
         final int size = ostream.readInt();
         for (int i = 0; i < size; i++) {
             try {
@@ -54,7 +55,6 @@ public final class ScoreListImpl implements ScoreList {
             try {
                 writeOnFile();
             } catch (IOException e) {
-                System.out.println("Error on writing on file\n");
                 e.printStackTrace();
             }
         } //if it contains the exact score it does nothing
@@ -67,7 +67,7 @@ public final class ScoreListImpl implements ScoreList {
      *          Exception if the file does not exist
      */
     private void writeOnFile() throws IOException {
-        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(OUTPUT_PATH, false)));
+        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(Files.newOutputStream(Paths.get(FILE_NAME))));
         ostream.writeInt(scoreList.size());
         scoreList.forEach(s -> {
             try {
@@ -89,7 +89,7 @@ public final class ScoreListImpl implements ScoreList {
 
     @Override
     public void deleteAll() throws IOException {
-        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(OUTPUT_PATH, false)));
+        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(Files.newOutputStream(Paths.get(FILE_NAME))));
         scoreList.clear();
         ostream.writeInt(0);
         ostream.flush();

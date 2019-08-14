@@ -25,7 +25,6 @@ public final class GameControllerImpl implements GameController {
     private final Level level;
     private Map map;
     private Set<EntityController> entitiesControllers;
-    private final EntityFactory entityFactory;
     private GameFieldView gameFieldView;
     private final GameStatistics gameStatistics;
     private final UpgradeController upgradeController;
@@ -57,7 +56,7 @@ public final class GameControllerImpl implements GameController {
         this.gameField = new GameFieldImpl(new CollisionSupervisorImpl(), this);
         this.principalController = principalController;
         this.gameStatistics = gameStatistics;
-        this.entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
+        final EntityFactory entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
         try {
             this.map = new TMXMapLoader().loadMap();
         } catch (Exception e) {
@@ -65,7 +64,7 @@ public final class GameControllerImpl implements GameController {
         }
         this.level = new LevelImpl(this.map,
                                    this.gameStatistics,
-                                   new EntitySpawnerImpl(this.entityFactory, this.gameField),
+                                   new EntitySpawnerImpl(entityFactory, this.gameField),
                                    this.gameFieldView);
         this.endLevelController = new EndLevelControllerImpl(this.principalController, this.gameStatistics, this.level, this.gameFieldView);
         this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this, primaryStage);

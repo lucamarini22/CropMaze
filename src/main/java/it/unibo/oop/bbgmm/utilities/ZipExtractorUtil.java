@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
+import java.nio.file.Files;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -42,7 +42,7 @@ public final class ZipExtractorUtil {
                     if (!parentDir.exists() && !parentDir.mkdirs() && !parentDir.isDirectory()) {
                         throw new IOException("Couldn't create parent directory " + parentDir);
                     }
-                    try (OutputStream fos = new BufferedOutputStream(new FileOutputStream(dest))) {
+                    try (OutputStream fos = new BufferedOutputStream(Files.newOutputStream(dest.toPath()))) {
                         if (ByteStreams.copy(zis, fos) < 0) {
                             throw new IOException("This is not possible and it's here to make checkstyle happy");
                         }
