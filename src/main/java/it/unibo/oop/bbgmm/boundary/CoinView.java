@@ -26,8 +26,10 @@ public class CoinView extends AbstractEntityView implements LifelessEntityView {
         this.audioPlayer = audioPlayer;
     }
 
-    @Override
+    /**
+     * Plays a sound when a coin is collected.
+     */
     public void playDeathSound() {
-        this.audioPlayer.playSound(Music.BULLET_SHOT.getPath());
+        this.audioPlayer.playSound(Music.TAKE_COIN.getPath());
     }
 }

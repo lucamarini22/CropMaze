@@ -33,6 +33,21 @@ public enum Music {
     BUTTON_PRESS("sounds/button_clicked.wav"),
 
     /**
+     * ALIEN DYING SOUND.
+     */
+    ALIEN_DYING("sounds/alienDying.wav"),
+
+    /**
+     * POWER UP OPEN BOX SOUND.
+     */
+    OPEN_BOX("sounds/openBox.wav"),
+
+    /**
+     * TAKE COIN SOUND.
+     */
+    TAKE_COIN("sounds/takeCoin.wav"),
+
+    /**
      * BULLET_SHOT.
      */
     BULLET_SHOT("sounds/shotSound.wav");

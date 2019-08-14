@@ -23,7 +23,6 @@ public abstract class AbstractEntityView implements EntityView {
     public AbstractEntityView(final Group group, final Dimension2D dimension) {
         this.myGroup = group;
         this.dimension = dimension;
-        //setDimension(dimension);
         this.myGroup.getChildren().add(image);
     }
 

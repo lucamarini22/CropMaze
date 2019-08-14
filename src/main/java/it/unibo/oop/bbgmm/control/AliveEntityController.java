@@ -39,7 +39,10 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
 
         super(entity, entityView);
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         if (getEntity().get(Life.class).isPresent() && getEntity().get(Life.class).get().isAlive()) {
@@ -74,12 +77,11 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
         if (life.isDead()) {
             getEntityView().changeState(PossibleEntityState.DYING);
         }
-        //else if (life.getCurrentLifePoints() > 0){
-            //the entity is damaged but still alive
-            //getEntityView().changeState(PossibleEntityState.SUFFERING);
-        //}
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void entityDestruction(final DeathEvent event) {
             getEntityView().deathView();

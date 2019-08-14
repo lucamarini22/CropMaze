@@ -39,10 +39,11 @@ public class Feet extends AbstractMovement {
     @Override
     public void attach(final Entity owner) {
         super.attach(owner);
-        //setState(State.STABLE);
-        //updateState();
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void update(final double dt) {
         super.update(dt);
@@ -103,7 +104,10 @@ public class Feet extends AbstractMovement {
         }
         return getOwner().get().getBody().getDirection();
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void move(final Point2D distanceVector) {
         final Point2D movementVector = calculateNewDistanceVector(distanceVector);
@@ -112,27 +116,11 @@ public class Feet extends AbstractMovement {
 
         if (wallChecker(newPos)) {
             setPosition(Point2D.ZERO);
-            //setState(State.STABLE);
-            //System.out.println("entity stable, find a wall");
         } else {
             setPosition(movementVector);
             setDirection(calculateNewDirection(movementVector));
-
-            /*
-            if(getPosition().equals(Point2D.ZERO)){
-                setState(State.STABLE);
-                System.out.println("entity stable - move method --> State =  " + getState());
-            }
-            else {
-                setState(State.WALKING);
-                System.out.println("entity walking -> State = " + getState());
-            }*/
         }
-        //System.out.println(" " + getState());
-        //setPosition(Point2D.ZERO);
-        //setState(State.STABLE);
         updateState();
-        //System.out.println("end of movement -> State = " + getState());
 
     }
 
@@ -148,23 +136,19 @@ public class Feet extends AbstractMovement {
         }
     }
 
-    /**
-     * return the walking speed.
-     * @return the speed.
-     */
+    @Override
     public double getSpeed() {
         return this.walkingSpeed;
     }
-
-    /**
-     * Setter for the speed.
-     * @param newSpeed
-     *          new speed to set
-     */
+    
+    @Override
     public void setSpeed(final double newSpeed) {
         this.walkingSpeed = newSpeed;
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public Point2D calculateVector(final Direction direction) {
         Point2D vector = Point2D.ZERO;

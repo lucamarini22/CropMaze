@@ -20,8 +20,9 @@ public final class MainMenu extends AbstractBasicView {
     private static final int BOX_Y_COORDINATE = 350;
     private final VBox menuBox;
     private int currentItem;
+    private boolean stop;
     private final MenuItem itemNewGame = new MenuItem("NEW GAME");
-    private final MenuItem itemScore = new MenuItem("SCORE");
+    private final MenuItem itemRanking = new MenuItem("RANKING");
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
     private final MenuItem itemExit = new MenuItem("EXIT");
 
@@ -42,10 +43,11 @@ public final class MainMenu extends AbstractBasicView {
         super(primaryStage, controller, pane, scene);
 
         this.currentItem = 0;
+        this.stop = false;
 
         this.menuBox = new VBox(SPACE_BETWEEN_ITEM,
                                 this.itemNewGame,
-                                this.itemScore,
+                                this.itemRanking,
                                 this.itemSettings,
                                 this.itemExit);
 
@@ -67,8 +69,10 @@ public final class MainMenu extends AbstractBasicView {
             }
 
             if (event.getCode() == KeyCode.ENTER) {
-                playPressSound();
-                getMenuItem(this.currentItem).activate();
+                if (!stop) {
+                    playPressSound();
+                    getMenuItem(this.currentItem).activate();
+                }
             }
         });
 
@@ -78,8 +82,8 @@ public final class MainMenu extends AbstractBasicView {
 
         //calculates the position of the box
         if (ResolutionUtil.isFullScreen()) {
-            this.menuBox.setLayoutX(BOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.SMALL_WIDTH);
-            this.menuBox.setLayoutY(BOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.SMALL_HEIGHT);
+            this.menuBox.setLayoutX(BOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.getSmallWidth());
+            this.menuBox.setLayoutY(BOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.getSmallHeight());
         } else {
             this.menuBox.setLayoutX(BOX_X_COORDINATE);
             this.menuBox.setLayoutY(BOX_Y_COORDINATE);
@@ -111,9 +115,9 @@ public final class MainMenu extends AbstractBasicView {
             getAudioPlayer().stopMusic();
             getController().showGameField(getScene());
             checkResolution();
-            clearEnter();
+            this.stop = true;
         });
-        this.itemScore.setOnActivate(() -> {
+        this.itemRanking.setOnActivate(() -> {
             getController().showRankingView(getViewFactory());
         });
         this.itemSettings.setOnActivate(() -> {
@@ -122,16 +126,6 @@ public final class MainMenu extends AbstractBasicView {
         this.itemExit.setOnActivate(() -> {
             getController().stopGame();
             System.exit(0);
-        });
-    }
-
-    /**
-     * it clears the actions of the button enter.
-     */
-    private void clearEnter() {
-        getScene().setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-            }
         });
     }
 

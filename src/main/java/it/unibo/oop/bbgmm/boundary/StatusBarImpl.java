@@ -31,12 +31,12 @@ public final class StatusBarImpl implements StatusBarScreen {
 
     public StatusBarImpl(){
         pb.setStyle("-fx-accent: green");
-        pb.setPrefWidth((WIDTHBAR * ResolutionUtil.getWidth()) / ResolutionUtil.SMALL_WIDTH);
-        pb.setPrefHeight((HIGHTBAR * ResolutionUtil.getHeight())/ ResolutionUtil.SMALL_HEIGHT);
+        pb.setPrefWidth((WIDTHBAR * ResolutionUtil.getWidth()) / ResolutionUtil.getSmallWidth());
+        pb.setPrefHeight((HIGHTBAR * ResolutionUtil.getHeight())/ ResolutionUtil.getSmallHeight());
         coinsBox.getChildren().add(new ImageView(new Image("images/coinSilver.png")));
         coinsBox.getChildren().add(new ImageView(new Image("images/numbers/X.png")));
-        coinsBox.setPrefWidth((WIDTHBAR * ResolutionUtil.getWidth()) / ResolutionUtil.SMALL_WIDTH);
-        coinsBox.setPrefHeight((HIGHTBAR * ResolutionUtil.getHeight())/ ResolutionUtil.SMALL_HEIGHT);
+        coinsBox.setPrefWidth((WIDTHBAR * ResolutionUtil.getWidth()) / ResolutionUtil.getSmallWidth());
+        coinsBox.setPrefHeight((HIGHTBAR * ResolutionUtil.getHeight())/ ResolutionUtil.getSmallHeight());
         statusBox.setAlignment(Pos.CENTER_LEFT);
         coinsBox.setAlignment(Pos.CENTER_LEFT);
         root.setPadding(new Insets(PADDING));

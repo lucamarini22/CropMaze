@@ -4,8 +4,10 @@ package it.unibo.oop.bbgmm.boundary;
 import it.unibo.oop.bbgmm.control.EndLevelController;
 import it.unibo.oop.bbgmm.control.PlayerInputListener;
 import it.unibo.oop.bbgmm.control.PrincipalController;
+import it.unibo.oop.bbgmm.utilities.ResolutionUtil;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Dimension2D;
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -29,6 +31,8 @@ public final class GameFieldViewImpl implements GameFieldView {
 
     private static final int TOP_LEFT_POINT_BACKGROUND = -800;
     private static final int SPACING = 20;
+    private static final int HEIGHT_BUTTON = 40;
+    private static final int PADDING = 20;
     private static final String BACKGROUND_PATH = "/images/background.png";
     private final Stage primaryStage;
     private final Group fieldView = new Group();
@@ -58,6 +62,8 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.playerInputHandler = playerInputHandler;
         this.setBackground();
         fieldView.getChildren().add(this.background);
+        this.upgradeButton.setPrefHeight((HEIGHT_BUTTON * ResolutionUtil.getHeight()) / ResolutionUtil.getSmallHeight());
+        this.upgradeButton.setPadding(new Insets(PADDING));
         rootView.getChildren().add(new HBox(SPACING, statusBar.getStatusBox(), upgradeButton));
         this.principalController = principalController;
         this.primaryStage.getScene().addEventHandler(KeyEvent.KEY_PRESSED, this::onPress);
@@ -141,12 +147,12 @@ public final class GameFieldViewImpl implements GameFieldView {
 
 
     @Override
-    public void showEndLevelBox(final PrincipalController principalController) {
+    public void showEndLevelBox(final PrincipalController principalController, final int currentLevel) {
         this.playerInputHandler.clearInput();
         principalController.getGameController().get().stop();
         final EndLevelView endLevelView = new EndLevelView(this.audioplayer);
         endLevelView.setObserver(this.endLevelController);
-        endLevelView.display(this.primaryStage);
+        endLevelView.display(this.primaryStage, currentLevel);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class GameFieldTest{
 
     private final EntityStatistics entityStatistics = new EntityStatisticsImpl();
     private final GameStatistics gameStatistics = new GameStatisticsImpl();
-    private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl());
+    private final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl(), null);
     private final EntityFactory entityFactory = new EntityFactoryImpl(gameField, entityStatistics,
             gameStatistics);
 

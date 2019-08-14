@@ -49,7 +49,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
         try {
             this.score = new ScoreListImpl();
         } catch (IOException e) {
-            System.out.println("Can't find ScoreList.txt");
+            e.printStackTrace();
         }
     }
 
@@ -68,7 +68,7 @@ public final class PrincipalControllerImpl implements PrincipalController {
         try {
             this.score.deleteAll();
         } catch (IOException e) {
-            System.out.println("Can't find ScoreList.txt");
+            e.printStackTrace();
         }
     }
 

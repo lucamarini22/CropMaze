@@ -96,7 +96,10 @@ public abstract class AbstractEntityChangeStateView<S extends EntityState> exten
         getView().setImage(image);
         getView().setFitWidth(this.getDimension().getWidth());
         getView().setPreserveRatio(true);
+<<<<<<< HEAD
         getView().setViewport(new Rectangle2D(0, 0, this.getDimension().getWidth(), this.getDimension().getHeight()));
+=======
+>>>>>>> 5b934a37782d5cd3d7cb1d23449b4115244750d4
     }
 
     /**
