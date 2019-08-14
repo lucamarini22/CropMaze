@@ -20,6 +20,7 @@ public final class MainMenu extends AbstractBasicView {
     private static final int BOX_Y_COORDINATE = 350;
     private final VBox menuBox;
     private int currentItem;
+    private boolean stop;
     private final MenuItem itemNewGame = new MenuItem("NEW GAME");
     private final MenuItem itemRanking = new MenuItem("RANKING");
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
@@ -42,6 +43,7 @@ public final class MainMenu extends AbstractBasicView {
         super(primaryStage, controller, pane, scene);
 
         this.currentItem = 0;
+        this.stop = false;
 
         this.menuBox = new VBox(SPACE_BETWEEN_ITEM,
                                 this.itemNewGame,
@@ -67,8 +69,10 @@ public final class MainMenu extends AbstractBasicView {
             }
 
             if (event.getCode() == KeyCode.ENTER) {
-                playPressSound();
-                getMenuItem(this.currentItem).activate();
+                if (!stop) {
+                    playPressSound();
+                    getMenuItem(this.currentItem).activate();
+                }
             }
         });
 
@@ -111,7 +115,7 @@ public final class MainMenu extends AbstractBasicView {
             getAudioPlayer().stopMusic();
             getController().showGameField(getScene());
             checkResolution();
-            clearEnter();
+            this.stop = true;
         });
         this.itemRanking.setOnActivate(() -> {
             getController().showRankingView(getViewFactory());
@@ -122,16 +126,6 @@ public final class MainMenu extends AbstractBasicView {
         this.itemExit.setOnActivate(() -> {
             getController().stopGame();
             System.exit(0);
-        });
-    }
-
-    /**
-     * it clears the actions of the button enter.
-     */
-    private void clearEnter() {
-        getScene().setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-            }
         });
     }
 
