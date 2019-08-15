@@ -20,7 +20,6 @@ public final class MainMenu extends AbstractBasicView {
     private static final int BOX_Y_COORDINATE = 350;
     private final VBox menuBox;
     private int currentItem;
-    private boolean stop;
     private final MenuItem itemNewGame = new MenuItem("NEW GAME");
     private final MenuItem itemRanking = new MenuItem("RANKING");
     private final MenuItem itemSettings = new MenuItem("SETTINGS");
@@ -43,7 +42,6 @@ public final class MainMenu extends AbstractBasicView {
         super(primaryStage, controller, pane, scene);
 
         this.currentItem = 0;
-        this.stop = false;
 
         this.menuBox = new VBox(SPACE_BETWEEN_ITEM,
                                 this.itemNewGame,
@@ -112,8 +110,6 @@ public final class MainMenu extends AbstractBasicView {
             setPlayerInputHandler();
             getAudioPlayer().stopMusic();
             getController().showGameField(getScene());
-            checkResolution();
-            this.stop = true;
         });
         this.itemRanking.setOnActivate(() -> {
             getController().showRankingView(getViewFactory());

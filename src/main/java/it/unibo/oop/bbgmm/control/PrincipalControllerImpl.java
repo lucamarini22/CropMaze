@@ -105,7 +105,6 @@ public final class PrincipalControllerImpl implements PrincipalController {
         stopGame();
         this.gameControl = Optional.empty();
         this.playerInputHandler = Optional.empty();
-
         this.view = new PrincipalView(primaryStage, this);
     }
 

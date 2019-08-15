@@ -96,6 +96,13 @@ public final class PlayerController extends AliveEntityController implements Pla
         updateCoinsView();
         updateLifeView();
     }
+
+    /**
+     * Delete the controller of the bullet from the list of bullet's controllers.
+     *
+     * @param bulletController
+     *          The controller of the bullet
+     */
     public void removeBulletController(final BulletController bulletController) {
         this.removedControllers.add(bulletController);
     }
