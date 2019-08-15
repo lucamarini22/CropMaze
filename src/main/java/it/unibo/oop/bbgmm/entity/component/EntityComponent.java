@@ -7,26 +7,26 @@ import java.util.Optional;
  */
 public interface EntityComponent {
     /**
-     * Attaches the component to the entity
+     * Attaches the component to the entity.
      * @param owner
-     *              The entity on which to attack the component
+     *              The entity on which to attack the component.
      */
     void attach(Entity owner);
 
     /**
-     * Detaches the component to the owner entity
+     * Detaches the component to the owner entity.
      */
     void detach();
 
     /**
-     * Sychronizes the component
+     * Sychronizes the component.
      * @param delta
-     *              The time passed since the last call in seconds
+     *              The time passed since the last call in seconds.
      */
     void update(double delta);
 
     /**
-     * @return The entity owner of the component
+     * @return The entity owner of the component.
      */
     Optional<? extends Entity> getOwner();
 

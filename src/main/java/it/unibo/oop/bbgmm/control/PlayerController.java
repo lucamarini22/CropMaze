@@ -14,14 +14,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class PlayerController extends AliveEntityController implements PlayerInputListener {
+/**
+ * Models the player controller.
+ */
+public final class PlayerController extends AliveEntityController implements PlayerInputListener {
 
     private final PlayerView playerView;
     private final GameFieldView gameFieldView;
     private final List<BulletController> bulletControllers;
     private final List<BulletController> removedControllers;
 
-    public PlayerController(final Entity player, final PlayerView playerView, final GameFieldView gameFieldView){
+    /**
+     * @param player
+     *      The player entity to control.
+     * @param playerView
+     *      The player view to update.
+     * @param gameFieldView
+     *      The game field reference.
+     */
+    public PlayerController(final Entity player, final PlayerView playerView, final GameFieldView gameFieldView) {
         super(player, playerView);
         this.playerView = playerView;
         this.gameFieldView = gameFieldView;
@@ -34,12 +45,11 @@ public class PlayerController extends AliveEntityController implements PlayerInp
         final Direction after = getEntity().getBody().getDirection();
         getEntity().get(Movement.class).ifPresent(movement -> movement.move(vector));
         final Direction before = getEntity().getBody().getDirection();
-        if(!after.equals(before)) {
+        if (!after.equals(before)) {
             movementChanged(getEntity().get(Movement.class).get());
-            if(before == Direction.NOTHING){
+            if (before == Direction.NOTHING) {
                 faceDirectionChanged(after);
-            }
-            else{
+            } else {
                 faceDirectionChanged(before);
             }
             //getEntityView().changeFaceDirection(getEntity().getBody().getDirection());
@@ -47,8 +57,8 @@ public class PlayerController extends AliveEntityController implements PlayerInp
 
     }
 
-    private void updateLifeView(){
-        getEntity().get(Life.class).ifPresent(life ->{
+    private void updateLifeView() {
+        getEntity().get(Life.class).ifPresent(life -> {
             playerView.setCurrentLifePoints(life.getCurrentLifePoints());
                 });
     }
@@ -57,7 +67,7 @@ public class PlayerController extends AliveEntityController implements PlayerInp
 
     @Override
     public void shoot(final Direction direction) {
-        if(getEntity().get(Weapon.class).isPresent()){
+        if (getEntity().get(Weapon.class).isPresent()) {
             final Optional<Bullet> bullet = getEntity().get(Weapon.class)
                                                  .get()
                                                  .shoot(direction);
@@ -65,18 +75,18 @@ public class PlayerController extends AliveEntityController implements PlayerInp
         }
     }
 
-    private void createBulletController(final Bullet bullet, final Direction direction){
+    private void createBulletController(final Bullet bullet, final Direction direction) {
         final BulletController controller = new BulletController(bullet, gameFieldView.getEntityViewFactory().createBulletView(direction), this);
         bulletControllers.add(controller);
     }
 
-    private void updateCoinsView(){
+    private void updateCoinsView() {
         getEntity().get(Bag.class).ifPresent(bag ->
                 playerView.setCoins(bag.getMoney()));
     }
 
     @Override
-    public void update(){
+    public void update() {
         super.update();
         bulletControllers.stream()
                 .filter(c -> !removedControllers.contains(c))
@@ -86,8 +96,7 @@ public class PlayerController extends AliveEntityController implements PlayerInp
         updateCoinsView();
         updateLifeView();
     }
-
-    public void removeBulletController(final BulletController bulletController){
+    public void removeBulletController(final BulletController bulletController) {
         this.removedControllers.add(bulletController);
     }
 }

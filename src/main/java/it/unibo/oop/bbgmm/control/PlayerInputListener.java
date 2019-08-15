@@ -3,18 +3,21 @@ package it.unibo.oop.bbgmm.control;
 import it.unibo.oop.bbgmm.entity.Direction;
 import javafx.geometry.Point2D;
 
+/**
+ * Interface for player input listener.
+ */
 public interface PlayerInputListener {
     /**
-     * Method called when the player wants to move
+     * Method called when the player wants to move.
      * @param vector
-     *      The direction vector
+     *      The direction vector.
      */
     void move(Point2D vector);
 
     /**
-     * Method called when the player wants to shoot
+     * Method called when the player wants to shoot.
      * @param direction
-     *      the direction where the bullet is shot
+     *      The direction where the bullet is shot.
      */
-    void shoot (Direction direction);
+    void shoot(Direction direction);
 }

@@ -35,7 +35,6 @@ public class Alien extends AbstractEntity {
                 .bodyPosition(position)
                 .bodyDimension(SIZE)
                 .bodyDirection(Direction.NOTHING)
-                .bodyMovable(true)
                 .build());
 
         add(new LifeComponent(health));

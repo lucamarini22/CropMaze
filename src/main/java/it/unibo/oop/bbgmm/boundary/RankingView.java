@@ -15,21 +15,32 @@ import javafx.stage.Stage;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Models the ranking view.
+ */
 public final class RankingView extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 40;
     private static final int BOX_X_COORDINATE = 280;
     private static final int BOX_Y_COORDINATE = 70;
-    //private static final ImageView crown = new ImageView(new Image("images/crown.png"));
     private final VBox menuBox;
-    //private VBox boxImage;
     private final MenuItem itemBack = new MenuItem("BACK");
 
+    /**
+     * @param primaryStage
+     *          The principal stage
+     * @param controller
+     *          The principal controller
+     * @param pane
+     *          The root for the scene
+     * @param scene
+     *          The scene displayed in the stage
+     */
     public RankingView(final Stage primaryStage, final PrincipalController controller,
-                       final AnchorPane pane, final Scene scene){
+                       final AnchorPane pane, final Scene scene) {
         super(primaryStage, controller, pane, scene);
 
-        getScene().setOnKeyPressed(event->{
-            if(event.getCode() == KeyCode.ENTER ){
+        getScene().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
                 playPressSound();
                 itemBack.activate();
             }
@@ -37,25 +48,21 @@ public final class RankingView extends AbstractBasicView {
 
         menuBox = new VBox(SPACE_BETWEEN_ITEM);
 
-        if(!controller.getRankingList().isEmpty()) {
-            //boxImage = new VBox(crown);
+        if (!controller.getRankingList().isEmpty()) {
             final List<Text> rankList = controller.getRankingList().stream()
                     .map(l -> new Text(l.getFst() + " " + l.getSnd()))
                     .collect(Collectors.toList());
             rankList.forEach(this::fontUtil);
             rankList.get(0).setFont(FontMakerUtil.getFontWinner());
             rankList.forEach(t -> menuBox.getChildren().add(t));
-            //boxImage.setAlignment(Pos.TOP_CENTER);
-            //pane.getChildren().add(boxImage);
-        }else {
+        } else {
             menuBox.getChildren().add(fontUtil(new Text("NO RANKING")));
         }
 
-        if(ResolutionUtil.isFullScreen()){
-            menuBox.setLayoutX(BOX_X_COORDINATE* ResolutionUtil.getWidth()/ ResolutionUtil.getSmallWidth());
-            menuBox.setLayoutY(BOX_Y_COORDINATE* ResolutionUtil.getHeight()/ ResolutionUtil.getSmallHeight());
-        }
-        else{
+        if (ResolutionUtil.isFullScreen()) {
+            menuBox.setLayoutX(BOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.getSmallWidth());
+            menuBox.setLayoutY(BOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.getSmallHeight());
+        } else {
             menuBox.setLayoutX(BOX_X_COORDINATE);
             menuBox.setLayoutY(BOX_Y_COORDINATE);
         }
@@ -81,13 +88,13 @@ public final class RankingView extends AbstractBasicView {
     }
 
     /**
-     * Util to set the font for the ranking list
+     * Util to set the font for the ranking list.
      * @param text
-     *      The text that has to be modified
+     *      The text that has to be modified.
      * @return
-     *      The text modified
+     *      The text modified.
      */
-    private Text fontUtil(final Text text){
+    private Text fontUtil(final Text text) {
         text.setFont(FontMakerUtil.getFont());
         text.setEffect(new GaussianBlur(2));
         text.setFill(Color.BLUE);
