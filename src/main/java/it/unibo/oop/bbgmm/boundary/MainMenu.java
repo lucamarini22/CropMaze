@@ -69,10 +69,8 @@ public final class MainMenu extends AbstractBasicView {
             }
 
             if (event.getCode() == KeyCode.ENTER) {
-                if (!stop) {
-                    playPressSound();
-                    getMenuItem(this.currentItem).activate();
-                }
+                playPressSound();
+                getMenuItem(this.currentItem).activate();
             }
         });
 

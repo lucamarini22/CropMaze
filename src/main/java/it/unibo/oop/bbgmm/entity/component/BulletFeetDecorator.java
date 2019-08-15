@@ -80,7 +80,7 @@ public final class BulletFeetDecorator extends AbstractMovement {
      * Method to remove the bullet.
      */
     private void remove() {
-        weapon.removeBullet((Bullet) getOwner().get());
+        this.weapon.removeBullet((Bullet) getOwner().get());
         getOwner().get().removeEntity();
     }
 }

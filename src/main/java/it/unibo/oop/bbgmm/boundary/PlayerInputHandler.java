@@ -26,8 +26,8 @@ public final class PlayerInputHandler {
      */
     public PlayerInputHandler(final Scene scene) {
         this.scene = scene;
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, this::onPress);
-        scene.addEventHandler(KeyEvent.KEY_RELEASED, this::onRelease);
+        scene.setOnKeyPressed(this::onPress);
+        scene.setOnKeyReleased(this::onRelease);
     }
 
     private boolean checkShooting(final KeyEvent event) {

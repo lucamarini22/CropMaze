@@ -31,6 +31,17 @@ public class BulletView extends AbstractAliveEntityView {
     }
 
     /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void setImage(final Image image) {
+        getView().setImage(image);
+        getView().setFitWidth(this.getDimension().getWidth());
+        getView().setPreserveRatio(true);
+    }
+
+    /**
      * Setter for the image.
      */
     private void setCurrentImage(final Direction direction) {
