@@ -21,6 +21,7 @@ public final class LifeComponent extends AbstractEntityComponent implements Life
      *      Max amount of life.
      */
     public LifeComponent(final int max) {
+        super();
         this.maxLifePoints = max;
         this.currentLifePoints = this.maxLifePoints;
     }

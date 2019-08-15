@@ -87,5 +87,5 @@ public abstract class AbstractEntityView implements EntityView {
     /**
      * Play the death sound.
      */
-    abstract void playDeathSound();
+    protected abstract void playDeathSound();
 }

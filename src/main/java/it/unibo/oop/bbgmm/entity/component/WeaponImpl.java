@@ -31,6 +31,7 @@ public final class WeaponImpl extends AbstractEntityComponent implements Weapon 
      *      The game field instance.
      */
     public WeaponImpl(final Inventory basicWeapon, final GameField gameField) {
+        super();
         this.weaponDamage = basicWeapon.getDamage();
         this.weaponRange = basicWeapon.getRange() + INITIAL_STEP;
         this.weaponSpeed = basicWeapon.getSpeed();

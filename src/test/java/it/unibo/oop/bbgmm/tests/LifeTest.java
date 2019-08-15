@@ -10,7 +10,6 @@ public class LifeTest {
     private static final int DAMAGE = 10;
     private final Life life = new LifeComponent(LIFEPOINTS);
     private final Damage damage = new DamageComponent(DAMAGE);
-    private final BodyBuilder body = new BodyBuilder();
 
     /**
      * A simple test for the life getting damaged

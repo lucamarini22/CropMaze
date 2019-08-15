@@ -11,6 +11,7 @@ public final class DamageComponent extends AbstractEntityComponent implements Da
      *      The component's damage
      */
     public DamageComponent(final int damage) {
+        super();
         this.damage = damage;
     }
     @Override

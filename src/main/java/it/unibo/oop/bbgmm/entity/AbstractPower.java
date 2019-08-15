@@ -5,8 +5,8 @@ package it.unibo.oop.bbgmm.entity;
  */
 public abstract class AbstractPower implements Power {
 
-    private boolean isActive;
-    private PowerTag powerTag;
+    private boolean active;
+    private final PowerTag powerTag;
     private Entity player;
 
     /**
@@ -25,7 +25,7 @@ public abstract class AbstractPower implements Power {
      */
     @Override
     public void activate(final Entity player) {
-        this.isActive = true;
+        this.active = true;
         this.player = player;
     }
 
@@ -35,7 +35,7 @@ public abstract class AbstractPower implements Power {
      */
     @Override
     public boolean isActive() {
-        return this.isActive;
+        return this.active;
     }
 
     /**
@@ -53,7 +53,7 @@ public abstract class AbstractPower implements Power {
      */
     @Override
     public void deactivate() {
-        this.isActive = false;
+        this.active = false;
     }
 
     /**

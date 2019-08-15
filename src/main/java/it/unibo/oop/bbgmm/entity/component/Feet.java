@@ -33,23 +33,6 @@ public class Feet extends AbstractMovement {
     }
 
     /**
-     * attach the component to the entity.
-     * @param owner
-     */
-    @Override
-    public void attach(final Entity owner) {
-        super.attach(owner);
-    }
-    /**
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public void update(final double dt) {
-        super.update(dt);
-    }
-
-    /**
      * Util method that check wall collision and stop the movement.
      * @param distanceVector
      *      The distance vector.

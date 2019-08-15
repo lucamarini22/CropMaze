@@ -22,7 +22,7 @@ public class AlienTest {
     private static final int INITIAL_LIFE = 40;
     private static final Dimension2D DIMENSION = new Dimension2D(1,1);
     private static Set<Entity> walls = new HashSet<>();
-    private static final BodyBuilder body = new BodyBuilder();
+    private final BodyBuilder body = new BodyBuilder();
     private Alien alien;
     private Player player;
     private Movement feet;
