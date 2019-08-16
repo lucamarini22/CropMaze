@@ -11,7 +11,7 @@ public interface MapLoader<T> {
     /**
      * Loads the map.
      * @return the map
-     * @throws Exception
+     * @throws IOException
      *      if there is not the map or the file is wrong
      */
      T loadMap() throws IOException;

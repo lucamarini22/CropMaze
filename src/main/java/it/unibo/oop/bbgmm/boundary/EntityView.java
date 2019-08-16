@@ -5,7 +5,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 
-
+/**
+ * Interface for entity view.
+ */
 public interface EntityView {
 
     /**
@@ -14,14 +16,14 @@ public interface EntityView {
      * @param newPosition
      *      The entity view new position.
      */
-    void setPosition(final Point2D newPosition);
+    void setPosition(Point2D newPosition);
 
     /**
      * Set the entity view dimension.
      * @param dimension
      *      The entity view dimension.
      */
-    void setDimension(final Dimension2D dimension);
+    void setDimension(Dimension2D dimension);
 
 
     /**

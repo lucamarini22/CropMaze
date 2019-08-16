@@ -1,9 +1,11 @@
 package it.unibo.oop.bbgmm.entity;
 
+/**
+ * Enumeration for possible directions.
+ */
 public enum Direction {
-    NOTHING, NORTH, SOUTH, EAST, WEST;
-
-    /*
-    da aggiungere metodo canMove per vedere se componente riesce a muoversi
+    /**
+     * Possible Directions.
      */
+    NOTHING, NORTH, SOUTH, EAST, WEST;
 }

@@ -13,7 +13,6 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
 
     private static final double MAX_TIME = 0.6;
     private static final double RANGE = 0.5;
-    private Point2D positionToFollow = Point2D.ZERO;
     private final Entity entityToFollow;
     private final Movement feet;
     private double time = MAX_TIME;
@@ -55,20 +54,20 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
      */
     @Override
     public void followPlayer() {
-        this.positionToFollow = this.entityToFollow.getBody().getPosition();
+        final Point2D positionToFollow = this.entityToFollow.getBody().getPosition();
         final Point2D currentPosition = getOwner().get().getBody().getPosition();
 
         Direction newDirection;
 
-        if (this.positionToFollow.getY() < currentPosition.getY()) {
+        if (positionToFollow.getY() < currentPosition.getY()) {
             newDirection = Direction.SOUTH;
         } else {
             newDirection = Direction.NORTH;
         }
 
-        if (this.positionToFollow.getY() <= currentPosition.getY() + RANGE
+        if (positionToFollow.getY() <= currentPosition.getY() + RANGE
                 && positionToFollow.getY() >= currentPosition.getY() - RANGE) {
-            if (this.positionToFollow.getX() < currentPosition.getX()) {
+            if (positionToFollow.getX() < currentPosition.getX()) {
                 newDirection = Direction.WEST;
             } else {
                 newDirection = Direction.EAST;
@@ -76,13 +75,13 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
         }
 
 
-        //if the alien and the player are collisioning the alien must not move
-        if (getOwner().get().getBody().getShape().getBoundsInLocal().intersects(entityToFollow.getBody().getShape().getBoundsInLocal())
-           || playerLife.isDead()) {
+        //if the alien and the player are colliding the alien must not move
+        if (getOwner().get().getBody().getShape().getBoundsInLocal().intersects(this.entityToFollow.getBody().getShape().getBoundsInLocal())
+           || this.playerLife.isDead()) {
             newDirection = Direction.NOTHING;
         }
 
-        final Point2D newPosition = feet.calculateVector(newDirection);
-        feet.move(newPosition);
+        final Point2D newPosition = this.feet.calculateVector(newDirection);
+        this.feet.move(newPosition);
     }
 }

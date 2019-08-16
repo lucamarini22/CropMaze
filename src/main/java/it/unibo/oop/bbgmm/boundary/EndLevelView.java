@@ -21,7 +21,6 @@ import static it.unibo.oop.bbgmm.boundary.Music.BUTTON_PRESS;
  * View that it shows when a level is finished, that is when all enemies are dead.
  */
 public final class EndLevelView implements ObservableView<EndLevelController> {
-    private static final String MESSAGE = "Press ENTER to go to the next level\n\n\n";
     private static final String NEXT_LEVEL = "Next Level";
     private static final int SIZE_MESSAGE = 35;
     private static final int SIZE_ITEMS = 40;
@@ -49,8 +48,11 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
      *
      * @param primaryStage
      *          The principal stage
+     * @param currentLevel
+     *          The number of the current level
      */
-    public void display(final Stage primaryStage) {
+    public void display(final Stage primaryStage, final int currentLevel) {
+        final String message = "Press ENTER to go to the next level\nCurrent Level:   " + currentLevel + "\n\n";
         final int currentItem = 0;
         final MenuItem itemNextLevel = new MenuItem(NEXT_LEVEL);
         final Stage stage = new Stage();
@@ -63,7 +65,7 @@ public final class EndLevelView implements ObservableView<EndLevelController> {
         stage.initStyle(StageStyle.UNDECORATED);
 
 
-        final Label label = new Label(MESSAGE);
+        final Label label = new Label(message);
         label.setFont(FontMakerUtil.getSizedFont(SIZE_MESSAGE));
         label.setEffect(new GaussianBlur(2));
         label.setTextFill(Color.FORESTGREEN);

@@ -27,7 +27,6 @@ public class Coin extends AbstractEntity {
         super(bodyBuilder
                 .bodyPosition(position)
                 .bodyDimension(SIZE)
-                .bodyMovable(false)
                 .bodyDirection(Direction.NOTHING)
                 .build());
         add(new CollisionComponent(new Rectangle(position.getX(), position.getY(), WIDTH, HEIGHT), CollisionLabel.COIN));

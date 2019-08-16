@@ -31,7 +31,7 @@ public abstract class AbstractEntity implements Entity {
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      */
     @Override

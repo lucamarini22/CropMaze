@@ -13,12 +13,9 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.mapeditor.core.Tile;
 import org.mapeditor.core.TileLayer;
@@ -32,7 +29,7 @@ import static it.unibo.oop.bbgmm.boundary.Music.BUTTON_PRESS;
  */
 public final class GameFieldViewImpl implements GameFieldView {
 
-    private static final int TOP_LEFT_POINT_BACKGROUND = -800;
+    private static final int TOP_LEFT_POINT_BACKGROUND = -900;
     private static final int SPACING = 20;
     private static final int HEIGHT_BUTTON = 40;
     private static final int PADDING = 20;
@@ -44,7 +41,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     private final PlayerInputHandler playerInputHandler;
     private final StatusBarScreen statusBar = new StatusBarImpl();
     private ImageView background;
-    private final Button upgradeButton = new Button("UPGRADE");
+    private final Button upgradeButton = new Button("UPGRADES");
     private final PrincipalController principalController;
     private EndLevelController endLevelController;
     /**
@@ -65,8 +62,9 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.playerInputHandler = playerInputHandler;
         this.setBackground();
         fieldView.getChildren().add(this.background);
-        this.upgradeButton.setPrefHeight((HEIGHT_BUTTON * ResolutionUtil.getHeight())/ ResolutionUtil.SMALL_HEIGHT);
+        this.upgradeButton.setPrefHeight((HEIGHT_BUTTON * ResolutionUtil.getHeight()) / ResolutionUtil.getSmallHeight());
         this.upgradeButton.setPadding(new Insets(PADDING));
+        this.upgradeButton.setStyle("-fx-background-color: #7FFF00; ");
         rootView.getChildren().add(new HBox(SPACING, statusBar.getStatusBox(), upgradeButton));
         this.principalController = principalController;
         this.primaryStage.getScene().addEventHandler(KeyEvent.KEY_PRESSED, this::onPress);
@@ -150,12 +148,12 @@ public final class GameFieldViewImpl implements GameFieldView {
 
 
     @Override
-    public void showEndLevelBox(final PrincipalController principalController) {
+    public void showEndLevelBox(final PrincipalController principalController, final int currentLevel) {
         this.playerInputHandler.clearInput();
         principalController.getGameController().get().stop();
         final EndLevelView endLevelView = new EndLevelView(this.audioplayer);
         endLevelView.setObserver(this.endLevelController);
-        endLevelView.display(this.primaryStage);
+        endLevelView.display(this.primaryStage, currentLevel);
     }
 
     @Override

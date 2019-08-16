@@ -19,7 +19,7 @@ import java.util.Locale;
 /**
  * The Game Over View.
  */
-public class GameOver extends AbstractBasicView {
+public final class GameOver extends AbstractBasicView {
     private static final int SPACE_BETWEEN_ITEM = 20;
     private static final int USERBOX_X_COORDINATE = 320;
     private static final int USERBOX_Y_COORDINATE = 450;
@@ -60,23 +60,19 @@ public class GameOver extends AbstractBasicView {
         menuBox = new VBox(SPACE_BETWEEN_ITEM, itemMainMenu, itemExit);
 
         getScene().setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.UP) {
-                if (currentItem > 0) {
-                    playSwitchSound();
-                    getMenuItem(currentItem).setActive(false);
-                    getMenuItem(--currentItem).setActive(true);
-                }
+            if (event.getCode() == KeyCode.UP && currentItem > 0) {
+                playSwitchSound();
+                getMenuItem(currentItem).setActive(false);
+                getMenuItem(--currentItem).setActive(true);
             }
 
-            else if (event.getCode() == KeyCode.DOWN) {
-                if (currentItem < (menuBox.getChildren().size()) - 1) {
-                    playSwitchSound();
-                    getMenuItem(currentItem).setActive(false);
-                    getMenuItem(++currentItem).setActive(true);
-                }
+            if (event.getCode() == KeyCode.DOWN && currentItem < (menuBox.getChildren().size()) - 1) {
+                playSwitchSound();
+                getMenuItem(currentItem).setActive(false);
+                getMenuItem(++currentItem).setActive(true);
             }
 
-            else if (event.getCode() == KeyCode.ENTER) {
+            if (event.getCode() == KeyCode.ENTER) {
                 playPressSound();
                 if (insertActive) {
                     itemInsert.activate();
@@ -108,10 +104,10 @@ public class GameOver extends AbstractBasicView {
 
         itemInsert.setActive(true);
         if (ResolutionUtil.isFullScreen()) {
-            menuBox.setLayoutX(BOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.SMALL_WIDTH);
-            menuBox.setLayoutY(BOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.SMALL_HEIGHT);
-            userBox.setTranslateX(USERBOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.SMALL_WIDTH);
-            userBox.setTranslateY(USERBOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.SMALL_HEIGHT);
+            menuBox.setLayoutX(BOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.getSmallWidth());
+            menuBox.setLayoutY(BOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.getSmallHeight());
+            userBox.setTranslateX(USERBOX_X_COORDINATE * ResolutionUtil.getWidth() / ResolutionUtil.getSmallWidth());
+            userBox.setTranslateY(USERBOX_Y_COORDINATE * ResolutionUtil.getHeight() / ResolutionUtil.getSmallHeight());
         } else {
             menuBox.setLayoutX(BOX_X_COORDINATE);
             menuBox.setLayoutY(BOX_Y_COORDINATE);

@@ -5,11 +5,17 @@ import it.unibo.oop.bbgmm.entity.Direction;
 import it.unibo.oop.bbgmm.entity.GameField;
 import it.unibo.oop.bbgmm.entity.Movement;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
-public class WeaponImpl extends AbstractEntityComponent implements Weapon {
+/**
+ * Manage a weapon component.
+ */
+public final class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
-    private static final double COOLDOWN_TIME = 0.5;
+    private static final double COOLDOWN_TIME = 0.2;
     private static final int INITIAL_STEP = 1;
     private int weaponDamage;
     private int weaponSpeed;
@@ -19,14 +25,16 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     private final GameField gameField;
 
     /**
-     *
      * @param basicWeapon
-     *                  The entity weapon.
+     *      Th weapon used.
+     * @param gameField
+     *      The game field instance.
      */
-    public WeaponImpl (final Inventory basicWeapon, final GameField gameField) {
-        this.weaponDamage = basicWeapon.damage;
-        this.weaponRange = basicWeapon.range+INITIAL_STEP;
-        this.weaponSpeed = basicWeapon.speed;
+    public WeaponImpl(final Inventory basicWeapon, final GameField gameField) {
+        super();
+        this.weaponDamage = basicWeapon.getDamage();
+        this.weaponRange = basicWeapon.getRange() + INITIAL_STEP;
+        this.weaponSpeed = basicWeapon.getSpeed();
         this.bulletShoted = new ArrayList<>();
         cooldown.update(COOLDOWN_TIME);
         this.gameField = gameField;
@@ -55,19 +63,23 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
 
     @Override
     public void setWeaponRange(final int range) {
-        this.weaponRange = range+INITIAL_STEP;
+        this.weaponRange = range + INITIAL_STEP;
     }
 
     @Override
-    public int getWeaponSpeed() { return this.weaponSpeed; }
+    public int getWeaponSpeed() {
+        return this.weaponSpeed;
+    }
 
     @Override
-    public void setWeaponSpeed(final int speed) { this.weaponSpeed = speed; }
+    public void setWeaponSpeed(final int speed) {
+        this.weaponSpeed = speed;
+    }
 
     @Override
     public Optional<Bullet> shoot(final Direction shootingDirection) {
         Optional<Bullet> bullet = Optional.empty();
-        if(this.cooldown.isElapsed() && shootingDirection != Direction.NOTHING) {
+        if (this.cooldown.isElapsed() && shootingDirection != Direction.NOTHING) {
             bullet = Optional.of(new Bullet(new BodyBuilder(),
                                         this,
                                         shootingDirection,
@@ -87,7 +99,7 @@ public class WeaponImpl extends AbstractEntityComponent implements Weapon {
     }
 
     @Override
-    public void removeBullet(final Bullet bullet){
+    public void removeBullet(final Bullet bullet) {
         this.bulletShoted.remove(bullet);
     }
 }

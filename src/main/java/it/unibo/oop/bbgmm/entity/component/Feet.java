@@ -33,23 +33,6 @@ public class Feet extends AbstractMovement {
     }
 
     /**
-     * attach the component to the entity.
-     * @param owner
-     */
-    @Override
-    public void attach(final Entity owner) {
-        super.attach(owner);
-    }
-    /**
-     *
-     * {@inheritDoc}
-     */
-    @Override
-    public void update(final double dt) {
-        super.update(dt);
-    }
-
-    /**
      * Util method that check wall collision and stop the movement.
      * @param distanceVector
      *      The distance vector.
@@ -136,11 +119,19 @@ public class Feet extends AbstractMovement {
         }
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public double getSpeed() {
         return this.walkingSpeed;
     }
-    
+
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void setSpeed(final double newSpeed) {
         this.walkingSpeed = newSpeed;
@@ -155,16 +146,16 @@ public class Feet extends AbstractMovement {
 
         switch (direction) {
             case NORTH:
-                vector = new Point2D(PlayerMoves.UP.x, PlayerMoves.UP.y);
+                vector = new Point2D(PlayerMoves.UP.getX(), PlayerMoves.UP.getY());
                 break;
             case SOUTH:
-                vector = new Point2D(PlayerMoves.DOWN.x, PlayerMoves.DOWN.y);
+                vector = new Point2D(PlayerMoves.DOWN.getX(), PlayerMoves.DOWN.getY());
                 break;
             case EAST:
-                vector = new Point2D(PlayerMoves.RIGHT.x, PlayerMoves.RIGHT.y);
+                vector = new Point2D(PlayerMoves.RIGHT.getX(), PlayerMoves.RIGHT.getY());
                 break;
             case WEST:
-                vector =  new Point2D(PlayerMoves.LEFT.x, PlayerMoves.LEFT.y);
+                vector =  new Point2D(PlayerMoves.LEFT.getX(), PlayerMoves.LEFT.getY());
                 break;
             default:
                 break;

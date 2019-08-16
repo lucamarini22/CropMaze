@@ -4,6 +4,11 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+/**
+ * Models a interface container.
+ * @param <T>
+ *          The parent interface.
+ */
 public interface ComponentsContainer<T> {
     /**
      * Gets an element by its Interface.
@@ -17,7 +22,7 @@ public interface ComponentsContainer<T> {
      *             if interf is not an interface
      * @return the element found
      */
-    <C extends T> Optional<C> get(final Class<C> interfaceClass) throws IllegalArgumentException;
+    <C extends T> Optional<C> get(Class<C> interfaceClass) throws IllegalArgumentException;
 
     /**
      * Puts an element in the bag.

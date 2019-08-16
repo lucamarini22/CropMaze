@@ -19,7 +19,7 @@ public class PrincipalView {
      * @param controller
      *          The principal controller
      */
-    public PrincipalView(final Stage primaryStage, PrincipalController controller) {
+    public PrincipalView(final Stage primaryStage, final PrincipalController controller) {
         this.window = new MainWindow(primaryStage, controller, ResolutionUtil.isFullScreen());
     }
 

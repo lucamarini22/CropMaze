@@ -12,7 +12,7 @@ import static it.unibo.oop.bbgmm.boundary.Music.BULLET_SHOT;
  */
 public class BulletView extends AbstractAliveEntityView {
 
-    private static final int WIDTH = 0, HEIGHT = 4;
+    private static final int WIDTH = 33, HEIGHT = 33;
 
     /**
      * Constructor for BulletView.
@@ -28,6 +28,17 @@ public class BulletView extends AbstractAliveEntityView {
         super(group, new Dimension2D(WIDTH, HEIGHT));
         setCurrentImage(direction);
         audioPlayer.playSound(BULLET_SHOT.getPath());
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public void setImage(final Image image) {
+        getView().setImage(image);
+        getView().setFitWidth(this.getDimension().getWidth());
+        getView().setPreserveRatio(true);
     }
 
     /**

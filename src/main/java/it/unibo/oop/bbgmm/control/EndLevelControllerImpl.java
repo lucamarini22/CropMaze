@@ -31,6 +31,6 @@ public final class EndLevelControllerImpl implements EndLevelController {
 
     @Override
     public void goToEndLevel() {
-        this.gameFieldView.showEndLevelBox(this.principalController);
+        this.gameFieldView.showEndLevelBox(this.principalController, this.gameStatistics.getCurrentLevel());
     }
 }

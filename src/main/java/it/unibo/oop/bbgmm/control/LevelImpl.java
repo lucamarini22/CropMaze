@@ -17,8 +17,6 @@ import java.util.Collections;
 import java.util.Locale;
 
 
-
-
 /**
  * Controls a level.
  */

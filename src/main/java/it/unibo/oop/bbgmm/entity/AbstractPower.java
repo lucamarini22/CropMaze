@@ -1,40 +1,68 @@
 package it.unibo.oop.bbgmm.entity;
 
 /**
- * This is an abstract class for the power
+ * This is an abstract class for the power.
  */
-public abstract class AbstractPower implements Power{
+public abstract class AbstractPower implements Power {
 
-    private boolean isActive;
-    private PowerTag powerTag;
+    private boolean active;
+    private final PowerTag powerTag;
     private Entity player;
 
-    public AbstractPower(final PowerTag powerTag){
-        this.powerTag=powerTag;
+    /**
+     * Constructor for AbstractPower.
+     *
+     * @param powerTag
+     *          The PowerTag
+     */
+    public AbstractPower(final PowerTag powerTag) {
+        this.powerTag = powerTag;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void activate(final Entity player) {
-        this.isActive = true;
-        this.player=player;
+        this.active = true;
+        this.player = player;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public boolean isActive() {
-        return isActive;
+        return this.active;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public PowerTag getPowerTag() {
-        return powerTag;
+        return this.powerTag;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void deactivate() {
-        this.isActive=false;
+        this.active = false;
     }
 
+    /**
+     * Getter for the player.
+     *
+     * @return Entity
+     *          The player
+     */
     public Entity getPlayer() {
-        return player;
+        return this.player;
     }
 }

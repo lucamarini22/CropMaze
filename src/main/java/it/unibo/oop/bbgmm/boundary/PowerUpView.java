@@ -42,6 +42,10 @@ public class PowerUpView extends AbstractEntityView implements LifelessEntityVie
         }
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void playDeathSound() {
         this.audioPlayer.playSound(Music.OPEN_BOX.getPath());

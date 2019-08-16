@@ -3,10 +3,13 @@ package it.unibo.oop.bbgmm.boundary;
 
 import it.unibo.oop.bbgmm.entity.Direction;
 
+/**
+ * Interface for alive entity view.
+ */
 public interface AliveEntityView extends EntityChangeState<PossibleEntityState> {
 
     /**
-     * Remove the entity from the view
+     * Remove the entity from the view.
     */
     void deathView();
 

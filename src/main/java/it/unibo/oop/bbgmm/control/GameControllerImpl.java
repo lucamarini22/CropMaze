@@ -22,16 +22,12 @@ public final class GameControllerImpl implements GameController {
 
     private static final double FRAME = 1.0 / 60;
     private final GameField gameField;
-    private final Level level;
-    private Map map;
+    private Level level;
     private Set<EntityController> entitiesControllers;
-    private final EntityFactory entityFactory;
     private GameFieldView gameFieldView;
-    private final GameStatistics gameStatistics;
-    private final UpgradeController upgradeController;
     private final PrincipalController principalController;
     private final EndLevelController endLevelController;
-    //the loop is made by animation timer which executes the handle method every few seconds
+    //the loop is made by animation timer which executes the handle method every few milliseconds
     private final AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(final long now) {
@@ -56,19 +52,19 @@ public final class GameControllerImpl implements GameController {
         this.gameFieldView = gameFieldView;
         this.gameField = new GameFieldImpl(new CollisionSupervisorImpl(), this);
         this.principalController = principalController;
-        this.gameStatistics = gameStatistics;
-        this.entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
+        final EntityFactory entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
         try {
-            this.map = new TMXMapLoader().loadMap();
+            final Map map;
+            map = new TMXMapLoader().loadMap();
+            this.level = new LevelImpl(map,
+                                       gameStatistics,
+                                       new EntitySpawnerImpl(entityFactory, this.gameField),
+                                       this.gameFieldView);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.level = new LevelImpl(this.map,
-                                   this.gameStatistics,
-                                   new EntitySpawnerImpl(this.entityFactory, this.gameField),
-                                   this.gameFieldView);
-        this.endLevelController = new EndLevelControllerImpl(this.principalController, this.gameStatistics, this.level, this.gameFieldView);
-        this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this, primaryStage);
+        this.endLevelController = new EndLevelControllerImpl(this.principalController, gameStatistics, this.level, this.gameFieldView);
+        new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this, primaryStage);
     }
 
     @Override

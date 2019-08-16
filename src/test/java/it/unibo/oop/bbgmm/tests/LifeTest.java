@@ -1,6 +1,10 @@
 package it.unibo.oop.bbgmm.tests;
 
-import it.unibo.oop.bbgmm.entity.component.*;
+
+import it.unibo.oop.bbgmm.entity.component.Damage;
+import it.unibo.oop.bbgmm.entity.component.DamageComponent;
+import it.unibo.oop.bbgmm.entity.component.Life;
+import it.unibo.oop.bbgmm.entity.component.LifeComponent;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,7 +14,6 @@ public class LifeTest {
     private static final int DAMAGE = 10;
     private final Life life = new LifeComponent(LIFEPOINTS);
     private final Damage damage = new DamageComponent(DAMAGE);
-    private final BodyBuilder body = new BodyBuilder();
 
     /**
      * A simple test for the life getting damaged
