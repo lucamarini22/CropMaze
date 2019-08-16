@@ -9,7 +9,6 @@ import java.util.Optional;
  * Class used to create the right font to use based on the dimension of the GameWindow.
  */
 public final class FontMakerUtil {
-
     private static final Dimension D = Toolkit.getDefaultToolkit().getScreenSize();
     private static final String FONT_URL = ClassLoader.getSystemResource("font.ttf").toExternalForm();
     private static final int PROPORTION_VALUE = 15;

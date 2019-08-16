@@ -13,12 +13,9 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.mapeditor.core.Tile;
 import org.mapeditor.core.TileLayer;
@@ -65,7 +62,7 @@ public final class GameFieldViewImpl implements GameFieldView {
         this.playerInputHandler = playerInputHandler;
         this.setBackground();
         fieldView.getChildren().add(this.background);
-        this.upgradeButton.setPrefHeight((HEIGHT_BUTTON * ResolutionUtil.getHeight())/ ResolutionUtil.SMALL_HEIGHT);
+        this.upgradeButton.setPrefHeight((HEIGHT_BUTTON * ResolutionUtil.getHeight()) / ResolutionUtil.getSmallHeight());
         this.upgradeButton.setPadding(new Insets(PADDING));
         this.upgradeButton.setStyle("-fx-background-color: #7FFF00; ");
         rootView.getChildren().add(new HBox(SPACING, statusBar.getStatusBox(), upgradeButton));
@@ -151,12 +148,12 @@ public final class GameFieldViewImpl implements GameFieldView {
 
 
     @Override
-    public void showEndLevelBox(final PrincipalController principalController) {
+    public void showEndLevelBox(final PrincipalController principalController, final int currentLevel) {
         this.playerInputHandler.clearInput();
         principalController.getGameController().get().stop();
         final EndLevelView endLevelView = new EndLevelView(this.audioplayer);
         endLevelView.setObserver(this.endLevelController);
-        endLevelView.display(this.primaryStage);
+        endLevelView.display(this.primaryStage, currentLevel);
     }
 
     @Override

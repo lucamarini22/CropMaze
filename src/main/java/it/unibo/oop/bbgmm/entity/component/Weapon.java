@@ -6,16 +6,19 @@ import it.unibo.oop.bbgmm.entity.Direction;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interface for weapon.
+ */
 public interface Weapon extends EntityComponent {
     /**
      * Shoots a projectile.
      * @param ownerDirection
-     *                  Tells projectile direction.
+     *      Tells projectile direction.
+     * @return The bullet shot.
      */
-    Optional<Bullet> shoot (Direction ownerDirection);
+    Optional<Bullet> shoot(Direction ownerDirection);
 
     /**
-     *
      * @return Current weapon damage.
      */
     int getWeaponDamage();
@@ -23,7 +26,7 @@ public interface Weapon extends EntityComponent {
     /**
      *
      * @param damage
-     *              New damage value in life points.
+     *      New damage value in life points.
      */
     void setWeaponDamage(int damage);
 
@@ -60,8 +63,9 @@ public interface Weapon extends EntityComponent {
     List<Bullet> getBulletList();
 
     /**
-     * Remove the bullet in input from the list of bullets
+     * Remove the bullet in input from the list of bullets.
      * @param bullet
+     *      the bullet to remove
      */
-    void removeBullet(final Bullet bullet);
+    void removeBullet(Bullet bullet);
 }

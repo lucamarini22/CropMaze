@@ -21,7 +21,7 @@ public final class CollisionSupervisorImpl implements CollisionSupervisor {
     public void searchCollision() {
         for (int i = 0; i < this.collidableComponents.size(); i++) {
             final Collidable coll1 = collidableComponents.get(i);
-            for (int j = i + 1; j < this.collidableComponents.size(); j++) {
+            for (int j = i + 1; j < collidableComponents.size(); j++) {
                 final Collidable coll2 = collidableComponents.get(j);
                 verifyCollision(coll1, coll2);
             }

@@ -36,6 +36,12 @@ public class PauseBox {
     private int currentItem = 1;
     private HBox itemLayout;
 
+    /**
+     * Constructor for PauseBox.
+     *
+     * @param audioPlayer
+     *          The audioPlayer
+     */
     public PauseBox(final AudioPlayer audioPlayer) {
         this.audioPlayer = audioPlayer;
         this.answer = false;
@@ -130,14 +136,14 @@ public class PauseBox {
     /**
      * Method called to play the buttonSwitch sound.
      */
-    private void playSwitchSound(){
+    private void playSwitchSound() {
         this.audioPlayer.playSound(BUTTON_SWITCH.getPath());
     }
 
     /**
      * Method called to play the buttonSwitch sound.
      */
-    private void playPressSound(){
+    private void playPressSound() {
         this.audioPlayer.playSound(BUTTON_PRESS.getPath());
     }
 }

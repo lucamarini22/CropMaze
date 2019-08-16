@@ -25,10 +25,7 @@ public final class GameControllerImpl implements GameController {
     private final Level level;
     private Map map;
     private Set<EntityController> entitiesControllers;
-    private final EntityFactory entityFactory;
     private GameFieldView gameFieldView;
-    private final GameStatistics gameStatistics;
-    private final UpgradeController upgradeController;
     private final PrincipalController principalController;
     private final EndLevelController endLevelController;
     //the loop is made by animation timer which executes the handle method every few seconds
@@ -56,19 +53,18 @@ public final class GameControllerImpl implements GameController {
         this.gameFieldView = gameFieldView;
         this.gameField = new GameFieldImpl(new CollisionSupervisorImpl(), this);
         this.principalController = principalController;
-        this.gameStatistics = gameStatistics;
-        this.entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
+        final EntityFactory entityFactory = new EntityFactoryImpl(this.gameField, new EntityStatisticsImpl(), gameStatistics);
         try {
             this.map = new TMXMapLoader().loadMap();
         } catch (Exception e) {
             e.printStackTrace();
         }
         this.level = new LevelImpl(this.map,
-                                   this.gameStatistics,
-                                   new EntitySpawnerImpl(this.entityFactory, this.gameField),
+                                   gameStatistics,
+                                   new EntitySpawnerImpl(entityFactory, this.gameField),
                                    this.gameFieldView);
-        this.endLevelController = new EndLevelControllerImpl(this.principalController, this.gameStatistics, this.level, this.gameFieldView);
-        this.upgradeController = new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this, primaryStage);
+        this.endLevelController = new EndLevelControllerImpl(this.principalController, gameStatistics, this.level, this.gameFieldView);
+        new UpgradeControllerImpl(this.gameFieldView.getUpgradeButton(), this.level.getPlayer(), this, primaryStage);
     }
 
     @Override

@@ -5,7 +5,9 @@ import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
 
-
+/**
+ * Interface fot body component.
+ */
 public interface EntityBody extends EntityComponent {
 
     /**
@@ -39,9 +41,4 @@ public interface EntityBody extends EntityComponent {
      */
     Rectangle getShape();
 
-    /**
-     *
-     * @return if the entity can move
-     */
-    boolean canMove();
 }

@@ -3,17 +3,29 @@ package it.unibo.oop.bbgmm.utilities;
 
 import com.google.common.reflect.TypeToken;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ *  Interfaces container made for components.
+ * @param <T>
+ *     The parent interface
+ */
 
 public final class ComponentsContainerImpl<T> implements ComponentsContainer<T> {
     private final Map<Class<?>, T> elements = new ConcurrentHashMap<>();
     private final Class<T> interfaceParent;
 
-    public ComponentsContainerImpl(final Class<T> interfaceParent){
+    /**
+     * Class constructor.
+     * @param interfaceParent
+     *      The parent interface
+     */
+    public ComponentsContainerImpl(final Class<T> interfaceParent) {
         this.isInterface(interfaceParent);
         this.interfaceParent = interfaceParent;
     }
@@ -56,8 +68,8 @@ public final class ComponentsContainerImpl<T> implements ComponentsContainer<T> 
         return Optional.ofNullable(type.cast(this.elements.remove(type)));
     }
 
-    private void isInterface(final Class<?> interf){
-        if(!interf.isInterface()){
+    private void isInterface(final Class<?> interf) {
+        if (!interf.isInterface()) {
             throw new IllegalArgumentException("Not a interface");
         }
     }
@@ -67,7 +79,7 @@ public final class ComponentsContainerImpl<T> implements ComponentsContainer<T> 
         return elements.values().stream();
     }
 
-    private Set<Class<?>> allInterfaces(final Class<?> type){
+    private Set<Class<?>> allInterfaces(final Class<?> type) {
 
         return TypeToken.of(type).getTypes().interfaces()
                 .stream()

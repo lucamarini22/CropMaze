@@ -13,7 +13,6 @@ public class BodyBuilder {
     private Dimension2D dimension;
     private Point2D position;
     private Direction direction;
-    private boolean movable;
 
     /**
      * Method for set direction.
@@ -40,18 +39,6 @@ public class BodyBuilder {
     }
 
     /**
-     * Method for set if is movable.
-     * @param movable
-     *          boolean.
-     * @return
-     *          if is movable or not.
-     */
-    public BodyBuilder bodyMovable(final boolean movable) {
-        this.movable = movable;
-        return this;
-    }
-
-    /**
      * MEthos fot set the position.
      * @param position
      *          new position to set.
@@ -72,7 +59,7 @@ public class BodyBuilder {
         if (this.checkBuild()) {
             throw new IllegalStateException("The build is incomplete");
         }
-        return new Body(this.position, this.dimension, this.direction, this.movable);
+        return new Body(this.position, this.dimension, this.direction);
 
     }
 

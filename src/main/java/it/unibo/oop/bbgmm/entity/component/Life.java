@@ -1,6 +1,9 @@
 package it.unibo.oop.bbgmm.entity.component;
 
-public interface Life extends EntityComponent{
+/**
+ * Interface for life component.
+ */
+public interface Life extends EntityComponent {
     /**
      *
      * @return Maximum amount of life points for the entity.
@@ -15,39 +18,38 @@ public interface Life extends EntityComponent{
 
     /**
      *
-     * @return  If entity is vulnerable or not
+     * @return  If entity is vulnerable or not.
      */
     boolean isVulnerable();
     /**
-     * Set entity vulnerabilty
+     * Set entity vulnerability.
      * @param vulnerability
-     *      True -> the entity can take damage
-     *      False -> the enity is invulnerable
+     *      True -> the entity can take damage.
+     *      False -> the enity is invulnerable.
      */
     void setVulnerability(boolean vulnerability);
     /**
      *
      * @param damageAmount
-     *                      Amount of damage inflicted to the entity
+     *      Amount of damage inflicted to the entity.
      */
     void damaged(int damageAmount);
 
     /**
-     * Add life
+     * Add life.
      * @param moreLife
-     *                      Amount of life to add
+     *      Amount of life to add.
      */
     void incrementLife(int moreLife);
 
     /**
-     *
-     * @return True if the entity is still alive
+     * @return True if the entity is still alive.
      */
     boolean isAlive();
 
     /**
      *
-     * @return True if the entity is dead
+     * @return True if the entity is dead.
      */
     boolean isDead();
 }

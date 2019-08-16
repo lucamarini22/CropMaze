@@ -35,7 +35,10 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
         this.playerLife = life;
     }
 
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void update(final double delta) {
         this.time = this.time - delta;
@@ -45,7 +48,10 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
             this.time = MAX_TIME;
         }
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void followPlayer() {
         this.positionToFollow = this.entityToFollow.getBody().getPosition();
@@ -69,7 +75,7 @@ public class BrainComponent extends AbstractEntityComponent implements Brain {
         }
 
 
-        //if the alien and the player are collisioning the alien must not move
+        //if the alien and the player are colliding the alien must not move
         if (getOwner().get().getBody().getShape().getBoundsInLocal().intersects(entityToFollow.getBody().getShape().getBoundsInLocal())
            || playerLife.isDead()) {
             newDirection = Direction.NOTHING;

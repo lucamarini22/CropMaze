@@ -29,7 +29,6 @@ public class PowerUp extends AbstractEntity {
                 .bodyPosition(position)
                 .bodyDimension(SIZE)
                 .bodyDirection(Direction.NOTHING)
-                .bodyMovable(false)
                 .build());
         add(new CollisionComponent(new Rectangle(position.getX(), position.getY(),
                 SIZE.getWidth(), SIZE.getHeight()), CollisionLabel.POWER));

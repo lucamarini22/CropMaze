@@ -33,22 +33,6 @@ public class Feet extends AbstractMovement {
     }
 
     /**
-     * attach the component to the entity.
-     * @param owner
-     */
-    @Override
-    public void attach(final Entity owner) {
-        super.attach(owner);
-        //setState(State.STABLE);
-        //updateState();
-    }
-
-    @Override
-    public void update(final double dt) {
-        super.update(dt);
-    }
-
-    /**
      * Util method that check wall collision and stop the movement.
      * @param distanceVector
      *      The distance vector.
@@ -103,7 +87,10 @@ public class Feet extends AbstractMovement {
         }
         return getOwner().get().getBody().getDirection();
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public void move(final Point2D distanceVector) {
         final Point2D movementVector = calculateNewDistanceVector(distanceVector);
@@ -112,27 +99,11 @@ public class Feet extends AbstractMovement {
 
         if (wallChecker(newPos)) {
             setPosition(Point2D.ZERO);
-            //setState(State.STABLE);
-            //System.out.println("entity stable, find a wall");
         } else {
             setPosition(movementVector);
             setDirection(calculateNewDirection(movementVector));
-
-            /*
-            if(getPosition().equals(Point2D.ZERO)){
-                setState(State.STABLE);
-                System.out.println("entity stable - move method --> State =  " + getState());
-            }
-            else {
-                setState(State.WALKING);
-                System.out.println("entity walking -> State = " + getState());
-            }*/
         }
-        //System.out.println(" " + getState());
-        //setPosition(Point2D.ZERO);
-        //setState(State.STABLE);
         updateState();
-        //System.out.println("end of movement -> State = " + getState());
 
     }
 
@@ -149,38 +120,42 @@ public class Feet extends AbstractMovement {
     }
 
     /**
-     * return the walking speed.
-     * @return the speed.
+     *
+     * {@inheritDoc}
      */
+    @Override
     public double getSpeed() {
         return this.walkingSpeed;
     }
 
     /**
-     * Setter for the speed.
-     * @param newSpeed
-     *          new speed to set
+     *
+     * {@inheritDoc}
      */
+    @Override
     public void setSpeed(final double newSpeed) {
         this.walkingSpeed = newSpeed;
     }
-
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public Point2D calculateVector(final Direction direction) {
         Point2D vector = Point2D.ZERO;
 
         switch (direction) {
             case NORTH:
-                vector = new Point2D(PlayerMoves.UP.x, PlayerMoves.UP.y);
+                vector = new Point2D(PlayerMoves.UP.getX(), PlayerMoves.UP.getY());
                 break;
             case SOUTH:
-                vector = new Point2D(PlayerMoves.DOWN.x, PlayerMoves.DOWN.y);
+                vector = new Point2D(PlayerMoves.DOWN.getX(), PlayerMoves.DOWN.getY());
                 break;
             case EAST:
-                vector = new Point2D(PlayerMoves.RIGHT.x, PlayerMoves.RIGHT.y);
+                vector = new Point2D(PlayerMoves.RIGHT.getX(), PlayerMoves.RIGHT.getY());
                 break;
             case WEST:
-                vector =  new Point2D(PlayerMoves.LEFT.x, PlayerMoves.LEFT.y);
+                vector =  new Point2D(PlayerMoves.LEFT.getX(), PlayerMoves.LEFT.getY());
                 break;
             default:
                 break;

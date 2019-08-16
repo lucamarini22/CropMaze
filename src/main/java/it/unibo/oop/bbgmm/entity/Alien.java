@@ -1,7 +1,14 @@
 package it.unibo.oop.bbgmm.entity;
 
 import it.unibo.oop.bbgmm.entity.collision.CollisionLabel;
-import it.unibo.oop.bbgmm.entity.component.*;
+import it.unibo.oop.bbgmm.entity.component.BodyBuilder;
+import it.unibo.oop.bbgmm.entity.component.BrainComponent;
+import it.unibo.oop.bbgmm.entity.component.Feet;
+import it.unibo.oop.bbgmm.entity.component.LifeComponent;
+import it.unibo.oop.bbgmm.entity.component.Life;
+import it.unibo.oop.bbgmm.entity.component.CollisionComponent;
+import it.unibo.oop.bbgmm.entity.component.ClashComponent;
+import it.unibo.oop.bbgmm.entity.component.DamageComponent;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 
@@ -35,7 +42,6 @@ public class Alien extends AbstractEntity {
                 .bodyPosition(position)
                 .bodyDimension(SIZE)
                 .bodyDirection(Direction.NOTHING)
-                .bodyMovable(true)
                 .build());
 
         add(new LifeComponent(health));
@@ -45,11 +51,4 @@ public class Alien extends AbstractEntity {
         add(new ClashComponent());
         add(new DamageComponent(DAMAGE));
     }
-
-    @Override
-    public String toString() {
-        return "Alien";
-    }
-
-
 }
