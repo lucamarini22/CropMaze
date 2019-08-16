@@ -5,6 +5,7 @@ import it.unibo.oop.bbgmm.control.EndLevelController;
 import it.unibo.oop.bbgmm.control.PlayerInputListener;
 import it.unibo.oop.bbgmm.control.PrincipalController;
 import it.unibo.oop.bbgmm.utilities.ResolutionUtil;
+import it.unibo.oop.bbgmm.utilities.ViewUtils;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;

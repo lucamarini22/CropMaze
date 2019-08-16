@@ -1,4 +1,4 @@
-package it.unibo.oop.bbgmm.boundary;
+package it.unibo.oop.bbgmm.utilities;
 import javafx.geometry.Point2D;
 
 /**
@@ -22,15 +22,6 @@ public final class ViewUtils {
     }
 
     /**
-     * @param pixels
-     *          Pixels to be converted.
-     * @return pixels in meters.
-     */
-    public static double pixelsToMeters(final int pixels) {
-        return (double) pixels / PIXELS_PER_METER;
-    }
-
-    /**
      * @param point
      *          Points to be converted in FX coordinates.
      * @return point in FX coordinates.
@@ -40,14 +31,11 @@ public final class ViewUtils {
     }
 
     /**
-     * @param point
-     *          Point to be converted in world coordinates.
-     * @return point in world coordinates.
+     * 
+     * @param p
+     *          Point to be inverted 
+     * @return inverted point
      */
-    public static Point2D jFXPointToWorld(final Point2D point) {
-        return invertY(point.multiply(1 / PIXELS_PER_METER));
-    }
-
     private static Point2D invertY(final Point2D p) {
         return new Point2D(p.getX(), -p.getY());
     }

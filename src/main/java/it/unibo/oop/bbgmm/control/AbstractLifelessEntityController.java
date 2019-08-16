@@ -1,7 +1,7 @@
 package it.unibo.oop.bbgmm.control;
 
 import it.unibo.oop.bbgmm.boundary.EntityView;
-import it.unibo.oop.bbgmm.boundary.ViewUtils;
+import it.unibo.oop.bbgmm.utilities.ViewUtils;
 import it.unibo.oop.bbgmm.entity.DeathEvent;
 import it.unibo.oop.bbgmm.entity.Entity;
 

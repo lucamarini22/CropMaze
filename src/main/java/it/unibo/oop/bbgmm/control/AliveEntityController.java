@@ -2,7 +2,7 @@ package it.unibo.oop.bbgmm.control;
 
 import it.unibo.oop.bbgmm.boundary.AliveEntityView;
 import it.unibo.oop.bbgmm.boundary.PossibleEntityState;
-import it.unibo.oop.bbgmm.boundary.ViewUtils;
+import it.unibo.oop.bbgmm.utilities.ViewUtils;
 import it.unibo.oop.bbgmm.entity.Direction;
 import it.unibo.oop.bbgmm.entity.component.Life;
 import it.unibo.oop.bbgmm.entity.DeathEvent;

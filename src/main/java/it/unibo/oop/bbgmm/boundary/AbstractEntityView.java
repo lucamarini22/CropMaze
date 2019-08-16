@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.boundary;
 
+import it.unibo.oop.bbgmm.utilities.ViewUtils;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
