@@ -1,5 +1,6 @@
 package it.unibo.oop.bbgmm.entity.component;
 
+import it.unibo.oop.bbgmm.entity.AbstractMovement;
 import it.unibo.oop.bbgmm.entity.Direction;
 import it.unibo.oop.bbgmm.entity.Entity;
 import it.unibo.oop.bbgmm.entity.Movement;
@@ -10,7 +11,7 @@ import javafx.geometry.Point2D;
  */
 public class BrainComponent extends AbstractEntityComponent implements Brain {
 
-    private static final double MAX_TIME = 0.2;
+    private static final double MAX_TIME = 0.6;
     private static final double RANGE = 0.5;
     private Point2D positionToFollow = Point2D.ZERO;
     private final Entity entityToFollow;
