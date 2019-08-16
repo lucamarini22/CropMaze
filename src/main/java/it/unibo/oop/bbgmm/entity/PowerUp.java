@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
  */
 public class PowerUp extends AbstractEntity {
 
-    private static final Dimension2D SIZE = new Dimension2D(3.1, 3.2);
+    private static final Dimension2D SIZE = new Dimension2D(2.1, 2.2);
 
     /**
      *

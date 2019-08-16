@@ -44,7 +44,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     private final PlayerInputHandler playerInputHandler;
     private final StatusBarScreen statusBar = new StatusBarImpl();
     private ImageView background;
-    private final Button upgradeButton = new Button("UPGRADE");
+    private final Button upgradeButton = new Button("UPGRADES");
     private final PrincipalController principalController;
     private EndLevelController endLevelController;
     /**
@@ -67,6 +67,7 @@ public final class GameFieldViewImpl implements GameFieldView {
         fieldView.getChildren().add(this.background);
         this.upgradeButton.setPrefHeight((HEIGHT_BUTTON * ResolutionUtil.getHeight())/ ResolutionUtil.SMALL_HEIGHT);
         this.upgradeButton.setPadding(new Insets(PADDING));
+        this.upgradeButton.setStyle("-fx-background-color: #7FFF00; ");
         rootView.getChildren().add(new HBox(SPACING, statusBar.getStatusBox(), upgradeButton));
         this.principalController = principalController;
         this.primaryStage.getScene().addEventHandler(KeyEvent.KEY_PRESSED, this::onPress);
