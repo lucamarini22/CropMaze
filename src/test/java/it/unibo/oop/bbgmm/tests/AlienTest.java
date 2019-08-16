@@ -1,6 +1,13 @@
 package it.unibo.oop.bbgmm.tests;
 
-import it.unibo.oop.bbgmm.entity.*;
+import it.unibo.oop.bbgmm.entity.Alien;
+import it.unibo.oop.bbgmm.entity.Entity;
+import it.unibo.oop.bbgmm.entity.GameField;
+import it.unibo.oop.bbgmm.entity.Player;
+import it.unibo.oop.bbgmm.entity.GameFieldImpl;
+import it.unibo.oop.bbgmm.entity.Movement;
+import it.unibo.oop.bbgmm.entity.Wall;
+import it.unibo.oop.bbgmm.entity.Direction;
 import it.unibo.oop.bbgmm.entity.collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.entity.component.BodyBuilder;
 import it.unibo.oop.bbgmm.entity.component.Brain;
@@ -25,7 +32,6 @@ public class AlienTest {
     private final BodyBuilder body = new BodyBuilder();
     private Alien alien;
     private Player player;
-    private Movement feet;
 
 
     private void initializeAlien(final Set<Entity> walls){
@@ -49,16 +55,17 @@ public class AlienTest {
             alien.add(new LifeComponent(30));
         }
         catch(IllegalArgumentException e){
-            
+            e.printStackTrace();
         }
 
-        feet = alien.get(Movement.class).get();
+        final Movement feet = alien.get(Movement.class).get();
         //remove and add the same component, it doesn't make problem
         try{
             alien.remove(feet);
             alien.add(feet);
         }
         catch(IllegalArgumentException e){
+            e.printStackTrace();
         }
     }
 

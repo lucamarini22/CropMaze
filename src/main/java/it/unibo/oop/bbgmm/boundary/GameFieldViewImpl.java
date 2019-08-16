@@ -29,7 +29,7 @@ import static it.unibo.oop.bbgmm.boundary.Music.BUTTON_PRESS;
  */
 public final class GameFieldViewImpl implements GameFieldView {
 
-    private static final int TOP_LEFT_POINT_BACKGROUND = -800;
+    private static final int TOP_LEFT_POINT_BACKGROUND = -900;
     private static final int SPACING = 20;
     private static final int HEIGHT_BUTTON = 40;
     private static final int PADDING = 20;

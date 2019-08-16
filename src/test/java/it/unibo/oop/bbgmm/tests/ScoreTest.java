@@ -15,7 +15,12 @@ import java.util.List;
  * Test for Ranking using.
  */
 public class ScoreTest {
-
+    private static final Pair<String, Integer> GIOVANNI = new Pair<>("Giovanni", 45);
+    private static final Pair<String, Integer> LUCA = new Pair<>("Luca", 20);
+    private static final Pair<String, Integer> MARIO = new Pair<>("Mario", 10);
+    private static final Pair<String, Integer> ANTONIO = new Pair<>("Antonio", 6);
+    private static final Pair<String, Integer> LUCIA = new Pair<>("Lucia", 30);
+    private static final Pair<String, Integer> SIMONE = new Pair<>("Simone", 60);
     /**
      * Basic test for Ranking writing on file.
      *
@@ -31,15 +36,12 @@ public class ScoreTest {
         Assert.assertEquals(Collections.EMPTY_LIST, scoreList.getRanking());
 
         // Write something to it.
-        final Pair<String, Integer> giovanni = new Pair<>("Giovanni", 45);
-        final Pair<String, Integer> luca = new Pair<>("Luca", 20);
-
-        scoreList.addScore(giovanni);
-        scoreList.addScore(luca);
+        scoreList.addScore(GIOVANNI);
+        scoreList.addScore(LUCA);
 
         final List<Pair<String, Integer>> list = new ArrayList<>();
-        list.add(giovanni);
-        list.add(luca);
+        list.add(GIOVANNI);
+        list.add(LUCA);
 
         Assert.assertEquals(list, scoreList.getRanking());
 
@@ -62,18 +64,14 @@ public class ScoreTest {
         Assert.assertEquals(Collections.EMPTY_LIST, scoreList.getRanking());
 
         // Write something to it.
-        final Pair<String, Integer> giovanni = new Pair<>("Giovanni", 45);
-        final Pair<String, Integer> luca = new Pair<>("Luca", 20);
-        final Pair<String, Integer> mario = new Pair<>("Mario", 10);
-
-        scoreList.addScore(luca);
-        scoreList.addScore(mario);
-        scoreList.addScore(giovanni);
+        scoreList.addScore(LUCA);
+        scoreList.addScore(MARIO);
+        scoreList.addScore(GIOVANNI);
 
         final List<Pair<String, Integer>> list = new ArrayList<>();
-        list.add(giovanni);
-        list.add(luca);
-        list.add(mario);
+        list.add(GIOVANNI);
+        list.add(LUCA);
+        list.add(MARIO);
 
         Assert.assertEquals(list, scoreList.getRanking());
 
@@ -96,27 +94,20 @@ public class ScoreTest {
         Assert.assertEquals(Collections.EMPTY_LIST, scoreList.getRanking());
 
         // Write something to it.
-        final Pair<String, Integer> giovanni = new Pair<>("Giovanni", 45);
-        final Pair<String, Integer> luca = new Pair<>("Luca", 20);
-        final Pair<String, Integer> mario = new Pair<>("Mario", 10);
-        final Pair<String, Integer> antonio = new Pair<>("Antonio", 6);
-        final Pair<String, Integer> lucia = new Pair<>("Lucia", 30);
-        final Pair<String, Integer> simone = new Pair<>("Simone", 60);
-
-        scoreList.addScore(luca);
-        scoreList.addScore(mario);
-        scoreList.addScore(giovanni);
-        scoreList.addScore(antonio);
-        scoreList.addScore(lucia);
-        scoreList.addScore(simone);
+        scoreList.addScore(LUCA);
+        scoreList.addScore(MARIO);
+        scoreList.addScore(GIOVANNI);
+        scoreList.addScore(ANTONIO);
+        scoreList.addScore(LUCIA);
+        scoreList.addScore(SIMONE);
 
         //max is 5
         final List<Pair<String, Integer>> list = new ArrayList<>();
-        list.add(simone);
-        list.add(giovanni);
-        list.add(lucia);
-        list.add(luca);
-        list.add(mario);
+        list.add(SIMONE);
+        list.add(GIOVANNI);
+        list.add(LUCIA);
+        list.add(LUCA);
+        list.add(MARIO);
 
         Assert.assertEquals(list, scoreList.getRanking());
 
@@ -139,20 +130,16 @@ public class ScoreTest {
         Assert.assertEquals(Collections.EMPTY_LIST, scoreList.getRanking());
 
         // Write something to it.
-        final Pair<String, Integer> giovanni = new Pair<>("Giovanni", 45);
-        final Pair<String, Integer> luca = new Pair<>("Luca", 20);
-        final Pair<String, Integer> mario = new Pair<>("Mario", 10);
-
-        scoreList.addScore(luca);
-        scoreList.addScore(mario);
-        scoreList.addScore(giovanni);
-        scoreList.addScore(giovanni);
-        scoreList.addScore(luca);
+        scoreList.addScore(LUCA);
+        scoreList.addScore(MARIO);
+        scoreList.addScore(GIOVANNI);
+        scoreList.addScore(GIOVANNI);
+        scoreList.addScore(LUCA);
 
         final List<Pair<String, Integer>> list = new ArrayList<>();
-        list.add(giovanni);
-        list.add(luca);
-        list.add(mario);
+        list.add(GIOVANNI);
+        list.add(LUCA);
+        list.add(MARIO);
 
         Assert.assertEquals(list, scoreList.getRanking());
 

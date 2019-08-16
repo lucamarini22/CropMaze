@@ -16,7 +16,7 @@ import org.junit.Test;
  */
 public class CollisionTest {
 
-    private static final double DELTA = 0.00001;
+    private static final double DELTA = 0.00_001;
     private CollisionSupervisor collisionSupervisor;
     private boolean result;
 

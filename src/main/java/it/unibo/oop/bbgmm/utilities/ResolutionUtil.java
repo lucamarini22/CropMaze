@@ -13,7 +13,7 @@ public final class ResolutionUtil {
     private static final Dimension D = Toolkit.getDefaultToolkit().getScreenSize();
     private static double width = SMALL_WIDTH;
     private static double height = SMALL_HEIGHT;
-    private static boolean fullScreen = false;
+    private static boolean fullScreen;
 
     /**
      * Private constructor for ResolutionUtil.
