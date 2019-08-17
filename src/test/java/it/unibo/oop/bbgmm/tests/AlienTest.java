@@ -9,7 +9,11 @@ import it.unibo.oop.bbgmm.entity.Movement;
 import it.unibo.oop.bbgmm.entity.Wall;
 import it.unibo.oop.bbgmm.entity.Direction;
 import it.unibo.oop.bbgmm.entity.collision.CollisionSupervisorImpl;
-import it.unibo.oop.bbgmm.entity.component.*;
+import it.unibo.oop.bbgmm.entity.component.BodyBuilder;
+import it.unibo.oop.bbgmm.entity.component.ClashComponent;
+import it.unibo.oop.bbgmm.entity.component.Feet;
+import it.unibo.oop.bbgmm.entity.component.LifeComponent;
+import it.unibo.oop.bbgmm.entity.component.Brain;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import org.junit.Assert;
@@ -104,10 +108,5 @@ public class AlienTest {
         }
         Assert.assertEquals(alien.getBody().getPosition(), player.getBody().getPosition());
         Assert.assertEquals(alien.get(Movement.class).get().getState(), Movement.State.WALKING);
-
-
-
     }
-
-
 }
