@@ -1,6 +1,4 @@
 package it.unibo.oop.bbgmm.entity.component;
-
-import it.unibo.oop.bbgmm.entity.AbstractMovement;
 import it.unibo.oop.bbgmm.entity.Direction;
 import it.unibo.oop.bbgmm.entity.Entity;
 import it.unibo.oop.bbgmm.entity.Movement;

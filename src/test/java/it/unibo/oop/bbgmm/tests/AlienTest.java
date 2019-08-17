@@ -9,10 +9,7 @@ import it.unibo.oop.bbgmm.entity.Movement;
 import it.unibo.oop.bbgmm.entity.Wall;
 import it.unibo.oop.bbgmm.entity.Direction;
 import it.unibo.oop.bbgmm.entity.collision.CollisionSupervisorImpl;
-import it.unibo.oop.bbgmm.entity.component.BodyBuilder;
-import it.unibo.oop.bbgmm.entity.component.Brain;
-import it.unibo.oop.bbgmm.entity.component.ClashComponent;
-import it.unibo.oop.bbgmm.entity.component.LifeComponent;
+import it.unibo.oop.bbgmm.entity.component.*;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Point2D;
 import org.junit.Assert;
@@ -25,7 +22,7 @@ public class AlienTest {
 
     private static final double INITIAL_POSITION_X = 20;
     private static final double INITIAL_POSITION_Y = 20;
-    private static final Point2D INITAL_ALIEN_POSITION = new Point2D(INITIAL_POSITION_X,INITIAL_POSITION_Y);
+    private static final Point2D INITIAL_ALIEN_POSITION = new Point2D(INITIAL_POSITION_X,INITIAL_POSITION_Y);
     private static final int INITIAL_LIFE = 40;
     private static final Dimension2D DIMENSION = new Dimension2D(1,1);
     private static Set<Entity> walls = new HashSet<>();
@@ -37,7 +34,7 @@ public class AlienTest {
     private void initializeAlien(final Set<Entity> walls){
         final GameField gameField = new GameFieldImpl(new CollisionSupervisorImpl(), null);
         player = new Player(body, new Point2D(25,23), INITIAL_LIFE, gameField);
-        alien = new Alien(body, INITAL_ALIEN_POSITION, INITIAL_LIFE, walls, player);
+        alien = new Alien(body, INITIAL_ALIEN_POSITION, INITIAL_LIFE, walls, player);
 
     }
 
@@ -48,8 +45,9 @@ public class AlienTest {
     }
 
     @Test
-    public void testAddExistingComponent(){
+    public void testAddExistingComponent() throws IllegalArgumentException{
         initializeAlien(walls);
+        //try to add existing components
         try {
             alien.add(new ClashComponent());
             alien.add(new LifeComponent(30));
@@ -62,7 +60,10 @@ public class AlienTest {
         //remove and add the same component, it doesn't make problem
         try{
             alien.remove(feet);
+            Assert.assertFalse(alien.get(Feet.class).isPresent());
             alien.add(feet);
+            Assert.assertTrue(alien.get(Feet.class).isPresent());
+
         }
         catch(IllegalArgumentException e){
             e.printStackTrace();
