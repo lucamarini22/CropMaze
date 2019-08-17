@@ -67,17 +67,6 @@ public class AliveEntityController extends AbstractEntityController<AliveEntityV
     public void faceDirectionChanged(final Direction direction) {
         getEntityView().changeFaceDirection(direction);
     }
-
-    /**
-     * it updates the entity state.
-     * @param life
-     *          the life of the entity.
-     */
-    public void lifeChange(final Life life) {
-        if (life.isDead()) {
-            getEntityView().changeState(PossibleEntityState.DYING);
-        }
-    }
     /**
      *
      * {@inheritDoc}
