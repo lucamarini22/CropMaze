@@ -5,11 +5,11 @@ import it.unibo.oop.bbgmm.utilities.Pair;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.BufferedOutputStream;
 import java.io.ObjectOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +20,7 @@ public final class ScoreListImpl implements ScoreList {
 
     private static final int RANKING_SIZE = 5;
     private static final String FILE_NAME = "ScoreList.txt";
+    private static final String PATH = ClassLoader.getSystemResource(FILE_NAME).getPath();
     private List<Score> scoreList = new ArrayList<>();
 
     /**
@@ -67,7 +68,7 @@ public final class ScoreListImpl implements ScoreList {
      *          Exception if the file does not exist
      */
     private void writeOnFile() throws IOException {
-        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(Files.newOutputStream(Paths.get(FILE_NAME))));
+        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(PATH)));
         ostream.writeInt(scoreList.size());
         scoreList.forEach(s -> {
             try {
@@ -89,7 +90,7 @@ public final class ScoreListImpl implements ScoreList {
 
     @Override
     public void deleteAll() throws IOException {
-        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(Files.newOutputStream(Paths.get(FILE_NAME))));
+        final ObjectOutputStream ostream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(PATH)));
         scoreList.clear();
         ostream.writeInt(0);
         ostream.flush();
