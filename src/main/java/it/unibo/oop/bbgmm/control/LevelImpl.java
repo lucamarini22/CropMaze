@@ -103,7 +103,7 @@ public final class LevelImpl implements Level {
 
     private void loadSolidObjects(final ObjectGroup layer) {
         layer.forEach(solidObject -> {
-            final Pair<Point2D, Dimension2D> info = getWallPositionAndDimension(this.map, solidObject.getX(), solidObject.getY(),
+            final Pair<Point2D, Dimension2D> info = getWallPositionAndDimension(solidObject.getX(), solidObject.getY(),
                     solidObject.getWidth(), solidObject.getHeight());
             entitySpawner.spawn(info.getKey(), info.getValue());
         });
@@ -170,8 +170,6 @@ public final class LevelImpl implements Level {
 
     /**
      * Gets the {@link Dimension2D} and the position of a solid block in the GameField.
-     * @param map
-     *      The tiled map
      * @param x
      *      Abscissa of the solid block in the tiled map
      * @param y
@@ -182,11 +180,11 @@ public final class LevelImpl implements Level {
      *      Height of the solid block in the tiled map
      * @return the position and the dimension that the block should get
      */
-    private Pair<Point2D, Dimension2D> getWallPositionAndDimension(final Map map, final double x, final double y,
+    private Pair<Point2D, Dimension2D> getWallPositionAndDimension(final double x, final double y,
                                                                  final double width, final double height) {
-        final Dimension2D dim = new Dimension2D(width / map.getTileWidth(), height / map.getTileHeight());
-        final Point2D pos = new Point2D(x / map.getTileWidth() + WALL_TRANSLATION_X,
-                -(y / map.getTileHeight() + dim.getHeight()) + WALL_TRANSLATION_Y);
+        final Dimension2D dim = new Dimension2D(width / this.map.getTileWidth(), height / this.map.getTileHeight());
+        final Point2D pos = new Point2D(x / this.map.getTileWidth() + WALL_TRANSLATION_X,
+                -(y / this.map.getTileHeight() + dim.getHeight()) + WALL_TRANSLATION_Y);
         return new Pair<>(pos, dim);
     }
 }
