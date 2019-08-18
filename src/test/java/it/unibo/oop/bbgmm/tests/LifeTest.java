@@ -6,8 +6,7 @@ import it.unibo.oop.bbgmm.entity.component.DamageComponent;
 import it.unibo.oop.bbgmm.entity.component.Life;
 import it.unibo.oop.bbgmm.entity.component.LifeComponent;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.junit.Assert;
 
 public class LifeTest {
     private static final int LIFEPOINTS = 100;
@@ -21,9 +20,9 @@ public class LifeTest {
     @Test
     public void lifeDamagedTest(){
         life.damaged(damage.getDamage());
-        assertEquals(90,life.getCurrentLifePoints());
+        Assert.assertEquals(90,life.getCurrentLifePoints());
         life.damaged(damage.getDamage()+13);
-        assertEquals(67,life.getCurrentLifePoints());
+        Assert.assertEquals(67,life.getCurrentLifePoints());
     }
 
     /**
@@ -32,9 +31,9 @@ public class LifeTest {
     @Test
     public void lifeHealingTest(){
         life.incrementLife(33);
-        assertEquals(LIFEPOINTS,life.getCurrentLifePoints());
+        Assert.assertEquals(LIFEPOINTS,life.getCurrentLifePoints());
         life.incrementLife(10);
-        assertEquals(LIFEPOINTS,life.getCurrentLifePoints());
+        Assert.assertEquals(LIFEPOINTS,life.getCurrentLifePoints());
     }
 
     /**
@@ -44,13 +43,13 @@ public class LifeTest {
     public void invulnerableTest(){
         life.setVulnerability(true);
         life.damaged(damage.getDamage());
-        assertEquals(90,life.getCurrentLifePoints());
+        Assert.assertEquals(90,life.getCurrentLifePoints());
         life.setVulnerability(false);
         life.damaged(damage.getDamage());
-        assertEquals(90,life.getCurrentLifePoints());
+        Assert.assertEquals(90,life.getCurrentLifePoints());
         life.setVulnerability(true);
         life.damaged(damage.getDamage());
-        assertEquals(80,life.getCurrentLifePoints());
+        Assert.assertEquals(80,life.getCurrentLifePoints());
     }
 
     /**
@@ -58,11 +57,11 @@ public class LifeTest {
      */
     @Test
     public void aliveTest(){
-        assertTrue(life.isAlive());
+        Assert.assertTrue(life.isAlive());
         for(int i = 0 ;i < 10; i++){
             life.damaged(damage.getDamage());
         }
-        assertFalse(life.isAlive());
+        Assert.assertFalse(life.isAlive());
     }
 
     /**
@@ -73,7 +72,7 @@ public class LifeTest {
         for(int i = 0 ;i < 11; i++){
             life.damaged(damage.getDamage());
         }
-        assertEquals(0,life.getCurrentLifePoints());
+        Assert.assertEquals(0,life.getCurrentLifePoints());
     }
 
 

@@ -1,5 +1,4 @@
 package it.unibo.oop.bbgmm.tests;
-import static org.junit.Assert.assertEquals;
 
 import it.unibo.oop.bbgmm.entity.collision.Collidable;
 import it.unibo.oop.bbgmm.entity.collision.CollisionLabel;
@@ -8,6 +7,7 @@ import it.unibo.oop.bbgmm.entity.collision.CollisionSupervisorImpl;
 import it.unibo.oop.bbgmm.entity.component.CollisionComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Rectangle;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,6 +24,7 @@ public class CollisionTest {
     public void setUp(){
         this.collisionSupervisor = new CollisionSupervisorImpl();
     }
+
 
     @Test
     public void testBetweenRectangles() {
@@ -53,13 +54,13 @@ public class CollisionTest {
 
         c1.getEvent().register(c -> {
             this.result = true;
-            assertEquals(c.getCollisionComponent(), c2);
+            Assert.assertEquals(c.getCollisionComponent(), c2);
         });
 
         this.collisionSupervisor.searchCollision();
         this.collisionSupervisor.removeCollisionComponent(c1);
         this.collisionSupervisor.removeCollisionComponent(c2);
-        assertEquals(expected, result);
+        Assert.assertEquals(expected, result);
     }
 
 }
