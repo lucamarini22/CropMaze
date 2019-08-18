@@ -16,9 +16,4 @@ public interface GameStatistics {
      *      the number of the current level
      */
     void setCurrentLevel(int currentLevel);
-
-    /**
-     * Reset the score and the current level.
-     */
-    void resetStatistics();
 }

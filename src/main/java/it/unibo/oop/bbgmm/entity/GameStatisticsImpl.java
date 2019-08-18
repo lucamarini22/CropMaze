@@ -24,9 +24,4 @@ public final class GameStatisticsImpl implements GameStatistics {
     public void setCurrentLevel(final int currentLevel) {
         this.currentLevel = currentLevel;
     }
-
-    @Override
-    public void resetStatistics() {
-        this.setCurrentLevel(FIRST_LEVEL);
-    }
 }
