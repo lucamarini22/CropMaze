@@ -11,7 +11,7 @@ public enum Inventory {
     /**
      * Models a punch.
      */
-    PUNCH(5, 20, 1),
+    PUNCH(1, 2, 1),
     /**
      * Models a RPG.
      */
