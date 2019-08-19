@@ -1,0 +1,33 @@
+#mainMenu{
+    -fx-background-image:url("images/mainMenu/menu_back.png");
+    -fx-background-size: cover, auto;
+}
+
+#settingsMenu{
+    -fx-background-image:url("images/mainMenu/settings_back.png");
+    -fx-background-size: cover;
+}
+
+#rankingView{
+    -fx-background-image:url("images/mainMenu/settings_back.png");
+    -fx-background-size: cover;
+}
+
+#gameOverView{
+    -fx-background-image:url("images/gameOver.png");
+    -fx-background-size: cover, auto;
+}
+
+#pauseBox{
+    -fx-background-image:url("images/pauseBoxBackground.png");
+    -fx-background-size: cover;
+}
+
+#userName{
+    -fx-background-color:LIGHTSLATEGREY
+}
+
+#endLevelView{
+    -fx-background-image:url("images/endLevelViewBackground.png");
+    -fx-background-size: cover;
+}
