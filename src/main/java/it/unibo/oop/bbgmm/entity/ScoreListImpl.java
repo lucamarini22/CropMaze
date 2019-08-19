@@ -2,12 +2,9 @@ package it.unibo.oop.bbgmm.entity;
 
 import it.unibo.oop.bbgmm.utilities.Pair;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -17,10 +14,9 @@ import java.util.stream.Collectors;
  * {@link ScoreList} implementation.
  */
 public final class ScoreListImpl implements ScoreList {
-
-    private static final int RANKING_SIZE = 5;
     private static final String FILE_NAME = "ScoreList.txt";
-    private static final String PATH = ClassLoader.getSystemResource(FILE_NAME).getPath();
+    private static final String PATH = ClassLoader.getSystemResource(FILE_NAME).getFile();
+    private static final int RANKING_SIZE = 5;
     private List<Score> scoreList = new ArrayList<>();
 
     /**
