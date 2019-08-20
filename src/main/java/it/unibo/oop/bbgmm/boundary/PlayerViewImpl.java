@@ -26,9 +26,9 @@ public final class PlayerViewImpl extends AbstractAliveEntityView implements Pla
         super(group, new Dimension2D(WIDTH, HEIGHT));
         this.statusBar = statusBar;
         putAnimation(PossibleEntityState.STABLE,
-                staticAnimation(new Image("images/farmerStanding.png")));
+                staticAnimation(new Image("images/entities/farmerStanding.png")));
         putAnimation(PossibleEntityState.WALKING,
-                dynamicAnimation(new Image("images/farmerWalking.png"), Duration.millis(ANIMATION_DURATION), ANIMATION_FRAMES));
+                dynamicAnimation(new Image("images/entities/farmerWalking.png"), Duration.millis(ANIMATION_DURATION), ANIMATION_FRAMES));
         startAnimation(getCurrentState());
     }
 

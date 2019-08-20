@@ -13,7 +13,7 @@ import java.io.InputStream;
  * Implementation of {@link MapLoader} with a ".tmx" map loader.
  */
 public final class TMXMapLoader implements  MapLoader {
-    private static final String MAP_PATH = "/images/Map/CropMazeMap.zip";
+    private static final String MAP_PATH = "/images/map/CropMazeMap.zip";
     private static final String MAP_NAME = "CropMazeMap.tmx";
 
     @Override

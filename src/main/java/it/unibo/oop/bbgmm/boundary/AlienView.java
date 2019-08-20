@@ -27,8 +27,8 @@ public class AlienView extends AbstractAliveEntityView {
         super(group, new Dimension2D(WIDTH, HEIGHT));
         this.audioPlayer = audioPlayer;
 
-        putAnimation(PossibleEntityState.WALKING, dynamicAnimation(new Image("images/alienWalking.png"), Duration.millis(FRAME_DURATION), ANIMATION_FRAMES));
-        putAnimation(PossibleEntityState.DYING, staticAnimation(new Image("images/alienDying.png")));
+        putAnimation(PossibleEntityState.WALKING, dynamicAnimation(new Image("images/entities/alienWalking.png"), Duration.millis(FRAME_DURATION), ANIMATION_FRAMES));
+        putAnimation(PossibleEntityState.DYING, staticAnimation(new Image("images/entities/alienDying.png")));
 
         changeState(PossibleEntityState.WALKING);
 

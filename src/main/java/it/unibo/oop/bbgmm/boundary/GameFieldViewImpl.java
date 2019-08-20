@@ -34,7 +34,7 @@ public final class GameFieldViewImpl implements GameFieldView {
     private static final int SPACING = 20;
     private static final int HEIGHT_BUTTON = 40;
     private static final int PADDING = 20;
-    private static final String BACKGROUND_PATH = "/images/background.png";
+    private static final String BACKGROUND_PATH = "/images/backgrounds/background.png";
     private final Stage primaryStage;
     private final Group fieldView = new Group();
     private final Group rootView = new Group(fieldView);
