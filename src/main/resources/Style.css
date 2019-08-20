@@ -28,6 +28,6 @@
 }
 
 #endLevelView{
-    -fx-background-image:url("images/endLevelViewBackground.png");
+    -fx-background-image:url("images/backgrounds/endLevelViewBackground.png");
     -fx-background-size: cover;
 }
