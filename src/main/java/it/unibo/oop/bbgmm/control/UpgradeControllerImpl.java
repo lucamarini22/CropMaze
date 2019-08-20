@@ -45,7 +45,7 @@ public final class UpgradeControllerImpl implements UpgradeController {
                 upgradeView = loader.getController();
                 upgradeView.setController(this);
                 upgradeScreen.setTitle("UPGRADES");
-                upgradeScreen.getIcons().add(new Image("images/mainMenu/icon.png"));
+                upgradeScreen.getIcons().add(new Image("images/backgrounds/icon.png"));
                 upgradeScreen.setScene(new Scene(p));
                 upgradeScreen.setResizable(false);
                 upgradeScreen.show();
