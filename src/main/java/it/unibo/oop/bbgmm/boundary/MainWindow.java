@@ -38,7 +38,7 @@ public class MainWindow {
             primaryStage.close();
         });
 
-        primaryStage.getIcons().add(new Image("images/mainMenu/icon.png"));
+        primaryStage.getIcons().add(new Image("images/backgrounds/icon.png"));
         //set the main menu as the scene
         final AnchorPane root = new AnchorPane();
         final Scene scene = new Scene(root, ResolutionUtil.getWidth(), ResolutionUtil.getHeight());

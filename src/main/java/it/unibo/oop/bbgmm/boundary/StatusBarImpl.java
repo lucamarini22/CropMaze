@@ -38,7 +38,7 @@ public final class StatusBarImpl implements StatusBarScreen {
         pb.setStyle("-fx-accent: green");
         pb.setPrefWidth((WIDTHBAR * ResolutionUtil.getWidth()) / ResolutionUtil.getSmallWidth());
         pb.setPrefHeight((HIGHTBAR * ResolutionUtil.getHeight()) / ResolutionUtil.getSmallHeight());
-        coinsBox.getChildren().add(new ImageView(new Image("images/coinSilver.png")));
+        coinsBox.getChildren().add(new ImageView(new Image("images/upgrades/coinSilver.png")));
         coinsBox.getChildren().add(new ImageView(new Image("images/numbers/X.png")));
         coinsBox.setPrefWidth((WIDTHBAR * ResolutionUtil.getWidth()) / ResolutionUtil.getSmallWidth());
         coinsBox.setPrefHeight((HIGHTBAR * ResolutionUtil.getHeight()) / ResolutionUtil.getSmallHeight());

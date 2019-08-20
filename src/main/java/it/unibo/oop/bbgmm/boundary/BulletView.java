@@ -46,13 +46,13 @@ public class BulletView extends AbstractAliveEntityView {
      */
     private void setCurrentImage(final Direction direction) {
         switch (direction) {
-            case EAST: setImage(new Image("images/bullets/BulletRight.png"));
+            case EAST: setImage(new Image("images/entities/BulletRight.png"));
                         break;
-            case WEST: setImage(new Image("images/bullets/BulletLeft.png"));
+            case WEST: setImage(new Image("images/entities/BulletLeft.png"));
                         break;
-            case NORTH: setImage(new Image("images/bullets/BulletUp.png"));
+            case NORTH: setImage(new Image("images/entities/BulletUp.png"));
                         break;
-            case SOUTH: setImage(new Image("images/bullets/BulletDown.png"));
+            case SOUTH: setImage(new Image("images/entities/BulletDown.png"));
                         break;
             default: break;
         }
