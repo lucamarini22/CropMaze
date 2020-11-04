@@ -23,6 +23,6 @@ To import the project into Eclipse, use as import tool "Gradle->Existing Gradle 
 <center><img src="./src/main/resources/images/upgrades.JPG"></center>
 <center>Upgrades</center>
 
-<center><img src="./src/main/resources/images/MainMenu.JPG"></center>
+<center><img src="./src/main/resources/images/over.JPG"></center>
 <center>game over</center>
 
