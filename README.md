@@ -11,3 +11,5 @@ To import the project into Eclipse, use as import tool "Gradle->Existing Gradle 
 
 
 ## Enjoy CropMaze!
+
+![](./src/main/resources/images/game.JPG)
