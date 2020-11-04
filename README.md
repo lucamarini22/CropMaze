@@ -12,15 +12,17 @@ To import the project into Eclipse, use as import tool "Gradle->Existing Gradle 
 
 ## Enjoy CropMaze!
 
-![](./src/main/resources/images/MainMenu.JPG)
 <center><img src="./src/main/resources/images/MainMenu.JPG"></center>
-<center>This is an image</center>
+<center>Main menu</center>
 
 
-![](./src/main/resources/images/game.JPG)
+<center><img src="./src/main/resources/images/game.JPG"></center>
+<center>Game</center>
 
-![](./src/main/resources/images/upgrades.JPG)
 
+<center><img src="./src/main/resources/images/upgrades.JPG"></center>
+<center>Upgrades</center>
 
-![](./src/main/resources/images/over.JPG)
+<center><img src="./src/main/resources/images/MainMenu.JPG"></center>
+<center>game over</center>
 
