@@ -1,3 +1,5 @@
+CropMaze is a 2D videogame in which you control a farmer, whose goal is to kill all the aliens and save his crop.
+
 ## Importing CropMaze into Eclipse
 To import the project into Eclipse, use as import tool "Gradle->Existing Gradle Project".
 
