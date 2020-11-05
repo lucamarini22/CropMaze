@@ -28,3 +28,8 @@ To import the project into Eclipse, use as import tool "Gradle->Existing Gradle 
 <center><img src="./src/main/resources/images/over.JPG"></center>
 <center>game over</center>
 
+
+### Team
+
+- [Luca Marini](https://github.com/lucamarini22) 
+- [Simone Mattioli](https://github.com/SimoneMattioli98) 
