@@ -31,5 +31,8 @@ To import the project into Eclipse, use as import tool "Gradle->Existing Gradle 
 
 ### Team
 
-- [Luca Marini](https://github.com/lucamarini22) 
-- [Simone Mattioli](https://github.com/SimoneMattioli98) 
+- Bernabè Stefania
+- Bombardi Luca
+- Gabrielli Manuel
+- [Marini Luca](https://github.com/lucamarini22) 
+- [Mattioli Simone](https://github.com/SimoneMattioli98)
